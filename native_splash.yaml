@@ -1,0 +1,14 @@
+flutter_native_splash:
+  android: true
+  ios: true
+
+  color: "#ffffff"
+  background_image: "assets/images/splash.jpg"
+
+  android_gravity: center # or centerCrop / fitCenter
+  ios_content_mode: scaleAspectFit
+
+  android_12:
+    color: "#ffffff"
+    background_image: "assets/images/splash.jpg"
+    android_gravity: center # same here
