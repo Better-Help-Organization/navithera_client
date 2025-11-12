@@ -65,7 +65,7 @@ class ChatRepositoryImpl implements ChatRepository {
       final response = await remoteDataSource.getChatThreads(
         page: page,
         take: limit,
-        fields: 'client.*,therapist.*,group.*,updatedAt',
+        fields: 'client.*,therapist.*,group.*,updatedAt,groupName',
         sort: sort,
       );
       return Right(response);

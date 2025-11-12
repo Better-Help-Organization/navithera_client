@@ -310,7 +310,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
               title:
                   thread.group.isEmpty
                       ? Text('${client?.firstName} ${client?.lastName}')
-                      : Text('Group Chat #${truncate(thread.id)}'),
+                      : Text('${thread.groupName ?? "Group Chat"}'),
               subtitle: Text(
                 lastMessage ?? '',
                 maxLines: 1,
@@ -354,7 +354,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                   name:
                       thread.group.isEmpty
                           ? '${client.firstName} ${client.lastName}'
-                          : "Group Chat",
+                          : "${thread.groupName ?? "Group Chat"}",
                   lastMessage: 'I sent you the design files 📎',
                   avatarUrl:
                       (client?.avatar == 7) &&

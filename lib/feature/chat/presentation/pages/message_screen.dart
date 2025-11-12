@@ -628,6 +628,20 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                     ),
                   );
                 }
+
+                if (widget.chat.isGroup != null &&
+                    widget.chat.isGroup == true) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => GroupProfileScreen(
+                            groupName: widget.chat.name ?? 'Group Chat',
+                            groupMembers: widget.chat.groupList,
+                          ),
+                    ),
+                  );
+                }
               },
               child:
                   (widget.chat.isGroup != null && widget.chat.isGroup == false)
@@ -708,13 +722,15 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                   widget.chat.name ?? 'Unknown',
                   style: const TextStyle(fontSize: 16),
                 ),
-                Text(
-                  isOnline ? 'Online' : 'Offline',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: isOnline ? Colors.green : Colors.grey,
+                if (widget.chat.isGroup == false)
+                  Text(
+                    isOnline ? 'Online' : 'Offline',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isOnline ? Colors.green : Colors.grey,
+                    ),
                   ),
-                ),
+
                 // if (isOnline != null) ...[
                 //   Text(
                 //     isOnline ? 'Online' : 'Offline',

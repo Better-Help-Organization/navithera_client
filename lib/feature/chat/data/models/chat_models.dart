@@ -33,6 +33,7 @@ class ChatThread with _$ChatThread {
     List<ChatMessage>? message,
     ChatMessage? lastMessage,
     int? unreadCount,
+    String? groupName,
   }) = _ChatThread;
 
   factory ChatThread.fromJson(Map<String, dynamic> json) =>

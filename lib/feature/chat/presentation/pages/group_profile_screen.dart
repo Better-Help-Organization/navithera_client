@@ -23,25 +23,17 @@ class GroupProfileScreen extends StatefulWidget {
 class _GroupProfileScreenState extends State<GroupProfileScreen> {
   bool notificationsOn = false;
 
-  final String groupName = 'Test';
-  // final List<Member> members = const [
-  //   Member(
-  //     name: 'Yabsira',
-  //     status: 'online',
-  //     gradient: [Color(0xFF3CB7CF), Color(0xFF5AD1E2)],
-  //     // isOwner: true,
-  //   ),
-  //   Member(
-  //     name: 'Roba',
-  //     status: 'last seen recently',
-  //     gradient: [Color(0xFFF08BA6), Color(0xFFF7A7A0)],
-  //   ),
-  //   Member(
-  //     name: 'Nati',
-  //     status: 'last seen within a week',
-  //     gradient: [Color(0xFF827CFF), Color(0xFFA06BFF)],
-  //   ),
-  // ];
+  // Helper method to get random gradient for member avatars
+  List<Color> getRandomGradient() {
+    final gradients = [
+      [const Color(0xFF3CB7CF), const Color(0xFF5AD1E2)],
+      [const Color(0xFFF08BA6), const Color(0xFFF7A7A0)],
+      [const Color(0xFF827CFF), const Color(0xFFA06BFF)],
+      [const Color(0xFF6AA8FF), const Color(0xFF7BC1FF)],
+      [const Color(0xFFF595A7), const Color(0xFFF4B6A2)],
+    ];
+    return gradients[Random().nextInt(gradients.length)];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +50,6 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
             )
             .toList() ??
         [];
-
-    //final theme = Theme.of(context);
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -88,7 +78,10 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: _Header(groupName: groupName, membersCount: members.length),
+            child: _Header(
+              groupName: widget.groupName, // Use the passed group name
+              membersCount: members.length,
+            ),
           ),
           SliverToBoxAdapter(child: const _SectionDivider(height: 10)),
 
@@ -160,7 +153,6 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final membersCount = membersCount; // update dynamically if needed
     return Container(
       color: AppColors.primary,
       child: Padding(
@@ -168,7 +160,7 @@ class _Header extends StatelessWidget {
         child: Row(
           children: [
             GradientAvatar(
-              label: initials(groupName),
+              label: initials(groupName), // Use the dynamic group name
               gradient: const [Color(0xFFF595A7), Color(0xFFF4B6A2)],
               size: 68,
             ),
@@ -177,7 +169,7 @@ class _Header extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  groupName,
+                  groupName, // Use the dynamic group name
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w800,
@@ -215,11 +207,7 @@ class _ThinDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(
-      height: 1,
-      thickness: 1,
-      color: Colors.grey[200],
-    ); //color: _Palette.divider);
+    return Divider(height: 1, thickness: 1, color: Colors.grey[200]);
   }
 }
 

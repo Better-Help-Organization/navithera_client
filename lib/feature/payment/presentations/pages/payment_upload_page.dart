@@ -416,12 +416,22 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
 
       // Use the preferenceId from widget parameter or from riverpod provider
       final preferenceId = widget.preferenceId;
+      final modalId = ref.read(modalIdProvider);
 
-      print("preferenceId: ${preferenceId}");
+      print("modalId: ${modalId} preferenceId: ${preferenceId}");
 
-      if (preferenceId != null) {
+      if (modalId == "aa4c9839-e031-417a-b319-2da4bf1092c3") {
+        // If modalId matches specific value, go to blocked user screen directly
+        // router.go('/blocked-user');
+        print("modalId matched");
+      } else {
+        print("modalId here");
+      }
+
+      if (modalId != "aa4c9839-e031-417a-b319-2da4bf1092c3") {
         await _handleSubmit(preferenceId);
       } else {
+        print("No handle submit called");
         // If no preferenceId, just go to blocked user screen
         router.go('/blocked-user');
       }
@@ -515,18 +525,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
 
               // After the HeaderCard, add this:
               Container(
-                // decoration: BoxDecoration(
-                //   color: Colors.white,
-                //   borderRadius: BorderRadius.circular(16),
-                //   border: Border.all(color: const Color(0xFFEAEAEA)),
-                //   boxShadow: const [
-                //     BoxShadow(
-                //       color: Color(0x0F000000),
-                //       blurRadius: 12,
-                //       offset: Offset(0, 4),
-                //     ),
-                //   ],
-                // ),
                 padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
                 child: Row(
                   children: [
@@ -556,6 +554,14 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
                               color: AppColors.primary,
                             ),
                           ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Telebirr: 0998888866',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.primary,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -565,129 +571,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
 
               const SizedBox(height: 24),
 
-              //_labelWithAsterisk('Amount'),
-              // // const SizedBox(height: 10),
-              // // Container(
-              // //   decoration: BoxDecoration(
-              // //     color: const Color(0xFFF5F5F5),
-              // //     borderRadius: BorderRadius.circular(12),
-              // //     border: Border.all(
-              // //       color:
-              // //           _isAmountValid
-              // //               ? const Color(0xFFF5F5F5)
-              // //               : AppColors.error,
-              // //       width: 1.5,
-              // //     ),
-              // //   ),
-              // //   child: TextField(
-              // //     controller: _amountController,
-              // //     onChanged: _validateAmount,
-              // //     keyboardType: const TextInputType.numberWithOptions(
-              // //       decimal: true,
-              // //     ),
-              // //     inputFormatters: _amountFormatter,
-              // //     cursorColor: secondary,
-              // //     decoration: const InputDecoration(
-              // //       hintText: 'e.g. 499.99',
-              // //       hintStyle: TextStyle(color: Color(0xFF9B9B9B)),
-              // //       border: InputBorder.none,
-              // //       contentPadding: EdgeInsets.symmetric(
-              // //         horizontal: 15,
-              // //         vertical: 15,
-              // //       ),
-              // //       prefixIcon: Padding(
-              // //         padding: EdgeInsets.only(left: 12, right: 4),
-              // //         child: Icon(
-              // //           Icons.payments_outlined,
-              // //           color: Color(0xFF7B7B7B),
-              // //         ),
-              // //       ),
-              // //       prefixIconConstraints: BoxConstraints(minWidth: 40),
-              // //     ),
-              // //   ),
-              // // ),
-              // if (!_isAmountValid) ...[
-              //   const SizedBox(height: 8),
-              //   Text(
-              //     _amountError,
-              //     style: TextStyle(color: AppColors.error, fontSize: 12),
-              //   ),
-              // ],
-
-              // const SizedBox(height: 20),
-              // Row(
-              //   children: [
-              //     Text(
-              //       'Receipt URL',
-              //       style: const TextStyle(
-              //         fontSize: 14,
-              //         color: Colors.black,
-              //         fontWeight: FontWeight.w500,
-              //       ),
-              //     ),
-              //     const SizedBox(width: 8),
-              //     Tooltip(
-              //       message: 'Optional. Paste a link to the payment receipt.',
-              //       child: Container(
-              //         padding: const EdgeInsets.all(6),
-              //         decoration: const BoxDecoration(
-              //           color: Color(0xFF7B7B7B),
-              //           shape: BoxShape.circle,
-              //         ),
-              //         child: const Icon(
-              //           Icons.info_outline,
-              //           color: Colors.white,
-              //           size: 12,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
-              // const SizedBox(height: 10),
-
-              // Container(
-              //   decoration: BoxDecoration(
-              //     color: const Color(0xFFF5F5F5),
-              //     borderRadius: BorderRadius.circular(12),
-              //     border: Border.all(
-              //       color:
-              //           _isReceiptValid
-              //               ? const Color(0xFFF5F5F5)
-              //               : AppColors.error,
-              //       width: 1.5,
-              //     ),
-              //   ),
-              //   child: TextField(
-              //     controller: _receiptController,
-              //     onChanged: _validateReceipt,
-              //     keyboardType: TextInputType.url,
-              //     cursorColor: secondary,
-              //     decoration: const InputDecoration(
-              //       hintText: 'https://payments.example.com/receipt/12345',
-              //       hintStyle: TextStyle(color: Color(0xFF9B9B9B)),
-              //       border: InputBorder.none,
-              //       contentPadding: EdgeInsets.symmetric(
-              //         horizontal: 15,
-              //         vertical: 15,
-              //       ),
-              //       prefixIcon: Padding(
-              //         padding: EdgeInsets.only(left: 12, right: 4),
-              //         child: Icon(Icons.link, color: Color(0xFF7B7B7B)),
-              //       ),
-              //       prefixIconConstraints: BoxConstraints(minWidth: 40),
-              //     ),
-              //   ),
-              // ),
-              // if (!_isReceiptValid) ...[
-              //   const SizedBox(height: 8),
-              //   Text(
-              //     _receiptError,
-              //     style: TextStyle(color: AppColors.error, fontSize: 12),
-              //   ),
-              // ],
-
-              // const SizedBox(height: 20),
               _labelWithAsterisk('Upload Receipt File'),
               const SizedBox(height: 10),
               AnimatedContainer(

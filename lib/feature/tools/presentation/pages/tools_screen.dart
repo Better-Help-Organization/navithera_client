@@ -76,21 +76,21 @@ class ToolsScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Expanded(child: Text("")),
-                  // Expanded(
-                  //   child: _buildToolCard(
-                  //     context,
-                  //     title: "Community",
-                  //     description: "Comming soon with a lot of new features",
-                  //     icon:
-                  //         Icons
-                  //             .groups_outlined, // Using a bar chart for meditate, can be replaced
-                  //     // color: const Color(0xFF3F3F72),
-                  //     ref: ref, // Dark blue background
-                  //     isComingSoon: true,
-                  //     //  navigate: "/meditationList",
-                  //   ),
-                  // ),
+                  // Expanded(child: Text("")),
+                  Expanded(
+                    child: _buildToolCard(
+                      context,
+                      title: "Community",
+                      description: "Comming soon with a lot of new features",
+                      icon:
+                          Icons
+                              .groups_outlined, // Using a bar chart for meditate, can be replaced
+                      // color: const Color(0xFF3F3F72),
+                      ref: ref, // Dark blue background
+                      isComingSoon: true,
+                      //  navigate: "/meditationList",
+                    ),
+                  ),
                 ],
               ),
             ],

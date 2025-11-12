@@ -296,6 +296,7 @@ mixin _$ChatThread {
   List<ChatMessage>? get message => throw _privateConstructorUsedError;
   ChatMessage? get lastMessage => throw _privateConstructorUsedError;
   int? get unreadCount => throw _privateConstructorUsedError;
+  String? get groupName => throw _privateConstructorUsedError;
 
   /// Serializes this ChatThread to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -323,6 +324,7 @@ abstract class $ChatThreadCopyWith<$Res> {
     List<ChatMessage>? message,
     ChatMessage? lastMessage,
     int? unreadCount,
+    String? groupName,
   });
 
   $UserModelCopyWith<$Res>? get client;
@@ -353,6 +355,7 @@ class _$ChatThreadCopyWithImpl<$Res, $Val extends ChatThread>
     Object? message = freezed,
     Object? lastMessage = freezed,
     Object? unreadCount = freezed,
+    Object? groupName = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -396,6 +399,11 @@ class _$ChatThreadCopyWithImpl<$Res, $Val extends ChatThread>
                     ? _value.unreadCount
                     : unreadCount // ignore: cast_nullable_to_non_nullable
                         as int?,
+            groupName:
+                freezed == groupName
+                    ? _value.groupName
+                    : groupName // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -458,6 +466,7 @@ abstract class _$$ChatThreadImplCopyWith<$Res>
     List<ChatMessage>? message,
     ChatMessage? lastMessage,
     int? unreadCount,
+    String? groupName,
   });
 
   @override
@@ -490,6 +499,7 @@ class __$$ChatThreadImplCopyWithImpl<$Res>
     Object? message = freezed,
     Object? lastMessage = freezed,
     Object? unreadCount = freezed,
+    Object? groupName = freezed,
   }) {
     return _then(
       _$ChatThreadImpl(
@@ -533,6 +543,11 @@ class __$$ChatThreadImplCopyWithImpl<$Res>
                 ? _value.unreadCount
                 : unreadCount // ignore: cast_nullable_to_non_nullable
                     as int?,
+        groupName:
+            freezed == groupName
+                ? _value.groupName
+                : groupName // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -550,6 +565,7 @@ class _$ChatThreadImpl implements _ChatThread {
     final List<ChatMessage>? message,
     this.lastMessage,
     this.unreadCount,
+    this.groupName,
   }) : _group = group,
        _message = message;
 
@@ -592,10 +608,12 @@ class _$ChatThreadImpl implements _ChatThread {
   final ChatMessage? lastMessage;
   @override
   final int? unreadCount;
+  @override
+  final String? groupName;
 
   @override
   String toString() {
-    return 'ChatThread(id: $id, updatedAt: $updatedAt, client: $client, group: $group, therapist: $therapist, message: $message, lastMessage: $lastMessage, unreadCount: $unreadCount)';
+    return 'ChatThread(id: $id, updatedAt: $updatedAt, client: $client, group: $group, therapist: $therapist, message: $message, lastMessage: $lastMessage, unreadCount: $unreadCount, groupName: $groupName)';
   }
 
   @override
@@ -614,7 +632,9 @@ class _$ChatThreadImpl implements _ChatThread {
             (identical(other.lastMessage, lastMessage) ||
                 other.lastMessage == lastMessage) &&
             (identical(other.unreadCount, unreadCount) ||
-                other.unreadCount == unreadCount));
+                other.unreadCount == unreadCount) &&
+            (identical(other.groupName, groupName) ||
+                other.groupName == groupName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -629,6 +649,7 @@ class _$ChatThreadImpl implements _ChatThread {
     const DeepCollectionEquality().hash(_message),
     lastMessage,
     unreadCount,
+    groupName,
   );
 
   /// Create a copy of ChatThread
@@ -655,6 +676,7 @@ abstract class _ChatThread implements ChatThread {
     final List<ChatMessage>? message,
     final ChatMessage? lastMessage,
     final int? unreadCount,
+    final String? groupName,
   }) = _$ChatThreadImpl;
 
   factory _ChatThread.fromJson(Map<String, dynamic> json) =
@@ -676,6 +698,8 @@ abstract class _ChatThread implements ChatThread {
   ChatMessage? get lastMessage;
   @override
   int? get unreadCount;
+  @override
+  String? get groupName;
 
   /// Create a copy of ChatThread
   /// with the given fields replaced by the non-null parameter values.

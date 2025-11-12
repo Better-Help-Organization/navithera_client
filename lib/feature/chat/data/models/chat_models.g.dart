@@ -54,6 +54,7 @@ _$ChatThreadImpl _$$ChatThreadImplFromJson(Map<String, dynamic> json) =>
                 json['lastMessage'] as Map<String, dynamic>,
               ),
       unreadCount: (json['unreadCount'] as num?)?.toInt(),
+      groupName: json['groupName'] as String?,
     );
 
 Map<String, dynamic> _$$ChatThreadImplToJson(_$ChatThreadImpl instance) =>
@@ -66,6 +67,7 @@ Map<String, dynamic> _$$ChatThreadImplToJson(_$ChatThreadImpl instance) =>
       'message': instance.message,
       'lastMessage': instance.lastMessage,
       'unreadCount': instance.unreadCount,
+      'groupName': instance.groupName,
     };
 
 _$ChatMessageResponseImpl _$$ChatMessageResponseImplFromJson(

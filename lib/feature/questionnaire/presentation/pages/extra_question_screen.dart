@@ -65,13 +65,13 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
 
   int get totalPages {
     final modalId = ref.read(modalIdProvider);
-    return modalId == 'd49cc9bc-261c-49f1-8f97-1344a551f498' ? 4 : 5;
+    return modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91' ? 4 : 5;
   }
 
   List<Widget> get pages {
     final modalId = ref.read(modalIdProvider);
 
-    if (modalId == 'd49cc9bc-261c-49f1-8f97-1344a551f498') {
+    if (modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91') {
       // Skip levels page (4 pages total)
       return [
         wrapWithContainer(_buildLanguagesContent()),
@@ -121,7 +121,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
 
   bool _isPageValid(int index) {
     final modalId = ref.read(modalIdProvider);
-    final isSpecialModal = modalId == 'd49cc9bc-261c-49f1-8f97-1344a551f498';
+    final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
 
     // Adjust index mapping based on whether levels page is included
     int actualPageIndex;
@@ -349,7 +349,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             );
           }).toList();
 
-      final isSpecialModal = modalId == 'd49cc9bc-261c-49f1-8f97-1344a551f498';
+      final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
 
       if (isSpecialModal) {
         final request = PreferenceRequestWithoutLevel(
@@ -533,9 +533,9 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                   }
 
                   String? priceText;
-                  if (level.price != null) {
-                    priceText = ' • ${level.price} ETB/session';
-                  }
+                  // if (level.price != null) {
+                  //   priceText = ' • ${level.price} ETB/session';
+                  // }
 
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -1406,7 +1406,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Write your Goals",
+          "what is your main goal for this therapy",
           style: const TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.w600,

@@ -890,6 +890,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         print("✅ Fresh preferences loaded:");
         print("  - Level ID: ${freshPreferences['levelId']}");
         print("  - Level Price: ${freshPreferences['levelPrice']}");
+        ref.read(modalIdProvider.notifier).state = freshPreferences['modalId'];
         print("  - Modal ID: ${freshPreferences['modalId']}");
         print("  - Modal Name: ${freshPreferences['modalName']}");
       } else {

@@ -221,7 +221,7 @@ class FCMService {
       // } else
       if (_isIncomingCallMessage(message)) {
         final call = _parseIncomingCall(message);
-        print("isVideoCall3: ${call?.isVideoCall}");
+
         if (call != null) {
           _showCallInvitationDialog(
             call.room,
