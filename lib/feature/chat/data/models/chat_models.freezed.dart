@@ -559,7 +559,7 @@ class _$ChatThreadImpl implements _ChatThread {
   const _$ChatThreadImpl({
     required this.id,
     this.updatedAt,
-    required this.client,
+    this.client,
     required final List<UserModel> group,
     required this.therapist,
     final List<ChatMessage>? message,
@@ -670,7 +670,7 @@ abstract class _ChatThread implements ChatThread {
   const factory _ChatThread({
     required final String id,
     final DateTime? updatedAt,
-    required final UserModel? client,
+    final UserModel? client,
     required final List<UserModel> group,
     required final UserModel therapist,
     final List<ChatMessage>? message,

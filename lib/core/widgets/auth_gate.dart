@@ -38,6 +38,7 @@ class AuthGate extends ConsumerWidget {
             user.preferences != null && user.preferences!.isNotEmpty;
 
         print("usersos: ${user.activeSubscription}");
+        // final subscritions = user.subscriptions.length;
         final hasSubsription = user.activeSubscription != null;
 
         final firstStatus =
@@ -66,6 +67,12 @@ class AuthGate extends ConsumerWidget {
         print("hasprefs: ${hasPreferences}");
 
         if (!hasAnswers && !hasPreferences) {
+          router.go('/categories');
+        }
+        // else if (hasPreferences && ) {
+        //   router.go('/categories');
+        // }
+        else if (!hasSubsription && hasPreferences) {
           router.go('/categories');
         } else if (!hasSubsription) {
           router.go('/subscription');

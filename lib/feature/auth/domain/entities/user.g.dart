@@ -41,6 +41,10 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       (json['answer'] as List<dynamic>?)
           ?.map((e) => AnsData.fromJson(e as Map<String, dynamic>))
           .toList(),
+  subscriptions:
+      (json['subscription'] as List<dynamic>?)
+          ?.map((e) => SubscriptionData.fromJson(e as Map<String, dynamic>))
+          .toList(),
   activeSubscription:
       json['activeSubscription'] == null
           ? null
@@ -82,6 +86,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'isPhoneNumberAuthenticated': instance.isPhoneNumberAuthenticated,
       'preference': instance.preferences,
       'answer': instance.answers,
+      'subscription': instance.subscriptions,
       'activeSubscription': instance.activeSubscription,
       'expertise': instance.expertise,
       'avatar': instance.avatar,

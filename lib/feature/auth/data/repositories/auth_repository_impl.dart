@@ -332,6 +332,7 @@ class AuthRepositoryImpl implements AuthRepository {
         profile: userData.profile,
         activeSubscription: userData.activeSubscription,
         hasNotification: userData.hasNotification,
+        // subscriptions: userData.subscription,
       );
 
       // Update stored user data with complete information

@@ -26,7 +26,7 @@ class ChatThread with _$ChatThread {
     required String id,
     // required DateTime createdAt,
     DateTime? updatedAt,
-    required UserModel? client, // Make client nullable
+    UserModel? client, // Make client nullable
     required List<UserModel> group, // Add group list
     required UserModel therapist,
     // required List<ChatMessage> message,

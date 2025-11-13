@@ -41,7 +41,10 @@ mixin _$User {
   @JsonKey(name: 'preference')
   List<PrefData>? get preferences => throw _privateConstructorUsedError; // Map 'preference' to 'preferences'
   @JsonKey(name: 'answer')
-  List<AnsData>? get answers => throw _privateConstructorUsedError; //@JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+  List<AnsData>? get answers => throw _privateConstructorUsedError;
+  @JsonKey(name: 'subscription')
+  List<SubscriptionData>? get subscriptions =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'activeSubscription')
   SubscriptionData? get activeSubscription =>
       throw _privateConstructorUsedError;
@@ -85,6 +88,7 @@ abstract class $UserCopyWith<$Res> {
     bool? isPhoneNumberAuthenticated,
     @JsonKey(name: 'preference') List<PrefData>? preferences,
     @JsonKey(name: 'answer') List<AnsData>? answers,
+    @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
     @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
     @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
     int? avatar,
@@ -130,6 +134,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? isPhoneNumberAuthenticated = freezed,
     Object? preferences = freezed,
     Object? answers = freezed,
+    Object? subscriptions = freezed,
     Object? activeSubscription = freezed,
     Object? expertise = freezed,
     Object? avatar = freezed,
@@ -233,6 +238,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
                     ? _value.answers
                     : answers // ignore: cast_nullable_to_non_nullable
                         as List<AnsData>?,
+            subscriptions:
+                freezed == subscriptions
+                    ? _value.subscriptions
+                    : subscriptions // ignore: cast_nullable_to_non_nullable
+                        as List<SubscriptionData>?,
             activeSubscription:
                 freezed == activeSubscription
                     ? _value.activeSubscription
@@ -320,6 +330,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
     bool? isPhoneNumberAuthenticated,
     @JsonKey(name: 'preference') List<PrefData>? preferences,
     @JsonKey(name: 'answer') List<AnsData>? answers,
+    @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
     @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
     @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
     int? avatar,
@@ -364,6 +375,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? isPhoneNumberAuthenticated = freezed,
     Object? preferences = freezed,
     Object? answers = freezed,
+    Object? subscriptions = freezed,
     Object? activeSubscription = freezed,
     Object? expertise = freezed,
     Object? avatar = freezed,
@@ -467,6 +479,11 @@ class __$$UserImplCopyWithImpl<$Res>
                 ? _value._answers
                 : answers // ignore: cast_nullable_to_non_nullable
                     as List<AnsData>?,
+        subscriptions:
+            freezed == subscriptions
+                ? _value._subscriptions
+                : subscriptions // ignore: cast_nullable_to_non_nullable
+                    as List<SubscriptionData>?,
         activeSubscription:
             freezed == activeSubscription
                 ? _value.activeSubscription
@@ -520,6 +537,7 @@ class _$UserImpl implements _User {
     this.isPhoneNumberAuthenticated,
     @JsonKey(name: 'preference') final List<PrefData>? preferences,
     @JsonKey(name: 'answer') final List<AnsData>? answers,
+    @JsonKey(name: 'subscription') final List<SubscriptionData>? subscriptions,
     @JsonKey(name: 'activeSubscription') this.activeSubscription,
     @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
     this.avatar,
@@ -527,6 +545,7 @@ class _$UserImpl implements _User {
     this.hasNotification,
   }) : _preferences = preferences,
        _answers = answers,
+       _subscriptions = subscriptions,
        _expertise = expertise;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
@@ -590,7 +609,17 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(value);
   }
 
-  //@JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+  final List<SubscriptionData>? _subscriptions;
+  @override
+  @JsonKey(name: 'subscription')
+  List<SubscriptionData>? get subscriptions {
+    final value = _subscriptions;
+    if (value == null) return null;
+    if (_subscriptions is EqualUnmodifiableListView) return _subscriptions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: 'activeSubscription')
   final SubscriptionData? activeSubscription;
@@ -614,7 +643,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, isEmailAuthenticated: $isEmailAuthenticated, status: $status, gender: $gender, dob: $dob, username: $username, phoneNumber: $phoneNumber, isVisible: $isVisible, updatedAt: $updatedAt, emergencyContact: $emergencyContact, deletedAt: $deletedAt, isLinked: $isLinked, isPhoneNumberAuthenticated: $isPhoneNumberAuthenticated, preferences: $preferences, answers: $answers, activeSubscription: $activeSubscription, expertise: $expertise, avatar: $avatar, profile: $profile, hasNotification: $hasNotification)';
+    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, isEmailAuthenticated: $isEmailAuthenticated, status: $status, gender: $gender, dob: $dob, username: $username, phoneNumber: $phoneNumber, isVisible: $isVisible, updatedAt: $updatedAt, emergencyContact: $emergencyContact, deletedAt: $deletedAt, isLinked: $isLinked, isPhoneNumberAuthenticated: $isPhoneNumberAuthenticated, preferences: $preferences, answers: $answers, subscriptions: $subscriptions, activeSubscription: $activeSubscription, expertise: $expertise, avatar: $avatar, profile: $profile, hasNotification: $hasNotification)';
   }
 
   @override
@@ -662,6 +691,10 @@ class _$UserImpl implements _User {
               _preferences,
             ) &&
             const DeepCollectionEquality().equals(other._answers, _answers) &&
+            const DeepCollectionEquality().equals(
+              other._subscriptions,
+              _subscriptions,
+            ) &&
             (identical(other.activeSubscription, activeSubscription) ||
                 other.activeSubscription == activeSubscription) &&
             const DeepCollectionEquality().equals(
@@ -697,6 +730,7 @@ class _$UserImpl implements _User {
     isPhoneNumberAuthenticated,
     const DeepCollectionEquality().hash(_preferences),
     const DeepCollectionEquality().hash(_answers),
+    const DeepCollectionEquality().hash(_subscriptions),
     activeSubscription,
     const DeepCollectionEquality().hash(_expertise),
     avatar,
@@ -739,6 +773,7 @@ abstract class _User implements User {
     final bool? isPhoneNumberAuthenticated,
     @JsonKey(name: 'preference') final List<PrefData>? preferences,
     @JsonKey(name: 'answer') final List<AnsData>? answers,
+    @JsonKey(name: 'subscription') final List<SubscriptionData>? subscriptions,
     @JsonKey(name: 'activeSubscription')
     final SubscriptionData? activeSubscription,
     @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
@@ -788,7 +823,10 @@ abstract class _User implements User {
   List<PrefData>? get preferences; // Map 'preference' to 'preferences'
   @override
   @JsonKey(name: 'answer')
-  List<AnsData>? get answers; //@JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+  List<AnsData>? get answers;
+  @override
+  @JsonKey(name: 'subscription')
+  List<SubscriptionData>? get subscriptions;
   @override
   @JsonKey(name: 'activeSubscription')
   SubscriptionData? get activeSubscription;

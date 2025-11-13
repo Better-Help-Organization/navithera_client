@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -344,6 +345,36 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
         ),
       );
     } catch (e) {
+      String errorMessage = 'Failed to upload file. Please try again.';
+      if (e is DioException && e.response != null) {
+        // ignore: avoid_print
+        print('Server responded with status code: ${e.response?.statusCode}');
+        // ignore: avoid_print
+        print('Response data: ${e.response?.data}');
+
+        final responseData = e.response?.data;
+        String errorMessage = 'Failed to upload';
+
+        if (responseData is Map) {
+          errorMessage =
+              responseData['message'] ??
+              responseData['error'] ??
+              'Failed to submit session selection';
+        } else if (responseData is String) {
+          try {
+            final parsed = json.decode(responseData);
+            errorMessage = parsed['message'] ?? errorMessage;
+          } catch (_) {
+            errorMessage = responseData;
+          }
+        }
+
+        // return {'success': false, 'message': errorMessage};
+      } else {
+        // ignore: avoid_print
+        print('Error submitting');
+        // return {'success': false, 'message': 'Network error: ${e.toString()}'};
+      }
       setState(() {
         _isPicking = false;
         _isUploading = false;
@@ -354,10 +385,7 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Upload failed: $e'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
       );
     }
   }
@@ -436,10 +464,40 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
         router.go('/blocked-user');
       }
     } catch (e) {
+      String errorMessage = 'Failed to Submit. Please try again.';
+      if (e is DioException && e.response != null) {
+        // ignore: avoid_print
+        print('Server responded with status code: ${e.response?.statusCode}');
+        // ignore: avoid_print
+        print('Response data: ${e.response?.data}');
+
+        final responseData = e.response?.data;
+        String errorMessage = 'Failed to upload';
+
+        if (responseData is Map) {
+          errorMessage =
+              responseData['message'] ??
+              responseData['error'] ??
+              'Failed to submit';
+        } else if (responseData is String) {
+          try {
+            final parsed = json.decode(responseData);
+            errorMessage = parsed['message'] ?? errorMessage;
+          } catch (_) {
+            errorMessage = responseData;
+          }
+        }
+
+        // return {'success': false, 'message': errorMessage};
+      } else {
+        // ignore: avoid_print
+        print('Error submitting');
+        // return {'success': false, 'message': 'Network error: ${e.toString()}'};
+      }
       print("e: ${e}");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Payment submission failed: $e'),
+          content: Text(errorMessage),
           backgroundColor: Colors.red,
           duration: const Duration(seconds: 3),
         ),
@@ -464,12 +522,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
 
       matchResult.fold(
         (failure) {
-          // scaffoldMessenger.showSnackBar(
-          //   SnackBar(
-          //     content: Text('Match failed: ${failure.toString()}'),
-          //     backgroundColor: Colors.red,
-          //   ),
-          // );
           router.go('/blocked-user');
         },
         (matchResponse) {
@@ -483,11 +535,35 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
         },
       );
     } catch (e) {
+      String errorMessage = 'Failed to Match. Please try again.';
+      if (e is DioException && e.response != null) {
+        // ignore: avoid_print
+
+        final responseData = e.response?.data;
+        String errorMessage = 'Failed to match';
+
+        if (responseData is Map) {
+          errorMessage =
+              responseData['message'] ??
+              responseData['error'] ??
+              'Failed to match';
+        } else if (responseData is String) {
+          try {
+            final parsed = json.decode(responseData);
+            errorMessage = parsed['message'] ?? errorMessage;
+          } catch (_) {
+            errorMessage = responseData;
+          }
+        }
+
+        // return {'success': false, 'message': errorMessage};
+      } else {
+        // ignore: avoid_print
+        print('Error Match');
+        // return {'success': false, 'message': 'Network error: ${e.toString()}'};
+      }
       scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text('An error occurred: ${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
       );
       router.go('/blocked-user');
     }

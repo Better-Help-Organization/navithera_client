@@ -1177,9 +1177,9 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                                 padding: const EdgeInsets.all(12),
                                 margin: const EdgeInsets.only(bottom: 16),
                                 decoration: BoxDecoration(
-                                  color: Colors.blue[50],
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.blue[100]!),
+                                  color: AppColors.secondary.withOpacity(0.12),
+                                  border: Border.all(color: Colors.transparent),
+                                  borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1188,7 +1188,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                                       children: [
                                         Icon(
                                           Icons.info,
-                                          color: Colors.blue[600],
+                                          color: AppColors.primary,
                                           size: 16,
                                         ),
                                         const SizedBox(width: 8),
@@ -1197,7 +1197,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.blue[800],
+                                            color: AppColors.primary,
                                           ),
                                         ),
                                       ],

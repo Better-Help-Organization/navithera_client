@@ -30,7 +30,7 @@ class User with _$User {
     @JsonKey(name: 'preference')
     List<PrefData>? preferences, // Map 'preference' to 'preferences'
     @JsonKey(name: 'answer') List<AnsData>? answers,
-    //@JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+    @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
     @JsonKey(name: 'activeSubscription') // Match JSON field name
     SubscriptionData? activeSubscription,
     @JsonKey(name: 'expertise') // Add this line
