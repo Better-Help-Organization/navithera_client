@@ -102,6 +102,7 @@ class FCMService {
     );
 
     try {
+      //25
       if (message.data['code'] == '11' || message.data['code'] == 11) {
         // _handleSessionSelectionNotification(message);
         // _handleSessionNotification();
@@ -133,6 +134,23 @@ class FCMService {
         //final context = navigatorKey.currentContext;
         // print("context: $context");
         // if (context == null) return;
+        return;
+      }
+      if (message.data['code'] == '25' || message.data['code'] == 25) {
+        print("25 25 25 25 code received");
+        // _handleSessionSelectionNotification(message);
+        // _handleSessionNotification();
+        //final context = navigatorKey.currentContext;
+        // print("context: $context");
+        // if (context == null) return;
+        final context = navigatorKey.currentContext;
+        print("context: $context");
+        if (context == null) return;
+        // //ref.read(routerProvider).go('/auth-gate');
+        //final result = await ref.read(authProvider.notifier).getCurrentUser();
+        final container = ProviderScope.containerOf(context);
+        await container.read(authProvider.notifier).getCurrentUser();
+        GoRouter.of(context).push('/auth-gate');
         return;
       }
       if (message.data['code'] == '8' || message.data['code'] == 8) {
@@ -375,6 +393,22 @@ class FCMService {
     print(
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
+    if (message.data['code'] == '25' || message.data['code'] == 25) {
+      // _handleSessionSelectionNotification(message);
+      // _handleSessionNotification();
+      //final context = navigatorKey.currentContext;
+      // print("context: $context");
+      // if (context == null) return;
+      final context = navigatorKey.currentContext;
+      print("context: $context");
+      if (context == null) return;
+      // //ref.read(routerProvider).go('/auth-gate');
+      //final result = await ref.read(authProvider.notifier).getCurrentUser();
+      final container = ProviderScope.containerOf(context);
+      await container.read(authProvider.notifier).getCurrentUser();
+      GoRouter.of(context).push('/auth-gate');
+      return;
+    }
     if (message.data['code'] == '11' || message.data['code'] == 11) {
       // _handleSessionSelectionNotification(message);
       // _handleSessionNotification();
@@ -580,6 +614,16 @@ class FCMService {
     if (message.data['code'] == '4' || message.data['code'] == 4) {
       print("event data is ${message.data}");
       _handleMessageReadEvent(message);
+      return;
+    }
+    if (message.data['code'] == '25' || message.data['code'] == 25) {
+      final context = navigatorKey.currentContext;
+      print("context: $context");
+      if (context == null) return;
+
+      final container = ProviderScope.containerOf(context);
+      await container.read(authProvider.notifier).getCurrentUser();
+      GoRouter.of(context).push('/auth-gate');
       return;
     }
     // if (message.notification?.title == 'Incoming Call') {

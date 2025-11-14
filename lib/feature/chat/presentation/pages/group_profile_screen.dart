@@ -1,10 +1,10 @@
-import 'dart:math';
-
+import 'dart:math' as Random;
 import 'package:flutter/material.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/chat/presentation/widgets/gradient_avatar.dart';
+import "dart:developer";
 
 class GroupProfileScreen extends StatefulWidget {
   final String groupName;
@@ -32,20 +32,24 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
       [const Color(0xFF6AA8FF), const Color(0xFF7BC1FF)],
       [const Color(0xFFF595A7), const Color(0xFFF4B6A2)],
     ];
-    return gradients[Random().nextInt(gradients.length)];
+    return gradients[Random.Random().nextInt(gradients.length)];
   }
 
   @override
   Widget build(BuildContext context) {
     // Convert UserModel objects to Member objects for display
+    log("Members: ${widget.groupMembers}");
     final members =
         widget.groupMembers
             ?.map(
               (user) => Member(
                 name: '${user.firstName} ${user.lastName}',
-                status: 'online', // You can customize this based on your data
+                status:
+                    user.isOnline == true
+                        ? "online"
+                        : "offline", // Handles null, false, or other values
                 gradient: getRandomGradient(),
-                isOwner: false, // Set this based on your logic
+                isOwner: false,
               ),
             )
             .toList() ??

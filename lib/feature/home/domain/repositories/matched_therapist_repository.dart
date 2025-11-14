@@ -26,13 +26,13 @@ class MatchedTherapistRepositoryImpl implements MatchedTherapistRepository {
         take: 10,
         page: 1,
       );
-      final firstWithAccepted = res.data.firstWhere(
-        (m) => m.accepted != null,
-        orElse: () => const MatchItem(id: ''),
-      );
-      if (firstWithAccepted.accepted != null) {
-        return Right(firstWithAccepted.accepted);
+
+      // Take the first match regardless of whether it has an accepted therapist
+      if (res.data.isNotEmpty) {
+        final firstMatch = res.data.first;
+        return Right(firstMatch.accepted);
       }
+
       return const Right(null);
     } on DioException catch (e) {
       String msg =
