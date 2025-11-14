@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/error/failures.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/home/data/data_sources/matched_therapist_remote_data_source.dart';
-import 'package:navithera_client/feature/home/data/models/matched_therapist_models.dart';
-import 'package:navithera_client/feature/therapy/data/models/users_list_model.dart';
 
 abstract class MatchedTherapistRepository {
   Future<Either<Failure, UserModel?>> getLatestAcceptedTherapist();

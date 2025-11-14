@@ -22,4 +22,14 @@ abstract class ExtraQuestionsRepository {
   );
 
   Future<Either<Failure, MatchResponse>> createMatch(MatchRequest request);
+
+  Future<Either<Failure, PreferenceResponse>> updatePreference(
+    String preferenceId,
+    PreferenceUpdateRequest request,
+  );
+
+  Future<Either<Failure, PreferenceResponse>> updatePreferenceWithoutLevel(
+    String preferenceId,
+    PreferenceUpdateWithoutLevelRequest request,
+  );
 }

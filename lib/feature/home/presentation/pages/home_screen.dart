@@ -919,14 +919,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  Text(
-                    AppLocalizations.of(context)!.howAreYouFeeling,
-                    style: AppTypography.heading1,
-                  ),
-                  const SizedBox(height: 12),
-
                   // Mood section
                   if (_isLoadingTodayMood) ...[
+                    Text(
+                      AppLocalizations.of(context)!.howAreYouFeeling,
+                      style: AppTypography.heading1,
+                    ),
+                    const SizedBox(height: 12),
                     const _MoodSkeleton(),
                     const SizedBox(height: 12),
                   ],

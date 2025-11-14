@@ -77,6 +77,58 @@ Map<String, dynamic> _$$AvailabilitySlotImplToJson(
   _$AvailabilitySlotImpl instance,
 ) => <String, dynamic>{'day': instance.day, 'day_period': instance.day_period};
 
+_$PreferenceUpdateRequestImpl _$$PreferenceUpdateRequestImplFromJson(
+  Map<String, dynamic> json,
+) => _$PreferenceUpdateRequestImpl(
+  modalId: json['modalId'] as String?,
+  gender: json['gender'] as String?,
+  languageIds:
+      (json['languageIds'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  goal: json['goal'] as String?,
+  levelId: json['levelId'] as String?,
+  availability:
+      (json['availability'] as List<dynamic>?)
+          ?.map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
+          .toList(),
+);
+
+Map<String, dynamic> _$$PreferenceUpdateRequestImplToJson(
+  _$PreferenceUpdateRequestImpl instance,
+) => <String, dynamic>{
+  'modalId': instance.modalId,
+  'gender': instance.gender,
+  'languageIds': instance.languageIds,
+  'goal': instance.goal,
+  'levelId': instance.levelId,
+  'availability': instance.availability,
+};
+
+_$PreferenceUpdateWithoutLevelRequestImpl
+_$$PreferenceUpdateWithoutLevelRequestImplFromJson(Map<String, dynamic> json) =>
+    _$PreferenceUpdateWithoutLevelRequestImpl(
+      modalId: json['modalId'] as String?,
+      gender: json['gender'] as String?,
+      languageIds:
+          (json['languageIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+      goal: json['goal'] as String?,
+      availability:
+          (json['availability'] as List<dynamic>?)
+              ?.map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
+              .toList(),
+    );
+
+Map<String, dynamic> _$$PreferenceUpdateWithoutLevelRequestImplToJson(
+  _$PreferenceUpdateWithoutLevelRequestImpl instance,
+) => <String, dynamic>{
+  'modalId': instance.modalId,
+  'gender': instance.gender,
+  'languageIds': instance.languageIds,
+  'goal': instance.goal,
+  'availability': instance.availability,
+};
+
 _$PreferenceResponseImpl _$$PreferenceResponseImplFromJson(
   Map<String, dynamic> json,
 ) => _$PreferenceResponseImpl(

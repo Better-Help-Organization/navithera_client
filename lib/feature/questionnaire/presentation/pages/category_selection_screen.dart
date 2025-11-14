@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
+import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/questions_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/routes/app_router.dart';
 import '../providers/modals_provider.dart';
 
@@ -146,6 +150,7 @@ class _CategorySelectionScreenState
                         ),
                       ),
                   data: (modalsResponse) {
+                    final user = ref.watch(currentUserProvider);
                     final categories = modalsResponse.data;
 
                     if (categories.isEmpty) {
@@ -176,37 +181,128 @@ class _CategorySelectionScreenState
                               //'color': Colors.white,
                             },
                             onTap: () {
-                              ref
-                                  .read(userAnswersProvider.notifier)
-                                  .clearAnswers();
-                              ref.read(modalIdProvider.notifier).state =
-                                  category.id;
-                              ref
-                                  .read(selectedLanguagesProvider.notifier)
-                                  .state = [];
-                              ref
-                                  .read(showOtherLanguageInputProvider.notifier)
-                                  .state = false;
+                              Future<void> _checkIfPrefFilled() async {
+                                final sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                final accessToken = sharedPreferences.getString(
+                                  'access_token',
+                                );
 
-                              // Reset level provider
-                              ref.read(selectedLevelProvider.notifier).state =
-                                  null;
+                                try {
+                                  final dio = Dio();
+                                  dio.options.headers['Authorization'] =
+                                      'Bearer $accessToken';
 
-                              // Reset gender provider
-                              ref.read(selectedGenderProvider.notifier).state =
-                                  null;
+                                  final response = await dio.get(
+                                    '${base_url_dev}/client/me/preferences?fields=modal.*&filters=modal.id=${category.id}',
+                                  );
 
-                              // Reset availability provider
-                              ref
-                                  .read(selectedAvailabilityProvider.notifier)
-                                  .state = [];
+                                  print("responsexoxo: ${response.data}");
 
-                              ref.read(goalsProvider.notifier).state = '';
+                                  if (response.statusCode == 200) {
+                                    ref
+                                        .read(userAnswersProvider.notifier)
+                                        .clearAnswers();
+                                    ref.read(modalIdProvider.notifier).state =
+                                        category.id;
+                                    ref
+                                        .read(
+                                          selectedLanguagesProvider.notifier,
+                                        )
+                                        .state = [];
+                                    ref
+                                        .read(
+                                          showOtherLanguageInputProvider
+                                              .notifier,
+                                        )
+                                        .state = false;
 
-                              final router = ref.read(routerProvider);
-                              router.push(
-                                '/questionnaire?category=${category.id}',
-                              );
+                                    // Reset level provider
+                                    ref
+                                        .read(selectedLevelProvider.notifier)
+                                        .state = null;
+
+                                    // Reset gender provider
+                                    ref
+                                        .read(selectedGenderProvider.notifier)
+                                        .state = null;
+
+                                    // Reset availability provider
+                                    ref
+                                        .read(
+                                          selectedAvailabilityProvider.notifier,
+                                        )
+                                        .state = [];
+
+                                    ref.read(goalsProvider.notifier).state = '';
+                                    print("responsexoxo ${category.name}");
+                                    // Check if data array is not empty
+                                    final responseData = response.data;
+                                    if (responseData['data'] != null &&
+                                        responseData['data'].isNotEmpty) {
+                                      // print(
+                                      //   "preference exists: ${responseData['data'][0]['id']}",
+                                      // );
+                                      if (category.name
+                                              .toString()
+                                              .toLowerCase() ==
+                                          'group therapy') {
+                                        final router = ref.read(routerProvider);
+                                        router.push('/subscription');
+                                      }
+                                      final router = ref.read(routerProvider);
+                                      // router.push(
+                                      //   '/language-selection?prefId=${responseData['data'][0]['id']}',
+                                      // );
+                                      router.push(
+                                        '/language-selection?prefId=${responseData['data'][0]['id']}',
+                                      );
+
+                                      // print("hello");
+                                    } else {
+                                      final router = ref.read(routerProvider);
+                                      router.push(
+                                        '/questionnaire?category=${category.id}',
+                                      );
+                                    }
+
+                                    if (!mounted) return;
+                                    // Your existing navigation code here...
+                                  } else {
+                                    if (!mounted) return;
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('an error occured'),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                } on DioException catch (e) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Error: ${e.response?.data['message'] ?? e.message}',
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                } catch (e) {
+                                  if (!mounted) return;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'An unexpected error occurred',
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
+
+                              _checkIfPrefFilled();
+
+                              // print("perfect user: ${user?.preferences}");
                             },
                           ),
                         );

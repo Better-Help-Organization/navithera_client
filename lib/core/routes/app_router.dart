@@ -138,10 +138,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/breathing',
         builder: (context, state) => BreathingScreen(),
       ),
-
       GoRoute(
         path: '/language-selection',
-        builder: (context, state) => const ExtraQuestionsScreen(),
+        builder: (context, state) {
+          final prefId =
+              state.uri.queryParameters['prefId']; // Use uri.queryParameters
+          return ExtraQuestionsScreen(
+            preferenceId: prefId, // Pass it to the screen
+          );
+        },
       ),
       GoRoute(
         path: '/chat/:chatId',

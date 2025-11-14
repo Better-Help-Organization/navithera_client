@@ -34,4 +34,16 @@ abstract class ExtraQuestionsDataSource {
 
   @POST('/match')
   Future<MatchResponse> createMatch(@Body() MatchRequest request);
+
+  @PATCH('/preference/{id}')
+  Future<PreferenceResponse> updatePreference(
+    @Path('id') String preferenceId,
+    @Body() PreferenceUpdateRequest request,
+  );
+
+  @PATCH('/preference/{id}')
+  Future<PreferenceResponse> updatePreferenceWithoutLevel(
+    @Path('id') String preferenceId,
+    @Body() PreferenceUpdateWithoutLevelRequest request,
+  );
 }

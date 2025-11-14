@@ -200,43 +200,7 @@ class FCMService {
         _handleMessageReadEvent(message);
         return;
       }
-      // if (message.notification?.title == 'Incoming Call') {
-      //   // Parse the JSON string from the notification body
-      //   final idJsonString = message.data['id'];
 
-      //   if (idJsonString != null) {
-      //     // Parse the inner JSON
-      //     final idMap = json.decode(idJsonString) as Map<String, dynamic>;
-
-      //     // Extract room
-      //     final chatId = idMap['chatId'];
-      //     print("chatId: ${chatId}");
-      //     final room = idMap['room'] as String?;
-
-      //     // Extract caller data
-      //     final callerData = idMap['callerData'] as Map<String, dynamic>?;
-      //     if (callerData != null) {
-      //       final firstName = callerData['firstName'] as String?;
-      //       final lastName = callerData['lastName'] as String?;
-      //       final fullName = '$firstName $lastName';
-      //       final email = callerData['email'] as String?;
-
-      //       print('Room: $room');
-      //       print('First Name: $firstName');
-      //       print('Last Name: $lastName');
-      //       print('Email: $email');
-
-      //       print("Room: $room");
-      //       print("Recipient ID: $callerData");
-      //       print("Recipient Name: $fullName");
-
-      //       _showCallInvitationDialog(room!, fullName ?? 'Guest', chatId);
-
-      //       // You can now use these values in your UI or logic
-      //     }
-      //   }
-
-      // } else
       if (_isIncomingCallMessage(message)) {
         final call = _parseIncomingCall(message);
 
@@ -1257,7 +1221,11 @@ class FCMService {
 
   bool _isIncomingCallMessage(RemoteMessage message) {
     // if (message.notification?.title == 'Incoming Call') return true;
-    if (message.data['code'] == '5' || message.data['code'] == 5) return true;
+    if (message.data['code'] == '5' ||
+        message.data['code'] == 5 ||
+        message.data['code'] == '30' ||
+        message.data['code'] == 30)
+      return true;
     final code = message.data['code'];
     return code == 'CALL_INCOMING' || code == 1 || code == '1';
   }

@@ -12,7 +12,12 @@ import 'package:navithera_client/feature/questionnaire/presentation/widgets/prog
 final numQuestionsProvider = StateProvider<int>((ref) => 0);
 
 class ExtraQuestionsScreen extends ConsumerStatefulWidget {
-  const ExtraQuestionsScreen({super.key});
+  final String? preferenceId;
+
+  const ExtraQuestionsScreen({
+    super.key,
+    this.preferenceId, // Make it optional
+  });
 
   @override
   ConsumerState<ExtraQuestionsScreen> createState() =>
@@ -92,33 +97,6 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     }
   }
 
-  // Page order mapping (5 pages)
-  // 0: languages, 1: levels, 2: sessionFormat, 3: availability, 4: goals
-  // bool _isPageValid(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       final selected = ref.read(selectedLanguagesProvider);
-  //       if (selected.isEmpty) return false;
-  //       // If 'other' is selected, require non-empty otherLanguage
-  //       final hasOther = selected.contains('other');
-  //       if (hasOther) {
-  //         final text = _otherLangController.text.trim();
-  //         return text.isNotEmpty;
-  //       }
-  //       return true;
-  //     case 1:
-  //       return ref.read(selectedLevelProvider) != null;
-  //     case 2:
-  //       return ref.read(selectedAvailabilityProvider).isNotEmpty;
-  //     case 3:
-  //       return ref.read(goalsProvider).trim().isNotEmpty;
-  //     case 4:
-  //       return ref.read(selectedGenderProvider) != null;
-  //     default:
-  //       return false;
-  //   }
-  // }
-
   bool _isPageValid(int index) {
     final modalId = ref.read(modalIdProvider);
     final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
@@ -177,34 +155,6 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     }
   }
 
-  // void _previousQuestion() {
-  //   if (_currentIndex > 0) {
-  //     final newIndex = _currentIndex - 1;
-  //     setState(() => _currentIndex = newIndex);
-  //     _pageController.animateToPage(
-  //       newIndex,
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.easeInOut,
-  //     );
-  //   }
-  // }
-
-  // Future<void> _nextQuestion() async {
-  //   if (_currentIndex < 4) {
-  //     final newIndex = _currentIndex + 1;
-  //     setState(() => _currentIndex = newIndex);
-  //     _pageController.animateToPage(
-  //       newIndex,
-  //       duration: const Duration(milliseconds: 300),
-  //       curve: Curves.easeInOut,
-  //     );
-  //   } else {
-  //     setState(() => _isLoading = true);
-  //     await _handleSubmit();
-  //     if (mounted) setState(() => _isLoading = false);
-  //   }
-  // }
-
   void _previousQuestion() {
     if (_currentIndex > 0) {
       final newIndex = _currentIndex - 1;
@@ -238,89 +188,6 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     }
   }
 
-  // Future<void> _handleSubmit() async {
-  //   // Get all the selected values
-  //   //final user = ref.read(currentUserProvider);
-  //   // final selectedLanguages = ref.read(selectedLanguagesProvider);
-  //   final cleanedSelectedLanguages = ref.read(cleanedLanguageIdsProvider);
-  //   final selectedLevel = ref.read(selectedLevelProvider);
-  //   //final selectedFormat = ref.read(selectedSessionFormatProvider);
-  //   final selectedGender = ref.read(selectedGenderProvider);
-  //   final selectedAvailability = ref.read(selectedAvailabilityProvider);
-  //   final goals = ref.read(goalsProvider);
-  //   //final modalId = ref.read(modalIdProvider);
-
-  //   // Show loading indicator
-  //   final scaffoldMessenger = ScaffoldMessenger.of(context);
-
-  //   try {
-  //     final questionsAsync = ref.read(questionsProvider);
-  //     final userAnswers = ref.read(userAnswersProvider);
-  //     final modalId = ref.read(
-  //       modalIdProvider,
-  //     ); // Make sure you have this provider
-  //     log("userAnswers: ${userAnswers}");
-  //     print("userAnswers: modalId: ${modalId}");
-
-  //     if (questionsAsync.hasValue && modalId != null) {
-  //       await ref
-  //           .read(questionsProvider.notifier)
-  //           .submitAnswers(modalId, userAnswers);
-  //     }
-
-  //     final formattedAvailability =
-  //         selectedAvailability.map((slot) {
-  //           return AvailabilitySlot(
-  //             day: slot['day'] as String,
-  //             day_period: (slot['day_period'] as String).toLowerCase(),
-  //           );
-  //         }).toList();
-
-  //     // Create the request
-  //     final request = PreferenceRequest(
-  //       modalId:
-  //           modalId ??
-  //           '15712652-72bc-400e-8f51-784bef64d09a', // Handle null case
-  //       gender: selectedGender?.toLowerCase() ?? "", // Handle null case
-  //       languageIds: cleanedSelectedLanguages,
-  //       //sessionFormat: selectedFormat?.toLowerCase() ?? '', // Handle null case
-  //       goal: goals.isNotEmpty ? goals : null,
-  //       levelId: selectedLevel ?? '', // Handle null case
-  //       availability: formattedAvailability,
-  //     );
-
-  //     // Get the repository
-  //     final repository = ref.read(extraQuestionsRepositoryProvider);
-
-  //     // Make the API call
-  //     final prefResult = await repository.createPreference(request);
-
-  //     return prefResult.fold(
-  //       (failure) {
-  //         scaffoldMessenger.showSnackBar(
-  //           SnackBar(
-  //             content: Text(
-  //               'Failed to save preferences: ${failure.toString()}',
-  //             ),
-  //             backgroundColor: Colors.red,
-  //           ),
-  //         );
-  //       },
-  //       (prefResponse) async {
-  //         ref.read(selectedPrefProvider.notifier).state = prefResponse.data.id;
-  //         ref.read(routerProvider).go('/subscription');
-  //       },
-  //     );
-  //   } catch (e) {
-  //     scaffoldMessenger.showSnackBar(
-  //       SnackBar(
-  //         content: Text('An error occurred: ${e.toString()}'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //   }
-  // }
-
   Future<void> _handleSubmit() async {
     final cleanedSelectedLanguages = ref.read(cleanedLanguageIdsProvider);
     final selectedLevel = ref.read(selectedLevelProvider);
@@ -330,7 +197,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     final modalId = ref.read(modalIdProvider);
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
-
+    print("responsexoj: ${widget.preferenceId}");
     try {
       final questionsAsync = ref.read(questionsProvider);
       final userAnswers = ref.read(userAnswersProvider);
@@ -351,67 +218,142 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
 
       final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
 
-      if (isSpecialModal) {
-        final request = PreferenceRequestWithoutLevel(
-          modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
-          gender: selectedGender?.toLowerCase() ?? "",
-          languageIds: cleanedSelectedLanguages,
-          goal: goals.isNotEmpty ? goals : null,
-          availability: formattedAvailability,
-        );
-        final repository = ref.read(extraQuestionsRepositoryProvider);
-        final prefResult = await repository.createPreferenceWithoutLevel(
-          request,
-        );
+      final isUpdate = widget.preferenceId != null;
 
-        return prefResult.fold(
-          (failure) {
-            scaffoldMessenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Failed to save preferences: ${failure.toString()}',
+      if (isUpdate) {
+        if (isSpecialModal) {
+          final request = PreferenceUpdateWithoutLevelRequest(
+            modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
+            gender: selectedGender?.toLowerCase() ?? "",
+            languageIds: cleanedSelectedLanguages,
+            goal: goals.isNotEmpty ? goals : null,
+            availability: formattedAvailability,
+          );
+          final repository = ref.read(extraQuestionsRepositoryProvider);
+          final prefResult = await repository.updatePreferenceWithoutLevel(
+            widget.preferenceId!,
+            request,
+          );
+
+          return prefResult.fold(
+            (failure) {
+              scaffoldMessenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Failed to save preferences: ${failure.toString()}',
+                  ),
+                  backgroundColor: Colors.red,
                 ),
-                backgroundColor: Colors.red,
-              ),
-            );
-          },
-          (prefResponse) async {
-            ref.read(selectedPrefProvider.notifier).state =
-                prefResponse.data.id;
-            ref.read(routerProvider).go('/subscription');
-          },
-        );
+              );
+            },
+            (prefResponse) async {
+              ref.read(selectedPrefProvider.notifier).state =
+                  prefResponse.data.id;
+              ref.read(routerProvider).go('/subscription');
+            },
+          );
+        } else {
+          final request = PreferenceUpdateRequest(
+            modalId: modalId,
+            gender: selectedGender?.toLowerCase(),
+            languageIds:
+                cleanedSelectedLanguages.isNotEmpty
+                    ? cleanedSelectedLanguages
+                    : null,
+            goal: goals.isNotEmpty ? goals : null,
+            levelId: isSpecialModal ? null : selectedLevel,
+            availability:
+                formattedAvailability.isNotEmpty ? formattedAvailability : null,
+          );
+
+          final repository = ref.read(extraQuestionsRepositoryProvider);
+          final updateResult = await repository.updatePreference(
+            widget.preferenceId!,
+            request,
+          );
+
+          return updateResult.fold(
+            (failure) {
+              scaffoldMessenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Failed to update preferences: ${failure.toString()}',
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            },
+            (prefResponse) async {
+              ref.read(selectedPrefProvider.notifier).state =
+                  prefResponse.data.id;
+              ref.read(routerProvider).go('/subscription');
+            },
+          );
+        }
       } else {
-        // For the special modal, levelId can be null/empty
-        final request = PreferenceRequest(
-          modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
-          gender: selectedGender?.toLowerCase() ?? "",
-          languageIds: cleanedSelectedLanguages,
-          goal: goals.isNotEmpty ? goals : null,
-          levelId: selectedLevel ?? '', // This will be empty for special modal
-          availability: formattedAvailability,
-        );
+        if (isSpecialModal) {
+          final request = PreferenceRequestWithoutLevel(
+            modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
+            gender: selectedGender?.toLowerCase() ?? "",
+            languageIds: cleanedSelectedLanguages,
+            goal: goals.isNotEmpty ? goals : null,
+            availability: formattedAvailability,
+          );
+          final repository = ref.read(extraQuestionsRepositoryProvider);
+          final prefResult = await repository.createPreferenceWithoutLevel(
+            request,
+          );
 
-        final repository = ref.read(extraQuestionsRepositoryProvider);
-        final prefResult = await repository.createPreference(request);
-
-        return prefResult.fold(
-          (failure) {
-            scaffoldMessenger.showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Failed to save preferences: ${failure.toString()}',
+          return prefResult.fold(
+            (failure) {
+              scaffoldMessenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Failed to save preferences: ${failure.toString()}',
+                  ),
+                  backgroundColor: Colors.red,
                 ),
-                backgroundColor: Colors.red,
-              ),
-            );
-          },
-          (prefResponse) async {
-            ref.read(selectedPrefProvider.notifier).state =
-                prefResponse.data.id;
-            ref.read(routerProvider).go('/subscription');
-          },
-        );
+              );
+            },
+            (prefResponse) async {
+              ref.read(selectedPrefProvider.notifier).state =
+                  prefResponse.data.id;
+              ref.read(routerProvider).go('/subscription');
+            },
+          );
+        } else {
+          // For the special modal, levelId can be null/empty
+          final request = PreferenceRequest(
+            modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
+            gender: selectedGender?.toLowerCase() ?? "",
+            languageIds: cleanedSelectedLanguages,
+            goal: goals.isNotEmpty ? goals : null,
+            levelId:
+                selectedLevel ?? '', // This will be empty for special modal
+            availability: formattedAvailability,
+          );
+
+          final repository = ref.read(extraQuestionsRepositoryProvider);
+          final prefResult = await repository.createPreference(request);
+
+          return prefResult.fold(
+            (failure) {
+              scaffoldMessenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Failed to save preferences: ${failure.toString()}',
+                  ),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            },
+            (prefResponse) async {
+              ref.read(selectedPrefProvider.notifier).state =
+                  prefResponse.data.id;
+              ref.read(routerProvider).go('/subscription');
+            },
+          );
+        }
       }
     } catch (e) {
       scaffoldMessenger.showSnackBar(
@@ -1483,11 +1425,18 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                   top: 20.0,
                   right: 20.0,
                 ),
-                child: QuestionnaireProgressIndicator(
-                  currentIndex: _currentIndex + numQuestions,
-                  totalQuestions:
-                      numQuestions + totalPagesCount, // Use dynamic total
-                ),
+                child:
+                    widget.preferenceId != null
+                        ? QuestionnaireProgressIndicator(
+                          currentIndex: _currentIndex,
+                          totalQuestions: totalPagesCount, // Use dynamic total
+                        )
+                        : QuestionnaireProgressIndicator(
+                          currentIndex: _currentIndex + numQuestions,
+                          totalQuestions:
+                              numQuestions +
+                              totalPagesCount, // Use dynamic total
+                        ),
               ),
               Expanded(
                 child: PageView(

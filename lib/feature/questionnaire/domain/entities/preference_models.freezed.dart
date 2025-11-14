@@ -971,6 +971,632 @@ abstract class _AvailabilitySlot implements AvailabilitySlot {
       throw _privateConstructorUsedError;
 }
 
+PreferenceUpdateRequest _$PreferenceUpdateRequestFromJson(
+  Map<String, dynamic> json,
+) {
+  return _PreferenceUpdateRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PreferenceUpdateRequest {
+  String? get modalId => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  List<String>? get languageIds => throw _privateConstructorUsedError;
+  String? get goal => throw _privateConstructorUsedError;
+  String? get levelId => throw _privateConstructorUsedError;
+  List<AvailabilitySlot>? get availability =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this PreferenceUpdateRequest to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of PreferenceUpdateRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PreferenceUpdateRequestCopyWith<PreferenceUpdateRequest> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PreferenceUpdateRequestCopyWith<$Res> {
+  factory $PreferenceUpdateRequestCopyWith(
+    PreferenceUpdateRequest value,
+    $Res Function(PreferenceUpdateRequest) then,
+  ) = _$PreferenceUpdateRequestCopyWithImpl<$Res, PreferenceUpdateRequest>;
+  @useResult
+  $Res call({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    String? levelId,
+    List<AvailabilitySlot>? availability,
+  });
+}
+
+/// @nodoc
+class _$PreferenceUpdateRequestCopyWithImpl<
+  $Res,
+  $Val extends PreferenceUpdateRequest
+>
+    implements $PreferenceUpdateRequestCopyWith<$Res> {
+  _$PreferenceUpdateRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PreferenceUpdateRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modalId = freezed,
+    Object? gender = freezed,
+    Object? languageIds = freezed,
+    Object? goal = freezed,
+    Object? levelId = freezed,
+    Object? availability = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            modalId:
+                freezed == modalId
+                    ? _value.modalId
+                    : modalId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            gender:
+                freezed == gender
+                    ? _value.gender
+                    : gender // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            languageIds:
+                freezed == languageIds
+                    ? _value.languageIds
+                    : languageIds // ignore: cast_nullable_to_non_nullable
+                        as List<String>?,
+            goal:
+                freezed == goal
+                    ? _value.goal
+                    : goal // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            levelId:
+                freezed == levelId
+                    ? _value.levelId
+                    : levelId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            availability:
+                freezed == availability
+                    ? _value.availability
+                    : availability // ignore: cast_nullable_to_non_nullable
+                        as List<AvailabilitySlot>?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$PreferenceUpdateRequestImplCopyWith<$Res>
+    implements $PreferenceUpdateRequestCopyWith<$Res> {
+  factory _$$PreferenceUpdateRequestImplCopyWith(
+    _$PreferenceUpdateRequestImpl value,
+    $Res Function(_$PreferenceUpdateRequestImpl) then,
+  ) = __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    String? levelId,
+    List<AvailabilitySlot>? availability,
+  });
+}
+
+/// @nodoc
+class __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>
+    extends
+        _$PreferenceUpdateRequestCopyWithImpl<
+          $Res,
+          _$PreferenceUpdateRequestImpl
+        >
+    implements _$$PreferenceUpdateRequestImplCopyWith<$Res> {
+  __$$PreferenceUpdateRequestImplCopyWithImpl(
+    _$PreferenceUpdateRequestImpl _value,
+    $Res Function(_$PreferenceUpdateRequestImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of PreferenceUpdateRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modalId = freezed,
+    Object? gender = freezed,
+    Object? languageIds = freezed,
+    Object? goal = freezed,
+    Object? levelId = freezed,
+    Object? availability = freezed,
+  }) {
+    return _then(
+      _$PreferenceUpdateRequestImpl(
+        modalId:
+            freezed == modalId
+                ? _value.modalId
+                : modalId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        gender:
+            freezed == gender
+                ? _value.gender
+                : gender // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        languageIds:
+            freezed == languageIds
+                ? _value._languageIds
+                : languageIds // ignore: cast_nullable_to_non_nullable
+                    as List<String>?,
+        goal:
+            freezed == goal
+                ? _value.goal
+                : goal // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        levelId:
+            freezed == levelId
+                ? _value.levelId
+                : levelId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        availability:
+            freezed == availability
+                ? _value._availability
+                : availability // ignore: cast_nullable_to_non_nullable
+                    as List<AvailabilitySlot>?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
+  const _$PreferenceUpdateRequestImpl({
+    this.modalId,
+    this.gender,
+    final List<String>? languageIds,
+    this.goal,
+    this.levelId,
+    final List<AvailabilitySlot>? availability,
+  }) : _languageIds = languageIds,
+       _availability = availability;
+
+  factory _$PreferenceUpdateRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PreferenceUpdateRequestImplFromJson(json);
+
+  @override
+  final String? modalId;
+  @override
+  final String? gender;
+  final List<String>? _languageIds;
+  @override
+  List<String>? get languageIds {
+    final value = _languageIds;
+    if (value == null) return null;
+    if (_languageIds is EqualUnmodifiableListView) return _languageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? goal;
+  @override
+  final String? levelId;
+  final List<AvailabilitySlot>? _availability;
+  @override
+  List<AvailabilitySlot>? get availability {
+    final value = _availability;
+    if (value == null) return null;
+    if (_availability is EqualUnmodifiableListView) return _availability;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'PreferenceUpdateRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, levelId: $levelId, availability: $availability)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PreferenceUpdateRequestImpl &&
+            (identical(other.modalId, modalId) || other.modalId == modalId) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            const DeepCollectionEquality().equals(
+              other._languageIds,
+              _languageIds,
+            ) &&
+            (identical(other.goal, goal) || other.goal == goal) &&
+            (identical(other.levelId, levelId) || other.levelId == levelId) &&
+            const DeepCollectionEquality().equals(
+              other._availability,
+              _availability,
+            ));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    modalId,
+    gender,
+    const DeepCollectionEquality().hash(_languageIds),
+    goal,
+    levelId,
+    const DeepCollectionEquality().hash(_availability),
+  );
+
+  /// Create a copy of PreferenceUpdateRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PreferenceUpdateRequestImplCopyWith<_$PreferenceUpdateRequestImpl>
+  get copyWith => __$$PreferenceUpdateRequestImplCopyWithImpl<
+    _$PreferenceUpdateRequestImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PreferenceUpdateRequestImplToJson(this);
+  }
+}
+
+abstract class _PreferenceUpdateRequest implements PreferenceUpdateRequest {
+  const factory _PreferenceUpdateRequest({
+    final String? modalId,
+    final String? gender,
+    final List<String>? languageIds,
+    final String? goal,
+    final String? levelId,
+    final List<AvailabilitySlot>? availability,
+  }) = _$PreferenceUpdateRequestImpl;
+
+  factory _PreferenceUpdateRequest.fromJson(Map<String, dynamic> json) =
+      _$PreferenceUpdateRequestImpl.fromJson;
+
+  @override
+  String? get modalId;
+  @override
+  String? get gender;
+  @override
+  List<String>? get languageIds;
+  @override
+  String? get goal;
+  @override
+  String? get levelId;
+  @override
+  List<AvailabilitySlot>? get availability;
+
+  /// Create a copy of PreferenceUpdateRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PreferenceUpdateRequestImplCopyWith<_$PreferenceUpdateRequestImpl>
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+PreferenceUpdateWithoutLevelRequest
+_$PreferenceUpdateWithoutLevelRequestFromJson(Map<String, dynamic> json) {
+  return _PreferenceUpdateWithoutLevelRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PreferenceUpdateWithoutLevelRequest {
+  String? get modalId => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  List<String>? get languageIds => throw _privateConstructorUsedError;
+  String? get goal => throw _privateConstructorUsedError; // String? levelId,
+  List<AvailabilitySlot>? get availability =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this PreferenceUpdateWithoutLevelRequest to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of PreferenceUpdateWithoutLevelRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PreferenceUpdateWithoutLevelRequestCopyWith<
+    PreferenceUpdateWithoutLevelRequest
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
+  factory $PreferenceUpdateWithoutLevelRequestCopyWith(
+    PreferenceUpdateWithoutLevelRequest value,
+    $Res Function(PreferenceUpdateWithoutLevelRequest) then,
+  ) =
+      _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
+        $Res,
+        PreferenceUpdateWithoutLevelRequest
+      >;
+  @useResult
+  $Res call({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    List<AvailabilitySlot>? availability,
+  });
+}
+
+/// @nodoc
+class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
+  $Res,
+  $Val extends PreferenceUpdateWithoutLevelRequest
+>
+    implements $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
+  _$PreferenceUpdateWithoutLevelRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PreferenceUpdateWithoutLevelRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modalId = freezed,
+    Object? gender = freezed,
+    Object? languageIds = freezed,
+    Object? goal = freezed,
+    Object? availability = freezed,
+  }) {
+    return _then(
+      _value.copyWith(
+            modalId:
+                freezed == modalId
+                    ? _value.modalId
+                    : modalId // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            gender:
+                freezed == gender
+                    ? _value.gender
+                    : gender // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            languageIds:
+                freezed == languageIds
+                    ? _value.languageIds
+                    : languageIds // ignore: cast_nullable_to_non_nullable
+                        as List<String>?,
+            goal:
+                freezed == goal
+                    ? _value.goal
+                    : goal // ignore: cast_nullable_to_non_nullable
+                        as String?,
+            availability:
+                freezed == availability
+                    ? _value.availability
+                    : availability // ignore: cast_nullable_to_non_nullable
+                        as List<AvailabilitySlot>?,
+          )
+          as $Val,
+    );
+  }
+}
+
+/// @nodoc
+abstract class _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<$Res>
+    implements $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
+  factory _$$PreferenceUpdateWithoutLevelRequestImplCopyWith(
+    _$PreferenceUpdateWithoutLevelRequestImpl value,
+    $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) then,
+  ) = __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    List<AvailabilitySlot>? availability,
+  });
+}
+
+/// @nodoc
+class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
+    extends
+        _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
+          $Res,
+          _$PreferenceUpdateWithoutLevelRequestImpl
+        >
+    implements _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<$Res> {
+  __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl(
+    _$PreferenceUpdateWithoutLevelRequestImpl _value,
+    $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of PreferenceUpdateWithoutLevelRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modalId = freezed,
+    Object? gender = freezed,
+    Object? languageIds = freezed,
+    Object? goal = freezed,
+    Object? availability = freezed,
+  }) {
+    return _then(
+      _$PreferenceUpdateWithoutLevelRequestImpl(
+        modalId:
+            freezed == modalId
+                ? _value.modalId
+                : modalId // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        gender:
+            freezed == gender
+                ? _value.gender
+                : gender // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        languageIds:
+            freezed == languageIds
+                ? _value._languageIds
+                : languageIds // ignore: cast_nullable_to_non_nullable
+                    as List<String>?,
+        goal:
+            freezed == goal
+                ? _value.goal
+                : goal // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        availability:
+            freezed == availability
+                ? _value._availability
+                : availability // ignore: cast_nullable_to_non_nullable
+                    as List<AvailabilitySlot>?,
+      ),
+    );
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PreferenceUpdateWithoutLevelRequestImpl
+    implements _PreferenceUpdateWithoutLevelRequest {
+  const _$PreferenceUpdateWithoutLevelRequestImpl({
+    this.modalId,
+    this.gender,
+    final List<String>? languageIds,
+    this.goal,
+    final List<AvailabilitySlot>? availability,
+  }) : _languageIds = languageIds,
+       _availability = availability;
+
+  factory _$PreferenceUpdateWithoutLevelRequestImpl.fromJson(
+    Map<String, dynamic> json,
+  ) => _$$PreferenceUpdateWithoutLevelRequestImplFromJson(json);
+
+  @override
+  final String? modalId;
+  @override
+  final String? gender;
+  final List<String>? _languageIds;
+  @override
+  List<String>? get languageIds {
+    final value = _languageIds;
+    if (value == null) return null;
+    if (_languageIds is EqualUnmodifiableListView) return _languageIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? goal;
+  // String? levelId,
+  final List<AvailabilitySlot>? _availability;
+  // String? levelId,
+  @override
+  List<AvailabilitySlot>? get availability {
+    final value = _availability;
+    if (value == null) return null;
+    if (_availability is EqualUnmodifiableListView) return _availability;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'PreferenceUpdateWithoutLevelRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, availability: $availability)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PreferenceUpdateWithoutLevelRequestImpl &&
+            (identical(other.modalId, modalId) || other.modalId == modalId) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            const DeepCollectionEquality().equals(
+              other._languageIds,
+              _languageIds,
+            ) &&
+            (identical(other.goal, goal) || other.goal == goal) &&
+            const DeepCollectionEquality().equals(
+              other._availability,
+              _availability,
+            ));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+    runtimeType,
+    modalId,
+    gender,
+    const DeepCollectionEquality().hash(_languageIds),
+    goal,
+    const DeepCollectionEquality().hash(_availability),
+  );
+
+  /// Create a copy of PreferenceUpdateWithoutLevelRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<
+    _$PreferenceUpdateWithoutLevelRequestImpl
+  >
+  get copyWith => __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<
+    _$PreferenceUpdateWithoutLevelRequestImpl
+  >(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PreferenceUpdateWithoutLevelRequestImplToJson(this);
+  }
+}
+
+abstract class _PreferenceUpdateWithoutLevelRequest
+    implements PreferenceUpdateWithoutLevelRequest {
+  const factory _PreferenceUpdateWithoutLevelRequest({
+    final String? modalId,
+    final String? gender,
+    final List<String>? languageIds,
+    final String? goal,
+    final List<AvailabilitySlot>? availability,
+  }) = _$PreferenceUpdateWithoutLevelRequestImpl;
+
+  factory _PreferenceUpdateWithoutLevelRequest.fromJson(
+    Map<String, dynamic> json,
+  ) = _$PreferenceUpdateWithoutLevelRequestImpl.fromJson;
+
+  @override
+  String? get modalId;
+  @override
+  String? get gender;
+  @override
+  List<String>? get languageIds;
+  @override
+  String? get goal; // String? levelId,
+  @override
+  List<AvailabilitySlot>? get availability;
+
+  /// Create a copy of PreferenceUpdateWithoutLevelRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<
+    _$PreferenceUpdateWithoutLevelRequestImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
+}
+
 PreferenceResponse _$PreferenceResponseFromJson(Map<String, dynamic> json) {
   return _PreferenceResponse.fromJson(json);
 }

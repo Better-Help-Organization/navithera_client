@@ -90,6 +90,38 @@ class ExtraQuestionsImpl implements ExtraQuestionsRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, PreferenceResponse>> updatePreference(
+    String preferenceId,
+    PreferenceUpdateRequest request,
+  ) async {
+    try {
+      final response = await remoteDataSource.updatePreference(
+        preferenceId,
+        request,
+      );
+      return Right(response);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PreferenceResponse>> updatePreferenceWithoutLevel(
+    String preferenceId,
+    PreferenceUpdateWithoutLevelRequest request,
+  ) async {
+    try {
+      final response = await remoteDataSource.updatePreferenceWithoutLevel(
+        preferenceId,
+        request,
+      );
+      return Right(response);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
   // We'll add more methods here as we implement more questions
   // For example:
   // Future<Either<Failure, SessionFormatsResponse>> getSessionFormats();

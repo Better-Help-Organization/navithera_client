@@ -1,620 +1,3 @@
-// import 'dart:convert';
-// import 'dart:io';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:navithera_client/core/constants/base_url.dart';
-// import 'package:navithera_client/core/theme/app_colors.dart';
-// import 'package:navithera_client/core/util/format_duration.dart';
-// import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
-// // Add VAT provider
-// final vatProvider = StateProvider<double?>((ref) => null);
-// final exchangeRateProvider = StateProvider<double?>((ref) => null);
-
-// // Add this to your providers file or create a new one
-// final userPreferencesProvider = FutureProvider<Map<String, dynamic>?>((
-//   ref,
-// ) async {
-//   final prefs = await SharedPreferences.getInstance();
-//   final token = prefs.getString('access_token');
-//   if (token == null) throw Exception('No token found');
-
-//   final uri = Uri.parse(
-//     '$base_url_dev/client/me/preferences?fields=level.*&sort=createdAt=desc',
-//   );
-//   final response = await http.get(
-//     uri,
-//     headers: {'Authorization': 'Bearer $token'},
-//   );
-
-//   if (response.statusCode != 200) {
-//     throw Exception(
-//       "We're having trouble loading your preference. Please check your connection and try again.",
-//     );
-//   }
-
-//   final data = jsonDecode(response.body);
-//   if (data['data'] != null && data['data'].isNotEmpty) {
-//     final levelData = data['data'][0]['level'];
-//     return {
-//       'levelId': levelData['id'],
-//       'levelType': levelData['type'],
-//       'levelPrice': levelData['price'].toString(),
-//     };
-//   }
-//   return null;
-// });
-
-// class Subscription {
-//   final String id;
-//   final int type; // 0=free,1=monthly,3=quarterly
-//   final int price;
-//   final String level;
-//   final String levelId;
-
-//   Subscription({
-//     required this.id,
-//     required this.type,
-//     required this.price,
-//     required this.level,
-//     required this.levelId,
-//   });
-
-//   // factory Subscription.fromJson(Map<String, dynamic> json) {
-//   //   return Subscription(
-//   //     id: json['id'],
-//   //     type: json['type'],
-//   //     price: json['price'],
-//   //     level: json['level']['type'],
-//   //     levelId: json['level']['id'],
-//   //   );
-//   // }
-//   factory Subscription.fromJson(Map<String, dynamic> json) {
-//     // Use the null-aware operator (?.) to check if json['level'] is null.
-//     // If it is null, the expression short-circuits to null,
-//     // and the null-coalescing operator (??) provides a default value.
-
-//     final levelMap = json['level'] as Map<String, dynamic>?;
-
-//     return Subscription(
-//       id: json['id'],
-//       type: json['type'],
-//       price: json['price'],
-//       // Safely access 'type'. If levelMap is null, default to 'N/A' or a placeholder.
-//       level: levelMap?['type'] as String? ?? 'N/A',
-//       // Safely access 'id'. If levelMap is null, default to an empty string.
-//       levelId: levelMap?['id'] as String? ?? '',
-//     );
-//   }
-// }
-
-// class SubscriptionService {
-//   static Future<List<Subscription>> fetchSubscriptions() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     final token = prefs.getString('access_token');
-//     if (token == null) throw Exception('No token found');
-
-//     final uri = Uri.parse(
-//       '$base_url_dev/subscription?fields=price%2Ctype%2Clevel.%2A',
-//     );
-//     final response = await http.get(
-//       uri,
-//       headers: {'Authorization': 'Bearer $token'},
-//     );
-
-//     if (response.statusCode != 200) {
-//       throw Exception('Failed: ${response.body}');
-//     }
-
-//     final data = jsonDecode(response.body)['data'] as List;
-//     print("Bearerxoxo: ${data}");
-//     return data.map((e) => Subscription.fromJson(e)).toList();
-//   }
-
-//   static Future<String> createSubscription({
-//     required int type,
-//     required int price,
-//     required String levelId,
-//     int? oldPrice,
-//     required String startDate,
-//   }) async {
-//     final prefs = await SharedPreferences.getInstance();
-//     final token = prefs.getString('access_token');
-//     if (token == null) throw Exception('No token found');
-
-//     final uri = Uri.parse('$base_url_dev/subscription');
-
-//     final body = json.encode({
-//       'type': type,
-//       'price': price * 4,
-//       'levelId': levelId,
-//       'old_price': 100000,
-//       'start_date': startDate,
-//     });
-
-//     print("Request Body: $body");
-
-//     final response = await http.post(
-//       uri,
-//       headers: {
-//         'Authorization': 'Bearer $token',
-//         'Content-Type': 'application/json',
-//       },
-//       body: body,
-//     );
-
-//     print("response: ${response.body}");
-
-//     if (response.statusCode != 201) {
-//       throw Exception('Failed to create subscription: ${response.body}');
-//     }
-
-//     final responseData = jsonDecode(response.body);
-//     return responseData['data']['id'];
-//   }
-// }
-
-// class SubscriptionPage extends ConsumerStatefulWidget {
-//   const SubscriptionPage({Key? key}) : super(key: key);
-
-//   @override
-//   ConsumerState<SubscriptionPage> createState() => _SubscriptionPageState();
-// }
-
-// class _SubscriptionPageState extends ConsumerState<SubscriptionPage> {
-//   late Future<List<Subscription>> _future;
-//   String _selectedLevel = "associate";
-//   bool _isCreatingSubscription = false;
-//   bool _isLoadingPreferences = false;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _future = SubscriptionService.fetchSubscriptions();
-//     _checkUserPreferences();
-//     _getVat();
-//     _getExchangeRate();
-//   }
-
-//   String _getTypeLabel(int type) {
-//     switch (type) {
-//       case 0:
-//         return 'Trial';
-//       case 1:
-//         return 'Monthly';
-//       case 3:
-//         return 'Quarterly';
-//       case 6:
-//         return 'Semi-Annual';
-//       case 12:
-//         return 'Yearly';
-//       default:
-//         return 'Unknown';
-//     }
-//   }
-
-//   // Calculate price with time span multiplier, VAT, and currency conversion
-//   int _calculateFinalPrice(
-//     int basePrice,
-//     int type,
-//     double vatRate,
-//     double exchangeRate,
-//   ) {
-//     if (type == 0) return 0; // Free trial
-
-//     // Multiply by time span
-//     int timeMultipliedPrice = basePrice * type;
-
-//     // Apply VAT
-//     double priceWithVat = timeMultipliedPrice * (1 + (vatRate));
-
-//     // Convert to ETB using exchange rate (assuming basePrice is in USD)
-//     double priceInEtb = priceWithVat * exchangeRate;
-
-//     // Round to nearest integer
-//     return priceInEtb.round();
-//   }
-
-//   Future<void> _handleSubscriptionTap(Subscription subscription) async {
-//     setState(() {
-//       _isCreatingSubscription = true;
-//     });
-
-//     try {
-//       // Calculate start date (10 minutes from now)
-//       final startDate = DateTime.now().add(const Duration(minutes: 10));
-//       final formattedStartDate =
-//           '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
-
-//       final selectedLevel = ref.read(selectedLevelProvider);
-//       final selectedLevelPrice = ref.read(selectedLevelPriceProvider);
-//       final vatRate = ref.read(vatProvider) ?? 0;
-//       final exchangeRate = ref.read(exchangeRateProvider) ?? 1;
-
-//       print("Selected level from provider: $selectedLevel");
-//       print("Selected level price from provider: $selectedLevelPrice");
-//       print("VAT rate: $vatRate%");
-//       print("Exchange rate: $exchangeRate");
-
-//       // Get the actual price from provider or use subscription price as fallback
-//       final basePrice =
-//           selectedLevelPrice != null
-//               ? int.parse(selectedLevelPrice)
-//               : subscription.price;
-
-//       // Calculate final price with time span, VAT, and currency conversion
-//       final finalPrice = _calculateFinalPrice(
-//         basePrice,
-//         subscription.type,
-//         vatRate,
-//         exchangeRate,
-//       );
-//       final oldPrice = _calculateFinalPrice(
-//         580,
-//         subscription.type,
-//         vatRate,
-//         exchangeRate,
-//       );
-
-//       // Create subscription
-//       final subscriptionId = await SubscriptionService.createSubscription(
-//         type: subscription.type,
-//         price: finalPrice,
-//         levelId: selectedLevel ?? subscription.levelId,
-//         // oldPrice: oldPrice,
-//         startDate: formattedStartDate,
-//       );
-//       final providerId = ref.read(selectedPrefProvider);
-
-//       // Navigate to payment page with the created subscription ID
-//       // context.push('/payment', extra: subscriptionId);
-//       context.go('/payment?preferenceId=$providerId', extra: subscriptionId);
-//     } catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           content: Text('Failed to create subscription: $e'),
-//           backgroundColor: Colors.red,
-//         ),
-//       );
-//     } finally {
-//       setState(() {
-//         _isCreatingSubscription = false;
-//       });
-//     }
-//   }
-
-//   Future<void> _checkUserPreferences() async {
-//     final selectedLevel = ref.read(selectedLevelProvider);
-//     final selectedLevelPrice = ref.read(selectedLevelPriceProvider);
-
-//     // If either is null, fetch from API
-//     if (selectedLevel == null || selectedLevelPrice == null) {
-//       setState(() {
-//         _isLoadingPreferences = true;
-//       });
-
-//       try {
-//         final preferences = await ref.read(userPreferencesProvider.future);
-
-//         print("Fetched preferences: $preferences");
-
-//         if (preferences != null) {
-//           ref.read(selectedLevelProvider.notifier).state =
-//               preferences['levelId'];
-//           ref.read(selectedLevelPriceProvider.notifier).state =
-//               preferences['levelPrice'];
-
-//           print("Fetched level from API: ${preferences['levelId']}");
-//           print("Fetched level price from API: ${preferences['levelPrice']}");
-//         }
-//       } catch (e) {
-//         print("Error fetching user preferences: $e");
-//       } finally {
-//         setState(() {
-//           _isLoadingPreferences = false;
-//         });
-//       }
-//     }
-//   }
-
-//   Future<void> _getVat() async {
-//     try {
-//       final prefs = await SharedPreferences.getInstance();
-//       final token = prefs.getString('access_token');
-//       if (token == null) throw Exception('No token found');
-
-//       final uri = Uri.parse('$base_url_dev/params?filters=name=vat');
-//       final response = await http.get(
-//         uri,
-//         headers: {'Authorization': 'Bearer $token'},
-//       );
-
-//       if (response.statusCode != 200) {
-//         throw Exception(
-//           "We're having trouble loading the data you're looking for. Please check your connection and try again.",
-//         );
-//       }
-
-//       final data = jsonDecode(response.body);
-//       print("vat data: $data");
-//       if (data['data'] != null && data['data'].isNotEmpty) {
-//         final vatData = double.parse(data['data'][0]['value'].toString());
-//         print("vat value: $vatData");
-//         ref.read(vatProvider.notifier).state = vatData;
-//       }
-//     } catch (e) {
-//       print("Error fetching VAT: $e");
-//       // Set default VAT if API fails
-//       ref.read(vatProvider.notifier).state = 15.0; // Default 15% VAT
-//     }
-//   }
-
-//   Future<void> _getExchangeRate() async {
-//     try {
-//       final prefs = await SharedPreferences.getInstance();
-//       final token = prefs.getString('access_token');
-//       if (token == null) throw Exception('No token found');
-
-//       final uri = Uri.parse('$base_url_dev/params?filters=name=exchange_rate');
-//       final response = await http.get(
-//         uri,
-//         headers: {'Authorization': 'Bearer $token'},
-//       );
-
-//       if (response.statusCode != 200) {
-//         throw Exception(
-//           "We're having trouble loading the data you're looking for. Please check your connection and try again.",
-//         );
-//       }
-
-//       final data = jsonDecode(response.body);
-//       print("exchange rate data: $data");
-//       if (data['data'] != null && data['data'].isNotEmpty) {
-//         final exchangeRateData = double.parse(
-//           data['data'][0]['value'].toString(),
-//         );
-//         print("exchange rate value: $exchangeRateData");
-//         ref.read(exchangeRateProvider.notifier).state = exchangeRateData;
-//       }
-//     } catch (e) {
-//       print("Error fetching exchange rate: $e");
-//       // Set default exchange rate if API fails
-//       ref.read(exchangeRateProvider.notifier).state =
-//           55.0; // Default 55 ETB per USD
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: AppBar(
-//         title: const Text(
-//           "Our Packages",
-//           style: TextStyle(color: Colors.black),
-//         ),
-//         centerTitle: true,
-//         backgroundColor: Colors.white,
-//         elevation: 0,
-//       ),
-//       body:
-//           _isLoadingPreferences
-//               ? const Center(child: CircularProgressIndicator())
-//               : _isCreatingSubscription
-//               ? const Center(child: CircularProgressIndicator())
-//               : FutureBuilder<List<Subscription>>(
-//                 future: _future,
-//                 builder: (context, snapshot) {
-//                   final selectedLevel = ref.read(selectedLevelProvider);
-//                   final selectedLevelPrice = ref.read(
-//                     selectedLevelPriceProvider,
-//                   );
-//                   final vatRate = ref.watch(vatProvider) ?? 0;
-//                   final exchangeRate = ref.watch(exchangeRateProvider) ?? 1;
-
-//                   print("Selected level in build: $selectedLevel");
-//                   print("Selected level price in build: $selectedLevelPrice");
-//                   print("VAT rate in build: $vatRate%");
-//                   print("Exchange rate in build: $exchangeRate");
-
-//                   if (snapshot.connectionState == ConnectionState.waiting) {
-//                     return const Center(child: CircularProgressIndicator());
-//                   }
-//                   if (snapshot.hasError) {
-//                     return Center(child: Text("Error: ${snapshot.error}"));
-//                   }
-
-//                   final subs = snapshot.data!;
-//                   final availableTypes = [0, 1, 3, 6, 12];
-
-//                   return Padding(
-//                     padding: const EdgeInsets.all(16.0),
-//                     child: Column(
-//                       children: [
-//                         Expanded(
-//                           child: ListView.builder(
-//                             itemCount: availableTypes.length,
-//                             itemBuilder: (context, index) {
-//                               final typeId = availableTypes[index];
-//                               final typeLabel = _getTypeLabel(typeId);
-
-//                               // Use the level from provider or default to first available
-//                               final currentLevel = selectedLevel ?? "associate";
-//                               final basePrice =
-//                                   selectedLevelPrice != null
-//                                       ? int.parse(selectedLevelPrice!)
-//                                       : 499;
-
-//                               Subscription sub;
-//                               try {
-//                                 sub = subs.firstWhere(
-//                                   (s) =>
-//                                       s.level == currentLevel &&
-//                                       s.type == typeId,
-//                                 );
-//                               } catch (e) {
-//                                 // Create placeholder with level ID from first subscription
-//                                 final levelSub = subs.firstWhere(
-//                                   (s) => s.level == currentLevel,
-//                                   orElse: () => subs.first,
-//                                 );
-//                                 sub = Subscription(
-//                                   id: '',
-//                                   type: typeId,
-//                                   price: _calculateFinalPrice(
-//                                     basePrice,
-//                                     typeId,
-//                                     vatRate,
-//                                     exchangeRate,
-//                                   ),
-//                                   level: currentLevel,
-//                                   levelId: levelSub.levelId,
-//                                 );
-//                               }
-
-//                               return SubscriptionCard(
-//                                 ref: ref,
-//                                 price: basePrice,
-//                                 subscription: sub,
-//                                 typeLabel: typeLabel,
-//                                 vatRate: vatRate,
-//                                 exchangeRate: exchangeRate,
-//                                 onTap: () => _handleSubscriptionTap(sub),
-//                               );
-//                             },
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   );
-//                 },
-//               ),
-//     );
-//   }
-// }
-
-// class SubscriptionCard extends StatelessWidget {
-//   final Subscription subscription;
-//   final String typeLabel;
-//   final VoidCallback onTap;
-//   final int price;
-//   final WidgetRef ref;
-//   final double vatRate;
-//   final double exchangeRate;
-
-//   const SubscriptionCard({
-//     Key? key,
-//     required this.subscription,
-//     required this.typeLabel,
-//     required this.onTap,
-//     required this.price,
-//     required this.ref,
-//     required this.vatRate,
-//     required this.exchangeRate,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final secondary = AppColors.secondary;
-
-//     // Calculate final price for display
-//     int calculateDisplayPrice(int basePrice, int type) {
-//       if (type == 0) return 0;
-
-//       int timeMultipliedPrice = basePrice * type;
-
-//       double priceWithVat = timeMultipliedPrice * (1 + (vatRate));
-
-//       double priceInEtb = priceWithVat * exchangeRate;
-
-//       return priceInEtb.round();
-//     }
-
-//     String _getTypeDescription(int type) {
-//       switch (type) {
-//         case 0:
-//           return '1 session - Perfect for trying our service';
-//         case 1:
-//           return '4 sessions - Great for getting started';
-//         case 3:
-//           return '12 sessions - Ideal for consistent progress';
-//         case 6:
-//           return '24 sessions - Best value for dedicated users';
-//         case 12:
-//           return '52 sessions - Ultimate commitment with maximum savings';
-//         default:
-//           return 'Subscription plan';
-//       }
-//     }
-
-//     final displayPrice =
-//         subscription.type == 0
-//             ? calculateDisplayPrice(price, 1)
-//             : calculateDisplayPrice(price, subscription.type) * 4;
-//     final priceText = "$displayPrice ETB";
-
-//     return Container(
-//       margin: const EdgeInsets.symmetric(vertical: 8),
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.circular(16),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Color(0x11000000),
-//             blurRadius: 10,
-//             offset: Offset(0, 4),
-//           ),
-//         ],
-//       ),
-//       child: ListTile(
-//         contentPadding: const EdgeInsets.all(16),
-//         leading: CircleAvatar(
-//           backgroundColor: secondary,
-//           child: const Icon(Icons.star, color: Colors.white),
-//         ),
-//         title: Text(
-//           typeLabel,
-//           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//         ),
-//         subtitle: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               //'A simple description for the ${typeLabel.toLowerCase()} plan.',
-//               _getTypeDescription(subscription.type),
-//               style: TextStyle(color: Colors.grey[600]),
-//             ),
-//             SizedBox(height: 4),
-//           ],
-//         ),
-//         trailing: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           crossAxisAlignment: CrossAxisAlignment.end,
-//           children: [
-//             Text(
-//               '${formatPrice(priceText)} ETB',
-//               style: TextStyle(
-//                 fontSize: 20,
-//                 fontWeight: FontWeight.bold,
-//                 color: secondary,
-//               ),
-//             ),
-//             if (subscription.type != 0)
-//               const Text(
-//                 'total',
-//                 style: TextStyle(fontSize: 12, color: Colors.grey),
-//               ),
-//           ],
-//         ),
-//         onTap: onTap,
-//       ),
-//     );
-//   }
-// }
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -624,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/core/util/format_duration.dart';
+import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -767,6 +151,7 @@ class SubscriptionService {
 
   static Future<String> createSubscription({
     required String subscriptionId,
+    required String? userId,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('access_token');
@@ -787,7 +172,48 @@ class SubscriptionService {
       body: body,
     );
 
-    print("response: ${response.body}");
+    print("Response status: ${response.statusCode}");
+    print("Response body: ${response.body}");
+
+    if (response.statusCode == 409) {
+      // Handle conflict - extract existing subscription ID from error message
+      final errorData = jsonDecode(response.body);
+      final errorMessage = errorData['message'] as String?;
+
+      if (errorMessage != null) {
+        // Extract the ID using regex to find the pattern in the error message
+        final regex = RegExp(r"'([a-f0-9-]+-[a-f0-9-]+)'");
+        final match = regex.firstMatch(errorMessage);
+
+        if (match != null && match.groupCount >= 1) {
+          String existingSubscriptionId = match.group(1)!;
+          print("Found existing subscription ID: $existingSubscriptionId");
+
+          // Subtract userId from the extracted subscription ID if userId is provided
+          if (userId != null && userId.isNotEmpty) {
+            if (existingSubscriptionId.startsWith(userId)) {
+              existingSubscriptionId = existingSubscriptionId.substring(
+                userId.length,
+              );
+              print(
+                "Subscription ID after subtracting userId: $existingSubscriptionId",
+              );
+            } else {
+              print(
+                "UserId '$userId' not found at start of subscription ID '$existingSubscriptionId'",
+              );
+            }
+          }
+
+          return existingSubscriptionId.substring(1);
+        }
+      }
+
+      // If we can't extract the ID, throw a more specific exception
+      throw Exception(
+        'Subscription already exists but could not extract ID from: $errorMessage',
+      );
+    }
 
     if (response.statusCode != 201) {
       throw Exception('Failed to create subscription: ${response.body}');
@@ -955,9 +381,11 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   void _handleSubscriptionTap(Subscription subscription) async {
     final subscriptionId = subscription.id;
     final providerId = ref.read(selectedPrefProvider);
+    final user = ref.watch(currentUserProvider);
 
     final finalsubscriptionId = await SubscriptionService.createSubscription(
       subscriptionId: subscriptionId,
+      userId: user?.id,
     );
 
     print("Selected subscription ID: $finalsubscriptionId");

@@ -56,6 +56,38 @@ class AvailabilitySlot with _$AvailabilitySlot {
 }
 
 @freezed
+class PreferenceUpdateRequest with _$PreferenceUpdateRequest {
+  const factory PreferenceUpdateRequest({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    String? levelId,
+    List<AvailabilitySlot>? availability,
+  }) = _PreferenceUpdateRequest;
+
+  factory PreferenceUpdateRequest.fromJson(Map<String, dynamic> json) =>
+      _$PreferenceUpdateRequestFromJson(json);
+}
+
+@freezed
+class PreferenceUpdateWithoutLevelRequest
+    with _$PreferenceUpdateWithoutLevelRequest {
+  const factory PreferenceUpdateWithoutLevelRequest({
+    String? modalId,
+    String? gender,
+    List<String>? languageIds,
+    String? goal,
+    // String? levelId,
+    List<AvailabilitySlot>? availability,
+  }) = _PreferenceUpdateWithoutLevelRequest;
+
+  factory PreferenceUpdateWithoutLevelRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$PreferenceUpdateWithoutLevelRequestFromJson(json);
+}
+
+@freezed
 class PreferenceResponse with _$PreferenceResponse {
   const factory PreferenceResponse({
     required PreferenceData data,
