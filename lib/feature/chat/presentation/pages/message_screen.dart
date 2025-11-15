@@ -221,6 +221,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
   Future<void> _sendMessage() async {
     final content = _messageController.text.trim();
+    print("Sending message: $content");
     _messageController.clear();
     if (content.isEmpty) return;
 
@@ -228,7 +229,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
     await ref
         .read(messageProvider(widget.chat.id).notifier)
-        .sendMessage(content);
+        .sendMessage(content, ref.read(currentUserProvider)!.id);
 
     // Update chat threads in background (don’t block UI)
     // ignore: unawaited_futures
@@ -237,20 +238,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     _isSendingVN.value = false;
   }
 
-  // String _formatMessageTime(DateTime dt) {
-  //   final now = DateTime.now();
-  //   final today = DateTime(now.year, now.month, now.day);
-  //   final yesterday = today.subtract(const Duration(days: 1));
-  //   final messageDate = DateTime(dt.year, dt.month, dt.day);
-
-  //   if (messageDate == today) {
-  //     return '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-  //   } else if (messageDate == yesterday) {
-  //     return 'Yesterday, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-  //   } else {
-  //     return '${dt.month}/${dt.day}, ${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
-  //   }
-  // }
   String _formatMessageTime(DateTime dt) {
     // Convert UTC to local time
     final localDt = dt.toLocal();
@@ -288,7 +275,8 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   }
 
   Widget _buildMessageBubble(ChatMessageDetail message) {
-    final isMe = message.client != null;
+    final user = ref.read(currentUserProvider);
+    final isMe = message.client != null && user?.id == message.client!.id;
     print("messageisMe: ${message.client}");
     print("messageisMereal: ${message}");
 
@@ -297,31 +285,32 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         if (!isMe)
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: getRandomGradient(),
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+          if (widget.chat.isGroup != null && widget.chat.isGroup == true)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: getRandomGradient(),
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  initials(message.client?.firstName ?? 'G'),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                child: Center(
+                  child: Text(
+                    initials(message.client?.firstName ?? 'G'),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
         Flexible(
           child: Align(
             alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -506,113 +495,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         leadingWidth: 30,
         title: Row(
           children: [
-            // GestureDetector(
-            //   onTap:
-            //       () => {
-            //         if (widget.chat.isGroup != null &&
-            //             widget.chat.isGroup == true)
-            //           {
-            //             Navigator.push(
-            //               context,
-            //               MaterialPageRoute(
-            //                 builder:
-            //                     (context) => GroupProfileScreen(
-            //                       groupName: widget.chat.name ?? 'Group Chat',
-            //                       groupMembers: widget.chat.groupList,
-            //                     ),
-            //               ),
-            //             ),
-            //           }
-            //         else
-            //           {
-            //             // For non-group chat, fetch therapist info
-            //             // if (therapistId != null)
-            //             //   {
-            //             //     Navigator.push(
-            //             //       context,
-            //             //       MaterialPageRoute(
-            //             //         builder:
-            //             //             (context) => ContactDetailPage(
-            //             //               therapistId: therapistId,
-            //             //               avatarUrl: widget.chat.avatarUrl,
-            //             //             ),
-            //             //       ),
-            //             //     ),
-            //             //   },
-            //           },
-            //       },
-            //   child:
-            //       (widget.chat.isGroup != null && widget.chat.isGroup == false)
-            //           ? ClipRRect(
-            //             borderRadius: BorderRadius.circular(25),
-            //             child:
-            //                 widget.chat.avatarUrl != null &&
-            //                         widget.chat.avatarUrl!.isNotEmpty
-            //                     ? Image(
-            //                       image: NetworkImage(
-            //                         '${widget.chat.avatarUrl}',
-            //                       ),
-            //                       width: 50,
-            //                       height: 50,
-            //                       fit: BoxFit.cover,
-            //                       errorBuilder: (context, error, stackTrace) {
-            //                         return Image(
-            //                           image: AssetImage(
-            //                             getAvatarImage(widget.chat.avatar ?? 0),
-            //                           ),
-            //                           width: 80,
-            //                           height: 80,
-            //                         );
-            //                       },
-            //                     )
-            //                     : Image.asset(
-            //                       getAvatarImage(widget.chat.avatar ?? 0),
-            //                       width: 40,
-            //                       height: 40,
-            //                       fit: BoxFit.cover,
-            //                     ),
-            //           )
-            //           : Container(
-            //             width: 40,
-            //             height: 40,
-            //             decoration: BoxDecoration(
-            //               shape:
-            //                   (widget.chat.isGroup != null &&
-            //                           widget.chat.isGroup == true)
-            //                       ? BoxShape.rectangle
-            //                       : BoxShape.circle,
-            //               borderRadius:
-            //                   (widget.chat.isGroup != null &&
-            //                           widget.chat.isGroup == true)
-            //                       ? BorderRadius.circular(12)
-            //                       : null,
-            //               gradient: LinearGradient(
-            //                 colors: getRandomGradient(
-            //                   // client != null
-            //                   //     ? '${client.firstName}${client.lastName}'
-            //                   //     : thread.id,
-            //                 ),
-            //                 begin: Alignment.topLeft,
-            //                 end: Alignment.bottomRight,
-            //               ),
-            //             ),
-            //             child: Center(
-            //               child: Text(
-            //                 initials(
-            //                   widget.chat.isGroup != null &&
-            //                           widget.chat.isGroup == false
-            //                       ? '${widget.chat.name}'
-            //                       : 'Group',
-            //                 ),
-            //                 style: const TextStyle(
-            //                   color: Colors.white,
-            //                   fontSize: 18,
-            //                   fontWeight: FontWeight.bold,
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            // ),
             GestureDetector(
               onTap: () {
                 // Check if it's a user with a profile image
@@ -636,6 +518,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                     MaterialPageRoute(
                       builder:
                           (context) => GroupProfileScreen(
+                            therapist: widget.chat.user,
                             groupName: widget.chat.name ?? 'Group Chat',
                             groupMembers: widget.chat.groupList,
                           ),
@@ -730,41 +613,11 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                       color: isOnline ? Colors.green : Colors.grey,
                     ),
                   ),
-
-                // if (isOnline != null) ...[
-                //   Text(
-                //     isOnline ? 'Online' : 'Offline',
-                //     style: TextStyle(
-                //       fontSize: 12,
-                //       color: isOnline ? Colors.green : Colors.grey,
-                //     ),
-                //   ),
-                // ],
-                // if (isOnline == null) ...[
-                //   Text(
-                //     widget.chat.isOnline ? 'Online' : 'Offline',
-                //     style: TextStyle(
-                //       fontSize: 12,
-                //       color: widget.chat.isOnline ? Colors.green : Colors.grey,
-                //     ),
-                //   ),
-                // ],
-                // if (isOnline == null) ...[
-                //   Text(
-                //     'Offline',
-                //     style: TextStyle(fontSize: 12, color: Colors.grey),
-                //   ),
-                // ],
               ],
             ),
           ],
         ),
         actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.videocam),
-          //   onPressed: () => _startCall(isVideoCall: true),
-          //   tooltip: 'Video Call',
-          // ),
           if (widget.chat.isGroup != null && widget.chat.isGroup == false)
             IconButton(
               icon: const Icon(Icons.phone),

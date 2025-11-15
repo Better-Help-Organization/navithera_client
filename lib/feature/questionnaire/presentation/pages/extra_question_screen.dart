@@ -475,9 +475,9 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                   }
 
                   String? priceText;
-                  // if (level.price != null) {
-                  //   priceText = ' • ${level.price} ETB/session';
-                  // }
+                  if (level.price != null) {
+                    priceText = ' • ${level.price} ETB/session';
+                  }
 
                   return Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16),

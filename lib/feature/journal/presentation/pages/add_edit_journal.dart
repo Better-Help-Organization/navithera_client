@@ -78,7 +78,7 @@ class _AddEditJournalScreenState extends ConsumerState<AddEditJournalScreen> {
         error: (failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(failure.toString()),
+              content: Text(failure.message.toString()),
               backgroundColor: Colors.red,
             ),
           );

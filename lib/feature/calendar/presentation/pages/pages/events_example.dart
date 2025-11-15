@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
+import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -290,6 +291,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
         if (context != null) {
           final container = ProviderScope.containerOf(context);
           await container.read(sessionProvider.notifier).loadSessions();
+          await container.read(matchedTherapistProvider.notifier).load();
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

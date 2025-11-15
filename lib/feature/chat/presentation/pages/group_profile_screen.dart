@@ -13,12 +13,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GroupProfileScreen extends StatefulWidget {
   final String groupName;
   final List<UserModel>? groupMembers; // Add this parameter
+  final UserModel? therapist;
   // final String chatId;
 
   const GroupProfileScreen({
     super.key,
     required this.groupName,
     this.groupMembers,
+    this.therapist,
     // required this.chatId,
   });
 
@@ -147,20 +149,48 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Convert UserModel objects to Member objects for display
-    final members =
-        widget.groupMembers
-            ?.map(
-              (user) => Member(
-                name: '${user.firstName} ${user.lastName}',
-                status: 'online', // You can customize this based on your data
-                gradient: getRandomGradient(),
-                isOwner: false, // Set this based on your logic
-                user: user,
-              ),
-            )
-            .toList() ??
-        [];
+    // Create members list with therapist as owner first, then other members
+    final List<Member> members = [];
+
+    // Add therapist as owner if available
+    if (widget.therapist != null) {
+      members.add(
+        Member(
+          name: '${widget.therapist!.firstName} ${widget.therapist!.lastName}',
+          status: widget.therapist!.isOnline == true ? 'online' : 'offline',
+          // status: '${widget.therapist?.isOnline ? 'online' : 'offline'}',
+          gradient: const [
+            Color(0xFF4CAF50),
+            Color(0xFF45a049),
+          ], // Green gradient for therapist
+          isOwner: true,
+          user: widget.therapist!,
+        ),
+      );
+    }
+
+    // Add other group members
+    if (widget.groupMembers != null) {
+      for (final user in widget.groupMembers!) {
+        // Skip if this user is the therapist (to avoid duplicates)
+        if (widget.therapist != null && user.id == widget.therapist!.id) {
+          continue;
+        }
+
+        members.add(
+          Member(
+            name: '${user.firstName} ${user.lastName}',
+            status:
+                user!.isOnline == true
+                    ? 'online'
+                    : 'offline', // You can customize this based on your data
+            gradient: getRandomGradient(),
+            isOwner: false,
+            user: user,
+          ),
+        );
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -183,7 +213,14 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
                     fontWeight: FontWeight.w600,
                   ),
                 )
-                : null,
+                : Text(
+                  'Group Info',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
         actions: [
           // if (widget.groupMembers != null && widget.groupMembers!.isNotEmpty)
           //   IconButton(
@@ -202,7 +239,10 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: _Header(groupName: groupName, membersCount: members.length),
+            child: _Header(
+              groupName: widget.groupName,
+              membersCount: members.length,
+            ),
           ),
           SliverToBoxAdapter(child: const _SectionDivider(height: 10)),
 
@@ -283,7 +323,8 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
                         gradient: m.gradient,
                         size: 50,
                       ),
-                      if (_isSelectionMode)
+                      if (_isSelectionMode &&
+                          !m.isOwner) // Don't show selection for therapist/owner
                         Positioned(
                           bottom: 0,
                           right: 0,
@@ -308,6 +349,26 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
                                     : null,
                           ),
                         ),
+                      // Badge for therapist
+                      // if (m.isOwner)
+                      //   Positioned(
+                      //     bottom: 0,
+                      //     right: 0,
+                      //     child: Container(
+                      //       width: 20,
+                      //       height: 20,
+                      //       decoration: BoxDecoration(
+                      //         color: Colors.green,
+                      //         shape: BoxShape.circle,
+                      //         border: Border.all(color: Colors.white, width: 2),
+                      //       ),
+                      //       child: Icon(
+                      //         Icons.medical_services,
+                      //         color: Colors.white,
+                      //         size: 12,
+                      //       ),
+                      //     ),
+                      //   ),
                     ],
                   ),
                   title: Text(
@@ -322,16 +383,30 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
                       _isSelectionMode
                           ? null
                           : m.isOwner
-                          ? Text(
-                            'Owner',
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
+                          ? Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(color: AppColors.primary),
+                            ),
+                            child: Text(
+                              'Therapist',
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                              ),
                             ),
                           )
                           : null,
                   onTap:
-                      _isSelectionMode
+                      _isSelectionMode &&
+                              !m
+                                  .isOwner // Don't allow selection of therapist
                           ? () => _toggleUserSelection(m.user)
                           : null,
                   tileColor: isSelected ? Colors.blue.shade50 : null,

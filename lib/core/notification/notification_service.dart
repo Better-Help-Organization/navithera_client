@@ -101,7 +101,37 @@ class FCMService {
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
 
+    const refreshArr = [
+      "1",
+      "8",
+      "9",
+      "29",
+      "11",
+      "12",
+      "15",
+      "24",
+      "26",
+      "27",
+      "28",
+      "29",
+      "18",
+      '11',
+    ];
+
     try {
+      final messageCode = message.data['code']?.toString();
+      if (messageCode != null && refreshArr.contains(messageCode)) {
+        final context = navigatorKey.currentContext;
+        if (context == null) return;
+
+        final container = ProviderScope.containerOf(context);
+        await container.read(matchedTherapistProvider.notifier).load();
+        // Refresh chat data
+        // container.read(chartDataProvider.notifier).load();
+        // Show notification banner
+        // _showNewMessageNotificationBanner(message);
+        // return;
+      }
       //25
       if (message.data['code'] == '11' || message.data['code'] == 11) {
         // _handleSessionSelectionNotification(message);
@@ -357,6 +387,37 @@ class FCMService {
     print(
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
+    const refreshArr = [
+      "1",
+      "8",
+      "9",
+      "29",
+      "11",
+      "12",
+      "15",
+      "24",
+      "26",
+      "27",
+      "28",
+      "29",
+      "18",
+      '11',
+    ];
+
+    // try {
+    final messageCode = message.data['code']?.toString();
+    if (messageCode != null && refreshArr.contains(messageCode)) {
+      final context = navigatorKey.currentContext;
+      if (context == null) return;
+
+      final container = ProviderScope.containerOf(context);
+      await container.read(matchedTherapistProvider.notifier).load();
+      // Refresh chat data
+      // container.read(chartDataProvider.notifier).load();
+      // Show notification banner
+      // _showNewMessageNotificationBanner(message);
+      // return;
+    }
     if (message.data['code'] == '25' || message.data['code'] == 25) {
       // _handleSessionSelectionNotification(message);
       // _handleSessionNotification();
@@ -1221,10 +1282,11 @@ class FCMService {
 
   bool _isIncomingCallMessage(RemoteMessage message) {
     // if (message.notification?.title == 'Incoming Call') return true;
-    if (message.data['code'] == '5' ||
-        message.data['code'] == 5 ||
-        message.data['code'] == '30' ||
-        message.data['code'] == 30)
+    if (message.data['code'] == '5' || message.data['code'] == 5
+    //  ||
+    // message.data['code'] == '30' ||
+    // message.data['code'] == 30
+    )
       return true;
     final code = message.data['code'];
     return code == 'CALL_INCOMING' || code == 1 || code == '1';

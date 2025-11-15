@@ -74,7 +74,7 @@ class MessageNotifier extends StateNotifier<MessageState> {
     }
   }
 
-  Future<void> sendMessage(String content) async {
+  Future<void> sendMessage(String content, String userId) async {
     // Optimistic UI only when we already have a loaded list
     if (state case Loaded(
       :final messages,
@@ -91,7 +91,7 @@ class MessageNotifier extends StateNotifier<MessageState> {
         therapist: null,
         client: UserModel(
           createdAt: DateTime.now(),
-          id: 'local-client',
+          id: userId,
           firstName: 'You',
           lastName: '',
           email: '',
