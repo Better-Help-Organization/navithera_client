@@ -186,24 +186,14 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
         child: ListView.builder(
           controller: _scrollController,
           physics: const AlwaysScrollableScrollPhysics(),
-          // child: ListView.builder(
-          //controller: _scrollController,
-          itemCount: threads.length + (canLoadMore ? 1 : 0),
+          // Only show the actual threads, no loading indicator
+          itemCount: threads.length,
           itemBuilder: (context, index) {
-            if (index == threads.length) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Center(
-                  child: CircularProgressIndicator(color: AppColors.primary),
-                ),
-              );
-            }
             final thread = threads[index];
             final client = thread.therapist;
             final unreadCount = thread.unreadCount;
 
             print("chat: ${thread.id}");
-
             print("unreadCount: ${unreadCount}");
 
             final lastMessage =
@@ -315,7 +305,6 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                 lastMessage ?? '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                // "",
               ),
 
               trailing: Column(
@@ -323,7 +312,6 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    //_formatTime(chat.timestamp ?? DateTime.now()),
                     displayTime,
                     style: TextStyle(
                       color: unreadCount! > 0 ? AppColors.primary : Colors.grey,

@@ -16,7 +16,7 @@ abstract class ChatRemoteDataSource {
   @GET('/client/me/chats')
   Future<ChatListResponse> getChatThreads({
     @Query('page') int? page,
-    @Query('take') int? take,
+    @Query('take') int? take = 1,
     @Query('fields') String? fields,
     @Query('sort') String? sort,
     @Query('filters') String? filters,

@@ -58,20 +58,19 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   Future<Either<Failure, ChatListResponse>> getChatThreads({
     int? page,
-    int? limit,
+    int? limit = 1, // Set default to 1
     String? sort = 'updatedAt=Desc',
   }) async {
     try {
       final response = await remoteDataSource.getChatThreads(
         page: page,
-        take: limit,
+        take: limit, // This should be 1 by default
         fields: 'client.*,therapist.*,group.*,updatedAt,groupName',
         sort: sort,
       );
       return Right(response);
     } on DioException catch (e) {
       String errorMessage =
-          //'Failed to fetch chats';
           "We're having trouble loading your chat. Please check your connection and try again.";
       if (e.response?.statusCode == 401) {
         errorMessage = 'Unauthorized';
@@ -234,8 +233,8 @@ class ChatRepositoryImpl implements ChatRepository {
   Future<Either<Failure, ChatListResponse>> searchChatThreads({
     required String query,
     int? page,
-    int? limit,
-    String? sort = 'updatedAt=Desc',
+    int? limit = 1,
+    String? sort = 'createdAt=Desc',
   }) async {
     try {
       final response = await remoteDataSource.getChatThreads(

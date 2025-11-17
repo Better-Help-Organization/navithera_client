@@ -93,6 +93,20 @@ class FCMService {
     print("token ${token}");
   }
 
+  Future<void> _loadUnreadCount() async {
+    final context = navigatorKey.currentContext;
+    if (context == null) return;
+    final container = ProviderScope.containerOf(context);
+    final notificationService = container.read(notificationServiceProvider);
+    final unreadCount = await notificationService.fetchUnreadCount();
+
+    // if (mounted) {
+    container
+        .read(notificationCountProvider.notifier)
+        .setCount(unreadCount ?? 0);
+    // }
+  }
+
   void _handleForegroundMessage(RemoteMessage message) async {
     log(
       "Full message: ${message.data}",
@@ -100,6 +114,8 @@ class FCMService {
     print(
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
+
+    _loadUnreadCount();
 
     const refreshArr = [
       "1",
@@ -126,6 +142,20 @@ class FCMService {
 
         final container = ProviderScope.containerOf(context);
         await container.read(matchedTherapistProvider.notifier).load();
+
+        // Future<void> _loadUnreadCount() async {
+        //   final notificationService = container.read(
+        //     notificationServiceProvider,
+        //   );
+        //   final unreadCount = await notificationService.fetchUnreadCount();
+
+        //   // if (mounted) {
+        //   container
+        //       .read(notificationCountProvider.notifier)
+        //       .setCount(unreadCount ?? 0);
+        //   // }
+        // }
+
         // Refresh chat data
         // container.read(chartDataProvider.notifier).load();
         // Show notification banner
@@ -387,6 +417,7 @@ class FCMService {
     print(
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
+    _loadUnreadCount();
     const refreshArr = [
       "1",
       "8",
