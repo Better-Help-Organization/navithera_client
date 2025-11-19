@@ -370,10 +370,10 @@ mixin _$SessionItem {
   String? get type => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get client => throw _privateConstructorUsedError; // This is the client info, not therapist
-  // Add therapist field if it exists in other responses
+  UserModel? get client => throw _privateConstructorUsedError; // Add therapist field
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get therapist => throw _privateConstructorUsedError;
+  UserModel? get therapist => throw _privateConstructorUsedError; // Add any other therapist-related fields you need
+  List<dynamic>? get group => throw _privateConstructorUsedError;
 
   /// Serializes this SessionItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -406,6 +406,7 @@ abstract class $SessionItemCopyWith<$Res> {
     String? note,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? therapist,
+    List<dynamic>? group,
   });
 
   $UserModelCopyWith<$Res>? get client;
@@ -437,6 +438,7 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
     Object? note = freezed,
     Object? client = freezed,
     Object? therapist = freezed,
+    Object? group = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -490,6 +492,11 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
                     ? _value.therapist
                     : therapist // ignore: cast_nullable_to_non_nullable
                         as UserModel?,
+            group:
+                freezed == group
+                    ? _value.group
+                    : group // ignore: cast_nullable_to_non_nullable
+                        as List<dynamic>?,
           )
           as $Val,
     );
@@ -547,6 +554,7 @@ abstract class _$$SessionItemImplCopyWith<$Res>
     String? note,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? therapist,
+    List<dynamic>? group,
   });
 
   @override
@@ -579,6 +587,7 @@ class __$$SessionItemImplCopyWithImpl<$Res>
     Object? note = freezed,
     Object? client = freezed,
     Object? therapist = freezed,
+    Object? group = freezed,
   }) {
     return _then(
       _$SessionItemImpl(
@@ -632,6 +641,11 @@ class __$$SessionItemImplCopyWithImpl<$Res>
                 ? _value.therapist
                 : therapist // ignore: cast_nullable_to_non_nullable
                     as UserModel?,
+        group:
+            freezed == group
+                ? _value._group
+                : group // ignore: cast_nullable_to_non_nullable
+                    as List<dynamic>?,
       ),
     );
   }
@@ -654,7 +668,8 @@ class _$SessionItemImpl implements _SessionItem {
     this.note,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.client,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.therapist,
-  });
+    final List<dynamic>? group,
+  }) : _group = group;
 
   factory _$SessionItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$SessionItemImplFromJson(json);
@@ -681,15 +696,25 @@ class _$SessionItemImpl implements _SessionItem {
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
   final UserModel? client;
-  // This is the client info, not therapist
-  // Add therapist field if it exists in other responses
+  // Add therapist field
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
   final UserModel? therapist;
+  // Add any other therapist-related fields you need
+  final List<dynamic>? _group;
+  // Add any other therapist-related fields you need
+  @override
+  List<dynamic>? get group {
+    final value = _group;
+    if (value == null) return null;
+    if (_group is EqualUnmodifiableListView) return _group;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'SessionItem(id: $id, schedule: $schedule, approvalStatus: $approvalStatus, hasTherapistAttended: $hasTherapistAttended, hasClientAttended: $hasClientAttended, duration: $duration, type: $type, note: $note, client: $client, therapist: $therapist)';
+    return 'SessionItem(id: $id, schedule: $schedule, approvalStatus: $approvalStatus, hasTherapistAttended: $hasTherapistAttended, hasClientAttended: $hasClientAttended, duration: $duration, type: $type, note: $note, client: $client, therapist: $therapist, group: $group)';
   }
 
   @override
@@ -712,7 +737,8 @@ class _$SessionItemImpl implements _SessionItem {
             (identical(other.note, note) || other.note == note) &&
             (identical(other.client, client) || other.client == client) &&
             (identical(other.therapist, therapist) ||
-                other.therapist == therapist));
+                other.therapist == therapist) &&
+            const DeepCollectionEquality().equals(other._group, _group));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -729,6 +755,7 @@ class _$SessionItemImpl implements _SessionItem {
     note,
     client,
     therapist,
+    const DeepCollectionEquality().hash(_group),
   );
 
   /// Create a copy of SessionItem
@@ -762,6 +789,7 @@ abstract class _SessionItem implements SessionItem {
     final UserModel? client,
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
     final UserModel? therapist,
+    final List<dynamic>? group,
   }) = _$SessionItemImpl;
 
   factory _SessionItem.fromJson(Map<String, dynamic> json) =
@@ -788,11 +816,12 @@ abstract class _SessionItem implements SessionItem {
   String? get note;
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get client; // This is the client info, not therapist
-  // Add therapist field if it exists in other responses
+  UserModel? get client; // Add therapist field
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get therapist;
+  UserModel? get therapist; // Add any other therapist-related fields you need
+  @override
+  List<dynamic>? get group;
 
   /// Create a copy of SessionItem
   /// with the given fields replaced by the non-null parameter values.

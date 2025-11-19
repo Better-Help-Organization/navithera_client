@@ -21,6 +21,7 @@ class UpcomingSessionRepositoryImpl implements UpcomingSessionRepository {
   UpcomingSessionRepositoryImpl(this.remote);
 
   // upcoming_session_repository.dart
+  // In upcoming_session_repository.dart
   @override
   Future<Either<Failure, SessionListResponse>> getUpcomingSessions({
     int? page,
@@ -32,14 +33,16 @@ class UpcomingSessionRepositoryImpl implements UpcomingSessionRepository {
         page: page,
         take: take,
         sort: 'schedule=asc',
-        // Use boolean filter instead of numeric
         filters:
             'schedule>$now,hasTherapistAttended=0,approvalStatus=confirmed',
+        // Add fields to include therapist data
+        fields:
+            'schedule,approvalStatus,hasTherapistAttended,hasclientAttended,'
+            'duration,type,note,therapist.*,client.*,group.*',
       );
       return Right(res);
     } on DioException catch (e) {
       String msg =
-          //'Failed to fetch sessions';
           "We're having trouble loading your sessions. Please check your connection and try again.";
       if (e.response?.statusCode == 401) {
         msg = 'Unauthorized';

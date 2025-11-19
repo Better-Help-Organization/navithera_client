@@ -464,6 +464,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                 separatorBuilder: (_, __) => const SizedBox(height: 12),
                 padding: const EdgeInsets.only(bottom: 8),
                 itemBuilder: (context, index) {
+                  print("levels to this shit: $levels");
                   final level = levels[index];
                   final isSelected = selectedLevel == level.id;
 

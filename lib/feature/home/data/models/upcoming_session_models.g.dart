@@ -51,6 +51,7 @@ _$SessionItemImpl _$$SessionItemImplFromJson(Map<String, dynamic> json) =>
       note: json['note'] as String?,
       client: _userFromJson(json['client']),
       therapist: _userFromJson(json['therapist']),
+      group: json['group'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$$SessionItemImplToJson(_$SessionItemImpl instance) =>
@@ -65,4 +66,5 @@ Map<String, dynamic> _$$SessionItemImplToJson(_$SessionItemImpl instance) =>
       'note': instance.note,
       'client': _userToJson(instance.client),
       'therapist': _userToJson(instance.therapist),
+      'group': instance.group,
     };
