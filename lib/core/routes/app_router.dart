@@ -34,7 +34,7 @@ import 'package:navithera_client/main.dart'; // Add this import to access naviga
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     navigatorKey: navigatorKey, // Now this will work
-    initialLocation: '/language-selection',
+    initialLocation: '/',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
