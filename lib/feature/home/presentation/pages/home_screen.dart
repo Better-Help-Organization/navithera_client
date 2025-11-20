@@ -744,16 +744,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                   // Mood section
                   if (_isLoadingTodayMood) ...[
-                    Text(
-                      AppLocalizations.of(context)!.howAreYouFeeling,
-                      style: AppTypography.heading1,
-                    ),
                     const SizedBox(height: 12),
                     const _MoodSkeleton(),
                     const SizedBox(height: 12),
                   ],
 
                   if (!_isLoadingTodayMood && _todayMood == null) ...[
+                    Text(
+                      AppLocalizations.of(context)!.howAreYouFeeling,
+                      style: AppTypography.heading1,
+                    ),
+                    const SizedBox(height: 12),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(

@@ -1102,6 +1102,7 @@ class _HeaderArea extends StatelessWidget {
   const _HeaderArea({required this.therapist});
 
   List<String> _getExpertiseLabels() {
+    print("ssjj ${therapist.expertise}");
     if (therapist.expertise == null || therapist.expertise!.isEmpty) {
       return ['GENERAL THERAPY'];
     }
@@ -1116,6 +1117,7 @@ class _HeaderArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = "${therapist.firstName} ${therapist.lastName}".trim();
+    print("ssjj therapist name $therapist");
     final theme = Theme.of(context);
     final expertiseLabels = _getExpertiseLabels();
 
