@@ -14,7 +14,6 @@ import 'package:go_router/go_router.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/new_message_notificaiton.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
-import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
@@ -25,6 +24,7 @@ import 'package:navithera_client/feature/home/presentation/pages/home_screen.dar
 import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
+import 'package:navithera_client/feature/therapy/presentation/pages/group_call_screen.dart';
 import 'package:navithera_client/main.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import to access navigatorKey
@@ -33,8 +33,9 @@ import 'package:uuid/uuid.dart';
 class PendingRoute {
   final String path;
   final Object? extra;
+  final Map<String, dynamic>? callData;
 
-  PendingRoute({required this.path, this.extra});
+  PendingRoute({required this.path, this.extra, this.callData});
 }
 
 // final fcmServiceProvider = Provider<FCMService>((ref) {
@@ -58,6 +59,10 @@ class FCMService {
   AudioPlayer? _ringtonePlayer;
   String? _activeCallChatId;
   bool get _isCallDialogOpen => _activeCallChatId != null;
+  
+  // Track recently shown CallKit notifications to prevent duplicates
+  static final Set<String> _recentCallKitIds = {};
+  static const _deduplicationWindow = Duration(seconds: 5);
 
   Future<String?> getToken() async {
     try {
@@ -114,6 +119,7 @@ class FCMService {
     print(
       "message: ${message.notification?.title} - ${message.notification?.body}",
     );
+    print("🔵 [FOREGROUND] Handling message in foreground");
 
     _loadUnreadCount();
 
@@ -265,11 +271,30 @@ class FCMService {
         final call = _parseIncomingCall(message);
 
         if (call != null) {
+          // Check if already in a call - don't show duplicate notifications
+          final context = navigatorKey.currentContext;
+          if (context != null) {
+            final currentLocation = GoRouter.of(context)
+                .routerDelegate
+                .currentConfiguration
+                .last
+                .matchedLocation;
+            
+            if (currentLocation.contains('/call') || currentLocation.contains('/group-call')) {
+              print('⏭️ [FOREGROUND] Already in a call, ignoring duplicate notification');
+              return;
+            }
+          }
+          
+          // Use custom dialog for foreground (CallKit is for background only)
+          print('🔵 [FOREGROUND] Showing custom dialog for call');
           _showCallInvitationDialog(
             call.room,
             call.callerName,
             call.chatId,
             call.isVideoCall,
+            call.isGroupCall,
+            callerAvatar: call.callerAvatar,
           );
         }
         return;
@@ -1030,16 +1055,25 @@ class FCMService {
     String participant,
     String chatId,
     bool isVideocall,
-  ) async {
+    bool isGroupCall, {
+    int? callerAvatar,
+  }) async {
+    print('📞 _showCallInvitationDialog called:');
+    print('   Room: $roomName');
+    print('   Caller: $participant');
+    print('   ChatId: $chatId');
+    print('   IsGroupCall: $isGroupCall');
+    print('   CallerAvatar: $callerAvatar');
+    
     // Use the global navigator key to get the current context
     final context = navigatorKey.currentContext;
     if (context == null) {
-      print("Navigator context is null");
+      print("❌ Navigator context is null");
       return;
     }
 
     if (_activeCallChatId != null) {
-      print("activeCallChatId: ${_activeCallChatId}");
+      print("⚠️ Active call dialog already exists for: ${_activeCallChatId}");
       _dismissCallPopupIfMatches(_activeCallChatId!);
     }
 
@@ -1145,20 +1179,44 @@ class FCMService {
                           icon: const Icon(Icons.call),
                           label: const Text('Accept'),
                           onPressed: () async {
-                            await _ringtonePlayer?.stop();
+                            // Stop ringtone immediately
+                            try {
+                              await _ringtonePlayer?.stop();
+                              await _ringtonePlayer?.dispose();
+                            } catch (e) {
+                              print('Error stopping ringtone: $e');
+                            }
+                            _activeCallChatId = null;
+                            _ringtonePlayer = null;
+                            
+                            // Pop dialog first
                             Navigator.of(
                               dialogContext,
                               rootNavigator: true,
                             ).pop();
-                            _activeCallChatId = null;
-                            _ringtonePlayer = null;
-                            _joinCallRoom(
-                              roomName,
-                              participant,
-                              dialogContext,
-                              chatId,
-                              isVideocall,
-                            );
+                            
+                            // Notify backend that call was accepted (non-blocking)
+                            // TODO: Uncomment when backend implements /chat/call/accept endpoint
+                            // acceptCall(chatId).catchError((e) {
+                            //   print('Error sending acceptance: $e');
+                            // });
+                            
+                            // Use the main context for navigation, not dialog context
+                            final navContext = navigatorKey.currentContext;
+                            if (navContext != null) {
+                              _joinCallRoom(
+                                roomName,
+                                participant,
+                                navContext,
+                                chatId,
+                                isVideocall,
+                                isGroupCall,
+                                callerName: participant,
+                                callerAvatar: callerAvatar,
+                              );
+                            } else {
+                              print('❌ Navigation context is null');
+                            }
                           },
                         ),
                       ],
@@ -1220,6 +1278,34 @@ class FCMService {
     }
   }
 
+  Future<void> acceptCall(String chatId) async {
+    final Dio _dio = Dio();
+    try {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      final accessToken = sharedPreferences.getString('access_token');
+
+      _dio.options.headers['Authorization'] = 'Bearer $accessToken';
+
+      final response = await _dio.post(
+        '${base_url_dev}/chat/call/accept/$chatId',
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        print('✅ Call accepted notification sent to backend');
+      } else {
+        print('⚠️ Failed to notify backend of call acceptance: Status ${response.statusCode}');
+      }
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        print('ℹ️ Accept call endpoint not implemented on backend (404) - continuing anyway');
+      } else {
+        print('❌ Error notifying backend of call acceptance: ${e.message}');
+      }
+    } catch (e) {
+      print('❌ Unexpected error notifying backend of call acceptance: $e');
+    }
+  }
+
   Future<void> rejectCall(String chatId) async {
     final Dio _dio = Dio();
     try {
@@ -1248,24 +1334,74 @@ class FCMService {
     BuildContext context,
     String chatId,
     bool isVideoCall,
-  ) {
-    // Since you're using GoRouter, you can use regular Navigator.push
-    // or create a route in your GoRouter for the call screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => CallScreen(
-              roomName: roomName,
-              participantName: participantName,
-              isVideoCall: isVideoCall,
-              chatId: chatId,
-            ),
-      ),
-    );
+    bool isGroupCall, {
+    String? callerName,
+    int? callerAvatar,
+  }) {
+    print('🎯 _joinCallRoom called:');
+    print('   Room: $roomName');
+    print('   Participant: $participantName');
+    print('   ChatId: $chatId');
+    print('   IsVideoCall: $isVideoCall');
+    print('   IsGroupCall: $isGroupCall');
+    print('   CallerName: $callerName');
+    print('   CallerAvatar: $callerAvatar');
+    
+    // Route to GroupCallScreen for group calls, CallScreen for individual calls
+    if (isGroupCall) {
+      print('✅ Navigating to GroupCallScreen');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:
+              (context) => GroupCallScreen(
+                roomName: roomName,
+                participantName: participantName,
+                isVideoCall: isVideoCall,
+                chatId: chatId,
+                callerName: callerName,
+                callerAvatar: callerAvatar,
+              ),
+        ),
+      );
+    } else {
+      print('✅ Navigating to CallScreen (1-to-1)');
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder:
+              (context) => CallScreen(
+                roomName: roomName,
+                participantName: participantName,
+                isVideoCall: isVideoCall,
+                chatId: chatId,
+              ),
+        ),
+      );
+    }
   }
 
   Future<void> _showCallKitIncoming(_IncomingCall call) async {
+    print('🔔 Showing CallKit for: ${call.callerName}');
+    print('📞 Room: ${call.room}, ChatId: ${call.chatId}');
+    print('📹 Video: ${call.isVideoCall}, Group: ${call.isGroupCall}');
+    
+    // Create a unique ID for this call notification
+    final callId = '${call.chatId}_${call.room}';
+    
+    // Check if we already showed this notification recently
+    if (_recentCallKitIds.contains(callId)) {
+      print('⏭️ [FOREGROUND] Skipping duplicate CallKit for: $callId');
+      return;
+    }
+    
+    // Add to recent set and schedule removal
+    _recentCallKitIds.add(callId);
+    Future.delayed(_deduplicationWindow, () {
+      _recentCallKitIds.remove(callId);
+    });
+    
     final uuid = const Uuid().v4();
 
     final params = CallKitParams(
@@ -1285,19 +1421,20 @@ class FCMService {
         'room': call.room,
         'callerName': call.callerName,
         'isVideoCall': call.isVideoCall,
+        'isGroupCall': call.isGroupCall,
       },
       headers: <String, dynamic>{},
       android: AndroidParams(
-        //isCustomNotification: true,
-        isShowLogo: false, // Set to false to hide logo/text
+        isCustomNotification: true,
+        isShowLogo: false,
         ringtonePath: 'ringtone',
-        backgroundColor: '#0bb89b', // Your app's green color
-        backgroundUrl: '', // No background image
+        backgroundColor: '#0bb89b',
+        backgroundUrl: '',
         actionColor: '#4CAF50',
-        // incomingCallNotificationChannelName: 'Incoming Calls',
-        // missedCallNotificationChannelName: 'Missed Calls',
-        // Hide the app name in notification
-        //notificationIcon: 'ic_notification', // Use your app's notification icon
+        incomingCallNotificationChannelName: 'Incoming Calls',
+        missedCallNotificationChannelName: 'Missed Calls',
+        isShowCallID: true,
+        isShowFullLockedScreen: true,
       ),
       ios: IOSParams(
         iconName: 'AppIcon', // Use your app's icon
@@ -1308,23 +1445,35 @@ class FCMService {
       ),
     );
 
-    await FlutterCallkitIncoming.showCallkitIncoming(params);
+    try {
+      await FlutterCallkitIncoming.showCallkitIncoming(params);
+      print('✅ CallKit displayed successfully');
+    } catch (e) {
+      print('❌ Error showing CallKit: $e');
+    }
   }
 
   bool _isIncomingCallMessage(RemoteMessage message) {
-    // if (message.notification?.title == 'Incoming Call') return true;
-    if (message.data['code'] == '5' || message.data['code'] == 5
-    //  ||
-    // message.data['code'] == '30' ||
-    // message.data['code'] == 30
-    )
-      return true;
     final code = message.data['code'];
-    return code == 'CALL_INCOMING' || code == 1 || code == '1';
+    
+    // Check for individual call codes (5, 1, CALL_INCOMING)
+    if (code == '5' || code == 5 || code == 'CALL_INCOMING' || code == 1 || code == '1') {
+      return true;
+    }
+    
+    // Check for group call code (30)
+    if (code == '30' || code == 30) {
+      return true;
+    }
+    
+    return false;
   }
 
   _IncomingCall? _parseIncomingCall(RemoteMessage message) {
     try {
+      print('📥 Parsing incoming call message...');
+      print('📋 Message code: ${message.data['code']}');
+      
       final idJsonString = message.data['id'];
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
@@ -1338,10 +1487,19 @@ class FCMService {
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-      print("isVideoCall4: ${isVideoCall}");
+      
+      // For group calls, check code 30
+      final code = message.data['code'];
+      final isGroupCall = (code == '30' || code == 30) || (idMap['isGroupCall'] as bool? ?? false);
+      
+      print("📞 Room: $room");
+      print("💬 ChatId: $chatId");
+      print("📹 isVideoCall: $isVideoCall");
+      print("👥 isGroupCall: $isGroupCall");
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
       final lastName = callerData?['lastName'] as String? ?? '';
+      final avatar = callerData?['avatar'] as int?;
       final fullName =
           (firstName + ' ' + lastName).trim().isEmpty
               ? 'Caller'
@@ -1354,6 +1512,8 @@ class FCMService {
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        isGroupCall: isGroupCall,
+        callerAvatar: avatar,
       );
     } catch (e) {
       log('parse incoming call error: $e');
@@ -1366,36 +1526,65 @@ class FCMService {
     required String participantName,
     required String chatId,
     required bool isVideocall,
+    bool isGroupCall = false,
   }) {
-    print("context not null praying");
+    print("🎯 joinCallFromCallKit called:");
+    print("   Room: $roomName");
+    print("   Participant: $participantName");
+    print("   ChatId: $chatId");
+    print("   IsVideoCall: $isVideocall");
+    print("   IsGroupCall: $isGroupCall");
+    
+    // Notify backend that call was accepted
+    // TODO: Uncomment when backend implements /chat/call/accept endpoint
+    // acceptCall(chatId).catchError((e) {
+    //   print('Error notifying backend of CallKit acceptance: $e');
+    // });
+    
     final context = navigatorKey.currentContext;
-    if (context == null) return;
-    print("context not null praying: $context");
-
+    
     if (context == null) {
+      print("Context is null, setting pending route");
       _ref.read(pendingRouteProvider.notifier).state = PendingRoute(
         path: '/call-screen',
-        // callData: {
-        //   'roomName': roomName,
-        //   'participantName': participantName,
-        //   'chatId': chatId,
-        //   'isVideoCall': isVideocall,
-        // },
+        callData: {
+          'roomName': roomName,
+          'participantName': participantName,
+          'chatId': chatId,
+          'isVideoCall': isVideocall,
+          'isGroupCall': isGroupCall,
+        },
       );
       return;
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder:
-            (context) => CallScreen(
-              roomName: roomName,
-              participantName: participantName,
-              isVideoCall: isVideocall,
-              chatId: chatId,
-            ),
-      ),
-    );
+    print("Context available, navigating to call screen: $context");
+    // Route to appropriate screen based on call type
+    if (isGroupCall) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder:
+              (context) => GroupCallScreen(
+                roomName: roomName,
+                participantName: participantName,
+                isVideoCall: isVideocall,
+                chatId: chatId,
+              ),
+        ),
+      );
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder:
+              (context) => CallScreen(
+                roomName: roomName,
+                participantName: participantName,
+                isVideoCall: isVideocall,
+                chatId: chatId,
+              ),
+        ),
+      );
+    }
   }
 }
 
@@ -1404,12 +1593,16 @@ class _IncomingCall {
   final String room;
   final String callerName;
   final bool isVideoCall;
+  final bool isGroupCall;
+  final int? callerAvatar;
 
   _IncomingCall({
     required this.chatId,
     required this.room,
     required this.callerName,
     required this.isVideoCall,
+    this.isGroupCall = false,
+    this.callerAvatar,
   });
 }
 
@@ -1422,6 +1615,22 @@ class FCMBackgroundBridge {
       if (_isIncomingCallMessage(message)) {
         final call = _parseIncomingCall(message);
         if (call != null) {
+          // Create a unique ID for this call notification
+          final callId = '${call.chatId}_${call.room}';
+          
+          // Check if we already showed this notification recently
+          // Use the same static set as FCMService for deduplication
+          if (FCMService._recentCallKitIds.contains(callId)) {
+            print('⏭️ [BG] Skipping duplicate CallKit for: $callId');
+            return;
+          }
+          
+          // Add to recent set and schedule removal
+          FCMService._recentCallKitIds.add(callId);
+          Future.delayed(FCMService._deduplicationWindow, () {
+            FCMService._recentCallKitIds.remove(callId);
+          });
+          
           await _showCallKitIncoming(call);
         }
         return;
@@ -1443,13 +1652,26 @@ class FCMBackgroundBridge {
   }
 
   static bool _isIncomingCallMessage(RemoteMessage message) {
-    if (message.data['code'] == '5' || message.data['code'] == 5) return true;
     final code = message.data['code'];
-    return code == 'CALL_INCOMING' || code == 1 || code == '1';
+    
+    // Check for individual call codes (5, 1, CALL_INCOMING)
+    if (code == '5' || code == 5 || code == 'CALL_INCOMING' || code == 1 || code == '1') {
+      return true;
+    }
+    
+    // Check for group call code (30)
+    if (code == '30' || code == 30) {
+      return true;
+    }
+    
+    return false;
   }
 
   static _IncomingCall? _parseIncomingCall(RemoteMessage message) {
     try {
+      print('📥 [BG] Parsing incoming call message...');
+      print('📋 [BG] Message code: ${message.data['code']}');
+      
       final idJsonString = message.data['id'];
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
@@ -1464,7 +1686,15 @@ class FCMBackgroundBridge {
       final room = idMap['room'] as String?;
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-      print("isVideoCall5: ${isVideoCall}");
+      
+      // For group calls, check code 30
+      final code = message.data['code'];
+      final isGroupCall = (code == '30' || code == 30) || (idMap['isGroupCall'] as bool? ?? false);
+      
+      print("📞 [BG] Room: $room");
+      print("💬 [BG] ChatId: $chatId");
+      print("📹 [BG] isVideoCall: $isVideoCall");
+      print("👥 [BG] isGroupCall: $isGroupCall");
       final firstName = callerData?['firstName'] as String? ?? '';
       final lastName = callerData?['lastName'] as String? ?? '';
       final fullName =
@@ -1479,6 +1709,7 @@ class FCMBackgroundBridge {
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        isGroupCall: isGroupCall,
       );
     } catch (e) {
       log('parse incoming call error (bg): $e');
@@ -1487,13 +1718,18 @@ class FCMBackgroundBridge {
   }
 
   static Future<void> _showCallKitIncoming(_IncomingCall call) async {
+    print('🔔 [BG] Showing CallKit for: ${call.callerName}');
+    print('📞 [BG] Room: ${call.room}, ChatId: ${call.chatId}');
+    print('📹 [BG] Video: ${call.isVideoCall}, Group: ${call.isGroupCall}');
+    
     final uuid = const Uuid().v4();
     final params = CallKitParams(
       id: uuid,
       nameCaller: call.callerName,
       appName: 'Navicare',
+      avatar: '',
       handle: call.callerName,
-      type: 0, // set 1 if you want to mark as video capable
+      type: call.isVideoCall ? 1 : 0,
       duration: 30000,
       textAccept: 'Accept',
       textDecline: 'Reject',
@@ -1502,17 +1738,34 @@ class FCMBackgroundBridge {
         'room': call.room,
         'callerName': call.callerName,
         'isVideoCall': call.isVideoCall,
+        'isGroupCall': call.isGroupCall,
       },
-      android: const AndroidParams(
-        // isCustomNotification: true,
+      headers: <String, dynamic>{},
+      android: AndroidParams(
+        isCustomNotification: true,
         isShowLogo: false,
-        actionColor: '#4CAF50',
-        // incomingCallNotificationChannelName: 'Incoming Calls',
-        // missedCallNotificationChannelName: 'Missed Calls',
         ringtonePath: 'ringtone',
+        backgroundColor: '#0bb89b',
+        backgroundUrl: '',
+        actionColor: '#4CAF50',
+        incomingCallNotificationChannelName: 'Incoming Calls',
+        missedCallNotificationChannelName: 'Missed Calls',
+        isShowCallID: true,
+        isShowFullLockedScreen: true,
       ),
-      ios: const IOSParams(handleType: 'generic', supportsVideo: true),
+      ios: const IOSParams(
+        iconName: 'AppIcon',
+        handleType: '',
+        supportsVideo: true,
+        maximumCallGroups: 2,
+      ),
     );
-    await FlutterCallkitIncoming.showCallkitIncoming(params);
+    
+    try {
+      await FlutterCallkitIncoming.showCallkitIncoming(params);
+      print('✅ [BG] CallKit displayed successfully');
+    } catch (e) {
+      print('❌ [BG] Error showing CallKit: $e');
+    }
   }
 }

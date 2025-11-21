@@ -79,7 +79,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       if (token != null) {
         ref.read(authProvider.notifier).login(phoneNumber, password, token);
       } else {
-        ref.read(authProvider.notifier).login(phoneNumber, password, "token");
+        //ref.read(authProvider.notifier).login(phoneNumber, password, "token");
         // Handle case where token is null
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

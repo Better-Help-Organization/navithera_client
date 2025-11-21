@@ -27,8 +27,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Initialize Firebase if not already done
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  print("Handling a background message: ${message.messageId}");
-  print("Background message data: ${message.data}");
+  print("🟡 [BACKGROUND] Handling a background message: ${message.messageId}");
+  print("🟡 [BACKGROUND] Background message data: ${message.data}");
 
   try {
     await FCMBackgroundBridge.handleBackgroundMessage(message);
@@ -160,6 +160,8 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           'callerName': idMap['callerName'],
         if (!extra.containsKey('isVideoCall') && idMap['isVideoCall'] != null)
           'isVideoCall': idMap['isVideoCall'],
+        if (!extra.containsKey('isGroupCall') && idMap['isGroupCall'] != null)
+          'isGroupCall': idMap['isGroupCall'],
       });
 
       // --- Extract variables ---
@@ -171,6 +173,12 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           (extra['isVideoCall'] ??
               idMap['isVideoCall'] ??
               body['isVideoCall'] ??
+              false) ==
+          true;
+      final bool isGroupCall =
+          (extra['isGroupCall'] ??
+              idMap['isGroupCall'] ??
+              body['isGroupCall'] ??
               false) ==
           true;
 
@@ -204,18 +212,20 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
                     participantName: callerName,
                     chatId: chatId,
                     isVideocall: isVideoCall,
+                    isGroupCall: isGroupCall,
                   );
             } else {
               // App was terminated - set pending route
               print("App was terminated, setting pending call route");
               ref.read(pendingRouteProvider.notifier).state = PendingRoute(
                 path: '/call-screen',
-                // callData: {
-                //   'roomName': roomName,
-                //   'participantName': callerName,
-                //   'chatId': chatId,
-                //   'isVideoCall': isVideoCall,
-                // },
+                callData: {
+                  'roomName': roomName,
+                  'participantName': callerName,
+                  'chatId': chatId,
+                  'isVideoCall': isVideoCall,
+                  'isGroupCall': isGroupCall,
+                },
               );
             }
           } else {

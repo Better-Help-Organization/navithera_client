@@ -97,6 +97,7 @@ class CallController extends StateNotifier<CallState> {
   LocalParticipant? _localParticipant;
   Timer? _callDurationTimer;
   DateTime? _callStartTime;
+  EventsListener<RoomEvent>? _roomListener;
 
   // LiveKit credentials
   static const String _serverUrl = 'wss://navicare-dmw0dh3w.livekit.cloud';
@@ -193,7 +194,43 @@ class CallController extends StateNotifier<CallState> {
       _room = Room();
       ref.read(liveKitRoomProvider.notifier).state = _room;
 
+      // Set up specific event listeners for track changes
       _room!.addListener(_onRoomUpdate);
+      
+      // Listen to track published/unpublished events
+      _roomListener = _room!.createListener()
+        ..on<TrackPublishedEvent>((event) {
+          print('Track published: ${event.publication.sid}');
+          _updateParticipantTracks();
+        })
+        ..on<TrackUnpublishedEvent>((event) {
+          print('Track unpublished: ${event.publication.sid}');
+          _updateParticipantTracks();
+        })
+        ..on<TrackSubscribedEvent>((event) {
+          print('Track subscribed: ${event.track.sid}');
+          _updateParticipantTracks();
+        })
+        ..on<TrackUnsubscribedEvent>((event) {
+          print('Track unsubscribed: ${event.track.sid}');
+          _updateParticipantTracks();
+        })
+        ..on<ParticipantConnectedEvent>((event) {
+          print('✅ Participant connected: ${event.participant.name}');
+          _updateParticipantTracks();
+        })
+        ..on<ParticipantDisconnectedEvent>((event) {
+          print('❌ Participant disconnected: ${event.participant.name}');
+          _updateParticipantTracks();
+        })
+        ..on<TrackMutedEvent>((event) {
+          print('Track muted: ${event.publication.sid}');
+          _updateParticipantTracks();
+        })
+        ..on<TrackUnmutedEvent>((event) {
+          print('Track unmuted: ${event.publication.sid}');
+          _updateParticipantTracks();
+        });
 
       final token = _generateToken();
 
@@ -241,6 +278,10 @@ class CallController extends StateNotifier<CallState> {
         isCameraOff: cameraOff,
       );
 
+      print('✅ Connected to LiveKit room: ${state.roomName}');
+      print('👤 Local participant: ${_localParticipant?.name} (${_localParticipant?.sid})');
+      print('👥 Remote participants count: ${_room!.remoteParticipants.length}');
+
       _callStartTime = DateTime.now();
       _callDurationTimer?.cancel();
       _callDurationTimer = Timer.periodic(const Duration(seconds: 1), (_) {
@@ -253,6 +294,8 @@ class CallController extends StateNotifier<CallState> {
       if (_room != null) {
         try {
           _room!.removeListener(_onRoomUpdate);
+          _roomListener?.dispose();
+          _roomListener = null;
           await _room!.disconnect();
           _room!.dispose();
         } catch (_) {}
@@ -276,28 +319,37 @@ class CallController extends StateNotifier<CallState> {
   void _updateParticipantTracks() {
     if (_room == null || !mounted) return;
 
+    print('🔄 _updateParticipantTracks called: room has ${_room!.remoteParticipants.length} remote participants');
+
     try {
       final newTracks = <ParticipantTrack>[
         // Remote participants
         ..._room!.remoteParticipants.values.map(
-          (p) => ParticipantTrack(
-            participant: p,
-            videoTrack:
-                p.videoTrackPublications.isNotEmpty
-                    ? p.videoTrackPublications.first.track as VideoTrack?
-                    : null,
-          ),
+          (p) {
+            print('  👤 Remote participant: name="${p.name}", sid=${p.sid}, camera=${p.isCameraEnabled()}, mic=${p.isMicrophoneEnabled()}');
+            return ParticipantTrack(
+              participant: p,
+              videoTrack:
+                  p.videoTrackPublications.isNotEmpty
+                      ? p.videoTrackPublications.first.track as VideoTrack?
+                      : null,
+            );
+          },
         ),
         // Local participant
-        if (_localParticipant != null)
-          ParticipantTrack(
-            participant: _localParticipant!,
-            videoTrack:
-                _localParticipant!.videoTrackPublications.isNotEmpty
-                    ? _localParticipant!.videoTrackPublications.first.track
-                        as VideoTrack?
-                    : null,
-          ),
+        if (_localParticipant != null) ...[
+          () {
+            print('  👤 Local participant: name="${_localParticipant!.name}", sid=${_localParticipant!.sid}, camera=${_localParticipant!.isCameraEnabled()}, mic=${_localParticipant!.isMicrophoneEnabled()}');
+            return ParticipantTrack(
+              participant: _localParticipant!,
+              videoTrack:
+                  _localParticipant!.videoTrackPublications.isNotEmpty
+                      ? _localParticipant!.videoTrackPublications.first.track
+                          as VideoTrack?
+                      : null,
+            );
+          }(),
+        ],
       ];
 
       final current = ref.read(participantTracksProvider);
@@ -348,12 +400,28 @@ class CallController extends StateNotifier<CallState> {
   }
 
   Future<void> toggleCamera() async {
-    if (_localParticipant == null) return;
+    if (_localParticipant == null) {
+      print('❌ toggleCamera: localParticipant is null');
+      return;
+    }
     try {
+      print('📹 toggleCamera: current state isCameraOff=${state.isCameraOff}');
+      print('📹 toggleCamera: localParticipant.isCameraEnabled()=${_localParticipant!.isCameraEnabled()}');
+      
       final newCameraState = state.isCameraOff; // if off, enable; else disable
+      print('📹 toggleCamera: setting camera enabled to $newCameraState');
+      
       await _localParticipant!.setCameraEnabled(newCameraState);
+      
+      print('📹 toggleCamera: after setCameraEnabled, localParticipant.isCameraEnabled()=${_localParticipant!.isCameraEnabled()}');
+      
       state = state.copyWith(isCameraOff: !newCameraState);
-    } catch (_) {
+      print('📹 toggleCamera: new state isCameraOff=${state.isCameraOff}');
+      
+      _updateParticipantTracks();
+      print('📹 toggleCamera: _updateParticipantTracks() called');
+    } catch (e) {
+      print('❌ toggleCamera error: $e');
       state = state.copyWith(error: 'Failed to toggle camera');
     }
   }
@@ -372,6 +440,8 @@ class CallController extends StateNotifier<CallState> {
     try {
       if (_room != null) {
         _room!.removeListener(_onRoomUpdate);
+        _roomListener?.dispose();
+        _roomListener = null;
         await _room!.disconnect();
         _room!.dispose();
         _room = null;
