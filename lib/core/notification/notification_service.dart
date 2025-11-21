@@ -198,12 +198,8 @@ class FCMService {
         return;
       }
       if (message.data['code'] == '25' || message.data['code'] == 25) {
-        print("25 25 25 25 code received");
-        // _handleSessionSelectionNotification(message);
-        // _handleSessionNotification();
-        //final context = navigatorKey.currentContext;
-        // print("context: $context");
-        // if (context == null) return;
+        // print("25 25 25 25 code received");
+
         final context = navigatorKey.currentContext;
         print("context: $context");
         if (context == null) return;
@@ -212,6 +208,12 @@ class FCMService {
         final container = ProviderScope.containerOf(context);
         await container.read(authProvider.notifier).getCurrentUser();
         GoRouter.of(context).push('/auth-gate');
+        return;
+      }
+      if (message.data['code'] == '31' || message.data['code'] == 31) {
+        // print("25 25 25 25 code received");
+
+        _handleSessionNotification();
         return;
       }
       if (message.data['code'] == '8' || message.data['code'] == 8) {
@@ -465,6 +467,12 @@ class FCMService {
       final container = ProviderScope.containerOf(context);
       await container.read(authProvider.notifier).getCurrentUser();
       GoRouter.of(context).push('/auth-gate');
+      return;
+    }
+    if (message.data['code'] == '31' || message.data['code'] == 31) {
+      // print("25 25 25 25 code received");
+
+      _handleSessionNotification();
       return;
     }
     if (message.data['code'] == '11' || message.data['code'] == 11) {
