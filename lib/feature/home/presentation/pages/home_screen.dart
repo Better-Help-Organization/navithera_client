@@ -160,81 +160,6 @@ class SessionService {
   }
 }
 
-// class QuoteService {
-//   final Dio _dio = Dio();
-
-//   QuoteService() {
-//     _dio.options.connectTimeout = const Duration(seconds: 20);
-//     _dio.options.receiveTimeout = const Duration(seconds: 20);
-//   }
-
-//   Future<void> _attachAuthHeader() async {
-//     final sharedPreferences = await SharedPreferences.getInstance();
-//     final accessToken = sharedPreferences.getString('access_token');
-//     if (accessToken != null && accessToken.isNotEmpty) {
-//       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
-//     } else {
-//       _dio.options.headers.remove('Authorization');
-//     }
-//   }
-
-//   Future<Quote?> fetchQuote() async {
-//     try {
-//       await _attachAuthHeader();
-//       final response = await _dio.get(
-//         '${base_url_dev}/quote?sort=createdAt=desc',
-//       );
-
-//       if (response.statusCode == 200) {
-//         final data = response.data;
-//         if (data is Map && data['data'] is List && data['data'].isNotEmpty) {
-//           final firstQuote = data['data'][0];
-
-//           final content = firstQuote['content'] as String?;
-//           final author = firstQuote['author'] as String?;
-
-//           if (content != null && author != null) {
-//             return Quote(content: content.trim(), author: author.trim());
-//           }
-//         }
-//       }
-//       return null;
-//     } catch (e) {
-//       log("Error fetching quote: $e");
-//       return null;
-//     }
-//   }
-
-//   Future<List<Quote>> fetchQuotes({int take = 10}) async {
-//     try {
-//       await _attachAuthHeader();
-//       final response = await _dio.get(
-//         '${base_url_dev}/quote?sort=createdAt=desc&take=$take',
-//       );
-
-//       if (response.statusCode == 200) {
-//         final data = response.data;
-//         if (data is Map && data['data'] is List) {
-//           final List<Quote> quotes = [];
-//           for (final quoteData in (data['data'] as List)) {
-//             final content = quoteData['content'] as String?;
-//             final author = quoteData['author'] as String?;
-
-//             if (content != null && author != null) {
-//               quotes.add(Quote(content: content.trim(), author: author.trim()));
-//             }
-//           }
-//           return quotes;
-//         }
-//       }
-//       return [];
-//     } catch (e) {
-//       log("Error fetching quotes: $e");
-//       return [];
-//     }
-//   }
-// }
-
 class QuoteService {
   final Dio _dio = Dio();
 
@@ -474,7 +399,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // Load initial data using providers
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(upcomingSessionProvider.notifier).loadNext();
-      ref.read(matchedTherapistProvider.notifier).load();
+      // ref.read(matchedTherapistProvider.notifier).load();
     });
   }
 
@@ -490,7 +415,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _loadUser() async {
     await ref.read(authProvider.notifier).getCurrentUser();
     ref.read(upcomingSessionProvider.notifier).loadNext();
-    ref.read(matchedTherapistProvider.notifier).load();
+    // ref.read(matchedTherapistProvider.notifier).load();
   }
 
   void _setupMessageReadListener() {
@@ -500,7 +425,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       if (message.notification?.title == 'Match accepted') {
         // Refresh therapist when match accepted notification comes
-        ref.read(matchedTherapistProvider.notifier).load();
+        // ref.read(matchedTherapistProvider.notifier).load();
+        ref.read(upcomingSessionProvider.notifier).loadNext();
       }
 
       if ((message.data['code'] == '1' || message.data['code'] == 1)) {
@@ -515,28 +441,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _quoteTimer?.cancel();
     super.dispose();
   }
-
-  // Future<void> _loadQuotes() async {
-  //   setState(() {
-  //     _isLoadingQuote = true;
-  //   });
-
-  //   final quoteService = ref.read(quoteServiceProvider);
-  //   final quotes = await quoteService.fetchQuotes(take: 10);
-
-  //   setState(() {
-  //     _quotes = quotes;
-  //     if (_quotes.isNotEmpty) {
-  //       _quote = _quotes.first.content;
-  //       _quoteAuthor = _quotes.first.author;
-  //       _startQuoteTimer();
-  //     } else {
-  //       _quote = null;
-  //       _quoteAuthor = "Today's Quote";
-  //     }
-  //     _isLoadingQuote = false;
-  //   });
-  // }
 
   Future<void> _loadQuote() async {
     // Renamed from _loadQuotes
@@ -575,37 +479,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
-  // Future<void> _loadSessions() async {
-  //   setState(() {
-  //     _isLoadingSessions = true;
-  //   });
-
-  //   final sessionService = ref.read(sessionServiceProvider);
-  //   final sessionsData = await sessionService.fetchSessions();
-
-  //   if (mounted) {
-  //     setState(() {
-  //       _sessionsData = sessionsData;
-  //       _isLoadingSessions = false;
-
-  //       if (sessionsData != null &&
-  //           sessionsData['data'] is List &&
-  //           (sessionsData['data'] as List).isNotEmpty) {
-  //         final firstSession = (sessionsData['data'] as List)[0];
-  //         final scheduleString = firstSession['schedule'] as String?;
-  //         if (scheduleString != null) {
-  //           try {
-  //             _nextSessionDate = DateTime.parse(scheduleString);
-  //           } catch (e) {
-  //             log("Error parsing session date: $e");
-  //             _nextSessionDate = null;
-  //           }
-  //         }
-  //       }
-  //     });
-  //   }
-  // }
-
   Future<void> _loadTodayMood() async {
     setState(() {
       _isLoadingTodayMood = true;
@@ -622,56 +495,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
-  // Future<void> _loadTherapist() async {
-  //   print("Bearer 5");
-  //   setState(() {
-  //     _isLoadingTherapist = true;
-  //     _therapistError = null;
-  //   });
-
-  //   try {
-  //     final user = ref.read(currentUserProvider);
-  //     final service = ref.read(therapistMatchServiceProvider);
-
-  //     if (user?.id == null) {
-  //       setState(() {
-  //         _isLoadingTherapist = false;
-  //         _therapistError = 'client error';
-  //       });
-  //       return;
-  //     }
-
-  //     print("Loading therapist data for client: ${user!.id}");
-
-  //     final therapist = await service.fetchLatestAcceptedTherapist(
-  //       clientId: user.id,
-  //     );
-
-  //     if (!mounted) return;
-
-  //     setState(() {
-  //       _therapist = therapist;
-  //       _isLoadingTherapist = false;
-  //       if (therapist == null) {
-  //         _therapistError = 'No therapist matched yet';
-  //         print("No therapist found for client");
-  //       } else {
-  //         print(
-  //           "Therapist loaded successfully: ${therapist.firstName} ${therapist.lastName}",
-  //         );
-  //       }
-  //     });
-  //   } catch (e) {
-  //     print('Error loading therapist: $e');
-  //     if (!mounted) return;
-
-  //     setState(() {
-  //       _isLoadingTherapist = false;
-  //       _therapistError = 'Failed to load therapist data';
-  //     });
-  //   }
-  // }
-
   Future<void> _refreshAll() async {
     await Future.wait([
       _loadTodayMood(),
@@ -682,7 +505,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     // Refresh providers
     ref.read(upcomingSessionProvider.notifier).loadNext();
-    ref.read(matchedTherapistProvider.notifier).load();
+    // ref.read(matchedTherapistProvider.notifier).load();
   }
 
   String formatSessionDate(DateTime date) {
@@ -803,7 +626,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final user = ref.watch(currentUserProvider);
     final moodService = ref.read(moodServiceProvider);
     final sessionState = ref.watch(upcomingSessionProvider);
-    final therapistState = ref.watch(matchedTherapistProvider);
+    // final therapistState = ref.watch(matchedTherapistProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -921,16 +744,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                   // Mood section
                   if (_isLoadingTodayMood) ...[
-                    Text(
-                      AppLocalizations.of(context)!.howAreYouFeeling,
-                      style: AppTypography.heading1,
-                    ),
                     const SizedBox(height: 12),
                     const _MoodSkeleton(),
                     const SizedBox(height: 12),
                   ],
 
                   if (!_isLoadingTodayMood && _todayMood == null) ...[
+                    Text(
+                      AppLocalizations.of(context)!.howAreYouFeeling,
+                      style: AppTypography.heading1,
+                    ),
+                    const SizedBox(height: 12),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -1066,63 +890,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
 
                   // Quote Card
-                  // Container(
-                  //   padding: const EdgeInsets.all(16),
-                  //   decoration: BoxDecoration(
-                  //     color: AppColors.primary,
-                  //     borderRadius: BorderRadius.circular(12),
-                  //   ),
-                  //   child: Column(
-                  //     children: [
-                  //       if (_isLoadingQuote)
-                  //         const _QuoteSkeleton()
-                  //       else if (_quote != null)
-                  //         Text(
-                  //           '"$_quote"',
-                  //           style: AppTypography.quote.copyWith(
-                  //             color: Colors.white,
-                  //           ),
-                  //           textAlign: TextAlign.center,
-                  //         )
-                  //       else
-                  //         Text(
-                  //           '"${AppLocalizations.of(context)!.selfEsteemQuote}"',
-                  //           style: AppTypography.quote.copyWith(
-                  //             color: Colors.white,
-                  //           ),
-                  //           textAlign: TextAlign.center,
-                  //         ),
-                  //       const SizedBox(height: 12),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Text(
-                  //             '- $_quoteAuthor',
-                  //             style: AppTypography.bodySmall.copyWith(
-                  //               color: Colors.white70,
-                  //             ),
-                  //           ),
-                  //           TextButton.icon(
-                  //             onPressed: () {},
-                  //             icon: const Icon(
-                  //               Icons.share,
-                  //               color: Colors.white,
-                  //               size: 14,
-                  //             ),
-                  //             label: Text(
-                  //               AppLocalizations.of(context)!.share,
-                  //               style: AppTypography.buttonText.copyWith(
-                  //                 color: Colors.white,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // Quote Card
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -1207,7 +974,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                   // Therapist & Session Section using providers
                   _buildTherapistAndSessionSection(
-                    therapistState,
+                    // therapistState,
                     sessionState,
                     context,
                   ),
@@ -1221,14 +988,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildTherapistAndSessionSection(
-    MatchedTherapistState therapistState,
+    // MatchedTherapistState therapistState,
     UpcomingSessionState sessionState,
     BuildContext context,
   ) {
     return Column(
       children: [
         // Therapist Section
-        _buildTherapistSection(therapistState, context),
+        _buildTherapistSection(sessionState, context),
 
         const SizedBox(height: 12),
 
@@ -1239,38 +1006,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildTherapistSection(
-    MatchedTherapistState therapistState,
+    UpcomingSessionState sessionState,
     BuildContext context,
   ) {
-    return switch (therapistState) {
-      MatchedTherapistInitial() => const _TherapistCardSkeleton(),
-      MatchedTherapistLoading() => const _TherapistCardSkeleton(),
-      MatchedTherapistError(:final failure) => _InfoBanner(
+    return switch (sessionState) {
+      UpcomingSessionInitial() => const _TherapistCardSkeleton(),
+      UpcomingSessionLoading() => const _TherapistCardSkeleton(),
+      UpcomingSessionError(:final failure) => _InfoBanner(
         icon: Icons.error_outline,
         text: failure.message,
         color: Colors.red,
       ),
-      MatchedTherapistLoaded(:final therapist) =>
-        therapist == null
+      UpcomingSessionLoaded(:final nextSession) =>
+        nextSession?.therapist == null
             ? _InfoBanner(
               icon: Icons.info_outline,
-              text: 'No therapist matched yet',
+              text: 'No therapist assigned to upcoming session',
               color: Colors.blue,
             )
             : TherapistCard(
-              therapist: therapist,
+              therapist: nextSession!.therapist!,
               onDetailsTap: () {
                 final router = GoRouter.of(context);
-                router.push('/therapist-profile', extra: therapist);
+                router.push(
+                  '/therapist-profile',
+                  extra: nextSession.therapist!,
+                );
               },
               onMessageTap: () {},
               onRateTap: () {
                 final ratingService = ref.read(ratingServiceProvider);
-                _showRatingDialog(context, therapist, ratingService);
+                _showRatingDialog(
+                  context,
+                  nextSession.therapist!,
+                  ratingService,
+                );
               },
             ),
       // TODO: Handle this case.
-      MatchedTherapistState() => throw UnimplementedError(),
+      UpcomingSessionState() => throw UnimplementedError(),
     };
   }
 
@@ -1328,116 +1102,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
     );
   }
-
-  // class _SessionSkeleton extends StatelessWidget {
-  //   const _SessionSkeleton();
-
-  //   @override
-  //   Widget build(BuildContext context) {
-  //     return Container(
-  //       padding: const EdgeInsets.all(16),
-  //       decoration: BoxDecoration(
-  //         color: Colors.grey.shade50,
-  //         borderRadius: BorderRadius.circular(16),
-  //       ),
-  //       child: Row(
-  //         children: const [
-  //           _ShimmerBlock(width: 20, height: 20, radius: 10),
-  //           SizedBox(width: 12),
-  //           Expanded(
-  //             child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 _ShimmerBlock(width: 200, height: 12, radius: 6),
-  //                 SizedBox(height: 8),
-  //                 _ShimmerBlock(width: 150, height: 10, radius: 6),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
-
-  // Widget _buildTherapistSection(BuildContext context, String sessionDateText) {
-  //   final ratingService = ref.read(ratingServiceProvider);
-
-  //   if (_therapistError != null) {
-  //     return _InfoBanner(
-  //       icon: Icons.error_outline,
-  //       text: _therapistError!,
-  //       color: Colors.red,
-  //     );
-  //   }
-
-  //   if (_therapist == null) {
-  //     return _InfoBanner(
-  //       icon: Icons.info_outline,
-  //       text: 'No therapist matched yet',
-  //       color: Colors.blue,
-  //     );
-  //   }
-
-  //   return Column(
-  //     children: [
-  //       if (sessionDateText.isNotEmpty)
-  //         TherapistCard(
-  //           therapist: _therapist!,
-  //           onDetailsTap: () {
-  //             final router = GoRouter.of(context);
-  //             router.push('/therapist-profile', extra: _therapist);
-  //           },
-  //           onMessageTap: () {},
-  //           onRateTap: () {
-  //             _showRatingDialog(context, _therapist!, ratingService);
-  //           },
-  //         ),
-
-  //       SizedBox(height: 12),
-  //       if (sessionDateText.isNotEmpty)
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             color: AppColors.primary.withOpacity(0.15),
-  //             borderRadius: BorderRadius.circular(16),
-  //             border: Border.all(color: Colors.grey.shade200),
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: Colors.black.withOpacity(0.04),
-  //                 blurRadius: 12,
-  //                 offset: const Offset(0, 6),
-  //               ),
-  //             ],
-  //           ),
-  //           padding: const EdgeInsets.all(16),
-  //           child: Row(
-  //             children: [
-  //               // Optional: Add an icon
-  //               Icon(
-  //                 Icons.calendar_today,
-  //                 color: Colors.green.shade700,
-  //                 size: 20,
-  //               ),
-  //               const SizedBox(width: 12),
-
-  //               Expanded(
-  //                 // This makes the text wrap
-  //                 child: Text(
-  //                   'Upcoming Session: $sessionDateText',
-  //                   style: AppTypography.bodySmall.copyWith(
-  //                     color: Colors.green.shade700,
-  //                     fontWeight: FontWeight.w500,
-  //                   ),
-  //                   maxLines: 2, // Limit to 2 lines
-  //                   overflow: TextOverflow.ellipsis,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //     ],
-  //   );
-  // }
 
   void _showRatingDialog(
     BuildContext context,

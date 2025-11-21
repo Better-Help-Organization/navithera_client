@@ -378,7 +378,7 @@ class _GroupProfileScreenState extends State<GroupProfileScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  subtitle: Text(m.status),
+                  // subtitle: Text(m.status),
                   trailing:
                       _isSelectionMode
                           ? null

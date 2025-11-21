@@ -291,7 +291,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
         if (context != null) {
           final container = ProviderScope.containerOf(context);
           await container.read(sessionProvider.notifier).loadSessions();
-          await container.read(matchedTherapistProvider.notifier).load();
+          // await container.read(matchedTherapistProvider.notifier).load();
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -933,14 +933,15 @@ class _DayCalendarView extends StatelessWidget {
       final durationMinutes = session.duration % 60;
 
       // Calculate position and height based on time
-      final top = (startHour + startMinute / 60) * (600 / 24) - 6;
-      final height = (durationHours + durationMinutes / 60) * (600 / 24);
+      final top = (startHour + 1 / 60) * (600 / 24) - 6;
+      // final height = (durationHours + durationMinutes / 60) * (600 / 24);
+      final height = 100;
 
       return Positioned(
         left: 60, // Offset for time markers
         top: top,
         right: 16,
-        height: height,
+        height: 20,
         child: _SessionTimeBlock(
           session: session,
           onTap: () => onSessionTap(session), // NEW: Pass the tap handler

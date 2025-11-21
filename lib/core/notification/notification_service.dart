@@ -147,7 +147,8 @@ class FCMService {
         if (context == null) return;
 
         final container = ProviderScope.containerOf(context);
-        await container.read(matchedTherapistProvider.notifier).load();
+        // await container.read(matchedTherapistProvider.notifier).load();
+        container.read(upcomingSessionProvider.notifier).loadNext();
 
         // Future<void> _loadUnreadCount() async {
         //   final notificationService = container.read(
@@ -467,7 +468,8 @@ class FCMService {
       if (context == null) return;
 
       final container = ProviderScope.containerOf(context);
-      await container.read(matchedTherapistProvider.notifier).load();
+      // await container.read(matchedTherapistProvider.notifier).load();
+      container.read(upcomingSessionProvider.notifier).loadNext();
       // Refresh chat data
       // container.read(chartDataProvider.notifier).load();
       // Show notification banner
@@ -688,7 +690,7 @@ class FCMService {
     //print("Session notification received: ${message.notification?.title}");
     container.read(sessionProvider.notifier).loadSessions();
     container.read(upcomingSessionProvider.notifier).loadNext();
-    container.read(matchedTherapistProvider.notifier).load();
+    // container.read(matchedTherapistProvider.notifier).load();
   }
 
   void handleInitialBackgroundMessage(RemoteMessage message) async {

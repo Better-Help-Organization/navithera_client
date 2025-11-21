@@ -20,7 +20,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
   @override
   Future<ChatListResponse> getChatThreads({
     int? page,
-    int? take,
+    int? take = 1,
     String? fields,
     String? sort,
     String? filters,

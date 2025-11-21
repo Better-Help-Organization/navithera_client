@@ -36,10 +36,11 @@ class SessionItem with _$SessionItem {
     int? duration,
     String? type,
     String? note,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-    UserModel? client, // This is the client info, not therapist
-    // Add therapist field if it exists in other responses
+    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
+    // Add therapist field
     @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? therapist,
+    // Add any other therapist-related fields you need
+    List<dynamic>? group,
   }) = _SessionItem;
 
   factory SessionItem.fromJson(Map<String, dynamic> json) =>

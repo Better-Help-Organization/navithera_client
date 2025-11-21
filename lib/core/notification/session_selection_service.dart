@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
+import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart'; // Add intl: ^0.19.0 to pubspec.yaml
 
@@ -215,6 +216,7 @@ class _SessionSelectionDialogState
       // Navigator.of(context).pop();
       await ref.read(authProvider.notifier).getCurrentUser();
       ref.read(routerProvider).go('/auth-gate');
+      ref.read(upcomingSessionProvider.notifier).loadNext();
 
       ScaffoldMessenger.of(rootContext).showSnackBar(
         SnackBar(
