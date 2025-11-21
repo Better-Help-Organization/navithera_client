@@ -240,15 +240,15 @@ class _CategorySelectionScreenState
                                     final responseData = response.data;
                                     if (responseData['data'] != null &&
                                         responseData['data'].isNotEmpty) {
+                                      print("responseXoxo here 1");
                                       // print(
                                       //   "preference exists: ${responseData['data'][0]['id']}",
                                       // );
-                                      if (category.name
-                                              .toString()
-                                              .toLowerCase() ==
-                                          'group therapy') {
+
+                                      if (category.name == 'Group Therapy') {
                                         final router = ref.read(routerProvider);
-                                        router.push('/subscription');
+                                        router.go('/subscription');
+                                        return;
                                       }
                                       final router = ref.read(routerProvider);
                                       // router.push(

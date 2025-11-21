@@ -383,16 +383,29 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     final providerId = ref.read(selectedPrefProvider);
     final user = ref.watch(currentUserProvider);
 
-    final finalsubscriptionId = await SubscriptionService.createSubscription(
-      subscriptionId: subscriptionId,
-      userId: user?.id,
-    );
+    try {
+      final finalsubscriptionId = await SubscriptionService.createSubscription(
+        subscriptionId: subscriptionId,
+        userId: user?.id,
+      );
 
-    print("Selected subscription ID: $finalsubscriptionId");
-    print("Selected provider ID: $providerId");
-    print("Navigating to payment page with subscription ID");
+      print("Selected subscription ID: $finalsubscriptionId");
+      print("Selected provider ID: $providerId");
+      print("Navigating to payment page with subscription ID");
 
-    context.go('/payment?preferenceId=$providerId', extra: finalsubscriptionId);
+      context.go(
+        '/payment?preferenceId=$providerId',
+        extra: finalsubscriptionId,
+      );
+    } catch (e) {
+      print("Error creating subscription: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("An error occurred. try again"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   Future<void> _getVat() async {
