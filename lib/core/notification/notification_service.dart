@@ -59,7 +59,7 @@ class FCMService {
   AudioPlayer? _ringtonePlayer;
   String? _activeCallChatId;
   bool get _isCallDialogOpen => _activeCallChatId != null;
-  
+
   // Track recently shown CallKit notifications to prevent duplicates
   static final Set<String> _recentCallKitIds = {};
   static const _deduplicationWindow = Duration(seconds: 5);
@@ -275,18 +275,20 @@ class FCMService {
           // Check if already in a call - don't show duplicate notifications
           final context = navigatorKey.currentContext;
           if (context != null) {
-            final currentLocation = GoRouter.of(context)
-                .routerDelegate
-                .currentConfiguration
-                .last
-                .matchedLocation;
-            
-            if (currentLocation.contains('/call') || currentLocation.contains('/group-call')) {
-              print('⏭️ [FOREGROUND] Already in a call, ignoring duplicate notification');
+            final currentLocation =
+                GoRouter.of(
+                  context,
+                ).routerDelegate.currentConfiguration.last.matchedLocation;
+
+            if (currentLocation.contains('/call') ||
+                currentLocation.contains('/group-call')) {
+              print(
+                '⏭️ [FOREGROUND] Already in a call, ignoring duplicate notification',
+              );
               return;
             }
           }
-          
+
           // Use custom dialog for foreground (CallKit is for background only)
           print('🔵 [FOREGROUND] Showing custom dialog for call');
           _showCallInvitationDialog(
@@ -912,75 +914,90 @@ class FCMService {
     String body = data['message_preview'] ?? notification?.body ?? '';
     final chatData = jsonDecode(data["id"]);
     final chatId = chatData['chat']['id'];
-    String senderName = 'Group Chat';
-    final therapistMap = chatData['chat']['therapist'];
-    final therapist = UserModel.fromJson(therapistMap);
-    final senderProfile = chatData['chat']['therapist']['profile'] ?? '';
-    final senderAvatar = chatData['chat']['therapist']['avatar'] ?? '';
-
-    if (currentLocation == '/chat/$chatId') {
-      print("Already on chat screen $chatId - skipping notification");
-      _updateChatData(chatId); // Still update chat data
-      return;
-    }
+    print("chatId: ${chatId}");
 
     try {
-      senderName =
-          chatData['chat']['therapist']['firstName'] +
-          ' ' +
-          chatData['chat']['therapist']['lastName'];
+      String senderName = 'Group Chat';
+      final therapistMap = chatData['chat']['therapist'];
+      final therapist = UserModel.fromJson(therapistMap);
+      print("therapistxj: ${therapist}");
+      final senderProfile = chatData['chat']['therapist']['profile'] ?? '';
+      print("therapistxj profile: ${senderProfile}");
+      final senderAvatar = chatData['chat']['therapist']['avatar'] ?? '';
+      print("therapistxj avatar: ${senderAvatar}");
+
+      if (currentLocation == '/chat/$chatId') {
+        print("Already on chat screen $chatId - skipping notification");
+        _updateChatData(chatId); // Still update chat data
+        return;
+      }
+
+      try {
+        senderName =
+            chatData['chat']['therapist']['firstName'] +
+            ' ' +
+            chatData['chat']['therapist']['lastName'];
+      } catch (e) {
+        // final senderName = 'Unknown Sender';
+      }
+
+      print("my name is ${senderName}");
+
+      print("Notification data: $data");
+
+      showOverlayNotification(
+        (context) {
+          return NewMessageNotificationBanner(
+            title: senderName,
+            body: body,
+            onTap: () {
+              //final currentRoute = GoRouter.of(context).location;
+              //  final currentLocation = GoRouter.of(context).location;
+              final currentLocation =
+                  GoRouter.of(
+                    context,
+                  ).routerDelegate.currentConfiguration.last.matchedLocation;
+              print("Current location: $currentLocation");
+              final targetRoute = '/chat/$chatId';
+              print("Notification banner tapped. Navigating to chat...");
+              OverlaySupportEntry.of(context)?.dismiss(animate: false);
+              final chat = Chat(
+                id: chatId,
+                name: senderName,
+                lastMessage: 'I sent you the design files 📎',
+                avatarUrl:
+                    (senderAvatar == 7) &&
+                            senderProfile != null &&
+                            senderProfile!.isNotEmpty
+                        ? '$base_url_for_image${senderProfile}?v=${DateTime.now().millisecondsSinceEpoch}'
+                        : null,
+                unreadCount: 0,
+                timestamp: DateTime(2025, 4, 2, 14, 15),
+                isOutgoing: true,
+                isRead: true,
+                user: therapist,
+                avatar: senderAvatar,
+              );
+              if (currentLocation != '/chat/$chatId') {
+                GoRouter.of(context).push('/chat/$chatId', extra: chat);
+              }
+            },
+          );
+        },
+        duration: Duration(seconds: 5),
+        position: NotificationPosition.top,
+      );
+
+      _updateChatData(chatId);
     } catch (e) {
-      // final senderName = 'Unknown Sender';
+      String title = notification?.title ?? 'New Message';
+      String body = data['message_preview'] ?? notification?.body ?? '';
+      final chatData = jsonDecode(data["id"]);
+      final chatId = chatData['chat']['id'];
+      print("chatId: ${chatId}");
+      _updateChatData(chatId);
+      print('therapistxj Error showing new message notification banner: $e');
     }
-
-    print("my name is ${senderName}");
-
-    print("Notification data: $data");
-
-    showOverlayNotification(
-      (context) {
-        return NewMessageNotificationBanner(
-          title: senderName,
-          body: body,
-          onTap: () {
-            //final currentRoute = GoRouter.of(context).location;
-            //  final currentLocation = GoRouter.of(context).location;
-            final currentLocation =
-                GoRouter.of(
-                  context,
-                ).routerDelegate.currentConfiguration.last.matchedLocation;
-            print("Current location: $currentLocation");
-            final targetRoute = '/chat/$chatId';
-            print("Notification banner tapped. Navigating to chat...");
-            OverlaySupportEntry.of(context)?.dismiss(animate: false);
-            final chat = Chat(
-              id: chatId,
-              name: senderName,
-              lastMessage: 'I sent you the design files 📎',
-              avatarUrl:
-                  (senderAvatar == 7) &&
-                          senderProfile != null &&
-                          senderProfile!.isNotEmpty
-                      ? '$base_url_for_image${senderProfile}?v=${DateTime.now().millisecondsSinceEpoch}'
-                      : null,
-              unreadCount: 0,
-              timestamp: DateTime(2025, 4, 2, 14, 15),
-              isOutgoing: true,
-              isRead: true,
-              user: therapist,
-              avatar: senderAvatar,
-            );
-            if (currentLocation != '/chat/$chatId') {
-              GoRouter.of(context).push('/chat/$chatId', extra: chat);
-            }
-          },
-        );
-      },
-      duration: Duration(seconds: 5),
-      position: NotificationPosition.top,
-    );
-
-    _updateChatData(chatId);
   }
 
   void _handleMatchAcceptedNotification(RemoteMessage message) {
@@ -1066,7 +1083,7 @@ class FCMService {
     print('   ChatId: $chatId');
     print('   IsGroupCall: $isGroupCall');
     print('   CallerAvatar: $callerAvatar');
-    
+
     // Use the global navigator key to get the current context
     final context = navigatorKey.currentContext;
     if (context == null) {
@@ -1190,19 +1207,19 @@ class FCMService {
                             }
                             _activeCallChatId = null;
                             _ringtonePlayer = null;
-                            
+
                             // Pop dialog first
                             Navigator.of(
                               dialogContext,
                               rootNavigator: true,
                             ).pop();
-                            
+
                             // Notify backend that call was accepted (non-blocking)
                             // TODO: Uncomment when backend implements /chat/call/accept endpoint
                             // acceptCall(chatId).catchError((e) {
                             //   print('Error sending acceptance: $e');
                             // });
-                            
+
                             // Use the main context for navigation, not dialog context
                             final navContext = navigatorKey.currentContext;
                             if (navContext != null) {
@@ -1295,11 +1312,15 @@ class FCMService {
       if (response.statusCode == 201 || response.statusCode == 200) {
         print('✅ Call accepted notification sent to backend');
       } else {
-        print('⚠️ Failed to notify backend of call acceptance: Status ${response.statusCode}');
+        print(
+          '⚠️ Failed to notify backend of call acceptance: Status ${response.statusCode}',
+        );
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
-        print('ℹ️ Accept call endpoint not implemented on backend (404) - continuing anyway');
+        print(
+          'ℹ️ Accept call endpoint not implemented on backend (404) - continuing anyway',
+        );
       } else {
         print('❌ Error notifying backend of call acceptance: ${e.message}');
       }
@@ -1348,7 +1369,7 @@ class FCMService {
     print('   IsGroupCall: $isGroupCall');
     print('   CallerName: $callerName');
     print('   CallerAvatar: $callerAvatar');
-    
+
     // Route to GroupCallScreen for group calls, CallScreen for individual calls
     if (isGroupCall) {
       print('✅ Navigating to GroupCallScreen');
@@ -1388,22 +1409,22 @@ class FCMService {
     print('🔔 Showing CallKit for: ${call.callerName}');
     print('📞 Room: ${call.room}, ChatId: ${call.chatId}');
     print('📹 Video: ${call.isVideoCall}, Group: ${call.isGroupCall}');
-    
+
     // Create a unique ID for this call notification
     final callId = '${call.chatId}_${call.room}';
-    
+
     // Check if we already showed this notification recently
     if (_recentCallKitIds.contains(callId)) {
       print('⏭️ [FOREGROUND] Skipping duplicate CallKit for: $callId');
       return;
     }
-    
+
     // Add to recent set and schedule removal
     _recentCallKitIds.add(callId);
     Future.delayed(_deduplicationWindow, () {
       _recentCallKitIds.remove(callId);
     });
-    
+
     final uuid = const Uuid().v4();
 
     final params = CallKitParams(
@@ -1457,17 +1478,21 @@ class FCMService {
 
   bool _isIncomingCallMessage(RemoteMessage message) {
     final code = message.data['code'];
-    
+
     // Check for individual call codes (5, 1, CALL_INCOMING)
-    if (code == '5' || code == 5 || code == 'CALL_INCOMING' || code == 1 || code == '1') {
+    if (code == '5' ||
+        code == 5 ||
+        code == 'CALL_INCOMING' ||
+        code == 1 ||
+        code == '1') {
       return true;
     }
-    
+
     // Check for group call code (30)
     if (code == '30' || code == 30) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -1475,7 +1500,7 @@ class FCMService {
     try {
       print('📥 Parsing incoming call message...');
       print('📋 Message code: ${message.data['code']}');
-      
+
       final idJsonString = message.data['id'];
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
@@ -1489,11 +1514,13 @@ class FCMService {
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-      
+
       // For group calls, check code 30
       final code = message.data['code'];
-      final isGroupCall = (code == '30' || code == 30) || (idMap['isGroupCall'] as bool? ?? false);
-      
+      final isGroupCall =
+          (code == '30' || code == 30) ||
+          (idMap['isGroupCall'] as bool? ?? false);
+
       print("📞 Room: $room");
       print("💬 ChatId: $chatId");
       print("📹 isVideoCall: $isVideoCall");
@@ -1536,15 +1563,15 @@ class FCMService {
     print("   ChatId: $chatId");
     print("   IsVideoCall: $isVideocall");
     print("   IsGroupCall: $isGroupCall");
-    
+
     // Notify backend that call was accepted
     // TODO: Uncomment when backend implements /chat/call/accept endpoint
     // acceptCall(chatId).catchError((e) {
     //   print('Error notifying backend of CallKit acceptance: $e');
     // });
-    
+
     final context = navigatorKey.currentContext;
-    
+
     if (context == null) {
       print("Context is null, setting pending route");
       _ref.read(pendingRouteProvider.notifier).state = PendingRoute(
@@ -1619,20 +1646,20 @@ class FCMBackgroundBridge {
         if (call != null) {
           // Create a unique ID for this call notification
           final callId = '${call.chatId}_${call.room}';
-          
+
           // Check if we already showed this notification recently
           // Use the same static set as FCMService for deduplication
           if (FCMService._recentCallKitIds.contains(callId)) {
             print('⏭️ [BG] Skipping duplicate CallKit for: $callId');
             return;
           }
-          
+
           // Add to recent set and schedule removal
           FCMService._recentCallKitIds.add(callId);
           Future.delayed(FCMService._deduplicationWindow, () {
             FCMService._recentCallKitIds.remove(callId);
           });
-          
+
           await _showCallKitIncoming(call);
         }
         return;
@@ -1655,17 +1682,21 @@ class FCMBackgroundBridge {
 
   static bool _isIncomingCallMessage(RemoteMessage message) {
     final code = message.data['code'];
-    
+
     // Check for individual call codes (5, 1, CALL_INCOMING)
-    if (code == '5' || code == 5 || code == 'CALL_INCOMING' || code == 1 || code == '1') {
+    if (code == '5' ||
+        code == 5 ||
+        code == 'CALL_INCOMING' ||
+        code == 1 ||
+        code == '1') {
       return true;
     }
-    
+
     // Check for group call code (30)
     if (code == '30' || code == 30) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -1673,7 +1704,7 @@ class FCMBackgroundBridge {
     try {
       print('📥 [BG] Parsing incoming call message...');
       print('📋 [BG] Message code: ${message.data['code']}');
-      
+
       final idJsonString = message.data['id'];
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
@@ -1688,11 +1719,13 @@ class FCMBackgroundBridge {
       final room = idMap['room'] as String?;
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-      
+
       // For group calls, check code 30
       final code = message.data['code'];
-      final isGroupCall = (code == '30' || code == 30) || (idMap['isGroupCall'] as bool? ?? false);
-      
+      final isGroupCall =
+          (code == '30' || code == 30) ||
+          (idMap['isGroupCall'] as bool? ?? false);
+
       print("📞 [BG] Room: $room");
       print("💬 [BG] ChatId: $chatId");
       print("📹 [BG] isVideoCall: $isVideoCall");
@@ -1723,7 +1756,7 @@ class FCMBackgroundBridge {
     print('🔔 [BG] Showing CallKit for: ${call.callerName}');
     print('📞 [BG] Room: ${call.room}, ChatId: ${call.chatId}');
     print('📹 [BG] Video: ${call.isVideoCall}, Group: ${call.isGroupCall}');
-    
+
     final uuid = const Uuid().v4();
     final params = CallKitParams(
       id: uuid,
@@ -1762,7 +1795,7 @@ class FCMBackgroundBridge {
         maximumCallGroups: 2,
       ),
     );
-    
+
     try {
       await FlutterCallkitIncoming.showCallkitIncoming(params);
       print('✅ [BG] CallKit displayed successfully');

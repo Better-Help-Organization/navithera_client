@@ -132,6 +132,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     _messageReadSubscription = FirebaseMessaging.onMessage.listen((event) {
       if (event.data['code'] == '2' || event.data['code'] == 2) {
         _markChatAsRead();
+
         print("hey hey new message");
       }
       print("hey hey event data is ${event.data}");
@@ -301,7 +302,11 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                 ),
                 child: Center(
                   child: Text(
-                    initials(message.client?.firstName ?? 'G'),
+                    initials(
+                      message.client?.firstName ??
+                          message.therapist?.firstName ??
+                          'T',
+                    ),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,

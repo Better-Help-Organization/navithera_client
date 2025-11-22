@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 // LiveKit room provider
 final liveKitRoomProvider = StateProvider<Room?>((ref) => null);
+
 // Call state provider
 final callControllerProvider = StateNotifierProvider<CallController, CallState>(
   (ref) {
@@ -114,6 +115,8 @@ class CallController extends StateNotifier<CallState> {
     required String participantName,
     required bool isVideoCall,
   }) async {
+    // Initialize state with user intent.
+    // If isVideoCall is true, isCameraOff is false.
     state = state.copyWith(
       isConnecting: true,
       error: null,
@@ -121,6 +124,7 @@ class CallController extends StateNotifier<CallState> {
       participantName: participantName,
       isVideoCall: isVideoCall,
       isCameraOff: !isVideoCall,
+      isMicMuted: false, // Default mic to on
     );
 
     try {
@@ -170,7 +174,7 @@ class CallController extends StateNotifier<CallState> {
       'exp': exp,
       'nbf': now,
       'sub': state.participantName,
-      'name': "${user?.firstName} ${user?.lastName}", // FIXED: Added name claim
+      'name': "${user?.firstName ?? ''} ${user?.lastName ?? ''}".trim(),
       'video': {
         'room': state.roomName,
         'roomJoin': true,
@@ -202,7 +206,10 @@ class CallController extends StateNotifier<CallState> {
 
       final token = _generateToken();
 
-      final wantCamera = !state.isCameraOff && state.isVideoCall;
+      // We use the state we set in startCall() to determine connection options
+      final wantCamera = !state.isCameraOff;
+      final wantMic = !state.isMicMuted;
+
       await _room!
           .connect(
             _serverUrl,
@@ -212,7 +219,7 @@ class CallController extends StateNotifier<CallState> {
               dynacast: true,
             ),
             fastConnectOptions: FastConnectOptions(
-              microphone: TrackOption(enabled: !state.isMicMuted),
+              microphone: TrackOption(enabled: wantMic),
               camera: TrackOption(enabled: wantCamera),
             ),
           )
@@ -220,28 +227,26 @@ class CallController extends StateNotifier<CallState> {
             const Duration(seconds: 30),
             onTimeout: () {
               throw Exception(
-                'Connection timeout: Could not connect to LiveKit server within 15 seconds',
+                'Connection timeout: Could not connect to LiveKit server within 30 seconds',
               );
             },
           );
 
       _localParticipant = _room!.localParticipant;
 
-      final micMuted =
-          _localParticipant != null
-              ? !_localParticipant!.isMicrophoneEnabled()
-              : false;
-      final cameraOff =
-          _localParticipant != null
-              ? !_localParticipant!.isCameraEnabled()
-              : true;
+      // FIX: Previously, we checked _localParticipant!.isCameraEnabled() here.
+      // That caused the bug because the track is still publishing asynchronously
+      // when connect() returns, so isCameraEnabled() reports false temporarily.
+      //
+      // Instead, we trust the 'wantCamera' intent we just passed to FastConnectOptions.
+      // If the hardware actually fails later, the error handling or event listeners will catch it.
 
       state = state.copyWith(
         isConnected: true,
         isConnecting: false,
         isInCall: true,
-        isMicMuted: micMuted,
-        isCameraOff: cameraOff,
+        // We DO NOT overwrite isCameraOff or isMicMuted here.
+        // We keep the values set in startCall().
       );
 
       _callStartTime = DateTime.now();
@@ -285,9 +290,17 @@ class CallController extends StateNotifier<CallState> {
             })
             ..on<TrackMutedEvent>((event) {
               _updateParticipantTracks();
+              // Optional: Sync button state if muted remotely or by system
+              if (event.participant == _localParticipant) {
+                _syncLocalState();
+              }
             })
             ..on<TrackUnmutedEvent>((event) {
               _updateParticipantTracks();
+              // Optional: Sync button state
+              if (event.participant == _localParticipant) {
+                _syncLocalState();
+              }
             })
             ..on<ParticipantConnectedEvent>((event) {
               _updateParticipantTracks();
@@ -304,14 +317,24 @@ class CallController extends StateNotifier<CallState> {
     });
   }
 
+  // Helper to sync state if events happen outside our button clicks
+  void _syncLocalState() {
+    if (_localParticipant == null) return;
+    // We only sync if we are sure the tracks are established
+    state = state.copyWith(
+      isMicMuted: !_localParticipant!.isMicrophoneEnabled(),
+      isCameraOff: !_localParticipant!.isCameraEnabled(),
+    );
+  }
+
   void _updateParticipantTracks() {
     if (_room == null || !mounted) return;
 
     try {
       final newTracks = <ParticipantTrack>[
         ..._room!.remoteParticipants.values.map((p) {
-          // Same logic as client to be safe
           VideoTrack? targetTrack;
+          // Prioritize camera, fallback to screen share or first available
           final cameraPub = p.videoTrackPublications.firstWhere(
             (pub) => pub.source == TrackSource.camera,
             orElse:
@@ -320,9 +343,12 @@ class CallController extends StateNotifier<CallState> {
                         ? p.videoTrackPublications.first
                         : throw 'No tracks',
           );
-          if (cameraPub is RemoteTrackPublication) {
+
+          // Safe cast check
+          if (cameraPub.track != null) {
             targetTrack = cameraPub.track as VideoTrack?;
           }
+
           return ParticipantTrack(participant: p, videoTrack: targetTrack);
         }),
         if (_localParticipant != null)
@@ -337,13 +363,16 @@ class CallController extends StateNotifier<CallState> {
       ];
 
       ref.read(participantTracksProvider.notifier).state = newTracks;
-    } catch (_) {}
+    } catch (_) {
+      // Handle cases where tracks might be empty during connection
+    }
   }
 
   Future<void> toggleMicrophone() async {
     if (_localParticipant == null) return;
     try {
-      final newMicState = state.isMicMuted;
+      final newMicState = state.isMicMuted; // Current state (true = muted)
+      // We want to set enabled to !newMicState (if muted, enable it)
       await _localParticipant!.setMicrophoneEnabled(newMicState);
       state = state.copyWith(isMicMuted: !newMicState);
     } catch (_) {
@@ -354,7 +383,8 @@ class CallController extends StateNotifier<CallState> {
   Future<void> toggleCamera() async {
     if (_localParticipant == null) return;
     try {
-      final newCameraState = state.isCameraOff;
+      final newCameraState = state.isCameraOff; // Current state (true = off)
+      // We want to set enabled to !newCameraState (if off, enable it)
       await _localParticipant!.setCameraEnabled(newCameraState);
       state = state.copyWith(isCameraOff: !newCameraState);
     } catch (_) {

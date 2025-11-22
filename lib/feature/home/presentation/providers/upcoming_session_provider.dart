@@ -26,6 +26,7 @@ class UpcomingSessionNotifier extends StateNotifier<UpcomingSessionState> {
     try {
       state = const UpcomingSessionState.loading();
       final res = await _repo.getNextUpcomingSession();
+      print("i'm getting new things");
       res.fold(
         (l) => state = UpcomingSessionState.error(l),
         (r) => state = UpcomingSessionState.loaded(r),

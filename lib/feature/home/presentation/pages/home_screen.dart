@@ -504,7 +504,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ]);
 
     // Refresh providers
-    ref.read(upcomingSessionProvider.notifier).loadNext();
+    //     ref.read(upcomingSessionProvider.notifier).loadNext();
     // ref.read(matchedTherapistProvider.notifier).load();
   }
 

@@ -211,12 +211,12 @@ class _SessionSelectionDialogState
     final rootContext = Navigator.of(context, rootNavigator: true).context;
 
     if (result['success'] == true) {
+      await ref.read(upcomingSessionProvider.notifier).loadNext();
       // Close dialog first, then show success snackbar.
       widget.onSelectionComplete();
       // Navigator.of(context).pop();
       await ref.read(authProvider.notifier).getCurrentUser();
       ref.read(routerProvider).go('/auth-gate');
-      ref.read(upcomingSessionProvider.notifier).loadNext();
 
       ScaffoldMessenger.of(rootContext).showSnackBar(
         SnackBar(
@@ -233,31 +233,7 @@ class _SessionSelectionDialogState
           backgroundColor: Colors.red,
         ),
       );
-
-      // If you prefer to close dialog on error:
-      // Navigator.of(context).pop();
-      // ScaffoldMessenger.of(rootContext).showSnackBar(
-      //   SnackBar(
-      //     content: Text(result['message'] ?? 'Failed to select session'),
-      //     backgroundColor: Colors.red,
-      //   ),
-      // );
     }
-
-    // ----------------------------------------------------------------------------
-    // Option 2: Using a global ScaffoldMessenger key (if you set it in app root)
-    // ----------------------------------------------------------------------------
-    // scaffoldMessengerKey.currentState?.showSnackBar(
-    //   SnackBar(
-    //     content: Text(
-    //       result['success'] == true
-    //           ? (result['message'] ?? 'Session selected successfully')
-    //           : (result['message'] ?? 'Failed to select session'),
-    //     ),
-    //     backgroundColor:
-    //         result['success'] == true ? Colors.green : Colors.red,
-    //   ),
-    // );
   }
 
   // Formatting helpers
@@ -362,7 +338,13 @@ class _SessionSelectionDialogState
               ),
       actions: [
         TextButton(
-          onPressed: _isSubmitting ? null : () => Navigator.of(context).pop(),
+          onPressed:
+              _isSubmitting
+                  ? null
+                  : () {
+                    Navigator.of(context).pop();
+                    ref.read(upcomingSessionProvider.notifier).loadNext();
+                  },
           child: const Text('Cancel'),
         ),
         ElevatedButton(
