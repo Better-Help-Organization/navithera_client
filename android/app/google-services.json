@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_number": "536465457827",
+    "project_id": "navi-care-b7a15",
+    "storage_bucket": "navi-care-b7a15.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:62f16904ee92d9b3adb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.abthon_navithera_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:057cd0b0172d2ba2adb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.navicare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:5bcf6ee649b4f05badb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.navithera_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:d7a7e4b7cbf89634adb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.navithera_client_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:86115b209accdb70adb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.navithera_therapist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:e6a3256486ef061fadb516",
+        "android_client_info": {
+          "package_name": "com.example.navithera_client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
