@@ -6,11 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/constants/emoji_list.dart';
-import 'package:navithera_client/core/util/format_duration.dart';
 import 'package:navithera_client/feature/therapy/presentation/widgets/animated_gradient_background.dart';
 import 'package:navithera_client/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../providers/call_provider.dart';
+import '../providers/one_to_one_call_provider.dart';
 import '../services/pip_manager.dart';
 
 class CallScreen extends ConsumerStatefulWidget {
@@ -39,7 +38,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
   final EdgeInsets _previewPadding = const EdgeInsets.fromLTRB(12, 12, 12, 120);
 
   // When true, show local feed as the large/main; when false, remote is large/main.
-  // We swap this when user taps the small preview tile.
   bool _isSwitched = false;
 
   StreamSubscription<RemoteMessage>? _notificationSubscription;
@@ -83,8 +81,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
 
       if (response.statusCode == 201) {
         // Call ended successfully
-      } else {
-        // Optional: handle non-201 responses
       }
     } catch (e) {
       // Optional: log error
@@ -151,7 +147,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
   }
 
   void _activatePiP() {
-    // Start PiP mode instead of ending the call
     ref
         .read(pipManagerProvider.notifier)
         .showPiP(
@@ -161,8 +156,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
           isVideoCall: widget.isVideoCall,
           chatId: widget.chatId,
           onExpand: () {
-            // Return to full call screen using global navigator
-            // Create a new CallScreen but mark it as resuming to skip connection
             navigatorKey.currentState?.push(
               MaterialPageRoute(
                 builder:
@@ -177,12 +170,10 @@ class _CallScreenState extends ConsumerState<CallScreen> {
             );
           },
           onClose: () {
-            // End the call when PiP is closed
             ref.read(callControllerProvider.notifier).endCall();
           },
         );
 
-    // Navigate back to previous screen
     Navigator.of(context).pop();
   }
 
@@ -222,20 +213,11 @@ class _CallScreenState extends ConsumerState<CallScreen> {
     Navigator.of(context).pop();
   }
 
-  bool _hasSingleRemote(List<ParticipantTrack> participantTracks) {
-    final remoteParticipants = participantTracks.where(
-      (t) => t.participant is! LocalParticipant,
-    );
-    final count = remoteParticipants.length;
-    return count == 1;
-  }
-
   @override
   Widget build(BuildContext context) {
     final callState = ref.watch(callControllerProvider);
     final participantTracks = ref.watch(participantTracksProvider);
 
-    // Derive local and remote
     final localTracks = participantTracks.where(
       (t) => t.participant is LocalParticipant,
     );
@@ -249,7 +231,7 @@ class _CallScreenState extends ConsumerState<CallScreen> {
     final hasSingleRemote = remoteParticipants.length == 1;
     final firstRemote = hasSingleRemote ? remoteParticipants.first : null;
 
-    // Video enabled flags from actual participant states (not just callState), safer
+    // UI flags based on actual track availability AND participant enabled state
     final isLocalVideoEnabled =
         local?.participant.isCameraEnabled() == true &&
         local?.videoTrack != null;
@@ -259,12 +241,9 @@ class _CallScreenState extends ConsumerState<CallScreen> {
         firstRemote.participant.isCameraEnabled() &&
         firstRemote.videoTrack != null;
 
-    // If audio-only call from prop, both sides video should be off unless user toggles camera.
-    // UI side: if isVideoCall false, treat as no video until camera toggled on.
     final isAudioOnlyMode = !widget.isVideoCall;
 
     if (callState.error != null) {
-      // Schedule on next frame to avoid setState/navigation during build issues.
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _endAndPopIfMounted();
       });
@@ -272,14 +251,12 @@ class _CallScreenState extends ConsumerState<CallScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        // Return false to prevent back navigation
         return false;
       },
       child: Scaffold(
         backgroundColor: Colors.grey[900],
         body: Stack(
           children: [
-            // Background video logic for single remote/local main stage
             if (!isAudioOnlyMode)
               ..._buildBackgroundVideoLayers(
                 local: local,
@@ -312,7 +289,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
               ),
             ),
 
-            // Draggable, tappable preview shown only when both videos are available
             if (!isAudioOnlyMode &&
                 isLocalVideoEnabled &&
                 isRemoteVideoEnabled &&
@@ -336,61 +312,13 @@ class _CallScreenState extends ConsumerState<CallScreen> {
     );
   }
 
-  // List<Widget> _buildBackgroundVideoLayers({
-  //   required ParticipantTrack? local,
-  //   required ParticipantTrack? firstRemote,
-  //   required bool isLocalVideoEnabled,
-  //   required bool isRemoteVideoEnabled,
-  // }) {
-  //   final showLocalFull =
-  //       (!isRemoteVideoEnabled && isLocalVideoEnabled) ||
-  //       (isRemoteVideoEnabled && _isSwitched);
-  //   print("isRemoteVideoEnable: ${isRemoteVideoEnabled}");
-  //   print("isSwitched: ${_isSwitched}");
-  //   print("firstRemote: ${firstRemote?.videoTrack}");
-  //   final layers = <Widget>[];
-
-  //   // If only remote video is available and not switched, show remote full
-  //   if (isRemoteVideoEnabled &&
-  //       !_isSwitched &&
-  //       firstRemote?.videoTrack != null) {
-  //     layers.add(
-  //       VideoTrackRenderer(
-  //         firstRemote!.videoTrack!,
-  //         fit: VideoViewFit.cover,
-  //         renderMode: VideoRenderMode.auto,
-  //       ),
-  //     );
-  //   }
-
-  //   // If only local video is available or switched, show local full
-  //   if (local?.videoTrack != null) {
-  //     if (showLocalFull) {
-  //       layers.add(
-  //         Positioned.fill(
-  //           child: VideoTrackRenderer(
-  //             local!.videoTrack!,
-  //             fit: VideoViewFit.cover,
-  //             renderMode: VideoRenderMode.auto,
-  //           ),
-  //         ),
-  //       );
-  //     }
-  //   }
-
-  //   return layers;
-  // }
-
   List<Widget> _buildBackgroundVideoLayers({
     required ParticipantTrack? local,
     required ParticipantTrack? firstRemote,
     required bool isLocalVideoEnabled,
     required bool isRemoteVideoEnabled,
   }) {
-    // Auto-switch logic: if the current main video becomes unavailable,
-    // automatically switch to the other available video
     if (_isSwitched && !isLocalVideoEnabled && isRemoteVideoEnabled) {
-      // If local was main but is now disabled, and remote is available, switch back
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
           setState(() {
@@ -399,7 +327,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
         }
       });
     } else if (!_isSwitched && !isRemoteVideoEnabled && isLocalVideoEnabled) {
-      // If remote was main but is now disabled, and local is available, switch to local
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
           setState(() {
@@ -419,7 +346,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
 
     final layers = <Widget>[];
 
-    // Show remote video as main background
     if (showRemoteFull && firstRemote?.videoTrack != null) {
       layers.add(
         VideoTrackRenderer(
@@ -430,7 +356,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       );
     }
 
-    // Show local video as main background
     if (showLocalFull && local?.videoTrack != null) {
       layers.add(
         Positioned.fill(
@@ -452,7 +377,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Back
           SizedBox(
             width: 40,
             height: 40,
@@ -463,14 +387,8 @@ class _CallScreenState extends ConsumerState<CallScreen> {
               child: const Icon(Icons.arrow_back, color: Colors.white),
             ),
           ),
-
-          // Middle emoji "room name signature"
           GestureDetector(
-            onLongPress: () {
-              final roomName = callState.roomName ?? 'Unknown Room';
-              // Debug print if needed
-              // print('Room Name: $roomName');
-            },
+            onLongPress: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:
@@ -487,8 +405,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
                       .toList(),
             ),
           ),
-
-          // Removed switch button per requirement #3
           const SizedBox(width: 40, height: 40),
         ],
       ),
@@ -551,7 +467,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       );
     }
 
-    // If no remote participants yet, show avatar/status.
     final remoteParticipants =
         participantTracks
             .where((t) => t.participant is! LocalParticipant)
@@ -573,12 +488,10 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       );
     }
 
-    // If multiple participants, show grid
     if (remoteParticipants.length >= 2) {
       return _buildGrid(remoteParticipants);
     }
 
-    // Fallback
     return const SizedBox.shrink();
   }
 
@@ -640,9 +553,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       crossAxisCount = 1;
       aspectRatio = 16 / 9;
     } else if (count <= 4) {
-      crossAxisCount = 2;
-      aspectRatio = 4 / 3;
-    } else if (count <= 6) {
       crossAxisCount = 2;
       aspectRatio = 4 / 3;
     } else {
@@ -718,7 +628,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
                 ],
               ),
             ),
-
           Positioned(
             bottom: 0,
             left: 0,
@@ -792,13 +701,10 @@ class _CallScreenState extends ConsumerState<CallScreen> {
     required ParticipantTrack local,
     required ParticipantTrack remote,
   }) {
-    // Preview shows the opposite of main: if local is main, preview shows remote, and vice versa.
     final previewTrack = mainIsLocal ? remote : local;
-
     Offset dragStartOffset = _previewOffset;
     return GestureDetector(
       onTap: () {
-        // Tap-to-swap
         setState(() {
           _isSwitched = !_isSwitched;
         });
@@ -817,13 +723,10 @@ class _CallScreenState extends ConsumerState<CallScreen> {
           dragStartOffset = _previewOffset;
         });
       },
-      onPanEnd: (_) {},
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
-          color: Colors.black, // fallback bg
-          // AbsorbPointer prevents the renderer from receiving touch events
-          // which could invoke camera focus/exposure platform calls and crash.
+          color: Colors.black,
           child: AbsorbPointer(
             absorbing: true,
             child: VideoTrackRenderer(
@@ -854,10 +757,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
             backgroundColor: callState.isMicMuted ? Colors.white : null,
             label: 'Mute',
           ),
-
-          // Camera toggle visible always (even if initial call is audio-only),
-
-          // so user can enable video later.
           if (widget.isVideoCall)
             _buildControlButton(
               icon: callState.isCameraOff ? Icons.videocam_off : Icons.videocam,
@@ -869,7 +768,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
               backgroundColor: callState.isCameraOff ? Colors.red : null,
               label: 'Camera',
             ),
-
           _buildControlButton(
             icon: callState.isSpeakerOn ? Icons.volume_up : Icons.volume_down,
             isActive: !callState.isSpeakerOn,
@@ -878,7 +776,6 @@ class _CallScreenState extends ConsumerState<CallScreen> {
             backgroundColor: callState.isSpeakerOn ? Colors.white : null,
             label: 'Speaker',
           ),
-
           _buildControlButton(
             icon: Icons.call_end,
             onPressed: () {
