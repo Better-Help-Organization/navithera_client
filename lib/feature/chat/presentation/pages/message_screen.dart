@@ -1,29 +1,30 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
-import 'package:navithera_client/core/notification/notification_service.dart';
+
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/core/util/photo_viewer.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
+import 'package:navithera_client/feature/call/exts.dart';
+import 'package:navithera_client/feature/call/pages/prejoin.dart';
+import 'package:navithera_client/feature/call/pages/room.dart';
 import 'package:navithera_client/feature/chat/data/models/chat_models.dart';
 import 'package:navithera_client/feature/chat/domain/repositories/chat_repository.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/chat_list_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/group_profile_screen.dart';
-import 'package:navithera_client/feature/chat/presentation/pages/user_profile_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart'
     show chatProvider;
 import 'package:navithera_client/core/providers/user_status_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
-import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final therapistInfoProvider = FutureProvider.family<UserModel, String>((
@@ -52,6 +53,9 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   StreamSubscription? _messageReadSubscription;
   bool _isSending = false;
   bool _initialStatusChecked = false;
+  bool _busy = false;
+  LocalAudioTrack? _audioTrack;
+  LocalVideoTrack? _videoTrack;
 
   @override
   void initState() {
@@ -150,6 +154,165 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     );
   }
 
+  _join(String url, String token, BuildContext context) async {
+    _busy = true;
+    setState(() {});
+
+    // final args = widget.args;
+
+    try {
+      //create new room
+      const cameraEncoding = VideoEncoding(
+        maxBitrate: 5 * 1000 * 1000,
+        maxFramerate: 30,
+      );
+
+      const screenEncoding = VideoEncoding(
+        maxBitrate: 3 * 1000 * 1000,
+        maxFramerate: 15,
+      );
+
+      // E2EEOptions? e2eeOptions;
+      // if (args.e2ee && args.e2eeKey != null) {
+      //   final keyProvider = await BaseKeyProvider.create();
+      //   e2eeOptions = E2EEOptions(keyProvider: keyProvider);
+      //   await keyProvider.setKey(args.e2eeKey!);
+      // }
+
+      final room = Room(
+        roomOptions: RoomOptions(
+          // adaptiveStream: args.adaptiveStream,
+          adaptiveStream: true,
+          dynacast: true,
+          defaultAudioPublishOptions: const AudioPublishOptions(
+            name: 'custom_audio_track_name',
+          ),
+          defaultCameraCaptureOptions: const CameraCaptureOptions(
+            maxFrameRate: 30,
+            params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
+          ),
+          // defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(
+          //     useiOSBroadcastExtension: true,
+          //     params: VideoParameters(
+          //       dimensions: VideoDimensionsPresets.h1080_169,
+          //     )),
+          defaultVideoPublishOptions: VideoPublishOptions(
+            simulcast: false,
+            // simulcast: args.simulcast,
+            videoCodec: "VP8",
+
+            videoEncoding: cameraEncoding,
+            screenShareEncoding: screenEncoding,
+          ),
+          // encryption: e2eeOptions,
+        ),
+      );
+      // Create a Listener before connecting
+      final listener = room.createListener();
+
+      await room.prepareConnection(url, token);
+
+      // Try to connect to the room
+      // This will throw an Exception if it fails for any reason.
+      await room.connect(
+        url,
+        token,
+        fastConnectOptions: FastConnectOptions(
+          microphone: TrackOption(track: _audioTrack),
+          camera: TrackOption(track: _videoTrack),
+        ),
+      );
+
+      if (!context.mounted) return;
+      await Navigator.push<void>(
+        context,
+        MaterialPageRoute(builder: (_) => RoomPage(room, listener)),
+      );
+    } catch (error) {
+      print('Could not connect $error');
+      if (!context.mounted) return;
+      await context.showErrorDialog(error);
+    } finally {
+      setState(() {
+        _busy = false;
+      });
+    }
+  }
+
+  // Future<void> _joinRoomDirectly(BuildContext context) async {
+  //   final args = JoinArgs(
+  //     url: "wss://demo-eukecq5l.livekit.cloud",
+  //     token:
+  //         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE4MTUzMiwibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.TGE1UsA9TbhxSJdVk-SMV5Glbx0y7yupnzXSpiefsCg",
+  //     adaptiveStream: true,
+  //     dynacast: true,
+  //     simulcast: false,
+  //     e2ee: false,
+  //     preferredCodec: 'VP8',
+  //     enableBackupVideoCodec: true,
+  //   );
+
+  //   try {
+  //     // Create room with same configuration as in PreJoinPage
+  //     const cameraEncoding = VideoEncoding(
+  //       maxBitrate: 5 * 1000 * 1000,
+  //       maxFramerate: 30,
+  //     );
+
+  //     const screenEncoding = VideoEncoding(
+  //       maxBitrate: 3 * 1000 * 1000,
+  //       maxFramerate: 15,
+  //     );
+
+  //     final room = Room(
+  //       roomOptions: RoomOptions(
+  //         adaptiveStream: true,
+  //         dynacast: true,
+  //         defaultAudioPublishOptions: const AudioPublishOptions(
+  //           name: 'custom_audio_track_name',
+  //         ),
+  //         defaultCameraCaptureOptions: const CameraCaptureOptions(
+  //           maxFrameRate: 30,
+  //           params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
+  //         ),
+  //         defaultVideoPublishOptions: VideoPublishOptions(
+  //           simulcast: false,
+  //           videoCodec: args.preferredCodec,
+  //           videoEncoding: cameraEncoding,
+  //           screenShareEncoding: screenEncoding,
+  //         ),
+  //       ),
+  //     );
+
+  //     // Create listener
+  //     final listener = room.createListener();
+
+  //     await room.prepareConnection(args.url, args.token);
+
+  //     // Connect without any tracks initially (user can enable them later)
+  //     await room.connect(
+  //       args.url,
+  //       args.token,
+  //       fastConnectOptions: FastConnectOptions(
+  //         microphone: const TrackOption(enabled: false),
+  //         camera: const TrackOption(enabled: false),
+  //       ),
+  //     );
+
+  //     if (!context.mounted) return;
+
+  //     // Navigate directly to RoomPage
+  //     await Navigator.push<void>(
+  //       context,
+  //       MaterialPageRoute(builder: (_) => RoomPage(room, listener)),
+  //     );
+  //   } catch (error) {
+  //     print('Could not connect $error');
+  //     if (!context.mounted) return;
+  //     await context.showErrorDialog(error);
+  //   }
+  // }
+
   Future<void> _startCall({bool isVideoCall = false}) async {
     final sharedPreferences = await SharedPreferences.getInstance();
 
@@ -174,17 +337,55 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
       // Check if status code is 201
       if (response.statusCode == 201) {
+        final responseData = response.data['data'];
+        final String token = responseData['token'];
+
+        if (token == null || token.isEmpty) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to start call'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          return;
+        }
+        // _joinRoomDirectly(context);
+        // return;
         // Navigate to CallScreen with the generated room name
         if (!mounted) return;
+        print("token ${token}");
+        // _join(
+        //   "wss://navicare-dmw0dh3w.livekit.cloud",
+        //   token,
+        //   context,
+        // );
+        final token2 =
+            "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDIyNzUzNiwibmJmIjowLCJzdWIiOiJ5b3lveW9veS1tZW1lLXVzZXJuYW1lIn0.GgIs5amQnN6MZu1zfGp9fGToZEBQjecIPL_TtrKrX0g";
         Navigator.push(
           context,
           MaterialPageRoute(
             builder:
-                (context) => CallScreen(
-                  roomName: roomName,
-                  participantName: widget.chat.name ?? "Unknown",
-                  isVideoCall: isVideoCall,
-                  chatId: widget.chat.id,
+                (context) =>
+                // CallScreen(
+                //   roomName: roomName,
+                //   participantName: widget.chat.name ?? "Unknown",
+                //   isVideoCall: isVideoCall,
+                //   chatId: widget.chat.id,
+                // ),
+                PreJoinPage(
+                  args: JoinArgs(
+                    url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+                    token: token2, // Your known token
+                    // token:
+                    //     "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE5NDMyMywibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.jMqEzPA1cRVRcdrIeSqns9UaBmQ67Ce9GXgIQflnEh8",
+                    adaptiveStream: true,
+                    dynacast: true,
+                    simulcast: false,
+                    e2ee: false,
+                    preferredCodec: 'VP8',
+                    enableBackupVideoCodec: true,
+                  ),
                 ),
           ),
         );
@@ -619,10 +820,12 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         ),
         actions: [
           if (widget.chat.isGroup != null && widget.chat.isGroup == false)
-            IconButton(
-              icon: const Icon(Icons.phone),
-              onPressed: () => _startCall(isVideoCall: false),
-            ),
+            if (!(_busy))
+              IconButton(
+                icon: const Icon(Icons.phone),
+                onPressed: () => _startCall(isVideoCall: false),
+                //  onPressed: _busy ? null : () => _join(context),
+              ),
           if (widget.chat.isGroup != null && widget.chat.isGroup == false)
             IconButton(
               icon: const Icon(Icons.videocam_outlined),

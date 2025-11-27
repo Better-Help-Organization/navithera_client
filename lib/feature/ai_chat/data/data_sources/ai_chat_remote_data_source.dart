@@ -73,7 +73,6 @@ class AiChatService {
       // Enhance prompt with therapy assistant context
       final finalPrompt =
           '''You are Navi, a helpful AI therapy assistant. The user is asking: "$prompt"
-
 Please provide supportive, empathetic guidance while being professional. Keep your responses concise and to the point - aim for 2-3 sentences maximum. If this requires specific medical advice, recommend consulting with a healthcare professional.''';
 
       final request = AiChatRequest(prompt: finalPrompt);

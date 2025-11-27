@@ -17,9 +17,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import "package:flutter_gen/gen_l10n/app_localization.dart";
 import "package:navithera_client/core/localization/fallback_localization.dart";
-// import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
-// Make sure this is exported so other files can import it
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @pragma('vm:entry-point')
@@ -35,12 +33,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   } catch (e, st) {
     log('Background handler error: $e\n$st');
   }
-
-  // Access the NotificationService instance
-
-  // Handle your background logic here
-  // Note: You can't show dialogs or navigate from here
-  // You can only do background processing like storing data locally
 }
 
 void main() async {
@@ -80,10 +72,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
     fcmService.initFCMWeb();
 
     _listenCallKitActions();
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   _initializeSocket();
-    // });
   }
 
   Map<String, dynamic> _asMap(dynamic v) {
@@ -160,6 +148,8 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           'callerName': idMap['callerName'],
         if (!extra.containsKey('isVideoCall') && idMap['isVideoCall'] != null)
           'isVideoCall': idMap['isVideoCall'],
+        if (!extra.containsKey('token') && idMap['token'] != null)
+          'token': idMap['token'],
       });
 
       // --- Extract variables ---
@@ -173,6 +163,8 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
               body['isVideoCall'] ??
               false) ==
           true;
+      final String? token =
+          (extra['token'] ?? idMap['token'] ?? body['token'])?.toString();
 
       String? callerName =
           (extra['callerName'] ??
@@ -193,7 +185,7 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         case 'ACTION_CALL_ACCEPT':
         case 'actionCallAccept':
           print("context not null praying1");
-          if (roomName != null && chatId != null && isVideoCall != null) {
+          if (roomName != null && chatId != null && isVideoCall != null && token != null) {
             if (context != null) {
               // App is in foreground/background - navigate directly
               print("Navigating directly to call screen");
@@ -204,18 +196,13 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
                     participantName: callerName,
                     chatId: chatId,
                     isVideocall: isVideoCall,
+                    token: token,
                   );
             } else {
               // App was terminated - set pending route
               print("App was terminated, setting pending call route");
               ref.read(pendingRouteProvider.notifier).state = PendingRoute(
                 path: '/call-screen',
-                // callData: {
-                //   'roomName': roomName,
-                //   'participantName': callerName,
-                //   'chatId': chatId,
-                //   'isVideoCall': isVideoCall,
-                // },
               );
             }
           } else {

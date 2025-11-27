@@ -18,6 +18,7 @@ import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
+import 'package:navithera_client/feature/call/pages/prejoin.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/chat_list_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
@@ -273,6 +274,7 @@ class FCMService {
             call.callerName,
             call.chatId,
             call.isVideoCall,
+            call.token,
           );
         }
         return;
@@ -1040,7 +1042,9 @@ class FCMService {
     String participant,
     String chatId,
     bool isVideocall,
+    String token,
   ) async {
+    print("toekn toekn toekn: $token");
     // Use the global navigator key to get the current context
     final context = navigatorKey.currentContext;
     if (context == null) {
@@ -1168,6 +1172,7 @@ class FCMService {
                               dialogContext,
                               chatId,
                               isVideocall,
+                              token,
                             );
                           },
                         ),
@@ -1258,18 +1263,45 @@ class FCMService {
     BuildContext context,
     String chatId,
     bool isVideoCall,
+    String token, // Add token parameter
   ) {
-    // Since you're using GoRouter, you can use regular Navigator.push
-    // or create a route in your GoRouter for the call screen
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) => CallScreen(
+    //           roomName: roomName,
+    //           participantName: participantName,
+    //           isVideoCall: isVideoCall,
+    //           chatId: chatId,
+    //           // token: token, // Pass to CallScreen
+    //         ),
+    //   ),
+    // );
+    final token2 =
+        "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDIyNzUzNiwibmJmIjowLCJzdWIiOiJ5b3lveW9veS1tZW1lLXVzZXJuYW1lIn0.GgIs5amQnN6MZu1zfGp9fGToZEBQjecIPL_TtrKrX0g";
     Navigator.push(
       context,
       MaterialPageRoute(
         builder:
-            (context) => CallScreen(
-              roomName: roomName,
-              participantName: participantName,
-              isVideoCall: isVideoCall,
-              chatId: chatId,
+            (context) =>
+            // CallScreen(
+            //   roomName: roomName,
+            //   participantName: widget.chat.name ?? "Unknown",
+            //   isVideoCall: isVideoCall,
+            //   chatId: widget.chat.id,
+            // ),
+            PreJoinPage(
+              args: JoinArgs(
+                url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+                token: token2, // Your known token
+                adaptiveStream: true,
+                dynacast: true,
+                simulcast: false,
+                e2ee: false,
+                preferredCodec: 'VP8',
+                enableBackupVideoCodec: true,
+              ),
             ),
       ),
     );
@@ -1295,6 +1327,7 @@ class FCMService {
         'room': call.room,
         'callerName': call.callerName,
         'isVideoCall': call.isVideoCall,
+        'token': call.token,
       },
       headers: <String, dynamic>{},
       android: AndroidParams(
@@ -1323,11 +1356,10 @@ class FCMService {
 
   bool _isIncomingCallMessage(RemoteMessage message) {
     // if (message.notification?.title == 'Incoming Call') return true;
-    if (message.data['code'] == '5' || message.data['code'] == 5
-    //  ||
-    // message.data['code'] == '30' ||
-    // message.data['code'] == 30
-    )
+    if (message.data['code'] == '5' ||
+        message.data['code'] == 5 ||
+        message.data['code'] == '30' ||
+        message.data['code'] == 30)
       return true;
     final code = message.data['code'];
     return code == 'CALL_INCOMING' || code == 1 || code == '1';
@@ -1336,6 +1368,7 @@ class FCMService {
   _IncomingCall? _parseIncomingCall(RemoteMessage message) {
     try {
       final idJsonString = message.data['id'];
+
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
         idMap = json.decode(idJsonString) as Map<String, dynamic>;
@@ -1344,9 +1377,9 @@ class FCMService {
       } else {
         idMap = {};
       }
-
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
+      final token = idMap['token'] as String?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
       print("isVideoCall4: ${isVideoCall}");
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
@@ -1364,6 +1397,7 @@ class FCMService {
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        token: token!,
       );
     } catch (e) {
       log('parse incoming call error: $e');
@@ -1376,6 +1410,7 @@ class FCMService {
     required String participantName,
     required String chatId,
     required bool isVideocall,
+    required String token,
   }) {
     print("context not null praying");
     final context = navigatorKey.currentContext;
@@ -1398,11 +1433,24 @@ class FCMService {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder:
-            (context) => CallScreen(
-              roomName: roomName,
-              participantName: participantName,
-              isVideoCall: isVideocall,
-              chatId: chatId,
+            (context) =>
+            // CallScreen(
+            //   roomName: roomName,
+            //   participantName: participantName,
+            //   isVideoCall: isVideocall,
+            //   chatId: chatId,
+            // ),
+            PreJoinPage(
+              args: JoinArgs(
+                url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+                token: token, // Your known token
+                adaptiveStream: true,
+                dynacast: true,
+                simulcast: false,
+                e2ee: false,
+                preferredCodec: 'VP8',
+                enableBackupVideoCodec: true,
+              ),
             ),
       ),
     );
@@ -1414,12 +1462,14 @@ class _IncomingCall {
   final String room;
   final String callerName;
   final bool isVideoCall;
+  final String token; // Add this
 
   _IncomingCall({
     required this.chatId,
     required this.room,
     required this.callerName,
     required this.isVideoCall,
+    required this.token, // Add this
   });
 }
 
@@ -1472,9 +1522,11 @@ class FCMBackgroundBridge {
 
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
-      final callerData = idMap['callerData'] as Map<String, dynamic>?;
+      final token = idMap['token'] as String?;
+      print("token token ${token}");
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-      print("isVideoCall5: ${isVideoCall}");
+
+      final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
       final lastName = callerData?['lastName'] as String? ?? '';
       final fullName =
@@ -1482,16 +1534,17 @@ class FCMBackgroundBridge {
               ? 'Caller'
               : '$firstName $lastName';
 
-      if (chatId == null || room == null) return null;
+      if (chatId == null || room == null || token == null) return null;
 
       return _IncomingCall(
         chatId: chatId.toString(),
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        token: token,
       );
     } catch (e) {
-      log('parse incoming call error (bg): $e');
+      log('parse incoming call error: $e');
       return null;
     }
   }
