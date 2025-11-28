@@ -11,6 +11,7 @@ import 'package:flutter_callkit_incoming/entities/ios_params.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/new_message_notificaiton.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
@@ -18,7 +19,9 @@ import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
+import 'package:navithera_client/feature/call/exts.dart';
 import 'package:navithera_client/feature/call/pages/prejoin.dart';
+import 'package:navithera_client/feature/call/pages/room.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/chat_list_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
@@ -59,6 +62,83 @@ class FCMService {
   AudioPlayer? _ringtonePlayer;
   String? _activeCallChatId;
   bool get _isCallDialogOpen => _activeCallChatId != null;
+
+  _join(
+    String url,
+    String token,
+    BuildContext context, {
+    required bool isVideoCall,
+  }) async {
+    // _busy = true;
+    // setState(() {});
+
+    // final args = widget.args;
+
+    try {
+      //create new room
+      const cameraEncoding = VideoEncoding(
+        maxBitrate: 5 * 1000 * 1000,
+        maxFramerate: 30,
+      );
+
+      const screenEncoding = VideoEncoding(
+        maxBitrate: 3 * 1000 * 1000,
+        maxFramerate: 15,
+      );
+
+      final room = Room(
+        roomOptions: RoomOptions(
+          // adaptiveStream: args.adaptiveStream,
+          adaptiveStream: true,
+          dynacast: true,
+          defaultAudioPublishOptions: const AudioPublishOptions(
+            name: 'custom_audio_track_name',
+          ),
+          defaultCameraCaptureOptions: const CameraCaptureOptions(
+            maxFrameRate: 30,
+            params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
+          ),
+          defaultVideoPublishOptions: VideoPublishOptions(
+            simulcast: false,
+            // simulcast: args.simulcast,
+            videoCodec: "VP8",
+
+            videoEncoding: cameraEncoding,
+            screenShareEncoding: screenEncoding,
+          ),
+          // encryption: e2eeOptions,
+        ),
+      );
+      // Create a Listener before connecting
+      final listener = room.createListener();
+
+      await room.prepareConnection(url, token);
+
+      // Try to connect to the room
+      // This will throw an Exception if it fails for any reason.
+      await room.connect(
+        url,
+        token,
+        fastConnectOptions: FastConnectOptions(
+          microphone: TrackOption(enabled: true),
+          camera: TrackOption(enabled: isVideoCall),
+        ),
+      );
+
+      if (!context.mounted) return;
+      await Navigator.push<void>(
+        context,
+        MaterialPageRoute(
+          builder:
+              (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
+        ),
+      );
+    } catch (error) {
+      print('Could not connect $error');
+      if (!context.mounted) return;
+      await context.showErrorDialog(error);
+    } finally {}
+  }
 
   Future<String?> getToken() async {
     try {
@@ -1280,31 +1360,38 @@ class FCMService {
     // );
     final token2 =
         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
-    Navigator.push(
+
+    _join(
+      "wss://demo-eukecq5l.livekit.cloud",
+      token,
       context,
-      MaterialPageRoute(
-        builder:
-            (context) =>
-            // CallScreen(
-            //   roomName: roomName,
-            //   participantName: widget.chat.name ?? "Unknown",
-            //   isVideoCall: isVideoCall,
-            //   chatId: widget.chat.id,
-            // ),
-            PreJoinPage(
-              args: JoinArgs(
-                url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
-                token: token2, // Your known token
-                adaptiveStream: true,
-                dynacast: true,
-                simulcast: false,
-                e2ee: false,
-                preferredCodec: 'VP8',
-                enableBackupVideoCodec: true,
-              ),
-            ),
-      ),
+      isVideoCall: isVideoCall,
     );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) =>
+    //         // CallScreen(
+    //         //   roomName: roomName,
+    //         //   participantName: widget.chat.name ?? "Unknown",
+    //         //   isVideoCall: isVideoCall,
+    //         //   chatId: widget.chat.id,
+    //         // ),
+    //         PreJoinPage(
+    //           args: JoinArgs(
+    //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+    //             token: token, // Your known token
+    //             adaptiveStream: true,
+    //             dynacast: true,
+    //             simulcast: false,
+    //             e2ee: false,
+    //             preferredCodec: 'VP8',
+    //             enableBackupVideoCodec: true,
+    //           ),
+    //         ),
+    //   ),
+    // );
   }
 
   Future<void> _showCallKitIncoming(_IncomingCall call) async {
@@ -1430,30 +1517,37 @@ class FCMService {
       return;
     }
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder:
-            (context) =>
-            // CallScreen(
-            //   roomName: roomName,
-            //   participantName: participantName,
-            //   isVideoCall: isVideocall,
-            //   chatId: chatId,
-            // ),
-            PreJoinPage(
-              args: JoinArgs(
-                url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
-                token: token, // Your known token
-                adaptiveStream: true,
-                dynacast: true,
-                simulcast: false,
-                e2ee: false,
-                preferredCodec: 'VP8',
-                enableBackupVideoCodec: true,
-              ),
-            ),
-      ),
+    _join(
+      "wss://demo-eukecq5l.livekit.cloud",
+      token,
+      context,
+      isVideoCall: isVideocall,
     );
+
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) =>
+    //         // CallScreen(
+    //         //   roomName: roomName,
+    //         //   participantName: participantName,
+    //         //   isVideoCall: isVideocall,
+    //         //   chatId: chatId,
+    //         // ),
+    //         PreJoinPage(
+    //           args: JoinArgs(
+    //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+    //             token: token, // Your known token
+    //             adaptiveStream: true,
+    //             dynacast: true,
+    //             simulcast: false,
+    //             e2ee: false,
+    //             preferredCodec: 'VP8',
+    //             enableBackupVideoCodec: true,
+    //           ),
+    //         ),
+    //   ),
+    // );
   }
 }
 

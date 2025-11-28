@@ -152,7 +152,12 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     );
   }
 
-  _join(String url, String token, BuildContext context, {required bool isVideoCall}) async {
+  _join(
+    String url,
+    String token,
+    BuildContext context, {
+    required bool isVideoCall,
+  }) async {
     _busy = true;
     setState(() {});
 
@@ -212,7 +217,10 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       if (!context.mounted) return;
       await Navigator.push<void>(
         context,
-        MaterialPageRoute(builder: (_) => RoomPage(room, listener, showVideoControl: isVideoCall)),
+        MaterialPageRoute(
+          builder:
+              (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
+        ),
       );
     } catch (error) {
       print('Could not connect $error');
@@ -350,7 +358,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
             "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
         _join(
           "wss://demo-eukecq5l.livekit.cloud",
-          token2,
+          token,
           context,
           isVideoCall: isVideoCall,
         );
@@ -812,12 +820,12 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         ),
         actions: [
           if (widget.chat.isGroup != null && widget.chat.isGroup == false)
-            if (!(_busy))
-              IconButton(
-                icon: const Icon(Icons.phone),
-                onPressed: () => _startCall(isVideoCall: false),
-                //  onPressed: _busy ? null : () => _join(context),
-              ),
+            // if (!(_busy))
+            IconButton(
+              icon: const Icon(Icons.phone),
+              onPressed: () => _startCall(isVideoCall: false),
+              //  onPressed: _busy ? null : () => _join(context),
+            ),
           if (widget.chat.isGroup != null && widget.chat.isGroup == false)
             IconButton(
               icon: const Icon(Icons.videocam_outlined),
