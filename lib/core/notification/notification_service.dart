@@ -125,9 +125,13 @@ class FCMService {
         ),
       );
 
-      if (!context.mounted) return;
-      await Navigator.push<void>(
-        context,
+      print("printed after connected ${context.mounted}");
+
+      // Use navigatorKey instead of the passed context
+      if (navigatorKey.currentContext == null) return;
+
+      // Navigate using GoRouter or Navigator with navigatorKey
+      Navigator.of(navigatorKey.currentContext!, rootNavigator: true).push(
         MaterialPageRoute(
           builder:
               (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
