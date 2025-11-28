@@ -54,6 +54,10 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   bool _isSending = false;
   bool _initialStatusChecked = false;
   bool _busy = false;
+  
+  // Selection mode state
+  bool _isSelectionMode = false;
+  final Set<String> _selectedMessageIds = {};
 
   @override
   void initState() {
@@ -68,6 +72,65 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       _fetchInitialTherapistStatus();
     });
   }
+
+  void _toggleSelectionMode(String messageId) {
+    setState(() {
+      if (_isSelectionMode) {
+        if (_selectedMessageIds.contains(messageId)) {
+          _selectedMessageIds.remove(messageId);
+          if (_selectedMessageIds.isEmpty) {
+            _isSelectionMode = false;
+          }
+        } else {
+          _selectedMessageIds.add(messageId);
+        }
+      } else {
+        _isSelectionMode = true;
+        _selectedMessageIds.add(messageId);
+      }
+    });
+  }
+
+  void _exitSelectionMode() {
+    setState(() {
+      _isSelectionMode = false;
+      _selectedMessageIds.clear();
+    });
+  }
+
+  Future<void> _deleteSelectedMessages() async {
+    final idsToDelete = _selectedMessageIds.toList();
+    
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Messages'),
+        content: Text('Are you sure you want to delete ${idsToDelete.length} messages?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      final notifier = ref.read(messageProvider(widget.chat.id).notifier);
+      // Assuming the provider doesn't have a bulk delete, we loop. 
+      // Ideally, update the backend to support bulk delete.
+      for (final id in idsToDelete) {
+        notifier.deleteMessage(id);
+      }
+      _exitSelectionMode();
+    }
+  }
+
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -478,10 +541,9 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   Widget _buildMessageBubble(ChatMessageDetail message) {
     final user = ref.read(currentUserProvider);
     final isMe = message.client != null && user?.id == message.client!.id;
-    print("messageisMe: ${message.client}");
-    print("messageisMereal: ${message}");
+    final isSelected = _selectedMessageIds.contains(message.id);
 
-    return Row(
+    Widget bubbleContent = Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
@@ -519,39 +581,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Three dots menu (only for user's own messages)
-                if (isMe)
-                  PopupMenuButton<String>(
-                    icon: Icon(
-                      Icons.more_vert,
-                      size: 16,
-                      color: Colors.grey[400],
-                    ),
-                    onSelected: (value) {
-                      if (value == 'delete') {
-                        _showDeleteDialog(message);
-                      }
-                    },
-                    itemBuilder:
-                        (BuildContext context) => [
-                          const PopupMenuItem<String>(
-                            value: 'delete',
-                            child: Row(
-                              children: [
-                                Icon(Icons.delete, color: Colors.red, size: 16),
-                                SizedBox(width: 8),
-                                Text(
-                                  'Delete',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                    padding: EdgeInsets.zero,
-                    offset: const Offset(-10, 20),
-                  ),
-
                 // Message bubble
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 4),
@@ -560,7 +589,12 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                   ),
                   decoration: BoxDecoration(
                     color: isMe ? AppColors.primary : Colors.grey[200],
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20),
+                      topRight: const Radius.circular(20),
+                      bottomLeft: isMe ? const Radius.circular(20) : Radius.zero,
+                      bottomRight: isMe ? Radius.zero : const Radius.circular(20),
+                    ),
                   ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -626,35 +660,54 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         ),
       ],
     );
-  }
 
-  void _showDeleteDialog(ChatMessageDetail message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Delete Message'),
-          content: const Text('Are you sure you want to delete this message?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                ref
-                    .read(messageProvider(widget.chat.id).notifier)
-                    .deleteMessage(message.id);
-              },
-              style: TextButton.styleFrom(foregroundColor: Colors.red),
-              child: const Text('Delete'),
-            ),
-          ],
-        );
+    return GestureDetector(
+      onLongPress: () {
+        // Only allow selecting own messages? Telegram allows selecting any message to forward/delete (delete for everyone depends).
+        // The prompt implies "we can go and select other chats as well and delete all at once".
+        // Typically users can only delete their own messages for everyone, or delete any message for themselves.
+        // Assuming standard behavior: allow selecting any message. 
+        // The implementation of delete will handle permissions (or the backend will).
+        _toggleSelectionMode(message.id);
       },
+      onTap: () {
+        if (_isSelectionMode) {
+          _toggleSelectionMode(message.id);
+        }
+      },
+      child: Container(
+        color: _isSelectionMode && isSelected 
+            ? AppColors.primary.withOpacity(0.1) 
+            : Colors.transparent,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        child: Row(
+          children: [
+            if (_isSelectionMode)
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: Container(
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isSelected ? AppColors.primary : Colors.transparent,
+                    border: Border.all(
+                      color: isSelected ? AppColors.primary : Colors.grey[400]!,
+                      width: 2,
+                    ),
+                  ),
+                  child: isSelected
+                      ? const Icon(Icons.check, size: 16, color: Colors.white)
+                      : null,
+                ),
+              ),
+            Expanded(child: bubbleContent),
+          ],
+        ),
+      ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -688,7 +741,24 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      appBar: AppBar(
+      appBar: _isSelectionMode 
+        ? AppBar(
+            surfaceTintColor: Colors.transparent,
+            backgroundColor: Colors.white,
+            elevation: 1,
+            leading: IconButton(
+              icon: const Icon(Icons.close, color: Colors.black),
+              onPressed: _exitSelectionMode,
+            ),
+            title: Text('${_selectedMessageIds.length}', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.black),
+                onPressed: _deleteSelectedMessages,
+              ),
+            ],
+          )
+        : AppBar(
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -862,45 +932,50 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
           ),
 
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Type a message',
-                      hintStyle: TextStyle(color: Colors.grey[500]),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
-                      ),
-                    ),
-                    minLines: 1,
-                    maxLines: 5,
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 30),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 5,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: TextField(
+                controller: _messageController,
+                decoration: InputDecoration(
+                  hintText: 'Type a message...',
+                  hintStyle: TextStyle(color: Colors.grey[400]),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
+                  suffixIcon: ValueListenableBuilder<bool>(
+                    valueListenable: _isSendingVN,
+                    builder: (context, isSending, _) {
+                      return IconButton(
+                        icon: Icon(
+                          Icons.send_rounded, 
+                          color: isSending ? Colors.grey : AppColors.primary,
+                        ),
+                        onPressed: isSending ? null : _sendMessage,
+                      );
+                    },
                   ),
                 ),
-                const SizedBox(width: 8),
-                ValueListenableBuilder<bool>(
-                  valueListenable: _isSendingVN,
-                  builder: (context, isSending, _) {
-                    return CircleAvatar(
-                      backgroundColor:
-                          isSending ? Colors.grey : AppColors.primary,
-                      child: IconButton(
-                        icon: const Icon(Icons.send, color: Colors.white),
-                        onPressed: isSending ? null : _sendMessage,
-                      ),
-                    );
-                  },
-                ),
-              ],
+                minLines: 1,
+                maxLines: 5,
+              ),
             ),
           ),
         ],

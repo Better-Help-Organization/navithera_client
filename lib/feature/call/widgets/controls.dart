@@ -338,14 +338,12 @@ class _ControlsWidgetState extends State<ControlsWidget> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isDestructive 
-                  ? Colors.red 
-                  : (isActive ? Theme.of(context).colorScheme.primary : Colors.white),
+                  ? Colors.red.withOpacity(0.8) 
+                  : Colors.white.withOpacity(0.2),
             ),
             child: Icon(
               icon,
-              color: isDestructive || isActive 
-                  ? Theme.of(context).colorScheme.onPrimary 
-                  : Colors.black54,
+              color: Colors.white,
               size: 28,
             ),
           ),
