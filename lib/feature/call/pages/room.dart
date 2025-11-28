@@ -375,24 +375,122 @@ class _RoomPageState extends ConsumerState<RoomPage> {
     );
   }
 
+  // ...
+  String? _focusedParticipantIdentity;
+  Offset? _smallVideoPos;
+
+  // ...
+
   Widget _buildContent() {
     final participants = participantTracks;
     if (participants.isEmpty) {
       return const Center(child: CircularProgressIndicator(color: Colors.white));
     }
     
-    final remoteParticipants = participants.where((p) => p.participant is RemoteParticipant).toList();
-    
-    if (remoteParticipants.isEmpty) {
-       // Only local
+    // If only one participant (e.g. just me), show single view
+    if (participants.length == 1) {
        return _buildSingleParticipant(participants.first);
-    } else if (remoteParticipants.length == 1) {
-       // 1-on-1 call
-       return _buildSingleParticipant(remoteParticipants.first);
-    } else {
-       // Group call
-       return _buildGrid(participants);
+    } 
+
+    // Two person layout (Picture-in-Picture style within the app)
+    if (participants.length == 2) {
+      return _buildTwoPersonLayout(participants);
     }
+    
+    // Otherwise show grid (handles 3 or more)
+    return _buildGrid(participants);
+  }
+
+  Widget _buildTwoPersonLayout(List<ParticipantTrack> participants) {
+    // Default focus to the first remote participant if not set
+    if (_focusedParticipantIdentity == null) {
+      final remote = participants.firstWhereOrNull((p) => p.participant is RemoteParticipant);
+      _focusedParticipantIdentity = remote?.participant.identity ?? participants.first.participant.identity;
+    }
+
+    final focused = participants.firstWhere(
+      (p) => p.participant.identity == _focusedParticipantIdentity, 
+      orElse: () => participants.first,
+    );
+    
+    final other = participants.firstWhere(
+      (p) => p.participant.identity != _focusedParticipantIdentity,
+      orElse: () => participants.last,
+    );
+
+    // If for some reason they are the same (shouldn't happen with length 2 logic above unless duplicates), 
+    // fallback to grid.
+    if (focused == other) return _buildGrid(participants);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Initialize position to bottom-right if null
+        // We use a default margin of 16 from right and 120 from bottom (above controls)
+        if (_smallVideoPos == null) {
+          const double width = 100;
+          const double height = 150;
+          _smallVideoPos = Offset(
+            constraints.maxWidth - width - 16,
+            constraints.maxHeight - height - 120,
+          );
+        }
+
+        return Stack(
+          children: [
+            // Full screen focused participant
+            Positioned.fill(
+              child: ParticipantWidget.widgetFor(focused, showStatsLayer: true),
+            ),
+            
+            // Draggable small floating participant
+            Positioned(
+              left: _smallVideoPos!.dx,
+              top: _smallVideoPos!.dy,
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  setState(() {
+                    _smallVideoPos = Offset(
+                      (_smallVideoPos!.dx + details.delta.dx).clamp(
+                        0.0, 
+                        constraints.maxWidth - 100
+                      ),
+                      (_smallVideoPos!.dy + details.delta.dy).clamp(
+                        0.0, 
+                        constraints.maxHeight - 150
+                      ),
+                    );
+                  });
+                },
+                onTap: () {
+                  setState(() {
+                    _focusedParticipantIdentity = other.participant.identity;
+                  });
+                },
+                child: Container(
+                  width: 100,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: ParticipantWidget.widgetFor(other, showStatsLayer: false),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      }
+    );
   }
 
   Widget _buildSingleParticipant(ParticipantTrack track) {
@@ -482,40 +580,53 @@ class _RoomPageState extends ConsumerState<RoomPage> {
   Widget _buildGrid(List<ParticipantTrack> tracks) {
     final count = tracks.length;
     int crossAxisCount;
-    double aspectRatio;
+    // double aspectRatio;
 
-    if (count <= 2) {
-      crossAxisCount = 1;
-      aspectRatio = 0.8; 
-    } else if (count <= 4) {
+    if (count <= 4) {
       crossAxisCount = 2;
-      aspectRatio = 0.75;
     } else {
       crossAxisCount = 3;
-      aspectRatio = 1.0;
     }
 
-    // Add padding to avoid overlap with top bar and bottom controls
-    return Padding(
-      padding: EdgeInsets.zero,
-      child: GridView.builder(
-        itemCount: count,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          childAspectRatio: aspectRatio,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              color: Colors.black26,
-              child: ParticipantWidget.widgetFor(tracks[index]),
+    // Calculate aspect ratio dynamically to fit screen without scrolling
+    // This is a rough approximation.
+    // LayoutBuilder would be better but for now:
+    // Assuming screen height available ~600-800px minus bars.
+    
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final availableHeight = constraints.maxHeight;
+        final availableWidth = constraints.maxWidth;
+        
+        final rows = (count / crossAxisCount).ceil();
+        final heightPerItem = (availableHeight / rows) - 10; // minus spacing
+        final widthPerItem = (availableWidth / crossAxisCount) - 10;
+        
+        final ratio = widthPerItem / heightPerItem;
+
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: count,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: ratio,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
             ),
-          );
-        },
-      ),
+            itemBuilder: (context, index) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  color: Colors.black26,
+                  child: ParticipantWidget.widgetFor(tracks[index]),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
