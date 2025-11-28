@@ -37,7 +37,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 
   // Access the NotificationService instance
-
   // Handle your background logic here
   // Note: You can't show dialogs or navigate from here
   // You can only do background processing like storing data locally
