@@ -24,10 +24,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Initialize Firebase if not already done
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  print("Handling a background message: ${message.messageId}");
-  print("Background message data: ${message.data}");
-
   try {
     await FCMBackgroundBridge.handleBackgroundMessage(message);
   } catch (e, st) {
@@ -38,9 +34,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(
@@ -176,7 +170,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
               ?.toString();
 
       callerName ??= 'Caller';
-
       final context = navigatorKey.currentContext;
       // if (context == null) return;
 
@@ -184,11 +177,9 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         case 'Event.actionCallAccept':
         case 'ACTION_CALL_ACCEPT':
         case 'actionCallAccept':
-          print("context not null praying1");
           if (roomName != null && chatId != null && isVideoCall != null && token != null) {
             if (context != null) {
               // App is in foreground/background - navigate directly
-              print("Navigating directly to call screen");
               ref
                   .read(fcmServiceProvider)
                   .joinCallFromCallKit(
@@ -200,7 +191,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
                   );
             } else {
               // App was terminated - set pending route
-              print("App was terminated, setting pending call route");
               ref.read(pendingRouteProvider.notifier).state = PendingRoute(
                 path: '/call-screen',
               );
@@ -214,7 +204,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         case 'Event.actionCallEnded':
         case 'ACTION_CALL_DECLINE':
         case 'ACTION_CALL_ENDED':
-          print("context not null praying4");
           if (chatId != null) {
             await ref.read(fcmServiceProvider).rejectCall(chatId);
           }

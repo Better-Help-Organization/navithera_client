@@ -2,14 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
+import 'package:navithera_client/core/theme/app_colors.dart';
 
 import '../exts.dart';
 import '../utils.dart';
 import '../widgets/controls.dart';
 import '../widgets/participant.dart';
 import '../widgets/participant_info.dart';
+import '../widgets/sound_waveform.dart';
+
 
 class RoomPage extends StatefulWidget {
   final Room room;
@@ -26,15 +30,31 @@ class RoomPage extends StatefulWidget {
 }
 
 class _RoomPageState extends State<RoomPage> {
+  static const _emojiCandidates = [
+    '🎨', '📡', '🇮🇹', '💂', '🦁', '🐯', '🎱', '🎲', 
+    '🎸', '🎻', '🎹', '🎺', '🏖️', '🏝️', '🏜️', '🌋', 
+    '🚀', '🛸', '⚓', '🎡'
+  ];
+
   List<ParticipantTrack> participantTracks = [];
+  List<String> headerEmojis = [];
   EventsListener<RoomEvent> get _listener => widget.listener;
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
+  
+  Timer? _callTimer;
+  int _callDurationSeconds = 0;
+
   @override
   void initState() {
     super.initState();
-    // add callback for a `RoomEvent` as opposed to a `ParticipantEvent`
+    _startTimer();
+    
+    // Generate unique emojis based on room name
+    final seed = widget.room.name?.hashCode ?? DateTime.now().millisecondsSinceEpoch;
+    final random = math.Random(seed);
+    headerEmojis = List.generate(4, (_) => _emojiCandidates[random.nextInt(_emojiCandidates.length)]);
+
     widget.room.addListener(_onRoomDidUpdate);
-    // add callbacks for finer grained events
     _setUpListeners();
     _sortParticipants();
     WidgetsBindingCompatible.instance?.addPostFrameCallback((_) {
@@ -57,11 +77,27 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   void dispose() {
-    // always dispose listener
+    _callTimer?.cancel();
     widget.room.removeListener(_onRoomDidUpdate);
     unawaited(_disposeRoomAsync());
     onWindowShouldClose = null;
     super.dispose();
+  }
+
+  void _startTimer() {
+    _callTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          _callDurationSeconds++;
+        });
+      }
+    });
+  }
+
+  String get _formattedDuration {
+    final minutes = (_callDurationSeconds ~/ 60).toString().padLeft(2, '0');
+    final seconds = (_callDurationSeconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
   }
 
   Future<void> _disposeRoomAsync() async {
@@ -69,7 +105,6 @@ class _RoomPageState extends State<RoomPage> {
     await widget.room.dispose();
   }
 
-  /// for more information, see [event types](https://docs.livekit.io/client/events/#events)
   void _setUpListeners() => _listener
     ..on<RoomDisconnectedEvent>((event) async {
       if (event.reason != null) {
@@ -79,7 +114,6 @@ class _RoomPageState extends State<RoomPage> {
           ?.addPostFrameCallback((timeStamp) => Navigator.popUntil(context, (route) => route.isFirst));
     })
     ..on<ParticipantEvent>((event) {
-      // sort participants on many track events as noted in documentation linked above
       _sortParticipants();
     })
     ..on<RoomRecordingStatusChanged>((event) {
@@ -130,7 +164,6 @@ class _RoomPageState extends State<RoomPage> {
     final result = await context.showPublishDialog();
     if (!mounted) return;
     if (result != true) return;
-    // video will fail when running in ios simulator
     try {
       await widget.room.localParticipant?.setCameraEnabled(true);
     } catch (error) {
@@ -170,9 +203,8 @@ class _RoomPageState extends State<RoomPage> {
         }
       }
     }
-    // sort speakers for the grid
+    
     userMediaTracks.sort((a, b) {
-      // loudest speaker first
       if (a.participant.isSpeaking && b.participant.isSpeaking) {
         if (a.participant.audioLevel > b.participant.audioLevel) {
           return -1;
@@ -180,21 +212,14 @@ class _RoomPageState extends State<RoomPage> {
           return 1;
         }
       }
-
-      // last spoken at
       final aSpokeAt = a.participant.lastSpokeAt?.millisecondsSinceEpoch ?? 0;
       final bSpokeAt = b.participant.lastSpokeAt?.millisecondsSinceEpoch ?? 0;
-
       if (aSpokeAt != bSpokeAt) {
         return aSpokeAt > bSpokeAt ? -1 : 1;
       }
-
-      // video on
       if (a.participant.hasVideo != b.participant.hasVideo) {
         return a.participant.hasVideo ? -1 : 1;
       }
-
-      // joinedAt
       return a.participant.joinedAt.millisecondsSinceEpoch - b.participant.joinedAt.millisecondsSinceEpoch;
     });
 
@@ -211,45 +236,232 @@ class _RoomPageState extends State<RoomPage> {
         }
       }
     }
+    
+    // Ensure local participant is in the list if no tracks yet (audio only)
+    if (widget.room.localParticipant != null && 
+        !userMediaTracks.any((p) => p.participant is LocalParticipant)) {
+       userMediaTracks.add(ParticipantTrack(participant: widget.room.localParticipant!));
+    }
+
     setState(() {
       participantTracks = [...screenTracks, ...userMediaTracks];
     });
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: Stack(
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AppColors.primary, 
+              Color(0xFF0066FF),
+            ],
+          ),
+        ),
+        child: Stack(
           children: [
-            Column(
-              children: [
-                Expanded(
-                    child: participantTracks.isNotEmpty
-                        ? ParticipantWidget.widgetFor(participantTracks.first, showStatsLayer: true)
-                        : Container()),
-                if (widget.room.localParticipant != null)
-                  SafeArea(
-                    top: false,
-                    child: ControlsWidget(widget.room, widget.room.localParticipant!),
-                  )
-              ],
+            // Main Content Layer (Video/Grid/Avatar)
+            Positioned.fill(
+              child: _buildContent(),
             ),
+
+            // Top Bar Layer
             Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0, bottom: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: headerEmojis.map(_buildHeaderEmoji).toList(),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.person_add, color: Colors.white),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            // Bottom Controls Layer
+            if (widget.room.localParticipant != null)
+              Positioned(
+                bottom: 0,
                 left: 0,
                 right: 0,
-                top: 0,
-                child: SizedBox(
-                  height: 120,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: math.max(0, participantTracks.length - 1),
-                    itemBuilder: (BuildContext context, int index) => SizedBox(
-                      width: 180,
-                      height: 120,
-                      child: ParticipantWidget.widgetFor(participantTracks[index + 1]),
-                    ),
-                  ),
-                )),
+                child: SafeArea(
+                  top: false,
+                  child: ControlsWidget(widget.room, widget.room.localParticipant!),
+                ),
+              ),
           ],
         ),
-      );
+      ),
+    );
+  }
+
+  Widget _buildHeaderEmoji(String emoji) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: Text(emoji, style: const TextStyle(fontSize: 20)),
+    );
+  }
+
+  Widget _buildContent() {
+    final participants = participantTracks;
+    if (participants.isEmpty) {
+      return const Center(child: CircularProgressIndicator(color: Colors.white));
+    }
+    
+    final remoteParticipants = participants.where((p) => p.participant is RemoteParticipant).toList();
+    
+    if (remoteParticipants.isEmpty) {
+       // Only local
+       return _buildSingleParticipant(participants.first);
+    } else if (remoteParticipants.length == 1) {
+       // 1-on-1 call
+       return _buildSingleParticipant(remoteParticipants.first);
+    } else {
+       // Group call
+       return _buildGrid(participants);
+    }
+  }
+
+  Widget _buildSingleParticipant(ParticipantTrack track) {
+    final hasVideo = track.participant.videoTrackPublications.any((t) => !t.muted);
+    
+    // Check for audio track
+    final audioPublication = track.participant.audioTrackPublications
+        .firstWhereOrNull((t) => t.source == TrackSource.microphone);
+    final audioTrack = audioPublication?.track;
+
+    if (hasVideo) {
+       // Full screen video
+       return ParticipantWidget.widgetFor(track, showStatsLayer: true);
+    } else {
+       // Centered audio view
+       return Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                if (audioTrack is AudioTrack)
+                   SizedBox(
+                     width: 300,
+                     height: 100,
+                     child: Center(
+                       child: SoundWaveformWidget(
+                         audioTrack: audioTrack,
+                         barCount: 7,
+                         width: 10,
+                         minHeight: 40,
+                         maxHeight: 120,
+                         color: Colors.white.withOpacity(0.5),
+                       ),
+                     ),
+                   ),
+                Container(
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: const DecorationImage(
+                      image: NetworkImage('https://i.pravatar.cc/300'),
+                      fit: BoxFit.cover,
+                    ),
+                    border: Border.all(color: Colors.white.withOpacity(0.2), width: 0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      )
+                    ]
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Text(
+              track.participant.name.isNotEmpty ? track.participant.name : track.participant.identity,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 Icon(Icons.signal_cellular_alt, color: Colors.white.withOpacity(0.8), size: 16),
+                 const SizedBox(width: 8),
+                 Text(
+                   _formattedDuration, 
+                   style: TextStyle(
+                     color: Colors.white.withOpacity(0.8),
+                     fontSize: 16,
+                   ),
+                 ),
+              ],
+            )
+         ],
+       );
+    }
+  }
+
+  Widget _buildGrid(List<ParticipantTrack> tracks) {
+    final count = tracks.length;
+    int crossAxisCount;
+    double aspectRatio;
+
+    if (count <= 2) {
+      crossAxisCount = 1;
+      aspectRatio = 0.8; 
+    } else if (count <= 4) {
+      crossAxisCount = 2;
+      aspectRatio = 0.75;
+    } else {
+      crossAxisCount = 3;
+      aspectRatio = 1.0;
+    }
+
+    // Add padding to avoid overlap with top bar and bottom controls
+    return Padding(
+      padding: EdgeInsets.zero,
+      child: GridView.builder(
+        itemCount: count,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          childAspectRatio: aspectRatio,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              color: Colors.black26,
+              child: ParticipantWidget.widgetFor(tracks[index]),
+            ),
+          );
+        },
+      ),
+    );
+  }
 }

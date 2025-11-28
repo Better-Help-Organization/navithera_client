@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/feature/call/theme.dart';
 // import 'package:livekit_example/theme.dart';
-
 import 'dart:async';
 import 'no_video.dart';
 import 'participant_info.dart';
@@ -142,34 +141,35 @@ abstract class _ParticipantWidgetState<T extends ParticipantWidget>
           child:
               activeVideoTrack != null && !activeVideoTrack!.muted
                   ? VideoTrackRenderer(
-                    renderMode: VideoRenderMode.auto,
                     activeVideoTrack!,
+                    renderMode: VideoRenderMode.auto,
+                    fit: VideoViewFit.cover,
                   )
                   : const NoVideoWidget(),
         ),
         // Bottom bar
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ...extraWidgets(isScreenShare),
-              ParticipantInfoWidget(
-                title:
-                    widget.participant.name.isNotEmpty
-                        ? '${widget.participant.name} (${widget.participant.identity})'
-                        : widget.participant.identity,
-                audioAvailable:
-                    audioPublication?.muted == false &&
-                    audioPublication?.subscribed == true,
-                connectionQuality: widget.participant.connectionQuality,
-                isScreenShare: isScreenShare,
-                enabledE2EE: widget.participant.isEncrypted,
-              ),
-            ],
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: [
+        //       ...extraWidgets(isScreenShare),
+        //       ParticipantInfoWidget(
+        //         title:
+        //             widget.participant.name.isNotEmpty
+        //                 ? '${widget.participant.name} (${widget.participant.identity})'
+        //                 : widget.participant.identity,
+        //         audioAvailable:
+        //             audioPublication?.muted == false &&
+        //             audioPublication?.subscribed == true,
+        //         connectionQuality: widget.participant.connectionQuality,
+        //         isScreenShare: isScreenShare,
+        //         enabledE2EE: widget.participant.isEncrypted,
+        //       ),
+        //     ],
+        //   ),
+        // ),
         if (widget.showStatsLayer)
           Positioned(
             top: 130,
