@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -13,6 +14,7 @@ class PiPCallWidget extends ConsumerStatefulWidget {
   final String? chatId;
   final VoidCallback? onExpand;
   final VoidCallback? onClose;
+  final Room? room;
 
   const PiPCallWidget({
     super.key,
@@ -22,6 +24,7 @@ class PiPCallWidget extends ConsumerStatefulWidget {
     this.chatId,
     this.onExpand,
     this.onClose,
+    this.room,
   });
 
   @override
@@ -262,6 +265,26 @@ class _PiPCallWidgetState extends ConsumerState<PiPCallWidget>
   }
 
   Widget _buildVideoContent(CallState callState) {
+    // Handle explicit room object
+    if (widget.room != null) {
+      final room = widget.room!;
+      final remoteParticipants = room.remoteParticipants.values;
+      
+      // Try to find a remote participant with video
+      for (var p in remoteParticipants) {
+        final videoTrackPub = p.videoTrackPublications.firstWhereOrNull((t) => !t.muted);
+        if (videoTrackPub != null && videoTrackPub.track != null) {
+             return VideoTrackRenderer(
+              videoTrackPub.track!,
+              fit: VideoViewFit.cover,
+            );
+        }
+      }
+      
+      // If no remote video, maybe local video?
+      // Or just fallthrough to avatar.
+    }
+
     // Get participant tracks from the provider
     final participantTracks = ref.watch(participantTracksProvider);
 
@@ -330,11 +353,23 @@ class _PiPCallWidgetState extends ConsumerState<PiPCallWidget>
   }
 
   String _getInitials(String name) {
-    final parts = name.trim().split(' ');
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) return 'U';
+
+    final parts = trimmed.split(' ');
     if (parts.length >= 2) {
-      return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
-    } else if (parts.isNotEmpty) {
-      return parts[0][0].toUpperCase();
+      final first = parts[0];
+      final second = parts[1];
+      if (first.isNotEmpty && second.isNotEmpty) {
+        return '${first[0]}${second[0]}'.toUpperCase();
+      }
+    }
+    
+    if (parts.isNotEmpty) {
+      final first = parts[0];
+      if (first.isNotEmpty) {
+        return first[0].toUpperCase();
+      }
     }
     return 'U';
   }

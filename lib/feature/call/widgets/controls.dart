@@ -15,10 +15,12 @@ class ControlsWidget extends StatefulWidget {
   //
   final Room room;
   final LocalParticipant participant;
+  final bool showVideoControl;
 
   const ControlsWidget(
     this.room,
     this.participant, {
+    this.showVideoControl = true,
     super.key,
   });
 
@@ -265,37 +267,38 @@ class _ControlsWidgetState extends State<ControlsWidget> {
              ),
 
           // Video
-          _buildControlButton(
-            icon: participant.isCameraEnabled() ? Icons.videocam : Icons.videocam_off, // Icon indicates action to take? Or state? Telegram shows "Stop Video" if on.
-            // Telegram: "Start Video" (camera icon crossed out initially).
-            // If on: "Stop Video" (camera icon).
-            // Let's stick to state icon for now.
-            label: participant.isCameraEnabled() ? 'Stop Video' : 'Start Video',
-            onPressed: participant.isCameraEnabled() ? _disableVideo : _enableVideo,
-            isActive: participant.isCameraEnabled(), // White if active/on?
-            // Telegram style: White circle usually means "action available" or "on". 
-            // In the screenshot:
-            // Speaker: Blue/Cyan circle (Active?)
-            // Start Video: White circle (Inactive?)
-            // Mute: Cyan circle (Active?)
-            // End Call: Red circle.
-            
-            // Let's use:
-            // Active (On): Cyan/Blue background, White Icon.
-            // Inactive (Off): White background, Black/Grey Icon? Or White background, Cyan icon?
-            // Screenshot shows:
-            // Speaker: Cyan bg, White icon.
-            // Start Video: White bg, Black icon (crossed out camera).
-            // Mute: Cyan bg, White icon (mic).
-            // End Call: Red bg, White icon.
-            
-            // So:
-            // Mic ON -> Cyan bg.
-            // Mic OFF -> White bg.
-            // Speaker ON -> Cyan bg.
-            // Video ON -> Cyan bg? Or maybe White if it means "Stop Video"?
-            // Let's assume "Active" state gets the Color.
-          ),
+          if (widget.showVideoControl)
+            _buildControlButton(
+              icon: participant.isCameraEnabled() ? Icons.videocam : Icons.videocam_off, // Icon indicates action to take? Or state? Telegram shows "Stop Video" if on.
+              // Telegram: "Start Video" (camera icon crossed out initially).
+              // If on: "Stop Video" (camera icon).
+              // Let's stick to state icon for now.
+              label: participant.isCameraEnabled() ? 'Stop Video' : 'Start Video',
+              onPressed: participant.isCameraEnabled() ? _disableVideo : _enableVideo,
+              isActive: participant.isCameraEnabled(), // White if active/on?
+              // Telegram style: White circle usually means "action available" or "on". 
+              // In the screenshot:
+              // Speaker: Blue/Cyan circle (Active?)
+              // Start Video: White circle (Inactive?)
+              // Mute: Cyan circle (Active?)
+              // End Call: Red circle.
+              
+              // Let's use:
+              // Active (On): Cyan/Blue background, White Icon.
+              // Inactive (Off): White background, Black/Grey Icon? Or White background, Cyan icon?
+              // Screenshot shows:
+              // Speaker: Cyan bg, White icon.
+              // Start Video: White bg, Black icon (crossed out camera).
+              // Mute: Cyan bg, White icon (mic).
+              // End Call: Red bg, White icon.
+              
+              // So:
+              // Mic ON -> Cyan bg.
+              // Mic OFF -> White bg.
+              // Speaker ON -> Cyan bg.
+              // Video ON -> Cyan bg? Or maybe White if it means "Stop Video"?
+              // Let's assume "Active" state gets the Color.
+            ),
 
           // Mic
           _buildControlButton(

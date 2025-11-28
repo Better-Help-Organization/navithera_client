@@ -4,8 +4,10 @@ import 'dart:math' as math;
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
+import 'package:navithera_client/feature/therapy/presentation/services/pip_manager.dart';
 
 import '../exts.dart';
 import '../utils.dart';
@@ -15,21 +17,23 @@ import '../widgets/participant_info.dart';
 import '../widgets/sound_waveform.dart';
 
 
-class RoomPage extends StatefulWidget {
+class RoomPage extends ConsumerStatefulWidget {
   final Room room;
   final EventsListener<RoomEvent> listener;
+  final bool showVideoControl;
 
   const RoomPage(
     this.room,
     this.listener, {
+    this.showVideoControl = true,
     super.key,
   });
 
   @override
-  State<StatefulWidget> createState() => _RoomPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _RoomPageState();
 }
 
-class _RoomPageState extends State<RoomPage> {
+class _RoomPageState extends ConsumerState<RoomPage> {
   static const _emojiCandidates = [
     '🎨', '📡', '🇮🇹', '💂', '🦁', '🐯', '🎱', '🎲', 
     '🎸', '🎻', '🎹', '🎺', '🏖️', '🏝️', '🏜️', '🌋', 
@@ -43,6 +47,7 @@ class _RoomPageState extends State<RoomPage> {
   
   Timer? _callTimer;
   int _callDurationSeconds = 0;
+  bool _isEnteringPiP = false;
 
   @override
   void initState() {
@@ -79,7 +84,9 @@ class _RoomPageState extends State<RoomPage> {
   void dispose() {
     _callTimer?.cancel();
     widget.room.removeListener(_onRoomDidUpdate);
-    unawaited(_disposeRoomAsync());
+    if (!_isEnteringPiP) {
+      unawaited(_disposeRoomAsync());
+    }
     onWindowShouldClose = null;
     super.dispose();
   }
@@ -103,6 +110,49 @@ class _RoomPageState extends State<RoomPage> {
   Future<void> _disposeRoomAsync() async {
     await _listener.dispose();
     await widget.room.dispose();
+  }
+
+  Future<void> _activatePiP() async {
+    setState(() {
+      _isEnteringPiP = true;
+    });
+
+    final roomName = widget.room.name ?? 'Room';
+    final participantName = widget.room.localParticipant?.name ?? 'Me';
+    
+    // Determine if video call (simplified logic)
+    final isVideo = widget.room.remoteParticipants.values.any((p) => p.isCameraEnabled()) ||
+                    (widget.room.localParticipant?.isCameraEnabled() ?? false);
+
+    final navigator = Navigator.of(context);
+
+    ref.read(pipManagerProvider.notifier).showPiP(
+      context: context,
+      roomName: roomName,
+      participantName: participantName,
+      isVideoCall: isVideo,
+      chatId: null, // Assuming no chat ID available here or not needed
+      room: widget.room,
+      onExpand: () {
+        // Re-push this page
+        navigator.push(
+          MaterialPageRoute(
+            builder: (_) => RoomPage(
+              widget.room, 
+              widget.listener,
+              showVideoControl: widget.showVideoControl,
+            ),
+          ),
+        );
+      },
+      onClose: () {
+        // Actually end call if closed from PiP
+        unawaited(_disposeRoomAsync());
+      },
+    );
+
+    // Pop this screen, but don't dispose room due to _isEnteringPiP flag
+    navigator.pop();
   }
 
   void _setUpListeners() => _listener
@@ -282,7 +332,7 @@ class _RoomPageState extends State<RoomPage> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.fullscreen_exit, color: Colors.white),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: _activatePiP,
                       ),
                       Row(
                         mainAxisSize: MainAxisSize.min,
@@ -305,7 +355,11 @@ class _RoomPageState extends State<RoomPage> {
                 right: 0,
                 child: SafeArea(
                   top: false,
-                  child: ControlsWidget(widget.room, widget.room.localParticipant!),
+                  child: ControlsWidget(
+                    widget.room, 
+                    widget.room.localParticipant!,
+                    showVideoControl: widget.showVideoControl,
+                  ),
                 ),
               ),
           ],

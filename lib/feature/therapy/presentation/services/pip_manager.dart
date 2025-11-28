@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:livekit_client/livekit_client.dart';
 import '../widgets/pip_call_widget.dart';
 
 class PiPManager {
@@ -17,6 +18,7 @@ class PiPManager {
     required String? chatId,
     required VoidCallback onExpand,
     required VoidCallback onClose,
+    Room? room,
   }) {
     if (_isActive) {
       hidePiP();
@@ -33,6 +35,7 @@ class PiPManager {
                   participantName: participantName,
                   isVideoCall: isVideoCall,
                   chatId: chatId,
+                  room: room,
                   onExpand: () {
                     hidePiP();
                     // Use a slight delay to ensure PiP is fully hidden before navigation
@@ -118,6 +121,7 @@ class PiPManagerNotifier extends StateNotifier<PiPManagerState> {
     required String? chatId,
     required VoidCallback onExpand,
     required VoidCallback onClose,
+    Room? room,
   }) {
     PiPManager.showPiP(
       context: context,
@@ -127,6 +131,7 @@ class PiPManagerNotifier extends StateNotifier<PiPManagerState> {
       chatId: chatId,
       onExpand: onExpand,
       onClose: onClose,
+      room: room,
     );
 
     state = state.copyWith(

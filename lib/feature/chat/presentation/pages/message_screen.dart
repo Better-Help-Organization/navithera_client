@@ -15,7 +15,7 @@ import 'package:navithera_client/core/util/photo_viewer.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 import 'package:navithera_client/feature/call/exts.dart';
-import 'package:navithera_client/feature/call/pages/prejoin.dart';
+// import 'package:navithera_client/feature/call/pages/prejoin.dart';
 import 'package:navithera_client/feature/call/pages/room.dart';
 import 'package:navithera_client/feature/chat/data/models/chat_models.dart';
 import 'package:navithera_client/feature/chat/domain/repositories/chat_repository.dart';
@@ -54,8 +54,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   bool _isSending = false;
   bool _initialStatusChecked = false;
   bool _busy = false;
-  LocalAudioTrack? _audioTrack;
-  LocalVideoTrack? _videoTrack;
 
   @override
   void initState() {
@@ -154,7 +152,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     );
   }
 
-  _join(String url, String token, BuildContext context) async {
+  _join(String url, String token, BuildContext context, {required bool isVideoCall}) async {
     _busy = true;
     setState(() {});
 
@@ -172,13 +170,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         maxFramerate: 15,
       );
 
-      // E2EEOptions? e2eeOptions;
-      // if (args.e2ee && args.e2eeKey != null) {
-      //   final keyProvider = await BaseKeyProvider.create();
-      //   e2eeOptions = E2EEOptions(keyProvider: keyProvider);
-      //   await keyProvider.setKey(args.e2eeKey!);
-      // }
-
       final room = Room(
         roomOptions: RoomOptions(
           // adaptiveStream: args.adaptiveStream,
@@ -191,11 +182,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
             maxFrameRate: 30,
             params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
           ),
-          // defaultScreenShareCaptureOptions: const ScreenShareCaptureOptions(
-          //     useiOSBroadcastExtension: true,
-          //     params: VideoParameters(
-          //       dimensions: VideoDimensionsPresets.h1080_169,
-          //     )),
           defaultVideoPublishOptions: VideoPublishOptions(
             simulcast: false,
             // simulcast: args.simulcast,
@@ -218,15 +204,15 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         url,
         token,
         fastConnectOptions: FastConnectOptions(
-          microphone: TrackOption(track: _audioTrack),
-          camera: TrackOption(track: _videoTrack),
+          microphone: TrackOption(enabled: true),
+          camera: TrackOption(enabled: isVideoCall),
         ),
       );
 
       if (!context.mounted) return;
       await Navigator.push<void>(
         context,
-        MaterialPageRoute(builder: (_) => RoomPage(room, listener)),
+        MaterialPageRoute(builder: (_) => RoomPage(room, listener, showVideoControl: isVideoCall)),
       );
     } catch (error) {
       print('Could not connect $error');
@@ -361,34 +347,40 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         //   context,
         // );
         final token2 =
-            "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyNzE2NCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.V4bVvRvyehj9Zah4UMVYKWmHejS9Ymb2Ozsha6BNQ0w";
-        Navigator.push(
+            "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
+        _join(
+          "wss://demo-eukecq5l.livekit.cloud",
+          token2,
           context,
-          MaterialPageRoute(
-            builder:
-                (context) =>
-                // CallScreen(
-                //   roomName: roomName,
-                //   participantName: widget.chat.name ?? "Unknown",
-                //   isVideoCall: isVideoCall,
-                //   chatId: widget.chat.id,
-                // ),
-                PreJoinPage(
-                  args: JoinArgs(
-                    url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
-                    token: token2, // Your known token
-                    // token:
-                    //     "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE5NDMyMywibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.jMqEzPA1cRVRcdrIeSqns9UaBmQ67Ce9GXgIQflnEh8",
-                    adaptiveStream: true,
-                    dynacast: true,
-                    simulcast: false,
-                    e2ee: false,
-                    preferredCodec: 'VP8',
-                    enableBackupVideoCodec: true,
-                  ),
-                ),
-          ),
+          isVideoCall: isVideoCall,
         );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder:
+        //         (context) =>
+        //         // CallScreen(
+        //         //   roomName: roomName,
+        //         //   participantName: widget.chat.name ?? "Unknown",
+        //         //   isVideoCall: isVideoCall,
+        //         //   chatId: widget.chat.id,
+        //         // ),
+        //         PreJoinPage(
+        //           args: JoinArgs(
+        //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+        //             token: token2, // Your known token
+        //             // token:
+        //             //     "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE5NDMyMywibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.jMqEzPA1cRVRcdrIeSqns9UaBmQ67Ce9GXgIQflnEh8",
+        //             adaptiveStream: true,
+        //             dynacast: true,
+        //             simulcast: false,
+        //             e2ee: false,
+        //             preferredCodec: 'VP8',
+        //             enableBackupVideoCodec: true,
+        //           ),
+        //         ),
+        //   ),
+        // );
       } else {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(

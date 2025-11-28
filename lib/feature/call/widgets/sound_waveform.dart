@@ -87,11 +87,15 @@ class _SoundWaveformWidgetState extends State<SoundWaveformWidget> with TickerPr
   }
 
   void _stopVisualizer(AudioTrack track) async {
-    await _visualizer?.stop();
-    await _visualizer?.dispose();
-    _visualizer = null;
-    await _listener?.dispose();
-    _listener = null;
+    try {
+      await _listener?.dispose();
+      _listener = null;
+      await _visualizer?.stop();
+      await _visualizer?.dispose();
+      _visualizer = null;
+    } catch (_) {
+      // Ignore errors during disposal, as the channel might already be closed
+    }
   }
 
   @override
