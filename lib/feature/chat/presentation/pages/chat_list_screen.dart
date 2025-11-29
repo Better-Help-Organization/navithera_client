@@ -343,7 +343,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                       thread.group.isEmpty
                           ? '${client.firstName} ${client.lastName}'
                           : "${thread.groupName ?? "Group Chat"}",
-                  lastMessage: 'I sent you the design files 📎',
+                  lastMessage: thread.lastMessage?.content,
                   avatarUrl:
                       (client?.avatar == 7) &&
                               client?.profile != null &&
@@ -351,7 +351,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
                           ? '$base_url_for_image${client.profile}?v=${DateTime.now().millisecondsSinceEpoch}'
                           : null,
                   unreadCount: 0,
-                  timestamp: DateTime(2025, 4, 2, 14, 15),
+                  timestamp: thread.lastMessage?.createdAt ?? thread.updatedAt,
                   isOutgoing: true,
                   isRead: true,
                   isGroup: thread.group.isNotEmpty,
