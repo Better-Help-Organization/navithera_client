@@ -326,8 +326,6 @@ class MoodService {
             final moodDate = item['date'] as String?;
             final mood = item['mood'] as String?;
 
-            print("helllllllo: ${moodDate}");
-
             if (moodDate != null) {
               try {
                 final apiDate = DateTime.parse(moodDate).toLocal();
@@ -1351,106 +1349,135 @@ class TherapistCard extends StatelessWidget {
     final imageWidget = _buildAvatar(context);
     final subtitle = _buildSubtitle();
 
-    return GestureDetector(
-      onTap: onDetailsTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Text(
             AppLocalizations.of(context)!.yourTherapist,
-            style: AppTypography.heading2,
+            style: AppTypography.heading2.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
           ),
-          const SizedBox(height: 12),
-          Container(
+        ),
+        const SizedBox(height: 16),
+        GestureDetector(
+          onTap: onDetailsTap,
+          child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              //color: Colors.white,
-              color: AppColors.primary.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(width: 1.0, color: Colors.grey.withOpacity(.2)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.04),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
                 ),
               ],
             ),
-            child: Column(
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: imageWidget,
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: onRateTap,
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.amber.shade50.withOpacity(0.5),
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.amber.shade100,
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.star_rate_rounded,
-                                size: 18,
-                                color: Colors.amber.shade700,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  "${therapist.firstName} ${therapist.lastName}",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            subtitle,
-                            style: AppTypography.bodySmall.copyWith(
-                              color: Colors.grey.shade700,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                // Avatar with status indicator (optional, just simple for now)
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
                       ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: imageWidget,
                     ),
-                  ],
+                  ),
+                ),
+                const SizedBox(width: 16),
+                
+                // Text Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${therapist.firstName} ${therapist.lastName}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black87,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 8),
+                      // Action / Rating Row
+                      GestureDetector(
+                        onTap: onRateTap,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.star_rounded,
+                              size: 16,
+                              color: Colors.amber[400],
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              "Rate Experience",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.amber[700],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // Arrow Icon
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey[400],
+                    size: 16,
+                  ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -1461,11 +1488,6 @@ class TherapistCard extends StatelessWidget {
         '${therapist.gender![0].toUpperCase()}${therapist.gender!.substring(1)}',
       );
     }
-    // if ((therapist.email).isNotEmpty) {
-    //   parts.add(therapist.email);
-    // } else if ((therapist.phoneNumber ?? '').isNotEmpty) {
-    //   parts.add(therapist.phoneNumber!);
-    // }
     return parts.isEmpty ? 'Your matched therapist' : parts.join(' • ');
   }
 
@@ -1473,31 +1495,21 @@ class TherapistCard extends StatelessWidget {
     final hasNetwork =
         therapist.avatar == 7 &&
         (therapist.profile != null && therapist.profile!.isNotEmpty);
-    if (hasNetwork) {
-      return Image(
-        image: NetworkImage(
-          '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}',
-        ),
-        width: 70,
-        height: 70,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return Image(
-            image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
-            width: 70,
-            height: 70,
-            fit: BoxFit.cover,
-          );
-        },
-      );
-    } else {
-      return Image(
-        image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
-        width: 70,
-        height: 70,
-        fit: BoxFit.cover,
-      );
-    }
+        
+    final imageProvider = hasNetwork 
+      ? NetworkImage('${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}')
+      : AssetImage(getAvatarImage(therapist.avatar ?? 0)) as ImageProvider;
+
+    return Image(
+      image: imageProvider,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Image(
+          image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
+          fit: BoxFit.cover,
+        );
+      },
+    );
   }
 }
 
