@@ -378,7 +378,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
       case 6:
         return '24 sessions - Best value for dedicated users';
       case 12:
-        return '52 sessions - Ultimate commitment with maximum savings';
+        return '48 sessions - Ultimate commitment with maximum savings';
       default:
         return 'Subscription plan';
     }
@@ -496,7 +496,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
           data: {
             'subscriptionId': finalsubscriptionId,
             'title': _getTypeLabel(subscription.type),
-            'amount': subscription.price,
+            // 'amount': subscription.price,
           },
         );
 

@@ -1,6 +1,7 @@
 // lib/core/notification/notification_service.dart
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -15,20 +16,16 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/new_message_notificaiton.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
-import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
 import 'package:navithera_client/feature/call/exts.dart';
-import 'package:navithera_client/feature/call/pages/prejoin.dart';
 import 'package:navithera_client/feature/call/pages/room.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/chat_list_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
 import 'package:navithera_client/feature/home/presentation/pages/home_screen.dart';
-import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
-import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
 import 'package:navithera_client/main.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import to access navigatorKey

@@ -4,6 +4,10 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+final callEndedProvider = StateProvider<String?>((ref) => null);
+
+// Provider to track active call chatId
+final activeCallChatIdProvider = StateProvider<String?>((ref) => null);
 // LiveKit room provider
 final liveKitRoomProvider = StateProvider<Room?>((ref) => null);
 // Call state provider

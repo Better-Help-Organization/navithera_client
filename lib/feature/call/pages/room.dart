@@ -227,6 +227,19 @@ class _RoomPageState extends ConsumerState<RoomPage> {
         })
         ..on<RoomMetadataChangedEvent>((event) {
           print('Room metadata changed: ${event.metadata}');
+
+          // Check if metadata indicates call ended
+          try {
+            if (event.metadata == null) return;
+            final metadata = jsonDecode(event.metadata!);
+            if (metadata['callStatus'] == 'ended' ||
+                metadata['status'] == 'ended' ||
+                metadata['callEnded'] == true) {
+              _endCallAndNavigateBack();
+            }
+          } catch (e) {
+            print('Error parsing metadata: $e');
+          }
         })
         ..on<DataReceivedEvent>((event) {
           String decoded = 'Failed to decode';
@@ -343,6 +356,30 @@ class _RoomPageState extends ConsumerState<RoomPage> {
     setState(() {
       participantTracks = [...screenTracks, ...userMediaTracks];
     });
+  }
+
+  void _endCallAndNavigateBack() async {
+    try {
+      // Show a snackbar or dialog
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Call ended by the other party'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+
+      // Disconnect from room
+      await widget.room.disconnect();
+      await _listener.dispose();
+      await widget.room.dispose();
+
+      // Navigate back
+      if (mounted && Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+    } catch (e) {
+      print('Error ending call: $e');
+    }
   }
 
   @override

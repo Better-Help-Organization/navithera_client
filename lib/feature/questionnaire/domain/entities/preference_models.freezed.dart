@@ -23,11 +23,11 @@ PreferenceRequest _$PreferenceRequestFromJson(Map<String, dynamic> json) {
 mixin _$PreferenceRequest {
   String get modalId => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  List<String> get languageIds =>
-      throw _privateConstructorUsedError; //String? sessionFormat,
+  List<String> get languageIds => throw _privateConstructorUsedError;
   String? get goal => throw _privateConstructorUsedError;
   String get levelId => throw _privateConstructorUsedError;
   List<AvailabilitySlot> get availability => throw _privateConstructorUsedError;
+  String? get otherLang => throw _privateConstructorUsedError;
 
   /// Serializes this PreferenceRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,6 +53,7 @@ abstract class $PreferenceRequestCopyWith<$Res> {
     String? goal,
     String levelId,
     List<AvailabilitySlot> availability,
+    String? otherLang,
   });
 }
 
@@ -77,6 +78,7 @@ class _$PreferenceRequestCopyWithImpl<$Res, $Val extends PreferenceRequest>
     Object? goal = freezed,
     Object? levelId = null,
     Object? availability = null,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -110,6 +112,11 @@ class _$PreferenceRequestCopyWithImpl<$Res, $Val extends PreferenceRequest>
                     ? _value.availability
                     : availability // ignore: cast_nullable_to_non_nullable
                         as List<AvailabilitySlot>,
+            otherLang:
+                freezed == otherLang
+                    ? _value.otherLang
+                    : otherLang // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -132,6 +139,7 @@ abstract class _$$PreferenceRequestImplCopyWith<$Res>
     String? goal,
     String levelId,
     List<AvailabilitySlot> availability,
+    String? otherLang,
   });
 }
 
@@ -155,6 +163,7 @@ class __$$PreferenceRequestImplCopyWithImpl<$Res>
     Object? goal = freezed,
     Object? levelId = null,
     Object? availability = null,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _$PreferenceRequestImpl(
@@ -188,6 +197,11 @@ class __$$PreferenceRequestImplCopyWithImpl<$Res>
                 ? _value._availability
                 : availability // ignore: cast_nullable_to_non_nullable
                     as List<AvailabilitySlot>,
+        otherLang:
+            freezed == otherLang
+                ? _value.otherLang
+                : otherLang // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -203,6 +217,7 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
     this.goal,
     required this.levelId,
     required final List<AvailabilitySlot> availability,
+    this.otherLang,
   }) : _languageIds = languageIds,
        _availability = availability;
 
@@ -221,7 +236,6 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
     return EqualUnmodifiableListView(_languageIds);
   }
 
-  //String? sessionFormat,
   @override
   final String? goal;
   @override
@@ -235,8 +249,11 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
   }
 
   @override
+  final String? otherLang;
+
+  @override
   String toString() {
-    return 'PreferenceRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, levelId: $levelId, availability: $availability)';
+    return 'PreferenceRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, levelId: $levelId, availability: $availability, otherLang: $otherLang)';
   }
 
   @override
@@ -255,7 +272,9 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
             const DeepCollectionEquality().equals(
               other._availability,
               _availability,
-            ));
+            ) &&
+            (identical(other.otherLang, otherLang) ||
+                other.otherLang == otherLang));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -268,6 +287,7 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
     goal,
     levelId,
     const DeepCollectionEquality().hash(_availability),
+    otherLang,
   );
 
   /// Create a copy of PreferenceRequest
@@ -295,6 +315,7 @@ abstract class _PreferenceRequest implements PreferenceRequest {
     final String? goal,
     required final String levelId,
     required final List<AvailabilitySlot> availability,
+    final String? otherLang,
   }) = _$PreferenceRequestImpl;
 
   factory _PreferenceRequest.fromJson(Map<String, dynamic> json) =
@@ -305,13 +326,15 @@ abstract class _PreferenceRequest implements PreferenceRequest {
   @override
   String get gender;
   @override
-  List<String> get languageIds; //String? sessionFormat,
+  List<String> get languageIds;
   @override
   String? get goal;
   @override
   String get levelId;
   @override
   List<AvailabilitySlot> get availability;
+  @override
+  String? get otherLang;
 
   /// Create a copy of PreferenceRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -332,9 +355,9 @@ mixin _$PreferenceRequestWithoutLevel {
   String get modalId => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   List<String> get languageIds => throw _privateConstructorUsedError;
-  String? get goal =>
-      throw _privateConstructorUsedError; // levelId is omitted entirely for special modal
+  String? get goal => throw _privateConstructorUsedError;
   List<AvailabilitySlot> get availability => throw _privateConstructorUsedError;
+  String? get otherLang => throw _privateConstructorUsedError;
 
   /// Serializes this PreferenceRequestWithoutLevel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -363,6 +386,7 @@ abstract class $PreferenceRequestWithoutLevelCopyWith<$Res> {
     List<String> languageIds,
     String? goal,
     List<AvailabilitySlot> availability,
+    String? otherLang,
   });
 }
 
@@ -389,6 +413,7 @@ class _$PreferenceRequestWithoutLevelCopyWithImpl<
     Object? languageIds = null,
     Object? goal = freezed,
     Object? availability = null,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -417,6 +442,11 @@ class _$PreferenceRequestWithoutLevelCopyWithImpl<
                     ? _value.availability
                     : availability // ignore: cast_nullable_to_non_nullable
                         as List<AvailabilitySlot>,
+            otherLang:
+                freezed == otherLang
+                    ? _value.otherLang
+                    : otherLang // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -438,6 +468,7 @@ abstract class _$$PreferenceRequestWithoutLevelImplCopyWith<$Res>
     List<String> languageIds,
     String? goal,
     List<AvailabilitySlot> availability,
+    String? otherLang,
   });
 }
 
@@ -464,6 +495,7 @@ class __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>
     Object? languageIds = null,
     Object? goal = freezed,
     Object? availability = null,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _$PreferenceRequestWithoutLevelImpl(
@@ -492,6 +524,11 @@ class __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>
                 ? _value._availability
                 : availability // ignore: cast_nullable_to_non_nullable
                     as List<AvailabilitySlot>,
+        otherLang:
+            freezed == otherLang
+                ? _value.otherLang
+                : otherLang // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -507,6 +544,7 @@ class _$PreferenceRequestWithoutLevelImpl
     required final List<String> languageIds,
     this.goal,
     required final List<AvailabilitySlot> availability,
+    this.otherLang,
   }) : _languageIds = languageIds,
        _availability = availability;
 
@@ -528,9 +566,7 @@ class _$PreferenceRequestWithoutLevelImpl
 
   @override
   final String? goal;
-  // levelId is omitted entirely for special modal
   final List<AvailabilitySlot> _availability;
-  // levelId is omitted entirely for special modal
   @override
   List<AvailabilitySlot> get availability {
     if (_availability is EqualUnmodifiableListView) return _availability;
@@ -539,8 +575,11 @@ class _$PreferenceRequestWithoutLevelImpl
   }
 
   @override
+  final String? otherLang;
+
+  @override
   String toString() {
-    return 'PreferenceRequestWithoutLevel(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, availability: $availability)';
+    return 'PreferenceRequestWithoutLevel(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, availability: $availability, otherLang: $otherLang)';
   }
 
   @override
@@ -558,7 +597,9 @@ class _$PreferenceRequestWithoutLevelImpl
             const DeepCollectionEquality().equals(
               other._availability,
               _availability,
-            ));
+            ) &&
+            (identical(other.otherLang, otherLang) ||
+                other.otherLang == otherLang));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -570,6 +611,7 @@ class _$PreferenceRequestWithoutLevelImpl
     const DeepCollectionEquality().hash(_languageIds),
     goal,
     const DeepCollectionEquality().hash(_availability),
+    otherLang,
   );
 
   /// Create a copy of PreferenceRequestWithoutLevel
@@ -598,6 +640,7 @@ abstract class _PreferenceRequestWithoutLevel
     required final List<String> languageIds,
     final String? goal,
     required final List<AvailabilitySlot> availability,
+    final String? otherLang,
   }) = _$PreferenceRequestWithoutLevelImpl;
 
   factory _PreferenceRequestWithoutLevel.fromJson(Map<String, dynamic> json) =
@@ -610,9 +653,11 @@ abstract class _PreferenceRequestWithoutLevel
   @override
   List<String> get languageIds;
   @override
-  String? get goal; // levelId is omitted entirely for special modal
+  String? get goal;
   @override
   List<AvailabilitySlot> get availability;
+  @override
+  String? get otherLang;
 
   /// Create a copy of PreferenceRequestWithoutLevel
   /// with the given fields replaced by the non-null parameter values.
@@ -986,6 +1031,7 @@ mixin _$PreferenceUpdateRequest {
   String? get levelId => throw _privateConstructorUsedError;
   List<AvailabilitySlot>? get availability =>
       throw _privateConstructorUsedError;
+  String? get otherLang => throw _privateConstructorUsedError;
 
   /// Serializes this PreferenceUpdateRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1011,6 +1057,7 @@ abstract class $PreferenceUpdateRequestCopyWith<$Res> {
     String? goal,
     String? levelId,
     List<AvailabilitySlot>? availability,
+    String? otherLang,
   });
 }
 
@@ -1038,6 +1085,7 @@ class _$PreferenceUpdateRequestCopyWithImpl<
     Object? goal = freezed,
     Object? levelId = freezed,
     Object? availability = freezed,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -1071,6 +1119,11 @@ class _$PreferenceUpdateRequestCopyWithImpl<
                     ? _value.availability
                     : availability // ignore: cast_nullable_to_non_nullable
                         as List<AvailabilitySlot>?,
+            otherLang:
+                freezed == otherLang
+                    ? _value.otherLang
+                    : otherLang // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -1093,6 +1146,7 @@ abstract class _$$PreferenceUpdateRequestImplCopyWith<$Res>
     String? goal,
     String? levelId,
     List<AvailabilitySlot>? availability,
+    String? otherLang,
   });
 }
 
@@ -1120,6 +1174,7 @@ class __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>
     Object? goal = freezed,
     Object? levelId = freezed,
     Object? availability = freezed,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _$PreferenceUpdateRequestImpl(
@@ -1153,6 +1208,11 @@ class __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>
                 ? _value._availability
                 : availability // ignore: cast_nullable_to_non_nullable
                     as List<AvailabilitySlot>?,
+        otherLang:
+            freezed == otherLang
+                ? _value.otherLang
+                : otherLang // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -1168,6 +1228,7 @@ class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
     this.goal,
     this.levelId,
     final List<AvailabilitySlot>? availability,
+    this.otherLang,
   }) : _languageIds = languageIds,
        _availability = availability;
 
@@ -1203,8 +1264,11 @@ class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
   }
 
   @override
+  final String? otherLang;
+
+  @override
   String toString() {
-    return 'PreferenceUpdateRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, levelId: $levelId, availability: $availability)';
+    return 'PreferenceUpdateRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, levelId: $levelId, availability: $availability, otherLang: $otherLang)';
   }
 
   @override
@@ -1223,7 +1287,9 @@ class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
             const DeepCollectionEquality().equals(
               other._availability,
               _availability,
-            ));
+            ) &&
+            (identical(other.otherLang, otherLang) ||
+                other.otherLang == otherLang));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1236,6 +1302,7 @@ class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
     goal,
     levelId,
     const DeepCollectionEquality().hash(_availability),
+    otherLang,
   );
 
   /// Create a copy of PreferenceUpdateRequest
@@ -1262,6 +1329,7 @@ abstract class _PreferenceUpdateRequest implements PreferenceUpdateRequest {
     final String? goal,
     final String? levelId,
     final List<AvailabilitySlot>? availability,
+    final String? otherLang,
   }) = _$PreferenceUpdateRequestImpl;
 
   factory _PreferenceUpdateRequest.fromJson(Map<String, dynamic> json) =
@@ -1279,6 +1347,8 @@ abstract class _PreferenceUpdateRequest implements PreferenceUpdateRequest {
   String? get levelId;
   @override
   List<AvailabilitySlot>? get availability;
+  @override
+  String? get otherLang;
 
   /// Create a copy of PreferenceUpdateRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1298,9 +1368,10 @@ mixin _$PreferenceUpdateWithoutLevelRequest {
   String? get modalId => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
   List<String>? get languageIds => throw _privateConstructorUsedError;
-  String? get goal => throw _privateConstructorUsedError; // String? levelId,
+  String? get goal => throw _privateConstructorUsedError;
   List<AvailabilitySlot>? get availability =>
       throw _privateConstructorUsedError;
+  String? get otherLang => throw _privateConstructorUsedError;
 
   /// Serializes this PreferenceUpdateWithoutLevelRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1331,6 +1402,7 @@ abstract class $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
     List<String>? languageIds,
     String? goal,
     List<AvailabilitySlot>? availability,
+    String? otherLang,
   });
 }
 
@@ -1357,6 +1429,7 @@ class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
     Object? languageIds = freezed,
     Object? goal = freezed,
     Object? availability = freezed,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -1385,6 +1458,11 @@ class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
                     ? _value.availability
                     : availability // ignore: cast_nullable_to_non_nullable
                         as List<AvailabilitySlot>?,
+            otherLang:
+                freezed == otherLang
+                    ? _value.otherLang
+                    : otherLang // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -1406,6 +1484,7 @@ abstract class _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<$Res>
     List<String>? languageIds,
     String? goal,
     List<AvailabilitySlot>? availability,
+    String? otherLang,
   });
 }
 
@@ -1432,6 +1511,7 @@ class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
     Object? languageIds = freezed,
     Object? goal = freezed,
     Object? availability = freezed,
+    Object? otherLang = freezed,
   }) {
     return _then(
       _$PreferenceUpdateWithoutLevelRequestImpl(
@@ -1460,6 +1540,11 @@ class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
                 ? _value._availability
                 : availability // ignore: cast_nullable_to_non_nullable
                     as List<AvailabilitySlot>?,
+        otherLang:
+            freezed == otherLang
+                ? _value.otherLang
+                : otherLang // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -1475,6 +1560,7 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
     final List<String>? languageIds,
     this.goal,
     final List<AvailabilitySlot>? availability,
+    this.otherLang,
   }) : _languageIds = languageIds,
        _availability = availability;
 
@@ -1498,9 +1584,7 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
 
   @override
   final String? goal;
-  // String? levelId,
   final List<AvailabilitySlot>? _availability;
-  // String? levelId,
   @override
   List<AvailabilitySlot>? get availability {
     final value = _availability;
@@ -1511,8 +1595,11 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
   }
 
   @override
+  final String? otherLang;
+
+  @override
   String toString() {
-    return 'PreferenceUpdateWithoutLevelRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, availability: $availability)';
+    return 'PreferenceUpdateWithoutLevelRequest(modalId: $modalId, gender: $gender, languageIds: $languageIds, goal: $goal, availability: $availability, otherLang: $otherLang)';
   }
 
   @override
@@ -1530,7 +1617,9 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
             const DeepCollectionEquality().equals(
               other._availability,
               _availability,
-            ));
+            ) &&
+            (identical(other.otherLang, otherLang) ||
+                other.otherLang == otherLang));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1542,6 +1631,7 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
     const DeepCollectionEquality().hash(_languageIds),
     goal,
     const DeepCollectionEquality().hash(_availability),
+    otherLang,
   );
 
   /// Create a copy of PreferenceUpdateWithoutLevelRequest
@@ -1570,6 +1660,7 @@ abstract class _PreferenceUpdateWithoutLevelRequest
     final List<String>? languageIds,
     final String? goal,
     final List<AvailabilitySlot>? availability,
+    final String? otherLang,
   }) = _$PreferenceUpdateWithoutLevelRequestImpl;
 
   factory _PreferenceUpdateWithoutLevelRequest.fromJson(
@@ -1583,9 +1674,11 @@ abstract class _PreferenceUpdateWithoutLevelRequest
   @override
   List<String>? get languageIds;
   @override
-  String? get goal; // String? levelId,
+  String? get goal;
   @override
   List<AvailabilitySlot>? get availability;
+  @override
+  String? get otherLang;
 
   /// Create a copy of PreferenceUpdateWithoutLevelRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -19,6 +19,7 @@ _$PreferenceRequestImpl _$$PreferenceRequestImplFromJson(
       (json['availability'] as List<dynamic>)
           .map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
           .toList(),
+  otherLang: json['otherLang'] as String?,
 );
 
 Map<String, dynamic> _$$PreferenceRequestImplToJson(
@@ -30,6 +31,7 @@ Map<String, dynamic> _$$PreferenceRequestImplToJson(
   'goal': instance.goal,
   'levelId': instance.levelId,
   'availability': instance.availability,
+  'otherLang': instance.otherLang,
 };
 
 _$PreferenceRequestWithoutLevelImpl
@@ -46,6 +48,7 @@ _$$PreferenceRequestWithoutLevelImplFromJson(Map<String, dynamic> json) =>
           (json['availability'] as List<dynamic>)
               .map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
               .toList(),
+      otherLang: json['otherLang'] as String?,
     );
 
 Map<String, dynamic> _$$PreferenceRequestWithoutLevelImplToJson(
@@ -56,6 +59,7 @@ Map<String, dynamic> _$$PreferenceRequestWithoutLevelImplToJson(
   'languageIds': instance.languageIds,
   'goal': instance.goal,
   'availability': instance.availability,
+  'otherLang': instance.otherLang,
 };
 
 _$PreferenceRequestModalOnlyImpl _$$PreferenceRequestModalOnlyImplFromJson(
@@ -90,6 +94,7 @@ _$PreferenceUpdateRequestImpl _$$PreferenceUpdateRequestImplFromJson(
       (json['availability'] as List<dynamic>?)
           ?.map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
           .toList(),
+  otherLang: json['otherLang'] as String?,
 );
 
 Map<String, dynamic> _$$PreferenceUpdateRequestImplToJson(
@@ -101,6 +106,7 @@ Map<String, dynamic> _$$PreferenceUpdateRequestImplToJson(
   'goal': instance.goal,
   'levelId': instance.levelId,
   'availability': instance.availability,
+  'otherLang': instance.otherLang,
 };
 
 _$PreferenceUpdateWithoutLevelRequestImpl
@@ -117,6 +123,7 @@ _$$PreferenceUpdateWithoutLevelRequestImplFromJson(Map<String, dynamic> json) =>
           (json['availability'] as List<dynamic>?)
               ?.map((e) => AvailabilitySlot.fromJson(e as Map<String, dynamic>))
               .toList(),
+      otherLang: json['otherLang'] as String?,
     );
 
 Map<String, dynamic> _$$PreferenceUpdateWithoutLevelRequestImplToJson(
@@ -127,6 +134,7 @@ Map<String, dynamic> _$$PreferenceUpdateWithoutLevelRequestImplToJson(
   'languageIds': instance.languageIds,
   'goal': instance.goal,
   'availability': instance.availability,
+  'otherLang': instance.otherLang,
 };
 
 _$PreferenceResponseImpl _$$PreferenceResponseImplFromJson(

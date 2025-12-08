@@ -10,10 +10,10 @@ class PreferenceRequest with _$PreferenceRequest {
     required String modalId,
     required String gender,
     required List<String> languageIds,
-    //String? sessionFormat,
     String? goal,
     required String levelId,
     required List<AvailabilitySlot> availability,
+    String? otherLang, // Add this field
   }) = _PreferenceRequest;
 
   factory PreferenceRequest.fromJson(Map<String, dynamic> json) =>
@@ -27,8 +27,8 @@ class PreferenceRequestWithoutLevel with _$PreferenceRequestWithoutLevel {
     required String gender,
     required List<String> languageIds,
     String? goal,
-    // levelId is omitted entirely for special modal
     required List<AvailabilitySlot> availability,
+    String? otherLang, // Add this field
   }) = _PreferenceRequestWithoutLevel;
 
   factory PreferenceRequestWithoutLevel.fromJson(Map<String, dynamic> json) =>
@@ -64,6 +64,7 @@ class PreferenceUpdateRequest with _$PreferenceUpdateRequest {
     String? goal,
     String? levelId,
     List<AvailabilitySlot>? availability,
+    String? otherLang, // Add this field
   }) = _PreferenceUpdateRequest;
 
   factory PreferenceUpdateRequest.fromJson(Map<String, dynamic> json) =>
@@ -78,8 +79,8 @@ class PreferenceUpdateWithoutLevelRequest
     String? gender,
     List<String>? languageIds,
     String? goal,
-    // String? levelId,
     List<AvailabilitySlot>? availability,
+    String? otherLang, // Add this field
   }) = _PreferenceUpdateWithoutLevelRequest;
 
   factory PreferenceUpdateWithoutLevelRequest.fromJson(
