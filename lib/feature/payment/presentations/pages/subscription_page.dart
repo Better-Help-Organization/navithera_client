@@ -670,7 +670,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     // 3. Create the redirect page URL
     // Make sure there's no space at the beginning
     String redirectPageUrl =
-        "http://10.30.236.17:5500/index.html?url=$encodedPaymentUrl";
+        "http://192.168.60.17:5501/index.html?url=$encodedPaymentUrl";
     //10.30.236.17
     // 4. Debug: Print URLs to verify
     print("Payment URL: $trimmedPaymentUrl");

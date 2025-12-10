@@ -287,7 +287,13 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         context,
         MaterialPageRoute(
           builder:
-              (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
+              (_) => RoomPage(
+                room,
+                listener,
+                showVideoControl: isVideoCall,
+                chatId: widget.chat.id,
+                isGroup: widget.chat.isGroup!,
+              ),
         ),
       );
     } catch (error) {

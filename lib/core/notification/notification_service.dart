@@ -65,6 +65,8 @@ class FCMService {
     String token,
     BuildContext context, {
     required bool isVideoCall,
+    required bool isGroupCall,
+    required String chatId,
   }) async {
     // _busy = true;
     // setState(() {});
@@ -131,7 +133,13 @@ class FCMService {
       Navigator.of(navigatorKey.currentContext!, rootNavigator: true).push(
         MaterialPageRoute(
           builder:
-              (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
+              (_) => RoomPage(
+                room,
+                listener,
+                showVideoControl: isVideoCall,
+                isGroup: isGroupCall,
+                chatId: chatId,
+              ),
         ),
       );
     } catch (error) {
@@ -330,7 +338,7 @@ class FCMService {
           message.data['code'] == 6) {
         final chatId = _extractChatIdFromMessage(message);
 
-        _showCallEndedSnackbar('Call ended by the other party');
+        // _showCallEndedSnackbar('Call ended by the other party');
         if (chatId != null) {
           _dismissCallPopupIfMatches(chatId);
 
@@ -356,6 +364,7 @@ class FCMService {
             call.chatId,
             call.isVideoCall,
             call.token,
+            call.isGroupCall,
           );
         }
         return;
@@ -1124,6 +1133,7 @@ class FCMService {
     String chatId,
     bool isVideocall,
     String token,
+    bool isGroupCall,
   ) async {
     print("toekn toekn toekn: $token");
     // Use the global navigator key to get the current context
@@ -1221,7 +1231,7 @@ class FCMService {
 
                             // Send rejection request
                             try {
-                              await rejectCall(chatId);
+                              // await rejectCall(chatId);
                             } catch (e) {
                               print('Error sending rejection: $e');
                             }
@@ -1254,6 +1264,7 @@ class FCMService {
                               chatId,
                               isVideocall,
                               token,
+                              isGroupCall,
                             );
                           },
                         ),
@@ -1345,6 +1356,7 @@ class FCMService {
     String chatId,
     bool isVideoCall,
     String token, // Add token parameter
+    bool isGroupCall,
   ) {
     // Navigator.push(
     //   context,
@@ -1367,6 +1379,8 @@ class FCMService {
       token,
       context,
       isVideoCall: isVideoCall,
+      isGroupCall: isGroupCall,
+      chatId: chatId,
     );
     // Navigator.push(
     //   context,
@@ -1469,6 +1483,7 @@ class FCMService {
       final room = idMap['room'] as String?;
       final token = idMap['token'] as String?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
+      final isGroupCall = idMap['isGroupCall'] as bool? ?? false;
       print("isVideoCall4: ${isVideoCall}");
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
@@ -1486,6 +1501,7 @@ class FCMService {
         callerName: fullName,
         isVideoCall: isVideoCall,
         token: token!,
+        isGroupCall: isGroupCall,
       );
     } catch (e) {
       log('parse incoming call error: $e');
@@ -1499,6 +1515,7 @@ class FCMService {
     required String chatId,
     required bool isVideocall,
     required String token,
+    required bool isGroupCall,
   }) {
     print("context not null praying");
     final context = navigatorKey.currentContext;
@@ -1523,6 +1540,8 @@ class FCMService {
       token,
       context,
       isVideoCall: isVideocall,
+      isGroupCall: isGroupCall,
+      chatId: chatId,
     );
 
     // Navigator.of(context).push(
@@ -1558,6 +1577,7 @@ class _IncomingCall {
   final String callerName;
   final bool isVideoCall;
   final String token; // Add this
+  final bool isGroupCall;
 
   _IncomingCall({
     required this.chatId,
@@ -1565,6 +1585,7 @@ class _IncomingCall {
     required this.callerName,
     required this.isVideoCall,
     required this.token, // Add this
+    required this.isGroupCall,
   });
 }
 
@@ -1620,6 +1641,7 @@ class FCMBackgroundBridge {
       final token = idMap['token'] as String?;
       print("token token ${token}");
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
+      final isGroupCall = idMap['isGroupCall'] as bool? ?? false;
 
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
@@ -1637,6 +1659,7 @@ class FCMBackgroundBridge {
         callerName: fullName,
         isVideoCall: isVideoCall,
         token: token,
+        isGroupCall: isGroupCall,
       );
     } catch (e) {
       log('parse incoming call error: $e');

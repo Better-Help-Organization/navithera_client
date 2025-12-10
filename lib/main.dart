@@ -142,6 +142,8 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           'callerName': idMap['callerName'],
         if (!extra.containsKey('isVideoCall') && idMap['isVideoCall'] != null)
           'isVideoCall': idMap['isVideoCall'],
+        if (!extra.containsKey('isGroupCall') && idMap['isGroupCall'] != null)
+          'isGroupCall': idMap['isGroupCall'],
         if (!extra.containsKey('token') && idMap['token'] != null)
           'token': idMap['token'],
       });
@@ -155,6 +157,12 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           (extra['isVideoCall'] ??
               idMap['isVideoCall'] ??
               body['isVideoCall'] ??
+              false) ==
+          true;
+      final bool isGroupCall =
+          (extra['isGroupCall'] ??
+              idMap['isGroupCall'] ??
+              body['isGroupCall'] ??
               false) ==
           true;
       final String? token =
@@ -177,7 +185,11 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         case 'Event.actionCallAccept':
         case 'ACTION_CALL_ACCEPT':
         case 'actionCallAccept':
-          if (roomName != null && chatId != null && isVideoCall != null && token != null) {
+          if (roomName != null &&
+              chatId != null &&
+              isVideoCall != null &&
+              isGroupCall != null &&
+              token != null) {
             if (context != null) {
               // App is in foreground/background - navigate directly
               ref
@@ -187,6 +199,7 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
                     participantName: callerName,
                     chatId: chatId,
                     isVideocall: isVideoCall,
+                    isGroupCall: isGroupCall,
                     token: token,
                   );
             } else {
