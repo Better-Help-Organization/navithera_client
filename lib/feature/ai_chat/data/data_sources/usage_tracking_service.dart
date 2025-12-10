@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UsageTrackingService {
   static const String _queryCountKey = 'ai_chat_query_count';
   static const String _lastQueryDateKey = 'ai_chat_last_query_date';
-  static const int _dailyQueryLimit = 30;
+  static const int _dailyQueryLimit = 10;
 
   /// Check if user can make another query today
   Future<bool> canMakeQuery() async {
