@@ -125,9 +125,13 @@ class FCMService {
         ),
       );
 
-      if (!context.mounted) return;
-      await Navigator.push<void>(
-        context,
+      print("printed after connected ${context.mounted}");
+
+      // Use navigatorKey instead of the passed context
+      if (navigatorKey.currentContext == null) return;
+
+      // Navigate using GoRouter or Navigator with navigatorKey
+      Navigator.of(navigatorKey.currentContext!, rootNavigator: true).push(
         MaterialPageRoute(
           builder:
               (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
@@ -1360,93 +1364,13 @@ class FCMService {
     // );
     final token2 =
         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
+
     _join(
-      String url,
-      String token,
-      BuildContext context, {
-      required bool isVideoCall,
-    }) async {
-      // _busy = true;
-      // setState(() {});
-
-      // final args = widget.args;
-
-      try {
-        //create new room
-        const cameraEncoding = VideoEncoding(
-          maxBitrate: 5 * 1000 * 1000,
-          maxFramerate: 30,
-        );
-
-        const screenEncoding = VideoEncoding(
-          maxBitrate: 3 * 1000 * 1000,
-          maxFramerate: 15,
-        );
-
-        final room = Room(
-          roomOptions: RoomOptions(
-            // adaptiveStream: args.adaptiveStream,
-            adaptiveStream: true,
-            dynacast: true,
-            defaultAudioPublishOptions: const AudioPublishOptions(
-              name: 'custom_audio_track_name',
-            ),
-            defaultCameraCaptureOptions: const CameraCaptureOptions(
-              maxFrameRate: 30,
-              params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
-            ),
-            defaultVideoPublishOptions: VideoPublishOptions(
-              simulcast: false,
-              // simulcast: args.simulcast,
-              videoCodec: "VP8",
-
-              videoEncoding: cameraEncoding,
-              screenShareEncoding: screenEncoding,
-            ),
-            // encryption: e2eeOptions,
-          ),
-        );
-        // Create a Listener before connecting
-        final listener = room.createListener();
-
-        await room.prepareConnection(url, token);
-
-        // Try to connect to the room
-        // This will throw an Exception if it fails for any reason.
-        await room.connect(
-          url,
-          token,
-          fastConnectOptions: FastConnectOptions(
-            microphone: TrackOption(enabled: true),
-            camera: TrackOption(enabled: isVideoCall),
-          ),
-        );
-
-        print("printed after connected ${context.mounted}");
-
-        // Use navigatorKey instead of the passed context
-        if (navigatorKey.currentContext == null) return;
-
-        // Navigate using GoRouter or Navigator with navigatorKey
-        Navigator.of(navigatorKey.currentContext!, rootNavigator: true).push(
-          MaterialPageRoute(
-            builder:
-                (_) => RoomPage(room, listener, showVideoControl: isVideoCall),
-          ),
-        );
-      } catch (error) {
-        print('Could not connect $error');
-        if (!context.mounted) return;
-        await context.showErrorDialog(error);
-      } finally {}
-    }
-
-    //_join(
-    //  "wss://demo-eukecq5l.livekit.cloud",
-    //  token,
-    //  context,
-    //  isVideoCall: isVideoCall,
-    //);
+      "wss://demo-eukecq5l.livekit.cloud",
+      token,
+      context,
+      isVideoCall: isVideoCall,
+    );
     // Navigator.push(
     //   context,
     //   MaterialPageRoute(

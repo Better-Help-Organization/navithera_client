@@ -20,7 +20,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.Abthon.abthon_navithera_client"
     compileSdk = 36
-    ndkVersion = "27.0.12077973"
+    ndkVersion = "29.0.14268665"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

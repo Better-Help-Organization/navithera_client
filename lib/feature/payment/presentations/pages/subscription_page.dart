@@ -1,15 +1,21 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:flutter_telebirr/flutter_telebirr.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/core/util/format_duration.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
+// import 'package:navithera_client/feature/payment/presentations/pages/payment_page.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+// import 'package:web/web.dart' as html;
 
 // Providers
 final vatProvider = StateProvider<double?>((ref) => null);
@@ -378,33 +384,319 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     }
   }
 
+  // void _handleSubscriptionTap(Subscription subscription) async {
+  //   final subscriptionId = subscription.id;
+  //   final providerId = ref.read(selectedPrefProvider);
+  //   final user = ref.watch(currentUserProvider);
+
+  //   try {
+  //     // Future<void> _checkIfPrefFilled() async {
+  //     final sharedPreferences = await SharedPreferences.getInstance();
+  //     final accessToken = sharedPreferences.getString('access_token');
+
+  //     try {
+  //       final finalsubscriptionId =
+  //           await SubscriptionService.createSubscription(
+  //             subscriptionId: subscriptionId,
+  //             userId: user?.id,
+  //           );
+
+  //       print("Selected subscription ID: $finalsubscriptionId");
+  //       print("Selected provider ID: $providerId");
+  //       print("Navigating to payment page with subscription ID");
+
+  //       // context.go(
+  //       //   '/payment?preferenceId=$providerId',
+  //       //   extra: finalsubscriptionId,
+  //       // );
+  //       print("hi hi");
+  //       final dio = Dio();
+  //       dio.options.headers['Authorization'] = 'Bearer $accessToken';
+
+  //       final response = await dio.post(
+  //         '${base_url_dev}/telebirr/user-sub',
+  //         data: {
+  //           'subscriptionId': finalsubscriptionId,
+  //           'title': _getTypeLabel(subscription.type),
+  //           'amount': subscription.price,
+  //         },
+  //       );
+
+  //       print("responsexoxo: ${response.data}");
+
+  //       if (response.statusCode == 200) {
+  //         print(" Subscription created successfully. ");
+  //         // Your existing navigation code here...
+  //       } else {
+  //         if (!mounted) return;
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           SnackBar(
+  //             content: Text('an error occured'),
+  //             backgroundColor: Colors.red,
+  //           ),
+  //         );
+  //       }
+  //     } on DioException catch (e) {
+  //       log("dio error: ${e.response?.data}");
+  //       if (!mounted) return;
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           content: Text('Error: ${e.response?.data['message'] ?? e.message}'),
+  //           backgroundColor: Colors.red,
+  //         ),
+  //       );
+  //     } catch (e) {
+  //       log("dio error2: ${e.toString()}");
+  //       if (!mounted) return;
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(
+  //           content: Text('An unexpected error occurred'),
+  //           backgroundColor: Colors.red,
+  //         ),
+  //       );
+  //       // }
+  //     }
+  //   } catch (e) {
+  //     print("Error creating subscription: $e");
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text("An error occurred. try again"),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //   }
+  // }
+
+  // ... your existing imports ...
+
   void _handleSubscriptionTap(Subscription subscription) async {
     final subscriptionId = subscription.id;
     final providerId = ref.read(selectedPrefProvider);
     final user = ref.watch(currentUserProvider);
 
     try {
-      final finalsubscriptionId = await SubscriptionService.createSubscription(
-        subscriptionId: subscriptionId,
-        userId: user?.id,
-      );
+      final sharedPreferences = await SharedPreferences.getInstance();
+      final accessToken = sharedPreferences.getString('access_token');
 
-      print("Selected subscription ID: $finalsubscriptionId");
-      print("Selected provider ID: $providerId");
-      print("Navigating to payment page with subscription ID");
+      try {
+        final finalsubscriptionId =
+            await SubscriptionService.createSubscription(
+              subscriptionId: subscriptionId,
+              userId: user?.id,
+            );
 
-      context.go(
-        '/payment?preferenceId=$providerId',
-        extra: finalsubscriptionId,
-      );
+        print("Selected subscription ID: $finalsubscriptionId");
+        print("Selected provider ID: $providerId");
+
+        final dio = Dio();
+        dio.options.headers['Authorization'] = 'Bearer $accessToken';
+
+        final response = await dio.post(
+          '${base_url_dev}/telebirr/user-sub',
+          data: {
+            'subscriptionId': finalsubscriptionId,
+            'title': _getTypeLabel(subscription.type),
+            'amount': subscription.price,
+          },
+        );
+
+        print("responsexoxo: ${response.data}");
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          final responseData = response.data;
+          final paymentUrl = responseData['data'];
+
+          if (paymentUrl != null && paymentUrl is String) {
+            print("Payment URL: $paymentUrl");
+
+            // Open the URL automatically
+            await _openPaymentUrl(paymentUrl);
+          } else {
+            if (!mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Payment URL not found in response'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        } else {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('An error occurred: ${response.statusCode}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } on DioException catch (e) {
+        log("dio error: ${e.response?.data}");
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${e.response?.data['message'] ?? e.message}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } catch (e) {
+        log("dio error2: ${e.toString()}");
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An unexpected error occurred'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     } catch (e) {
       print("Error creating subscription: $e");
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("An error occurred. try again"),
           backgroundColor: Colors.red,
         ),
       );
+    }
+  }
+
+  // Future<void> __openPaymentUrlUrl(String url) async {
+  //   // Navigator.push(
+  //   //   context,
+  //   //   MaterialPageRoute(builder: (context) => PaymentPage(checkOutUrl: url)),
+  //   // );
+  //   // try {
+  //   //   TelebirrPayment.instance.configure(
+  //   //     publicKey:
+  //   //         "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC/ZcoOng1sJZ4CegopQVCw3HYqqVRLEudgT+dDpS8fRVy7zBgqZunju2VRCQuHeWs7yWgc9QGd4/8kRSLY+jlvKNeZ60yWcqEY+eKyQMmcjOz2Sn41fcVNgF+HV3DGiV4b23B6BCMjnpEFIb9d99/TsjsFSc7gCPgfl2yWDxE/Y1B2tVE6op2qd63YsMVFQGdre/CQYvFJENpQaBLMq4hHyBDgluUXlF0uA1X7UM0ZjbFC6ZIB/Hn1+pl5Ua8dKYrkVaecolmJT/s7c/+/1JeN+ja8luBoONsoODt2mTeVJHLF9Y3oh5rI+IY8HukIZJ1U6O7/JcjH3aRJTZagXUS9AgMBAAECggEBALBIBx8JcWFfEDZFwuAWeUQ7+VX3mVx/770kOuNx24HYt718D/HV0avfKETHqOfA7AQnz42EF1Yd7Rux1ZO0e3unSVRJhMO4linT1XjJ9ScMISAColWQHk3wY4va/FLPqG7N4L1w3BBtdjIc0A2zRGLNcFDBlxl/CVDHfcqD3CXdLukm/friX6TvnrbTyfAFicYgu0+UtDvfxTL3pRL3u3WTkDvnFK5YXhoazLctNOFrNiiIpCW6dJ7WRYRXuXhz7C0rENHyBtJ0zura1WD5oDbRZ8ON4v1KV4QofWiTFXJpbDgZdEeJJmFmt5HIi+Ny3P5n31WwZpRMHGeHrV23//0CgYEA+2/gYjYWOW3JgMDLX7r8fGPTo1ljkOUHuH98H/a/lE3wnnKKx+2ngRNZX4RfvNG4LLeWTz9plxR2RAqqOTbX8fj/NA/sS4mru9zvzMY1925FcX3WsWKBgKlLryl0vPScq4ejMLSCmypGz4VgLMYZqT4NYIkU2Lo1G1MiDoLy0CcCgYEAwt77exynUhM7AlyjhAA2wSINXLKsdFFF1u976x9kVhOfmbAutfMJPEQWb2WXaOJQMvMpgg2rU5aVsyEcuHsRH/2zatrxrGqLqgxaiqPz4ELINIh1iYK/hdRpr1vATHoebOv1wt8/9qxITNKtQTgQbqYci3KV1lPsOrBAB5S57nsCgYAvw+cagS/jpQmcngOEoh8I+mXgKEET64517DIGWHe4kr3dO+FFbc5eZPCbhqgxVJ3qUM4LK/7BJq/46RXBXLvVSfohR80Z5INtYuFjQ1xJLveeQcuhUxdK+95W3kdBBi8lHtVPkVsmYvekwK+ukcuaLSGZbzE4otcn47kajKHYDQKBgDbQyIbJ+ZsRw8CXVHu2H7DWJlIUBIS3s+CQ/xeVfgDkhjmSIKGX2to0AOeW+S9MseiTE/L8a1wY+MUppE2UeK26DLUbH24zjlPoI7PqCJjl0DFOzVlACSXZKV1lfsNEeriC61/EstZtgezyOkAlSCIH4fGr6tAeTU349Bnt0RtvAoGBAObgxjeH6JGpdLz1BbMj8xUHuYQkbxNeIPhH29CySn0vfhwg9VxAtIoOhvZeCfnsCRTj9OZjepCeUqDiDSoFznglrKhfeKUndHjvg+9kiae92iI6qJudPCHMNwP8wMSphkxUqnXFR3lr9A765GA980818UWZdrhrjLKtIIZdh+X1",
+  //   //     appId: '1511910021811206',
+  //   //     appKey: "c4182ef8-9249-458a-985e-06d191f4d505",
+  //   //     notifyUrl: '${base_url_dev}/telebirr/user-sub',
+  //   //     shortCode: "841050",
+  //   //     merchantDisplayName: "Organization name",
+  //   //   );
+
+  //   //   final response = await TelebirrPayment.instance.startPayment(
+  //   //     itemName: "Goods name",
+  //   //     totalAmount: "10",
+  //   //   );
+
+  //   //   print("response from telebirr: $response");
+  //   // } catch (e) {
+  //   //   print("Error launching payment URL: $e");
+  //   // }
+  //   Future<void> startPay(String url) async {
+  //     // final uri = Uri.parse(url);
+
+  //     // final bool launched = await launchUrl(
+  //     //   uri,
+  //     //   mode: LaunchMode.externalApplication,
+  //     // );
+
+  //     // if (!launched) {
+  //     //   debugPrint("FAILED to open: $url");
+  //     // }
+
+  //     String paymentUrl =
+  //         "https://developerportal.ethiotelebirr.et:38443/payment/web/paygate?appid=1511910021811206&merch_code=841050&nonce_str=UUDJ5BF5BEFR072F0CG0VXYSNB8VLYQQ&prepay_id=019f3c760fc4da5c56624aedc4b3baa3804006&timestamp=1764670833&sign=cQvTVbguARgAU9SJSGfh3Flh4ivL4Dwf0Ux1ReLQnUgfXD9onIXdqN+1tftf7XbaNfEtjp2qqcJ6nYXmHw7rcPP4fRr1IIjCUxNsnuwZHa5j2A6cGUoZNOVO0KNQ33UR9RAY/+tYlTGmvb2lDTTGl3PlXt6Ryg/m5ZsFlxRApV+xUiMaSVQexhgLv9s+upzwVFgXytSx8ILJTfFQhndBUk3/aiqUJh2OOMmlcmNyJ+umUT9RWlVEnKDYdDBdH1KoEhJPDWW88MvI3dW/knMEYh9xi7C83LjY5E4R6bGKcNhy/sGt7tZiGYKGg5keFamtY6A+bjvkUia8UseGt3iD1w==&sign_type=SHA256WithRSA&version=1.0&trade_type=Checkout";
+  //     String encodedUrl = Uri.encodeComponent(paymentUrl);
+  //     String htmlPageUrl =
+  //         "   http://localhost:5500/index.html?url=$encodedUrl";
+
+  //     // Launch WebView with the HTML page
+  //     launchUrl(Uri.parse(htmlPageUrl), mode: LaunchMode.externalApplication);
+  //   }
+
+  //   startPay(url);
+  //   // try {
+  //   // if (kIsWeb) {
+  //   // WEB SPECIFIC IMPLEMENTATION
+  //   // This mimics exactly:
+  //   // let anchorEle = document.createElement("a");
+  //   // anchorEle.setAttribute("href", checkOutUrl);
+  //   // anchorEle.setAttribute("target", "_blank");
+  //   // anchorEle.setAttribute("rel", "external");
+  //   // anchorEle.click();
+
+  //   //   final anchor =
+  //   //       html.AnchorElement(href: url)
+  //   //         ..target = '_blank'
+  //   //         ..rel = 'external';
+
+  //   //   // Append to body temporarily to ensure click works in some browsers
+  //   //   html.document.body?.children.add(anchor);
+  //   //   anchor.click();
+  //   //   anchor.remove(); // Clean up
+  //   // } else {
+  //   // MOBILE IMPLEMENTATION (Android/iOS)
+  //   //   final uri = Uri.parse(url);
+
+  //   //   if (await canLaunchUrl(uri)) {
+  //   //     await launchUrl(
+  //   //       uri,
+  //   //       mode:
+  //   //           LaunchMode
+  //   //               .externalApplication, // Opens in Chrome/Safari, not in-app WebView
+  //   //     );
+  //   //   } else {
+  //   //     if (!mounted) return;
+  //   //     ScaffoldMessenger.of(context).showSnackBar(
+  //   //       SnackBar(
+  //   //         content: Text('Could not launch payment URL: $url'),
+  //   //         backgroundColor: Colors.red,
+  //   //       ),
+  //   //     );
+  //   //   }
+  //   //   // }
+  //   // } catch (e) {
+  //   //   print("Error launching URL: $e");
+  //   //   if (!mounted) return;
+  //   //   ScaffoldMessenger.of(context).showSnackBar(
+  //   //     SnackBar(
+  //   //       content: Text('Failed to open payment page: $e'),
+  //   //       backgroundColor: Colors.red,
+  //   //     ),
+  //   //   );
+  //   // }
+  // }
+
+  Future<void> _openPaymentUrl(String paymentUrl) async {
+    // 1. First, trim the payment URL to remove any whitespace
+    String trimmedPaymentUrl = paymentUrl.trim();
+
+    // 2. Encode the payment URL for the query parameter
+    String encodedPaymentUrl = Uri.encodeComponent(trimmedPaymentUrl);
+
+    // 3. Create the redirect page URL
+    // Make sure there's no space at the beginning
+    String redirectPageUrl =
+        "http://10.30.236.17:5500/index.html?url=$encodedPaymentUrl";
+    //10.30.236.17
+    // 4. Debug: Print URLs to verify
+    print("Payment URL: $trimmedPaymentUrl");
+    print("Encoded URL: $encodedPaymentUrl");
+    print("Redirect Page URL: $redirectPageUrl");
+
+    // 5. Try to launch the URL
+    try {
+      final uri = Uri.parse(redirectPageUrl.trim()); // Trim here too for safety
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $redirectPageUrl';
+      }
+    } catch (e) {
+      print('Error launching URL: $e');
+      // Fallback: Try to open the payment URL directly
+      try {
+        final directUri = Uri.parse(trimmedPaymentUrl);
+        if (await canLaunchUrl(directUri)) {
+          await launchUrl(directUri, mode: LaunchMode.externalApplication);
+        }
+      } catch (e2) {
+        print('Error with direct URL: $e2');
+      }
     }
   }
 

@@ -54,7 +54,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   bool _isSending = false;
   bool _initialStatusChecked = false;
   bool _busy = false;
-  
+
   // Selection mode state
   bool _isSelectionMode = false;
   final Set<String> _selectedMessageIds = {};
@@ -100,29 +100,32 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
   Future<void> _deleteSelectedMessages() async {
     final idsToDelete = _selectedMessageIds.toList();
-    
+
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Messages'),
-        content: Text('Are you sure you want to delete ${idsToDelete.length} messages?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Delete Messages'),
+            content: Text(
+              'Are you sure you want to delete ${idsToDelete.length} messages?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Delete'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
     );
 
     if (confirmed == true) {
       final notifier = ref.read(messageProvider(widget.chat.id).notifier);
-      // Assuming the provider doesn't have a bulk delete, we loop. 
+      // Assuming the provider doesn't have a bulk delete, we loop.
       // Ideally, update the backend to support bulk delete.
       for (final id in idsToDelete) {
         notifier.deleteMessage(id);
@@ -130,7 +133,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       _exitSelectionMode();
     }
   }
-
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -220,6 +222,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     String token,
     BuildContext context, {
     required bool isVideoCall,
+    VoidCallback? onBeforeNavigate,
   }) async {
     _busy = true;
     setState(() {});
@@ -278,6 +281,8 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       );
 
       if (!context.mounted) return;
+
+      onBeforeNavigate?.call();
       await Navigator.push<void>(
         context,
         MaterialPageRoute(
@@ -296,108 +301,188 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     }
   }
 
-  // Future<void> _joinRoomDirectly(BuildContext context) async {
-  //   final args = JoinArgs(
-  //     url: "wss://demo-eukecq5l.livekit.cloud",
-  //     token:
-  //         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE4MTUzMiwibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.TGE1UsA9TbhxSJdVk-SMV5Glbx0y7yupnzXSpiefsCg",
-  //     adaptiveStream: true,
-  //     dynacast: true,
-  //     simulcast: false,
-  //     e2ee: false,
-  //     preferredCodec: 'VP8',
-  //     enableBackupVideoCodec: true,
-  //   );
+  // Future<void> _startCall({bool isVideoCall = false}) async {
+  //   final sharedPreferences = await SharedPreferences.getInstance();
+
+  //   final accessToken = sharedPreferences.getString('access_token');
+  //   // Generate random room name
+  //   final roomName = _generateRandomRoomName();
+
+  //   print("roomName: $roomName");
+  //   print("name: ${widget.chat.id}");
 
   //   try {
-  //     // Create room with same configuration as in PreJoinPage
-  //     const cameraEncoding = VideoEncoding(
-  //       maxBitrate: 5 * 1000 * 1000,
-  //       maxFramerate: 30,
+  //     // Call your backend endpoint
+  //     final dio = Dio();
+  //     dio.options.headers['Authorization'] = 'Bearer ${accessToken}';
+
+  //     final response = await dio.post(
+  //       '${base_url_dev}/chat/call/${widget.chat.id}',
+  //       data: {'room': roomName, 'isVideoCall': isVideoCall},
   //     );
 
-  //     const screenEncoding = VideoEncoding(
-  //       maxBitrate: 3 * 1000 * 1000,
-  //       maxFramerate: 15,
-  //     );
+  //     print("Response: ${response.data}");
 
-  //     final room = Room(
-  //       roomOptions: RoomOptions(
-  //         adaptiveStream: true,
-  //         dynacast: true,
-  //         defaultAudioPublishOptions: const AudioPublishOptions(
-  //           name: 'custom_audio_track_name',
+  //     // Check if status code is 201
+  //     if (response.statusCode == 201) {
+  //       final responseData = response.data['data'];
+  //       final String token = responseData['token'];
+
+  //       if (token == null || token.isEmpty) {
+  //         if (!mounted) return;
+  //         ScaffoldMessenger.of(context).showSnackBar(
+  //           const SnackBar(
+  //             content: Text('Failed to start call'),
+  //             backgroundColor: Colors.red,
+  //           ),
+  //         );
+  //         return;
+  //       }
+  //       // _joinRoomDirectly(context);
+  //       // return;
+  //       // Navigate to CallScreen with the generated room name
+  //       if (!mounted) return;
+  //       print("token ${token}");
+  //       // _join(
+  //       //   "wss://navicare-dmw0dh3w.livekit.cloud",
+  //       //   token,
+  //       //   context,
+  //       // );
+  //       final token2 =
+  //           "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
+  //       _join(
+  //         "wss://demo-eukecq5l.livekit.cloud",
+  //         token,
+  //         context,
+  //         isVideoCall: isVideoCall,
+  //       );
+  //       // Navigator.push(
+  //       //   context,
+  //       //   MaterialPageRoute(
+  //       //     builder:
+  //       //         (context) =>
+  //       //         // CallScreen(
+  //       //         //   roomName: roomName,
+  //       //         //   participantName: widget.chat.name ?? "Unknown",
+  //       //         //   isVideoCall: isVideoCall,
+  //       //         //   chatId: widget.chat.id,
+  //       //         // ),
+  //       //         PreJoinPage(
+  //       //           args: JoinArgs(
+  //       //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+  //       //             token: token2, // Your known token
+  //       //             // token:
+  //       //             //     "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE5NDMyMywibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.jMqEzPA1cRVRcdrIeSqns9UaBmQ67Ce9GXgIQflnEh8",
+  //       //             adaptiveStream: true,
+  //       //             dynacast: true,
+  //       //             simulcast: false,
+  //       //             e2ee: false,
+  //       //             preferredCodec: 'VP8',
+  //       //             enableBackupVideoCodec: true,
+  //       //           ),
+  //       //         ),
+  //       //   ),
+  //       // );
+  //     } else {
+  //       if (!mounted) return;
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(
+  //           content: Text(
+  //             'Failed to start call: ${response.data['message'] ?? 'Unknown error'}',
+  //           ),
+  //           backgroundColor: Colors.red,
   //         ),
-  //         defaultCameraCaptureOptions: const CameraCaptureOptions(
-  //           maxFrameRate: 30,
-  //           params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
-  //         ),
-  //         defaultVideoPublishOptions: VideoPublishOptions(
-  //           simulcast: false,
-  //           videoCodec: args.preferredCodec,
-  //           videoEncoding: cameraEncoding,
-  //           screenShareEncoding: screenEncoding,
-  //         ),
+  //       );
+  //     }
+  //   } on DioException catch (e) {
+  //     print("DioException: ${e.toString()}");
+  //     if (!mounted) return;
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text('Error: ${e.response?.data['message'] ?? e.message}'),
+  //         backgroundColor: Colors.red,
   //       ),
   //     );
-
-  //     // Create listener
-  //     final listener = room.createListener();
-
-  //     await room.prepareConnection(args.url, args.token);
-
-  //     // Connect without any tracks initially (user can enable them later)
-  //     await room.connect(
-  //       args.url,
-  //       args.token,
-  //       fastConnectOptions: FastConnectOptions(
-  //         microphone: const TrackOption(enabled: false),
-  //         camera: const TrackOption(enabled: false),
+  //   } catch (e) {
+  //     if (!mounted) return;
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text('An unexpected error occurred'),
+  //         backgroundColor: Colors.red,
   //       ),
   //     );
-
-  //     if (!context.mounted) return;
-
-  //     // Navigate directly to RoomPage
-  //     await Navigator.push<void>(
-  //       context,
-  //       MaterialPageRoute(builder: (_) => RoomPage(room, listener)),
-  //     );
-  //   } catch (error) {
-  //     print('Could not connect $error');
-  //     if (!context.mounted) return;
-  //     await context.showErrorDialog(error);
   //   }
   // }
 
   Future<void> _startCall({bool isVideoCall = false}) async {
-    final sharedPreferences = await SharedPreferences.getInstance();
+    // 1. Create a CancelToken to control the HTTP request
+    final cancelToken = CancelToken();
 
+    // Show calling overlay
+    OverlayEntry? overlayEntry;
+
+    void removeOverlay() {
+      overlayEntry?.remove();
+      overlayEntry = null;
+      if (mounted) {
+        setState(() {
+          _busy = false;
+        });
+      }
+    }
+
+    overlayEntry = OverlayEntry(
+      builder:
+          (context) => CallingOverlay(
+            userName: widget.chat.name ?? 'Unknown',
+            isVideoCall: isVideoCall,
+            onCancel: () {
+              // 2. Trigger cancellation when user taps button
+              if (!cancelToken.isCancelled) {
+                cancelToken.cancel("User cancelled the call");
+              }
+              removeOverlay();
+            },
+          ),
+    );
+
+    Overlay.of(context).insert(overlayEntry!);
+    setState(() {
+      _busy = true;
+    });
+
+    final sharedPreferences = await SharedPreferences.getInstance();
     final accessToken = sharedPreferences.getString('access_token');
-    // Generate random room name
     final roomName = _generateRandomRoomName();
 
     print("roomName: $roomName");
     print("name: ${widget.chat.id}");
 
     try {
-      // Call your backend endpoint
       final dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer ${accessToken}';
 
+      // 3. Pass the cancelToken to the request
       final response = await dio.post(
         '${base_url_dev}/chat/call/${widget.chat.id}',
         data: {'room': roomName, 'isVideoCall': isVideoCall},
+        cancelToken: cancelToken,
       );
+
+      // 4. Check if cancelled immediately after await (in case cancel happened during response processing)
+      if (cancelToken.isCancelled) {
+        removeOverlay();
+        return;
+      }
 
       print("Response: ${response.data}");
 
-      // Check if status code is 201
       if (response.statusCode == 201) {
         final responseData = response.data['data'];
         final String token = responseData['token'];
 
         if (token == null || token.isEmpty) {
+          removeOverlay();
           if (!mounted) return;
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -407,52 +492,31 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
           );
           return;
         }
-        // _joinRoomDirectly(context);
-        // return;
-        // Navigate to CallScreen with the generated room name
+
+        // Navigate to call room
         if (!mounted) return;
-        print("token ${token}");
-        // _join(
-        //   "wss://navicare-dmw0dh3w.livekit.cloud",
-        //   token,
-        //   context,
-        // );
-        final token2 =
-            "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
-        _join(
+
+        // Wait a moment for user to see the calling screen
+        await Future.delayed(const Duration(milliseconds: 500));
+
+        // 5. Check cancellation again before the heavy lifting of joining video
+        if (cancelToken.isCancelled) {
+          removeOverlay();
+          return;
+        }
+
+        // Join the call
+        await _join(
           "wss://demo-eukecq5l.livekit.cloud",
           token,
           context,
           isVideoCall: isVideoCall,
+          onBeforeNavigate: () {
+            removeOverlay();
+          },
         );
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder:
-        //         (context) =>
-        //         // CallScreen(
-        //         //   roomName: roomName,
-        //         //   participantName: widget.chat.name ?? "Unknown",
-        //         //   isVideoCall: isVideoCall,
-        //         //   chatId: widget.chat.id,
-        //         // ),
-        //         PreJoinPage(
-        //           args: JoinArgs(
-        //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
-        //             token: token2, // Your known token
-        //             // token:
-        //             //     "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDE5NDMyMywibmJmIjowLCJzdWIiOiJtZW1lLXVzZXJuYW1lIn0.jMqEzPA1cRVRcdrIeSqns9UaBmQ67Ce9GXgIQflnEh8",
-        //             adaptiveStream: true,
-        //             dynacast: true,
-        //             simulcast: false,
-        //             e2ee: false,
-        //             preferredCodec: 'VP8',
-        //             enableBackupVideoCodec: true,
-        //           ),
-        //         ),
-        //   ),
-        // );
       } else {
+        removeOverlay();
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -464,6 +528,14 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         );
       }
     } on DioException catch (e) {
+      removeOverlay();
+
+      // 6. Handle the specific Cancel exception silently
+      if (CancelToken.isCancel(e)) {
+        print("Call flow cancelled by user.");
+        return;
+      }
+
       print("DioException: ${e.toString()}");
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -473,6 +545,8 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         ),
       );
     } catch (e) {
+      removeOverlay();
+      print("Unexpected error: $e");
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -480,6 +554,11 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
           backgroundColor: Colors.red,
         ),
       );
+    } finally {
+      // Ensure overlay is removed if logic falls through
+      if (overlayEntry != null) {
+        removeOverlay();
+      }
     }
   }
 
@@ -592,8 +671,10 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(20),
                       topRight: const Radius.circular(20),
-                      bottomLeft: isMe ? const Radius.circular(20) : Radius.zero,
-                      bottomRight: isMe ? Radius.zero : const Radius.circular(20),
+                      bottomLeft:
+                          isMe ? const Radius.circular(20) : Radius.zero,
+                      bottomRight:
+                          isMe ? Radius.zero : const Radius.circular(20),
                     ),
                   ),
                   padding: const EdgeInsets.symmetric(
@@ -666,7 +747,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         // Only allow selecting own messages? Telegram allows selecting any message to forward/delete (delete for everyone depends).
         // The prompt implies "we can go and select other chats as well and delete all at once".
         // Typically users can only delete their own messages for everyone, or delete any message for themselves.
-        // Assuming standard behavior: allow selecting any message. 
+        // Assuming standard behavior: allow selecting any message.
         // The implementation of delete will handle permissions (or the backend will).
         _toggleSelectionMode(message.id);
       },
@@ -676,9 +757,10 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
         }
       },
       child: Container(
-        color: _isSelectionMode && isSelected 
-            ? AppColors.primary.withOpacity(0.1) 
-            : Colors.transparent,
+        color:
+            _isSelectionMode && isSelected
+                ? AppColors.primary.withOpacity(0.1)
+                : Colors.transparent,
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         child: Row(
           children: [
@@ -696,9 +778,14 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                       width: 2,
                     ),
                   ),
-                  child: isSelected
-                      ? const Icon(Icons.check, size: 16, color: Colors.white)
-                      : null,
+                  child:
+                      isSelected
+                          ? const Icon(
+                            Icons.check,
+                            size: 16,
+                            color: Colors.white,
+                          )
+                          : null,
                 ),
               ),
             Expanded(child: bubbleContent),
@@ -707,7 +794,6 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -741,168 +827,186 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      appBar: _isSelectionMode 
-        ? AppBar(
-            surfaceTintColor: Colors.transparent,
-            backgroundColor: Colors.white,
-            elevation: 1,
-            leading: IconButton(
-              icon: const Icon(Icons.close, color: Colors.black),
-              onPressed: _exitSelectionMode,
-            ),
-            title: Text('${_selectedMessageIds.length}', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.delete, color: Colors.black),
-                onPressed: _deleteSelectedMessages,
-              ),
-            ],
-          )
-        : AppBar(
-        surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        shadowColor: Colors.black.withOpacity(0.1),
-        leadingWidth: 30,
-        title: Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                // Check if it's a user with a profile image
-                if (widget.chat.avatarUrl != null &&
-                    widget.chat.avatarUrl!.isNotEmpty) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder:
-                          (context) => FullScreenImageViewer(
-                            imageUrl: widget.chat.avatarUrl!,
-                            heroTag: 'appbar-avatar-${widget.chat.id}',
-                          ),
-                    ),
-                  );
-                }
-
-                if (widget.chat.isGroup != null &&
-                    widget.chat.isGroup == true) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => GroupProfileScreen(
-                            therapist: widget.chat.user,
-                            groupName: widget.chat.name ?? 'Group Chat',
-                            groupMembers: widget.chat.groupList,
-                          ),
-                    ),
-                  );
-                }
-              },
-              child:
-                  (widget.chat.isGroup != null && widget.chat.isGroup == false)
-                      ? Hero(
-                        tag: 'appbar-avatar-${widget.chat.id}',
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(25),
-                          child:
-                              widget.chat.avatarUrl != null &&
-                                      widget.chat.avatarUrl!.isNotEmpty
-                                  ? Image(
-                                    image: NetworkImage(widget.chat.avatarUrl!),
-                                    width: 50,
-                                    height: 50,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image(
-                                        image: AssetImage(
-                                          getAvatarImage(
-                                            widget.chat.avatar ?? 0,
-                                          ),
-                                        ),
-                                        width: 80,
-                                        height: 80,
-                                      );
-                                    },
-                                  )
-                                  : Image.asset(
-                                    getAvatarImage(widget.chat.avatar ?? 0),
-                                    width: 40,
-                                    height: 40,
-                                    fit: BoxFit.cover,
-                                  ),
-                        ),
-                      )
-                      : Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          shape:
-                              (widget.chat.isGroup != null &&
-                                      widget.chat.isGroup == true)
-                                  ? BoxShape.rectangle
-                                  : BoxShape.circle,
-                          borderRadius:
-                              (widget.chat.isGroup != null &&
-                                      widget.chat.isGroup == true)
-                                  ? BorderRadius.circular(12)
-                                  : null,
-                          gradient: LinearGradient(
-                            colors: getRandomGradient(),
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            initials(
-                              widget.chat.isGroup != null &&
-                                      widget.chat.isGroup == false
-                                  ? '${widget.chat.name}'
-                                  : 'Group',
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.chat.name ?? 'Unknown',
-                  style: const TextStyle(fontSize: 16),
+      appBar:
+          _isSelectionMode
+              ? AppBar(
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.white,
+                elevation: 1,
+                leading: IconButton(
+                  icon: const Icon(Icons.close, color: Colors.black),
+                  onPressed: _exitSelectionMode,
                 ),
-                if (widget.chat.isGroup == false)
-                  Text(
-                    isOnline ? 'Online' : 'Offline',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isOnline ? Colors.green : Colors.grey,
-                    ),
+                title: Text(
+                  '${_selectedMessageIds.length}',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-              ],
-            ),
-          ],
-        ),
-        actions: [
-          if (widget.chat.isGroup != null && widget.chat.isGroup == false)
-            // if (!(_busy))
-            IconButton(
-              icon: const Icon(Icons.phone),
-              onPressed: () => _startCall(isVideoCall: false),
-              //  onPressed: _busy ? null : () => _join(context),
-            ),
-          if (widget.chat.isGroup != null && widget.chat.isGroup == false)
-            IconButton(
-              icon: const Icon(Icons.videocam_outlined),
-              onPressed: () => _startCall(isVideoCall: true),
-            ),
-        ],
-      ),
+                ),
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.black),
+                    onPressed: _deleteSelectedMessages,
+                  ),
+                ],
+              )
+              : AppBar(
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                shadowColor: Colors.black.withOpacity(0.1),
+                leadingWidth: 30,
+                title: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        // Check if it's a user with a profile image
+                        if (widget.chat.avatarUrl != null &&
+                            widget.chat.avatarUrl!.isNotEmpty) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => FullScreenImageViewer(
+                                    imageUrl: widget.chat.avatarUrl!,
+                                    heroTag: 'appbar-avatar-${widget.chat.id}',
+                                  ),
+                            ),
+                          );
+                        }
+
+                        if (widget.chat.isGroup != null &&
+                            widget.chat.isGroup == true) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => GroupProfileScreen(
+                                    therapist: widget.chat.user,
+                                    groupName: widget.chat.name ?? 'Group Chat',
+                                    groupMembers: widget.chat.groupList,
+                                  ),
+                            ),
+                          );
+                        }
+                      },
+                      child:
+                          (widget.chat.isGroup != null &&
+                                  widget.chat.isGroup == false)
+                              ? Hero(
+                                tag: 'appbar-avatar-${widget.chat.id}',
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(25),
+                                  child:
+                                      widget.chat.avatarUrl != null &&
+                                              widget.chat.avatarUrl!.isNotEmpty
+                                          ? Image(
+                                            image: NetworkImage(
+                                              widget.chat.avatarUrl!,
+                                            ),
+                                            width: 50,
+                                            height: 50,
+                                            fit: BoxFit.cover,
+                                            errorBuilder: (
+                                              context,
+                                              error,
+                                              stackTrace,
+                                            ) {
+                                              return Image(
+                                                image: AssetImage(
+                                                  getAvatarImage(
+                                                    widget.chat.avatar ?? 0,
+                                                  ),
+                                                ),
+                                                width: 80,
+                                                height: 80,
+                                              );
+                                            },
+                                          )
+                                          : Image.asset(
+                                            getAvatarImage(
+                                              widget.chat.avatar ?? 0,
+                                            ),
+                                            width: 40,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                ),
+                              )
+                              : Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape:
+                                      (widget.chat.isGroup != null &&
+                                              widget.chat.isGroup == true)
+                                          ? BoxShape.rectangle
+                                          : BoxShape.circle,
+                                  borderRadius:
+                                      (widget.chat.isGroup != null &&
+                                              widget.chat.isGroup == true)
+                                          ? BorderRadius.circular(12)
+                                          : null,
+                                  gradient: LinearGradient(
+                                    colors: getRandomGradient(),
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    initials(
+                                      widget.chat.isGroup != null &&
+                                              widget.chat.isGroup == false
+                                          ? '${widget.chat.name}'
+                                          : 'Group',
+                                    ),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                    ),
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.chat.name ?? 'Unknown',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        if (widget.chat.isGroup == false)
+                          Text(
+                            isOnline ? 'Online' : 'Offline',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isOnline ? Colors.green : Colors.grey,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  if (widget.chat.isGroup != null &&
+                      widget.chat.isGroup == false)
+                    // if (!(_busy))
+                    IconButton(
+                      icon: const Icon(Icons.phone),
+                      onPressed: () => _startCall(isVideoCall: false),
+                      //  onPressed: _busy ? null : () => _join(context),
+                    ),
+                  if (widget.chat.isGroup != null &&
+                      widget.chat.isGroup == false)
+                    IconButton(
+                      icon: const Icon(Icons.videocam_outlined),
+                      onPressed: () => _startCall(isVideoCall: true),
+                    ),
+                ],
+              ),
 
       body: Column(
         children: [
@@ -932,7 +1036,12 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
           ),
 
           Container(
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 30),
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 8,
+              bottom: 30,
+            ),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -965,7 +1074,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                     builder: (context, isSending, _) {
                       return IconButton(
                         icon: Icon(
-                          Icons.send_rounded, 
+                          Icons.send_rounded,
                           color: isSending ? Colors.grey : AppColors.primary,
                         ),
                         onPressed: isSending ? null : _sendMessage,
@@ -1004,4 +1113,185 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     _scrollController.dispose();
     super.dispose();
   }
+}
+
+class CallingOverlay extends StatefulWidget {
+  final String userName;
+  final bool isVideoCall;
+  final VoidCallback onCancel;
+
+  const CallingOverlay({
+    super.key,
+    required this.userName,
+    required this.isVideoCall,
+    required this.onCancel,
+  });
+
+  @override
+  State<CallingOverlay> createState() => _CallingOverlayState();
+}
+
+class _CallingOverlayState extends State<CallingOverlay>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _animation = Tween<double>(
+      begin: 0.8,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black.withOpacity(0.85),
+      child: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Animated avatar
+            ScaleTransition(
+              scale: _animation,
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primary,
+                      AppColors.primary.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withOpacity(0.4),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    getInitials(widget.userName),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            // User name
+            Text(
+              widget.userName,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // Call type and status
+            Text(
+              widget.isVideoCall ? 'Video Call' : 'Voice Call',
+              style: const TextStyle(color: Colors.white70, fontSize: 16),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Calling text with animated dots
+            _buildCallingText(),
+
+            const SizedBox(height: 60),
+
+            // Cancel button
+            // ElevatedButton(
+            //   onPressed: widget.onCancel,
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.red,
+            //     foregroundColor: Colors.white,
+            //     padding: const EdgeInsets.symmetric(
+            //       horizontal: 32,
+            //       vertical: 12,
+            //     ),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(25),
+            //     ),
+            //   ),
+            //   child: const Row(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       Icon(Icons.close, size: 20),
+            //       SizedBox(width: 8),
+            //       Text('Cancel Call', style: TextStyle(fontSize: 16)),
+            //     ],
+            //   ),
+            // ),
+
+            // const SizedBox(height: 30),
+
+            // Spinning indicator
+            CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+              strokeWidth: 3,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCallingText() {
+    return TweenAnimationBuilder<int>(
+      tween: IntTween(begin: 0, end: 3),
+      duration: const Duration(milliseconds: 1200),
+      // repeatForever: true,
+      builder: (context, value, child) {
+        String dots = '.' * value;
+        return Text(
+          'Calling$dots',
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+// Helper function for initials
+String getInitials(String name) {
+  final parts = name.split(' ');
+  if (parts.length >= 2) {
+    return '${parts[0][0]}${parts[1][0]}';
+  } else if (name.isNotEmpty) {
+    return name[0];
+  }
+  return 'U';
 }
