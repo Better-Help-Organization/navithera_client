@@ -7,20 +7,23 @@ part of 'ai_chat_models.dart';
 // **************************************************************************
 
 _$AiChatRequestImpl _$$AiChatRequestImplFromJson(Map<String, dynamic> json) =>
-    _$AiChatRequestImpl(prompt: json['prompt'] as String);
+    _$AiChatRequestImpl(query: json['query'] as String);
 
 Map<String, dynamic> _$$AiChatRequestImplToJson(_$AiChatRequestImpl instance) =>
-    <String, dynamic>{'prompt': instance.prompt};
+    <String, dynamic>{'query': instance.query};
 
-_$AiChatResponseImpl _$$AiChatResponseImplFromJson(Map<String, dynamic> json) =>
-    _$AiChatResponseImpl(
-      success: json['success'] as bool,
-      errors:
-          (json['errors'] as List<dynamic>).map((e) => e as String).toList(),
-      messages:
-          (json['messages'] as List<dynamic>).map((e) => e as String).toList(),
-      result: AiChatResult.fromJson(json['result'] as Map<String, dynamic>),
-    );
+_$AiChatResponseImpl _$$AiChatResponseImplFromJson(
+  Map<String, dynamic> json,
+) => _$AiChatResponseImpl(
+  success: json['success'] as bool,
+  errors:
+      (json['errors'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  messages:
+      (json['messages'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  result: AiChatResult.fromJson(json['result'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$$AiChatResponseImplToJson(
   _$AiChatResponseImpl instance,
