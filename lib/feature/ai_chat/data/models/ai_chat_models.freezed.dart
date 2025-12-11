@@ -21,7 +21,7 @@ AiChatRequest _$AiChatRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AiChatRequest {
-  String get prompt => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
 
   /// Serializes this AiChatRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $AiChatRequestCopyWith<$Res> {
     $Res Function(AiChatRequest) then,
   ) = _$AiChatRequestCopyWithImpl<$Res, AiChatRequest>;
   @useResult
-  $Res call({String prompt});
+  $Res call({String query});
 }
 
 /// @nodoc
@@ -57,13 +57,13 @@ class _$AiChatRequestCopyWithImpl<$Res, $Val extends AiChatRequest>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? prompt = null}) {
+  $Res call({Object? query = null}) {
     return _then(
       _value.copyWith(
-            prompt:
-                null == prompt
-                    ? _value.prompt
-                    : prompt // ignore: cast_nullable_to_non_nullable
+            query:
+                null == query
+                    ? _value.query
+                    : query // ignore: cast_nullable_to_non_nullable
                         as String,
           )
           as $Val,
@@ -80,7 +80,7 @@ abstract class _$$AiChatRequestImplCopyWith<$Res>
   ) = __$$AiChatRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String prompt});
+  $Res call({String query});
 }
 
 /// @nodoc
@@ -96,13 +96,13 @@ class __$$AiChatRequestImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? prompt = null}) {
+  $Res call({Object? query = null}) {
     return _then(
       _$AiChatRequestImpl(
-        prompt:
-            null == prompt
-                ? _value.prompt
-                : prompt // ignore: cast_nullable_to_non_nullable
+        query:
+            null == query
+                ? _value.query
+                : query // ignore: cast_nullable_to_non_nullable
                     as String,
       ),
     );
@@ -112,17 +112,17 @@ class __$$AiChatRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AiChatRequestImpl implements _AiChatRequest {
-  const _$AiChatRequestImpl({required this.prompt});
+  const _$AiChatRequestImpl({required this.query});
 
   factory _$AiChatRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiChatRequestImplFromJson(json);
 
   @override
-  final String prompt;
+  final String query;
 
   @override
   String toString() {
-    return 'AiChatRequest(prompt: $prompt)';
+    return 'AiChatRequest(query: $query)';
   }
 
   @override
@@ -130,12 +130,12 @@ class _$AiChatRequestImpl implements _AiChatRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AiChatRequestImpl &&
-            (identical(other.prompt, prompt) || other.prompt == prompt));
+            (identical(other.query, query) || other.query == query));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, prompt);
+  int get hashCode => Object.hash(runtimeType, query);
 
   /// Create a copy of AiChatRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -152,14 +152,14 @@ class _$AiChatRequestImpl implements _AiChatRequest {
 }
 
 abstract class _AiChatRequest implements AiChatRequest {
-  const factory _AiChatRequest({required final String prompt}) =
+  const factory _AiChatRequest({required final String query}) =
       _$AiChatRequestImpl;
 
   factory _AiChatRequest.fromJson(Map<String, dynamic> json) =
       _$AiChatRequestImpl.fromJson;
 
   @override
-  String get prompt;
+  String get query;
 
   /// Create a copy of AiChatRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -336,8 +336,8 @@ class __$$AiChatResponseImplCopyWithImpl<$Res>
 class _$AiChatResponseImpl implements _AiChatResponse {
   const _$AiChatResponseImpl({
     required this.success,
-    required final List<String> errors,
-    required final List<String> messages,
+    final List<String> errors = const [],
+    final List<String> messages = const [],
     required this.result,
   }) : _errors = errors,
        _messages = messages;
@@ -349,6 +349,7 @@ class _$AiChatResponseImpl implements _AiChatResponse {
   final bool success;
   final List<String> _errors;
   @override
+  @JsonKey()
   List<String> get errors {
     if (_errors is EqualUnmodifiableListView) return _errors;
     // ignore: implicit_dynamic_type
@@ -357,6 +358,7 @@ class _$AiChatResponseImpl implements _AiChatResponse {
 
   final List<String> _messages;
   @override
+  @JsonKey()
   List<String> get messages {
     if (_messages is EqualUnmodifiableListView) return _messages;
     // ignore: implicit_dynamic_type
@@ -412,8 +414,8 @@ class _$AiChatResponseImpl implements _AiChatResponse {
 abstract class _AiChatResponse implements AiChatResponse {
   const factory _AiChatResponse({
     required final bool success,
-    required final List<String> errors,
-    required final List<String> messages,
+    final List<String> errors,
+    final List<String> messages,
     required final AiChatResult result,
   }) = _$AiChatResponseImpl;
 

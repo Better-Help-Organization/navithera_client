@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/constants/base_url.dart';
@@ -356,10 +358,21 @@ class _MessageBubble extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Text(
-                  message.content,
+                child: Linkify(
+                  onOpen: (link) async {
+                    final uri = Uri.parse(link.url);
+                    if (await canLaunchUrl(uri)) {
+                      await launchUrl(uri, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                  text: message.content,
                   style: AppTypography.bodyMedium.copyWith(
                     color: message.isUser ? Colors.white : Colors.black87,
+                  ),
+                  linkStyle: AppTypography.bodyMedium.copyWith(
+                    color: message.isUser ? Colors.white : AppColors.primary,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),

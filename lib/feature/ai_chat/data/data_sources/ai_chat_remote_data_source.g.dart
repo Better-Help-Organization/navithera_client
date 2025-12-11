@@ -20,6 +20,7 @@ class _AiChatRemoteDataSource implements AiChatRemoteDataSource {
   @override
   Future<AiChatResponse> sendMessage(
     String accountId,
+    String ragId,
     AiChatRequest request,
   ) async {
     final _extra = <String, dynamic>{};
@@ -30,7 +31,7 @@ class _AiChatRemoteDataSource implements AiChatRemoteDataSource {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/client/v4/accounts/${accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct',
+            '/client/v4/accounts/${accountId}/autorag/rags/${ragId}/ai-search',
             queryParameters: queryParameters,
             data: _data,
           )

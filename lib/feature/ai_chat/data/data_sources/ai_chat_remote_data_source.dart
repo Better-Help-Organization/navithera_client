@@ -10,9 +10,10 @@ part 'ai_chat_remote_data_source.g.dart';
 abstract class AiChatRemoteDataSource {
   factory AiChatRemoteDataSource(Dio dio) = _AiChatRemoteDataSource;
 
-  @POST('/client/v4/accounts/{accountId}/ai/run/${AiConfig.modelEndpoint}')
+  @POST('/client/v4/accounts/{accountId}/autorag/rags/{ragId}/ai-search')
   Future<AiChatResponse> sendMessage(
     @Path('accountId') String accountId,
+    @Path('ragId') String ragId,
     @Body() AiChatRequest request,
   );
 }
@@ -73,10 +74,14 @@ class AiChatService {
       // Enhance prompt with therapy assistant context
       final finalPrompt =
           '''You are Navi, a helpful AI therapy assistant. The user is asking: "$prompt"
-Please provide supportive, empathetic guidance while being professional. Keep your responses concise and to the point - aim for 2-3 sentences maximum. If this requires specific medical advice, recommend consulting with a healthcare professional.''';
-
-      final request = AiChatRequest(prompt: finalPrompt);
-      return await _dataSource.sendMessage(AiConfig.accountId, request);
+          Please provide supportive, empathetic guidance while being professional.Answer clearly and directly, focusing only on what was asked. nothing extra answer is needed.
+''';
+      final request = AiChatRequest(query: finalPrompt);
+      return await _dataSource.sendMessage(
+        AiConfig.accountId,
+        AiConfig.ragId,
+        request,
+      );
     } on DioException catch (e) {
       throw _handleDioException(e);
     } catch (e) {
