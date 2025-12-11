@@ -25,6 +25,7 @@ import 'package:navithera_client/feature/chat/presentation/pages/chat_list_scree
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
 import 'package:navithera_client/feature/home/presentation/pages/home_screen.dart';
+import 'package:navithera_client/feature/home/presentation/providers/live_session_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/main.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -209,6 +210,7 @@ class FCMService {
 
     const refreshArr = [
       "1",
+      "6",
       "8",
       "9",
       "29",
@@ -234,6 +236,7 @@ class FCMService {
         // await container.read(matchedTherapistProvider.notifier).load();
         container.read(upcomingSessionProvider.notifier).loadNext();
 
+        container.read(liveSessionProvider.notifier).loadActiveCalls();
         // Future<void> _loadUnreadCount() async {
         //   final notificationService = container.read(
         //     notificationServiceProvider,
