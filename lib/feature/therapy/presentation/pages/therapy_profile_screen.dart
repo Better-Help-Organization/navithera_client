@@ -1049,6 +1049,7 @@ class _TherapistProfileScreenState
   @override
   Widget build(BuildContext context) {
     final therapist = widget.therapist;
+    log("right here and heretherapist: ${therapist.expertise}");
 
     return Scaffold(
       appBar: AppBar(

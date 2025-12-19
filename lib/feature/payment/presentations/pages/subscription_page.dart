@@ -384,13 +384,97 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     }
   }
 
+  void _handleSubscriptionTap(Subscription subscription) async {
+    final subscriptionId = subscription.id;
+    final providerId = ref.read(selectedPrefProvider);
+    final user = ref.watch(currentUserProvider);
+
+    try {
+      // Future<void> _checkIfPrefFilled() async {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      final accessToken = sharedPreferences.getString('access_token');
+
+      try {
+        final finalsubscriptionId =
+            await SubscriptionService.createSubscription(
+              subscriptionId: subscriptionId,
+              userId: user?.id,
+            );
+
+        print("Selected subscription ID: $finalsubscriptionId");
+        print("Selected provider ID: $providerId");
+        print("Navigating to payment page with subscription ID");
+
+        context.go(
+          '/payment?preferenceId=$providerId',
+          extra: finalsubscriptionId,
+        );
+        // print("hi hi");
+        // final dio = Dio();
+        // dio.options.headers['Authorization'] = 'Bearer $accessToken';
+
+        // final response = await dio.post(
+        //   '${base_url_dev}/telebirr/user-sub',
+        //   data: {
+        //     'subscriptionId': finalsubscriptionId,
+        //     'title': _getTypeLabel(subscription.type),
+        //     'amount': subscription.price,
+        //   },
+        // );
+
+        // print("responsexoxo: ${response.data}");
+
+        // if (response.statusCode == 200) {
+        //   print(" Subscription created successfully. ");
+        //   // Your existing navigation code here...
+        // } else {
+        //   if (!mounted) return;
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(
+        //       content: Text('an error occured'),
+        //       backgroundColor: Colors.red,
+        //     ),
+        //   );
+        // }
+      } on DioException catch (e) {
+        log("dio error: ${e.response?.data}");
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: ${e.response?.data['message'] ?? e.message}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } catch (e) {
+        log("dio error2: ${e.toString()}");
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An unexpected error occurred'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        // }
+      }
+    } catch (e) {
+      print("Error creating subscription: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("An error occurred. try again"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  // ... your existing imports ...
+
   // void _handleSubscriptionTap(Subscription subscription) async {
   //   final subscriptionId = subscription.id;
   //   final providerId = ref.read(selectedPrefProvider);
   //   final user = ref.watch(currentUserProvider);
 
   //   try {
-  //     // Future<void> _checkIfPrefFilled() async {
   //     final sharedPreferences = await SharedPreferences.getInstance();
   //     final accessToken = sharedPreferences.getString('access_token');
 
@@ -403,13 +487,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
   //       print("Selected subscription ID: $finalsubscriptionId");
   //       print("Selected provider ID: $providerId");
-  //       print("Navigating to payment page with subscription ID");
 
-  //       // context.go(
-  //       //   '/payment?preferenceId=$providerId',
-  //       //   extra: finalsubscriptionId,
-  //       // );
-  //       print("hi hi");
   //       final dio = Dio();
   //       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
@@ -418,20 +496,35 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   //         data: {
   //           'subscriptionId': finalsubscriptionId,
   //           'title': _getTypeLabel(subscription.type),
-  //           'amount': subscription.price,
+  //           // 'amount': subscription.price,
   //         },
   //       );
 
   //       print("responsexoxo: ${response.data}");
 
-  //       if (response.statusCode == 200) {
-  //         print(" Subscription created successfully. ");
-  //         // Your existing navigation code here...
+  //       if (response.statusCode == 200 || response.statusCode == 201) {
+  //         final responseData = response.data;
+  //         final paymentUrl = responseData['data'];
+
+  //         if (paymentUrl != null && paymentUrl is String) {
+  //           print("Payment URL: $paymentUrl");
+
+  //           // Open the URL automatically
+  //           await _openPaymentUrl(paymentUrl);
+  //         } else {
+  //           if (!mounted) return;
+  //           ScaffoldMessenger.of(context).showSnackBar(
+  //             SnackBar(
+  //               content: Text('Payment URL not found in response'),
+  //               backgroundColor: Colors.red,
+  //             ),
+  //           );
+  //         }
   //       } else {
   //         if (!mounted) return;
   //         ScaffoldMessenger.of(context).showSnackBar(
   //           SnackBar(
-  //             content: Text('an error occured'),
+  //             content: Text('An error occurred: ${response.statusCode}'),
   //             backgroundColor: Colors.red,
   //           ),
   //         );
@@ -454,10 +547,10 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   //           backgroundColor: Colors.red,
   //         ),
   //       );
-  //       // }
   //     }
   //   } catch (e) {
   //     print("Error creating subscription: $e");
+  //     if (!mounted) return;
   //     ScaffoldMessenger.of(context).showSnackBar(
   //       SnackBar(
   //         content: Text("An error occurred. try again"),
@@ -466,99 +559,6 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   //     );
   //   }
   // }
-
-  // ... your existing imports ...
-
-  void _handleSubscriptionTap(Subscription subscription) async {
-    final subscriptionId = subscription.id;
-    final providerId = ref.read(selectedPrefProvider);
-    final user = ref.watch(currentUserProvider);
-
-    try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
-
-      try {
-        final finalsubscriptionId =
-            await SubscriptionService.createSubscription(
-              subscriptionId: subscriptionId,
-              userId: user?.id,
-            );
-
-        print("Selected subscription ID: $finalsubscriptionId");
-        print("Selected provider ID: $providerId");
-
-        final dio = Dio();
-        dio.options.headers['Authorization'] = 'Bearer $accessToken';
-
-        final response = await dio.post(
-          '${base_url_dev}/telebirr/user-sub',
-          data: {
-            'subscriptionId': finalsubscriptionId,
-            'title': _getTypeLabel(subscription.type),
-            // 'amount': subscription.price,
-          },
-        );
-
-        print("responsexoxo: ${response.data}");
-
-        if (response.statusCode == 200 || response.statusCode == 201) {
-          final responseData = response.data;
-          final paymentUrl = responseData['data'];
-
-          if (paymentUrl != null && paymentUrl is String) {
-            print("Payment URL: $paymentUrl");
-
-            // Open the URL automatically
-            await _openPaymentUrl(paymentUrl);
-          } else {
-            if (!mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Payment URL not found in response'),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        } else {
-          if (!mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('An error occurred: ${response.statusCode}'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      } on DioException catch (e) {
-        log("dio error: ${e.response?.data}");
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Error: ${e.response?.data['message'] ?? e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      } catch (e) {
-        log("dio error2: ${e.toString()}");
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('An unexpected error occurred'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      print("Error creating subscription: $e");
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("An error occurred. try again"),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
 
   // Future<void> __openPaymentUrlUrl(String url) async {
   //   // Navigator.push(

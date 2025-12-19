@@ -45,6 +45,25 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:536465457827:android:da0572e1ca95d2e1adb516",
+        "android_client_info": {
+          "package_name": "com.Abthon.navitheraTherapist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:536465457827:android:5bcf6ee649b4f05badb516",
         "android_client_info": {
           "package_name": "com.Abthon.navithera_client"

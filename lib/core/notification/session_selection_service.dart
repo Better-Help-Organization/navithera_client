@@ -212,11 +212,12 @@ class _SessionSelectionDialogState
 
     if (result['success'] == true) {
       // Close dialog first, then show success snackbar.
-      widget.onSelectionComplete();
       // Navigator.of(context).pop();
       await ref.read(authProvider.notifier).getCurrentUser();
       ref.read(routerProvider).go('/auth-gate');
+      // print("hey hey23");
       ref.read(upcomingSessionProvider.notifier).loadNext();
+      widget.onSelectionComplete();
 
       ScaffoldMessenger.of(rootContext).showSnackBar(
         SnackBar(
