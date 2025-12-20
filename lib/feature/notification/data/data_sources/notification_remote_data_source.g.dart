@@ -47,7 +47,7 @@ class _NotificationRemoteDataSource implements NotificationRemoteDataSource {
     try {
       _value = NotificationListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

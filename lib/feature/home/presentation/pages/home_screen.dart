@@ -25,7 +25,7 @@ import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/core/util/greeting.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 //import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:url_launcher/url_launcher.dart';
 
 final notificationCountProvider =

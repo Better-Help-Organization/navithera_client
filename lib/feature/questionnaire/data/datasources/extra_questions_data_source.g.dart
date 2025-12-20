@@ -38,7 +38,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = LanguagesResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -65,7 +65,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = LevelsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -92,7 +92,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = PreferenceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -121,7 +121,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = PreferenceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -150,7 +150,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = PreferenceGroupResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -177,7 +177,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = MatchResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -207,7 +207,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = PreferenceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -237,7 +237,7 @@ class _ExtraQuestionsDataSource implements ExtraQuestionsDataSource {
     try {
       _value = PreferenceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

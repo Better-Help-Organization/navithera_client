@@ -4,7 +4,7 @@ import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import "package:navithera_client/l10n/app_localizations.dart";
 
 class UpdatePersonalDetails extends ConsumerStatefulWidget {
   const UpdatePersonalDetails({super.key});

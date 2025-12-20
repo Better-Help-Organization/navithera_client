@@ -38,7 +38,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -65,7 +65,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -92,7 +92,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ProfileApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -121,7 +121,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ProfileApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -151,7 +151,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ProfileApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -197,7 +197,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ApiResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -226,7 +226,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ForgotPasswordResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -255,7 +255,7 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
     try {
       _value = ResetPasswordResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

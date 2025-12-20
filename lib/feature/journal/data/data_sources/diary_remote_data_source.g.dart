@@ -47,7 +47,7 @@ class _DiaryRemoteDataSource implements DiaryRemoteDataSource {
     try {
       _value = DiaryListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -77,7 +77,7 @@ class _DiaryRemoteDataSource implements DiaryRemoteDataSource {
     try {
       _value = DiaryCreateResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -108,7 +108,7 @@ class _DiaryRemoteDataSource implements DiaryRemoteDataSource {
     try {
       _value = DiaryEditResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -135,7 +135,7 @@ class _DiaryRemoteDataSource implements DiaryRemoteDataSource {
     try {
       _value = DiaryEditResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

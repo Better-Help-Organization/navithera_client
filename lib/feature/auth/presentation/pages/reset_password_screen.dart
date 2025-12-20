@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import "package:navithera_client/l10n/app_localizations.dart";
 
 class ResetPasswordScreen extends ConsumerStatefulWidget {
   final String email;

@@ -39,7 +39,7 @@ class _UsersRemoteDataSource implements UsersRemoteDataSource {
     try {
       _value = UsersListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      // errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

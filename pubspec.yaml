@@ -43,7 +43,7 @@ dependencies:
   googleapis_auth: ^2.0.0
   flutter_dotenv: ^5.2.1
   overlay_support: ^2.1.0
-  intl: ^0.19.0
+  intl: ^0.20.0
 
   flutter_localizations:
     sdk: flutter
@@ -73,15 +73,22 @@ dev_dependencies:
 
 flutter:
   generate: true
-  uses-material-design: true
 
+  uses-material-design: true
   assets:
     - assets/images/
     - assets/images/avatars/
     - assets/sounds/
     - assets/animations/
-
   fonts:
     - family: PlusJakartaSans
       fonts:
         - asset: assets/fonts/PlusJakartaSans-VariableFont_wght.ttf
+      
+flutter_native_splash:
+  image: assets/images/logo.png
+  color: "#ffffff"         # background color for splash
+  android: true
+  ios: true
+  android_gravity: center
+  ios_content_mode: center

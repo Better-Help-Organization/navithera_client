@@ -6,7 +6,7 @@ import 'package:navithera_client/feature/home/presentation/pages/home_screen.dar
 import 'package:navithera_client/feature/tools/presentation/pages/tools_screen.dart';
 import 'package:navithera_client/feature/profile/presentation/pages/profile_screen.dart';
 import 'package:navithera_client/feature/ai_chat/presentation/pages/ai_chat_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import "package:navithera_client/l10n/app_localizations.dart";
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
