@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 //import 'package:navithera_client/feature/diary/data/models/diary_models.dart';
-import "package:flutter_gen/gen_l10n/app_localization.dart";
+import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:navithera_client/feature/journal/data/models/diary_models.dart';
 import 'package:navithera_client/feature/journal/presentation/providers/diary_provider.dart';
 

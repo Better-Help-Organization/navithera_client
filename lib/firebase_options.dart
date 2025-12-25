@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '536465457827',
     projectId: 'navi-care-b7a15',
     storageBucket: 'navi-care-b7a15.firebasestorage.app',
-    iosBundleId: 'com.Abthon.navicare',
+    iosBundleId: 'com.abthon.navithera',
   );
 
 }

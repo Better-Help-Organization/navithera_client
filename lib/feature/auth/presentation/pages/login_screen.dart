@@ -7,7 +7,7 @@ import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/routes/app_router.dart';
 import '../providers/auth_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localization.dart';
+import "package:navithera_client/l10n/app_localizations.dart";
 
 class LoginPage extends ConsumerStatefulWidget {
   @override

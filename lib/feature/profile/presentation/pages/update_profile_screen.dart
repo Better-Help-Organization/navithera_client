@@ -4,7 +4,7 @@ import 'package:navithera_client/feature/profile/presentation/providers/profile_
 import 'package:navithera_client/feature/profile/presentation/widgets/avatar_screen.dart';
 import 'package:navithera_client/feature/profile/presentation/widgets/student_id.dart';
 import 'package:navithera_client/feature/profile/presentation/widgets/update_personal_detail_widget.dart';
-import "package:flutter_gen/gen_l10n/app_localization.dart";
+import "package:navithera_client/l10n/app_localizations.dart";
 
 class UpdateProfileWrapperPage extends ConsumerStatefulWidget {
   final int initialIndex;
