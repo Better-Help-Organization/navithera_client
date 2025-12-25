@@ -6,7 +6,7 @@ import 'package:navithera_client/feature/journal/data/models/diary_models.dart';
 // import 'package:navithera_client/feature/diary/data/models/diary_models.dart';
 // import 'package:navithera_client/feature/diary/presentation/providers/diary_provider.dart';
 import 'package:navithera_client/feature/journal/presentation/pages/add_edit_journal.dart';
-import "package:flutter_gen/gen_l10n/app_localization.dart";
+import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:navithera_client/feature/journal/presentation/providers/diary_provider.dart';
 
 class MyJournalScreen extends ConsumerStatefulWidget {
