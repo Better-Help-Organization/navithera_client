@@ -1,6 +1,7 @@
 // lib/core/notification/notification_service.dart
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,20 +12,21 @@ import 'package:flutter_callkit_incoming/entities/ios_params.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/new_message_notificaiton.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
+import 'package:navithera_client/feature/call/exts.dart';
+import 'package:navithera_client/feature/call/pages/room.dart';
 import 'package:navithera_client/feature/chat/presentation/pages/chat_list_screen.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
 import 'package:navithera_client/feature/home/presentation/pages/home_screen.dart';
-import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
+import 'package:navithera_client/feature/home/presentation/providers/live_session_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
-import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
-import 'package:navithera_client/feature/therapy/presentation/pages/group_call_screen.dart';
 import 'package:navithera_client/main.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Import to access navigatorKey
@@ -60,9 +62,94 @@ class FCMService {
   String? _activeCallChatId;
   bool get _isCallDialogOpen => _activeCallChatId != null;
 
-  // Track recently shown CallKit notifications to prevent duplicates
-  static final Set<String> _recentCallKitIds = {};
-  static const _deduplicationWindow = Duration(seconds: 5);
+  _join(
+    String url,
+    String token,
+    BuildContext context, {
+    required bool isVideoCall,
+    required bool isGroupCall,
+    required String chatId,
+  }) async {
+    // _busy = true;
+    // setState(() {});
+
+    // final args = widget.args;
+
+    try {
+      //create new room
+      const cameraEncoding = VideoEncoding(
+        maxBitrate: 5 * 1000 * 1000,
+        maxFramerate: 30,
+      );
+
+      const screenEncoding = VideoEncoding(
+        maxBitrate: 3 * 1000 * 1000,
+        maxFramerate: 15,
+      );
+
+      final room = Room(
+        roomOptions: RoomOptions(
+          // adaptiveStream: args.adaptiveStream,
+          adaptiveStream: true,
+          dynacast: true,
+          defaultAudioPublishOptions: const AudioPublishOptions(
+            name: 'custom_audio_track_name',
+          ),
+          defaultCameraCaptureOptions: const CameraCaptureOptions(
+            maxFrameRate: 30,
+            params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
+          ),
+          defaultVideoPublishOptions: VideoPublishOptions(
+            simulcast: false,
+            // simulcast: args.simulcast,
+            videoCodec: "VP8",
+
+            videoEncoding: cameraEncoding,
+            screenShareEncoding: screenEncoding,
+          ),
+          // encryption: e2eeOptions,
+        ),
+      );
+      // Create a Listener before connecting
+      final listener = room.createListener();
+
+      await room.prepareConnection(url, token);
+
+      // Try to connect to the room
+      // This will throw an Exception if it fails for any reason.
+      await room.connect(
+        url,
+        token,
+        fastConnectOptions: FastConnectOptions(
+          microphone: TrackOption(enabled: true),
+          camera: TrackOption(enabled: isVideoCall),
+        ),
+      );
+
+      print("printed after connected ${context.mounted}");
+
+      // Use navigatorKey instead of the passed context
+      if (navigatorKey.currentContext == null) return;
+
+      // Navigate using GoRouter or Navigator with navigatorKey
+      Navigator.of(navigatorKey.currentContext!, rootNavigator: true).push(
+        MaterialPageRoute(
+          builder:
+              (_) => RoomPage(
+                room,
+                listener,
+                showVideoControl: isVideoCall,
+                isGroup: isGroupCall,
+                chatId: chatId,
+              ),
+        ),
+      );
+    } catch (error) {
+      print('Could not connect $error');
+      if (!context.mounted) return;
+      await context.showErrorDialog(error);
+    } finally {}
+  }
 
   Future<String?> getToken() async {
     try {
@@ -125,6 +212,7 @@ class FCMService {
 
     const refreshArr = [
       "1",
+      "6",
       "8",
       "9",
       "29",
@@ -150,6 +238,7 @@ class FCMService {
         // await container.read(matchedTherapistProvider.notifier).load();
         container.read(upcomingSessionProvider.notifier).loadNext();
 
+        container.read(liveSessionProvider.notifier).loadActiveCalls();
         // Future<void> _loadUnreadCount() async {
         //   final notificationService = container.read(
         //     notificationServiceProvider,
@@ -204,12 +293,8 @@ class FCMService {
         return;
       }
       if (message.data['code'] == '25' || message.data['code'] == 25) {
-        print("25 25 25 25 code received");
-        // _handleSessionSelectionNotification(message);
-        // _handleSessionNotification();
-        //final context = navigatorKey.currentContext;
-        // print("context: $context");
-        // if (context == null) return;
+        // print("25 25 25 25 code received");
+
         final context = navigatorKey.currentContext;
         print("context: $context");
         if (context == null) return;
@@ -218,6 +303,12 @@ class FCMService {
         final container = ProviderScope.containerOf(context);
         await container.read(authProvider.notifier).getCurrentUser();
         GoRouter.of(context).push('/auth-gate');
+        return;
+      }
+      if (message.data['code'] == '31' || message.data['code'] == 31) {
+        // print("25 25 25 25 code received");
+
+        _handleSessionNotification();
         return;
       }
       if (message.data['code'] == '8' || message.data['code'] == 8) {
@@ -252,7 +343,7 @@ class FCMService {
           message.data['code'] == 6) {
         final chatId = _extractChatIdFromMessage(message);
 
-        _showCallEndedSnackbar('Call ended by the other party');
+        // _showCallEndedSnackbar('Call ended by the other party');
         if (chatId != null) {
           _dismissCallPopupIfMatches(chatId);
 
@@ -296,8 +387,8 @@ class FCMService {
             call.callerName,
             call.chatId,
             call.isVideoCall,
+            call.token,
             call.isGroupCall,
-            callerAvatar: call.callerAvatar,
           );
         }
         return;
@@ -492,6 +583,12 @@ class FCMService {
       final container = ProviderScope.containerOf(context);
       await container.read(authProvider.notifier).getCurrentUser();
       GoRouter.of(context).push('/auth-gate');
+      return;
+    }
+    if (message.data['code'] == '31' || message.data['code'] == 31) {
+      // print("25 25 25 25 code received");
+
+      _handleSessionNotification();
       return;
     }
     if (message.data['code'] == '11' || message.data['code'] == 11) {
@@ -1074,16 +1171,10 @@ class FCMService {
     String participant,
     String chatId,
     bool isVideocall,
-    bool isGroupCall, {
-    int? callerAvatar,
-  }) async {
-    print('📞 _showCallInvitationDialog called:');
-    print('   Room: $roomName');
-    print('   Caller: $participant');
-    print('   ChatId: $chatId');
-    print('   IsGroupCall: $isGroupCall');
-    print('   CallerAvatar: $callerAvatar');
-
+    String token,
+    bool isGroupCall,
+  ) async {
+    print("toekn toekn toekn: $token");
     // Use the global navigator key to get the current context
     final context = navigatorKey.currentContext;
     if (context == null) {
@@ -1179,7 +1270,7 @@ class FCMService {
 
                             // Send rejection request
                             try {
-                              await rejectCall(chatId);
+                              // await rejectCall(chatId);
                             } catch (e) {
                               print('Error sending rejection: $e');
                             }
@@ -1213,29 +1304,17 @@ class FCMService {
                               dialogContext,
                               rootNavigator: true,
                             ).pop();
-
-                            // Notify backend that call was accepted (non-blocking)
-                            // TODO: Uncomment when backend implements /chat/call/accept endpoint
-                            // acceptCall(chatId).catchError((e) {
-                            //   print('Error sending acceptance: $e');
-                            // });
-
-                            // Use the main context for navigation, not dialog context
-                            final navContext = navigatorKey.currentContext;
-                            if (navContext != null) {
-                              _joinCallRoom(
-                                roomName,
-                                participant,
-                                navContext,
-                                chatId,
-                                isVideocall,
-                                isGroupCall,
-                                callerName: participant,
-                                callerAvatar: callerAvatar,
-                              );
-                            } else {
-                              print('❌ Navigation context is null');
-                            }
+                            _activeCallChatId = null;
+                            _ringtonePlayer = null;
+                            _joinCallRoom(
+                              roomName,
+                              participant,
+                              dialogContext,
+                              chatId,
+                              isVideocall,
+                              token,
+                              isGroupCall,
+                            );
                           },
                         ),
                       ],
@@ -1357,52 +1436,58 @@ class FCMService {
     BuildContext context,
     String chatId,
     bool isVideoCall,
-    bool isGroupCall, {
-    String? callerName,
-    int? callerAvatar,
-  }) {
-    print('🎯 _joinCallRoom called:');
-    print('   Room: $roomName');
-    print('   Participant: $participantName');
-    print('   ChatId: $chatId');
-    print('   IsVideoCall: $isVideoCall');
-    print('   IsGroupCall: $isGroupCall');
-    print('   CallerName: $callerName');
-    print('   CallerAvatar: $callerAvatar');
+    String token, // Add token parameter
+    bool isGroupCall,
+  ) {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) => CallScreen(
+    //           roomName: roomName,
+    //           participantName: participantName,
+    //           isVideoCall: isVideoCall,
+    //           chatId: chatId,
+    //           // token: token, // Pass to CallScreen
+    //         ),
+    //   ),
+    // );
+    final token2 =
+        "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
 
-    // Route to GroupCallScreen for group calls, CallScreen for individual calls
-    if (isGroupCall) {
-      print('✅ Navigating to GroupCallScreen');
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => GroupCallScreen(
-                roomName: roomName,
-                participantName: participantName,
-                isVideoCall: isVideoCall,
-                chatId: chatId,
-                callerName: callerName,
-                callerAvatar: callerAvatar,
-              ),
-        ),
-      );
-    } else {
-      print('✅ Navigating to CallScreen (1-to-1)');
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => CallScreen(
-                roomName: roomName,
-                participantName: participantName,
-                isVideoCall: isVideoCall,
-                chatId: chatId,
-              ),
-        ),
-      );
-    }
+    _join(
+      "wss://demo-eukecq5l.livekit.cloud",
+      token,
+      context,
+      isVideoCall: isVideoCall,
+      isGroupCall: isGroupCall,
+      chatId: chatId,
+    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) =>
+    //         // CallScreen(
+    //         //   roomName: roomName,
+    //         //   participantName: widget.chat.name ?? "Unknown",
+    //         //   isVideoCall: isVideoCall,
+    //         //   chatId: widget.chat.id,
+    //         // ),
+    //         PreJoinPage(
+    //           args: JoinArgs(
+    //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+    //             token: token, // Your known token
+    //             adaptiveStream: true,
+    //             dynacast: true,
+    //             simulcast: false,
+    //             e2ee: false,
+    //             preferredCodec: 'VP8',
+    //             enableBackupVideoCodec: true,
+    //           ),
+    //         ),
+    //   ),
+    // );
   }
 
   Future<void> _showCallKitIncoming(_IncomingCall call) async {
@@ -1444,7 +1529,7 @@ class FCMService {
         'room': call.room,
         'callerName': call.callerName,
         'isVideoCall': call.isVideoCall,
-        'isGroupCall': call.isGroupCall,
+        'token': call.token,
       },
       headers: <String, dynamic>{},
       android: AndroidParams(
@@ -1477,6 +1562,12 @@ class FCMService {
   }
 
   bool _isIncomingCallMessage(RemoteMessage message) {
+    // if (message.notification?.title == 'Incoming Call') return true;
+    if (message.data['code'] == '5' ||
+        message.data['code'] == 5 ||
+        message.data['code'] == '30' ||
+        message.data['code'] == 30)
+      return true;
     final code = message.data['code'];
 
     // Check for individual call codes (5, 1, CALL_INCOMING)
@@ -1502,6 +1593,7 @@ class FCMService {
       print('📋 Message code: ${message.data['code']}');
 
       final idJsonString = message.data['id'];
+
       Map<String, dynamic>? idMap;
       if (idJsonString is String) {
         idMap = json.decode(idJsonString) as Map<String, dynamic>;
@@ -1510,21 +1602,12 @@ class FCMService {
       } else {
         idMap = {};
       }
-
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
+      final token = idMap['token'] as String?;
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
-
-      // For group calls, check code 30
-      final code = message.data['code'];
-      final isGroupCall =
-          (code == '30' || code == 30) ||
-          (idMap['isGroupCall'] as bool? ?? false);
-
-      print("📞 Room: $room");
-      print("💬 ChatId: $chatId");
-      print("📹 isVideoCall: $isVideoCall");
-      print("👥 isGroupCall: $isGroupCall");
+      final isGroupCall = idMap['isGroupCall'] as bool? ?? false;
+      print("isVideoCall4: ${isVideoCall}");
       final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
       final lastName = callerData?['lastName'] as String? ?? '';
@@ -1541,8 +1624,8 @@ class FCMService {
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        token: token!,
         isGroupCall: isGroupCall,
-        callerAvatar: avatar,
       );
     } catch (e) {
       log('parse incoming call error: $e');
@@ -1555,7 +1638,8 @@ class FCMService {
     required String participantName,
     required String chatId,
     required bool isVideocall,
-    bool isGroupCall = false,
+    required String token,
+    required bool isGroupCall,
   }) {
     print("🎯 joinCallFromCallKit called:");
     print("   Room: $roomName");
@@ -1587,33 +1671,39 @@ class FCMService {
       return;
     }
 
-    print("Context available, navigating to call screen: $context");
-    // Route to appropriate screen based on call type
-    if (isGroupCall) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder:
-              (context) => GroupCallScreen(
-                roomName: roomName,
-                participantName: participantName,
-                isVideoCall: isVideocall,
-                chatId: chatId,
-              ),
-        ),
-      );
-    } else {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder:
-              (context) => CallScreen(
-                roomName: roomName,
-                participantName: participantName,
-                isVideoCall: isVideocall,
-                chatId: chatId,
-              ),
-        ),
-      );
-    }
+    _join(
+      "wss://demo-eukecq5l.livekit.cloud",
+      token,
+      context,
+      isVideoCall: isVideocall,
+      isGroupCall: isGroupCall,
+      chatId: chatId,
+    );
+
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder:
+    //         (context) =>
+    //         // CallScreen(
+    //         //   roomName: roomName,
+    //         //   participantName: participantName,
+    //         //   isVideoCall: isVideocall,
+    //         //   chatId: chatId,
+    //         // ),
+    //         PreJoinPage(
+    //           args: JoinArgs(
+    //             url: "wss://demo-eukecq5l.livekit.cloud", // Your known URL
+    //             token: token, // Your known token
+    //             adaptiveStream: true,
+    //             dynacast: true,
+    //             simulcast: false,
+    //             e2ee: false,
+    //             preferredCodec: 'VP8',
+    //             enableBackupVideoCodec: true,
+    //           ),
+    //         ),
+    //   ),
+    // );
   }
 }
 
@@ -1622,16 +1712,16 @@ class _IncomingCall {
   final String room;
   final String callerName;
   final bool isVideoCall;
+  final String token; // Add this
   final bool isGroupCall;
-  final int? callerAvatar;
 
   _IncomingCall({
     required this.chatId,
     required this.room,
     required this.callerName,
     required this.isVideoCall,
-    this.isGroupCall = false,
-    this.callerAvatar,
+    required this.token, // Add this
+    required this.isGroupCall,
   });
 }
 
@@ -1717,19 +1807,12 @@ class FCMBackgroundBridge {
 
       final chatId = idMap['chatId'] ?? idMap['chat']?['id'];
       final room = idMap['room'] as String?;
-      final callerData = idMap['callerData'] as Map<String, dynamic>?;
+      final token = idMap['token'] as String?;
+      print("token token ${token}");
       final isVideoCall = idMap['isVideoCall'] as bool? ?? false;
+      final isGroupCall = idMap['isGroupCall'] as bool? ?? false;
 
-      // For group calls, check code 30
-      final code = message.data['code'];
-      final isGroupCall =
-          (code == '30' || code == 30) ||
-          (idMap['isGroupCall'] as bool? ?? false);
-
-      print("📞 [BG] Room: $room");
-      print("💬 [BG] ChatId: $chatId");
-      print("📹 [BG] isVideoCall: $isVideoCall");
-      print("👥 [BG] isGroupCall: $isGroupCall");
+      final callerData = idMap['callerData'] as Map<String, dynamic>?;
       final firstName = callerData?['firstName'] as String? ?? '';
       final lastName = callerData?['lastName'] as String? ?? '';
       final fullName =
@@ -1737,17 +1820,18 @@ class FCMBackgroundBridge {
               ? 'Caller'
               : '$firstName $lastName';
 
-      if (chatId == null || room == null) return null;
+      if (chatId == null || room == null || token == null) return null;
 
       return _IncomingCall(
         chatId: chatId.toString(),
         room: room,
         callerName: fullName,
         isVideoCall: isVideoCall,
+        token: token,
         isGroupCall: isGroupCall,
       );
     } catch (e) {
-      log('parse incoming call error (bg): $e');
+      log('parse incoming call error: $e');
       return null;
     }
   }

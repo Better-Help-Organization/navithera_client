@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ai_chat_remote_data_source.dart';
+part of 'live_session_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'ai_chat_remote_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _AiChatRemoteDataSource implements AiChatRemoteDataSource {
-  _AiChatRemoteDataSource(this._dio, {this.baseUrl, this.errorLogger});
+class _LiveSessionRemoteDataSource implements LiveSessionRemoteDataSource {
+  _LiveSessionRemoteDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -18,31 +18,67 @@ class _AiChatRemoteDataSource implements AiChatRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AiChatResponse> sendMessage(
-    String accountId,
-    String ragId,
-    AiChatRequest request,
-  ) async {
+  Future<ChatListResponse> getChats({
+    String? fields,
+    String? sort,
+    int? take,
+    int? page,
+    String? filters,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'fields': fields,
+      r'sort': sort,
+      r'take': take,
+      r'page': page,
+      r'filters': filters,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = request;
-    final _options = _setStreamType<AiChatResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ChatListResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/client/v4/accounts/${accountId}/autorag/rags/${ragId}/ai-search',
+            '/client/me/chats',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AiChatResponse _value;
+    late ChatListResponse _value;
     try {
-      _value = AiChatResponse.fromJson(_result.data!);
+      _value = ChatListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<JoinCallResponse> joinCall(String chatId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<JoinCallResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/chat/call/${chatId}/join',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late JoinCallResponse _value;
+    try {
+      _value = JoinCallResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

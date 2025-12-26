@@ -5,7 +5,7 @@ part 'ai_chat_models.g.dart';
 
 @freezed
 class AiChatRequest with _$AiChatRequest {
-  const factory AiChatRequest({required String prompt}) = _AiChatRequest;
+  const factory AiChatRequest({required String query}) = _AiChatRequest;
 
   factory AiChatRequest.fromJson(Map<String, dynamic> json) =>
       _$AiChatRequestFromJson(json);
@@ -15,8 +15,8 @@ class AiChatRequest with _$AiChatRequest {
 class AiChatResponse with _$AiChatResponse {
   const factory AiChatResponse({
     required bool success,
-    required List<String> errors,
-    required List<String> messages,
+    @Default([]) List<String> errors,
+    @Default([]) List<String> messages,
     required AiChatResult result,
   }) = _AiChatResponse;
 

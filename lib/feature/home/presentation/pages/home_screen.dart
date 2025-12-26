@@ -8,13 +8,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
+import 'package:navithera_client/feature/call/exts.dart';
+import 'package:navithera_client/feature/call/pages/room.dart';
+import 'package:navithera_client/feature/home/data/models/live_session_models.dart';
 import 'package:navithera_client/feature/home/data/models/upcoming_session_models.dart';
+import 'package:navithera_client/feature/home/presentation/providers/live_session_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/feature/notification/presentation/pages/notification_screen.dart';
@@ -82,6 +87,163 @@ class NotificationService {
     } catch (e) {
       log("Error fetching unread count: $e");
       return 0;
+    }
+  }
+}
+
+_join(
+  String url,
+  String token,
+  BuildContext context, {
+  required bool isVideoCall,
+  VoidCallback? onBeforeNavigate,
+}) async {
+  // _busy = true;
+  // setState(() {});
+
+  // final args = widget.args;
+
+  try {
+    //create new room
+    const cameraEncoding = VideoEncoding(
+      maxBitrate: 5 * 1000 * 1000,
+      maxFramerate: 30,
+    );
+
+    const screenEncoding = VideoEncoding(
+      maxBitrate: 3 * 1000 * 1000,
+      maxFramerate: 15,
+    );
+
+    final room = Room(
+      roomOptions: RoomOptions(
+        // adaptiveStream: args.adaptiveStream,
+        adaptiveStream: true,
+        dynacast: true,
+        defaultAudioPublishOptions: const AudioPublishOptions(
+          name: 'custom_audio_track_name',
+        ),
+        defaultCameraCaptureOptions: const CameraCaptureOptions(
+          maxFrameRate: 30,
+          params: VideoParameters(dimensions: VideoDimensions(1280, 720)),
+        ),
+        defaultVideoPublishOptions: VideoPublishOptions(
+          simulcast: false,
+          // simulcast: args.simulcast,
+          videoCodec: "VP8",
+
+          videoEncoding: cameraEncoding,
+          screenShareEncoding: screenEncoding,
+        ),
+        // encryption: e2eeOptions,
+      ),
+    );
+    // Create a Listener before connecting
+    final listener = room.createListener();
+
+    await room.prepareConnection(url, token);
+
+    // Try to connect to the room
+    // This will throw an Exception if it fails for any reason.
+    await room.connect(
+      url,
+      token,
+      fastConnectOptions: FastConnectOptions(
+        microphone: TrackOption(enabled: true),
+        camera: TrackOption(enabled: isVideoCall),
+      ),
+    );
+
+    if (!context.mounted) return;
+
+    onBeforeNavigate?.call();
+    await Navigator.push<void>(
+      context,
+      MaterialPageRoute(
+        builder:
+            (_) => RoomPage(
+              room,
+              listener,
+              showVideoControl: isVideoCall,
+              // chatId: chatId,
+              // isGroup: true,
+            ),
+      ),
+    );
+  } catch (error) {
+    print('Could not connect $error');
+    if (!context.mounted) return;
+    await context.showErrorDialog(error);
+  } finally {
+    // setState(() {
+    //   _busy = false;
+    // });
+  }
+}
+
+// Add to your existing service providers in home_screen.dart
+final liveSessionServiceProvider = Provider<LiveSessionService>((ref) {
+  return LiveSessionService();
+});
+
+class LiveSessionService {
+  final Dio _dio = Dio();
+
+  LiveSessionService() {
+    _dio.options.connectTimeout = const Duration(seconds: 20);
+    _dio.options.receiveTimeout = const Duration(seconds: 20);
+  }
+
+  Future<void> _attachAuthHeader() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    final accessToken = sharedPreferences.getString('access_token');
+    if (accessToken != null && accessToken.isNotEmpty) {
+      _dio.options.headers['Authorization'] = 'Bearer $accessToken';
+    } else {
+      _dio.options.headers.remove('Authorization');
+    }
+  }
+
+  Future<List<ChatItem>?> fetchActiveCalls() async {
+    try {
+      await _attachAuthHeader();
+
+      final response = await _dio.get(
+        '${base_url_dev}/client/me/chats?filters=activeCallRoom!==null&sort=updatedAt=desc&take=10&page=1',
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data;
+        if (data is Map && data.containsKey('data')) {
+          final chats = data['data'] as List;
+          return chats.map((chat) => ChatItem.fromJson(chat)).toList();
+        }
+      }
+      return [];
+    } catch (e) {
+      log("Error fetching active calls: $e");
+      return [];
+    }
+  }
+
+  Future<JoinCallData?> joinCall(String chatId) async {
+    try {
+      await _attachAuthHeader();
+
+      final response = await _dio.post(
+        '${base_url_dev}/chat/call/$chatId/join',
+      );
+
+      if (response.statusCode == 201) {
+        final data = response.data;
+        if (data is Map && data.containsKey('data')) {
+          return JoinCallData.fromJson(data['data']);
+        }
+      }
+      return null;
+    } catch (e) {
+      log("Error joining call: $e");
+      return null;
     }
   }
 }
@@ -326,8 +488,6 @@ class MoodService {
             final moodDate = item['date'] as String?;
             final mood = item['mood'] as String?;
 
-            print("helllllllo: ${moodDate}");
-
             if (moodDate != null) {
               try {
                 final apiDate = DateTime.parse(moodDate).toLocal();
@@ -399,6 +559,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // Load initial data using providers
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(upcomingSessionProvider.notifier).loadNext();
+      ref.read(liveSessionProvider.notifier).loadActiveCalls();
       // ref.read(matchedTherapistProvider.notifier).load();
     });
   }
@@ -415,6 +576,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Future<void> _loadUser() async {
     await ref.read(authProvider.notifier).getCurrentUser();
     ref.read(upcomingSessionProvider.notifier).loadNext();
+
     // ref.read(matchedTherapistProvider.notifier).load();
   }
 
@@ -504,7 +666,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ]);
 
     // Refresh providers
-    //     ref.read(upcomingSessionProvider.notifier).loadNext();
+    ref.read(upcomingSessionProvider.notifier).loadNext();
+    ref.read(liveSessionProvider.notifier).loadActiveCalls();
     // ref.read(matchedTherapistProvider.notifier).load();
   }
 
@@ -889,6 +1052,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
 
+                  const SizedBox(height: 16),
+
+                  // Live Session Section
+                  _buildLiveSessionSection(),
+
                   // Quote Card
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -983,6 +1151,235 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildLiveSessionSection() {
+    final liveSessionState = ref.watch(liveSessionProvider);
+
+    return switch (liveSessionState) {
+      LiveSessionInitial() => const SizedBox.shrink(),
+      LiveSessionLoading() => const _LiveSessionSkeleton(),
+      LiveSessionError(:final failure) => _InfoBanner(
+        icon: Icons.error_outline,
+        text: failure.message,
+        color: Colors.red,
+      ),
+      LiveSessionLoaded(:final activeCalls) =>
+        activeCalls.isEmpty
+            ? const SizedBox.shrink()
+            : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // No title needed, just show the card directly
+                ...activeCalls.map(
+                  (call) => _buildLiveSessionCard(call, context),
+                ),
+              ],
+            ),
+      LiveSessionJoining() => Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: AppColors.primary.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.videocam, color: AppColors.primary, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Joining session...',
+                style: AppTypography.bodySmall.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: AppColors.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+      LiveSessionJoinSuccess(:final joinData) =>
+        const SizedBox.shrink(), // Remove card completely
+      LiveSessionJoinError(:final failure) => Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          color: Colors.red.shade50,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.red.shade200),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.error_outline, color: Colors.red, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                failure.message,
+                style: AppTypography.bodySmall.copyWith(
+                  color: Colors.red.shade800,
+                ),
+                maxLines: 2,
+              ),
+            ),
+            const SizedBox(width: 12),
+            IconButton(
+              onPressed: () {
+                ref.read(liveSessionProvider.notifier).reset();
+                ref.read(liveSessionProvider.notifier).loadActiveCalls();
+              },
+              icon: Icon(Icons.close, color: Colors.red.shade600, size: 18),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 30, minHeight: 30),
+            ),
+          ],
+        ),
+      ),
+      // TODO: Handle this case.
+      LiveSessionState() => throw UnimplementedError(),
+    };
+  }
+
+  Future<void> _joinLiveSession(String chatId, BuildContext context) async {
+    final liveSessionState = ref.read(liveSessionProvider.notifier);
+
+    try {
+      await liveSessionState.joinCall(chatId);
+
+      // Check the state after joining
+      final currentState = ref.read(liveSessionProvider);
+
+      if (currentState is LiveSessionJoinSuccess) {
+        // Print the token to console as requested
+        // print('JWT Token: ${currentState.joinData.token}');
+        // print('Room: ${currentState.joinData.room}');
+        await _join(
+          "wss://demo-eukecq5l.livekit.cloud",
+          currentState.joinData.token,
+          context,
+          isVideoCall: true,
+          // onBeforeNavigate: () {
+          //   removeOverlay();
+          // },
+        );
+
+        // The card will be automatically removed since LiveSessionJoinSuccess returns SizedBox.shrink()
+        // Optionally show a toast/snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Joining live session...'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+
+        // Here you would typically navigate to the video call screen
+        // For now, we just print the token as requested
+      } else if (currentState is LiveSessionJoinError) {
+        // Error banner will be shown automatically by _buildLiveSessionSection
+        // Optionally show a snackbar too
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(currentState.failure.message),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Failed to join session'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
+  }
+
+  Widget _buildLiveSessionCard(ChatItem activeCall, BuildContext context) {
+    final participants = activeCall.group?.length ?? 0;
+    final groupName = activeCall.groupName ?? 'Group Session';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade200),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Icon(Icons.videocam, color: AppColors.primary, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Live Session: $groupName',
+                  style: AppTypography.bodySmall.copyWith(
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                if (participants > 0) ...[
+                  const SizedBox(height: 4),
+                  Text(
+                    '$participants participant${participants > 1 ? 's' : ''}',
+                    style: AppTypography.bodySmall.copyWith(
+                      color: Colors.grey.shade600,
+                      fontSize: 11,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          ElevatedButton(
+            onPressed: () => _joinLiveSession(activeCall.id, context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              minimumSize: const Size(0, 0),
+              elevation: 0,
+            ),
+            child: Text(
+              'Join',
+              style: AppTypography.bodySmall.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1351,106 +1748,134 @@ class TherapistCard extends StatelessWidget {
     final imageWidget = _buildAvatar(context);
     final subtitle = _buildSubtitle();
 
-    return GestureDetector(
-      onTap: onDetailsTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Text(
             AppLocalizations.of(context)!.yourTherapist,
-            style: AppTypography.heading2,
+            style: AppTypography.heading2.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
           ),
-          const SizedBox(height: 12),
-          Container(
+        ),
+        const SizedBox(height: 16),
+        GestureDetector(
+          onTap: onDetailsTap,
+          child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.only(top: 4),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              //color: Colors.white,
-              color: AppColors.primary.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.grey.shade200),
+              border: Border.all(
+                width: 1.0,
+                color: Colors.grey.withOpacity(.2),
+              ),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.04),
-                  blurRadius: 12,
-                  offset: const Offset(0, 6),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
                 ),
               ],
             ),
-            child: Column(
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: imageWidget,
-                        ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: GestureDetector(
-                            onTap: onRateTap,
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.amber.shade50.withOpacity(0.5),
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.amber.shade100,
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.star_rate_rounded,
-                                size: 18,
-                                color: Colors.amber.shade700,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  "${therapist.firstName} ${therapist.lastName}",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            subtitle,
-                            style: AppTypography.bodySmall.copyWith(
-                              color: Colors.grey.shade700,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                // Avatar with status indicator (optional, just simple for now)
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: SizedBox(width: 60, height: 60, child: imageWidget),
+                  ),
+                ),
+                const SizedBox(width: 16),
+
+                // Text Info
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${therapist.firstName} ${therapist.lastName}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black87,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 8),
+                      // Action / Rating Row
+                      GestureDetector(
+                        onTap: onRateTap,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.star_rounded,
+                              size: 16,
+                              color: Colors.amber[400],
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              "Rate Experience",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.amber[700],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Arrow Icon
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey[400],
+                    size: 16,
+                  ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -1461,11 +1886,6 @@ class TherapistCard extends StatelessWidget {
         '${therapist.gender![0].toUpperCase()}${therapist.gender!.substring(1)}',
       );
     }
-    // if ((therapist.email).isNotEmpty) {
-    //   parts.add(therapist.email);
-    // } else if ((therapist.phoneNumber ?? '').isNotEmpty) {
-    //   parts.add(therapist.phoneNumber!);
-    // }
     return parts.isEmpty ? 'Your matched therapist' : parts.join(' • ');
   }
 
@@ -1473,31 +1893,25 @@ class TherapistCard extends StatelessWidget {
     final hasNetwork =
         therapist.avatar == 7 &&
         (therapist.profile != null && therapist.profile!.isNotEmpty);
-    if (hasNetwork) {
-      return Image(
-        image: NetworkImage(
-          '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}',
-        ),
-        width: 70,
-        height: 70,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return Image(
-            image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
-            width: 70,
-            height: 70,
-            fit: BoxFit.cover,
-          );
-        },
-      );
-    } else {
-      return Image(
-        image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
-        width: 70,
-        height: 70,
-        fit: BoxFit.cover,
-      );
-    }
+
+    final imageProvider =
+        hasNetwork
+            ? NetworkImage(
+              '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}',
+            )
+            : AssetImage(getAvatarImage(therapist.avatar ?? 0))
+                as ImageProvider;
+
+    return Image(
+      image: imageProvider,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Image(
+          image: AssetImage(getAvatarImage(therapist.avatar ?? 0)),
+          fit: BoxFit.cover,
+        );
+      },
+    );
   }
 }
 
@@ -1742,6 +2156,40 @@ class _ShimmerBlockState extends State<_ShimmerBlock>
           color: baseColor,
           borderRadius: BorderRadius.circular(widget.radius),
         ),
+      ),
+    );
+  }
+}
+
+class _LiveSessionSkeleton extends StatelessWidget {
+  const _LiveSessionSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          _ShimmerBlock(width: 20, height: 20, radius: 10),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _ShimmerBlock(width: 150, height: 12, radius: 6),
+                const SizedBox(height: 4),
+                _ShimmerBlock(width: 80, height: 10, radius: 6),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          _ShimmerBlock(width: 60, height: 30, radius: 10),
+        ],
       ),
     );
   }

@@ -104,10 +104,8 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     // Adjust index mapping based on whether levels page is included
     int actualPageIndex;
     if (isSpecialModal) {
-      // When levels is skipped, the pages are: 0: languages, 1: availability, 2: goals, 3: gender
       actualPageIndex = index;
     } else {
-      // Normal flow: 0: languages, 1: levels, 2: availability, 3: goals, 4: gender
       actualPageIndex = index;
     }
 
@@ -115,10 +113,11 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
       case 0: // languages (always first)
         final selected = ref.read(selectedLanguagesProvider);
         if (selected.isEmpty) return false;
+
         final hasOther = selected.contains('other');
         if (hasOther) {
-          final text = _otherLangController.text.trim();
-          return text.isNotEmpty;
+          final otherLangText = ref.read(otherLanguageProvider).trim();
+          return otherLangText.isNotEmpty; // Use provider instead of controller
         }
         return true;
 
@@ -195,9 +194,12 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     final selectedAvailability = ref.read(selectedAvailabilityProvider);
     final goals = ref.read(goalsProvider);
     final modalId = ref.read(modalIdProvider);
+    final otherLangText =
+        ref.read(otherLanguageProvider).trim(); // Get the other language text
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     print("responsexoj: ${widget.preferenceId}");
+
     try {
       final questionsAsync = ref.read(questionsProvider);
       final userAnswers = ref.read(userAnswersProvider);
@@ -217,7 +219,6 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
           }).toList();
 
       final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
-
       final isUpdate = widget.preferenceId != null;
 
       if (isUpdate) {
@@ -228,6 +229,10 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             languageIds: cleanedSelectedLanguages,
             goal: goals.isNotEmpty ? goals : null,
             availability: formattedAvailability,
+            otherLang:
+                otherLangText.isNotEmpty
+                    ? otherLangText
+                    : null, // Add otherLang
           );
           final repository = ref.read(extraQuestionsRepositoryProvider);
           final prefResult = await repository.updatePreferenceWithoutLevel(
@@ -264,6 +269,10 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             levelId: isSpecialModal ? null : selectedLevel,
             availability:
                 formattedAvailability.isNotEmpty ? formattedAvailability : null,
+            otherLang:
+                otherLangText.isNotEmpty
+                    ? otherLangText
+                    : null, // Add otherLang
           );
 
           final repository = ref.read(extraQuestionsRepositoryProvider);
@@ -298,6 +307,10 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             languageIds: cleanedSelectedLanguages,
             goal: goals.isNotEmpty ? goals : null,
             availability: formattedAvailability,
+            otherLang:
+                otherLangText.isNotEmpty
+                    ? otherLangText
+                    : null, // Add otherLang
           );
           final repository = ref.read(extraQuestionsRepositoryProvider);
           final prefResult = await repository.createPreferenceWithoutLevel(
@@ -331,6 +344,10 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             levelId:
                 selectedLevel ?? '', // This will be empty for special modal
             availability: formattedAvailability,
+            otherLang:
+                otherLangText.isNotEmpty
+                    ? otherLangText
+                    : null, // Add otherLang
           );
 
           final repository = ref.read(extraQuestionsRepositoryProvider);
@@ -596,6 +613,7 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     final languagesAsync = ref.watch(languagesProvider);
     final selectedLanguages = ref.watch(selectedLanguagesProvider);
     final showOtherInput = ref.watch(showOtherLanguageInputProvider);
+    final otherLanguageText = ref.watch(otherLanguageProvider);
     // final otherLanguage = ref.watch(otherLanguageProvider);
 
     const primary = Color(0xFF7EB09B);
@@ -717,7 +735,9 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                           ref
                               .read(showOtherLanguageInputProvider.notifier)
                               .state = false;
-                          _otherLangController.clear(); // Clear the text field
+                          _otherLangController.clear();
+                          ref.read(otherLanguageProvider.notifier).state =
+                              ''; // Clear the text field
                         } else {
                           // Add 'other' alongside existing selections
                           final updated =
@@ -788,7 +808,6 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                     );
                   }
 
-                  // "Please specify" input right after "Other"
                   if (showOtherInput && index == languages.length + 1) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -796,12 +815,17 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
                         const SizedBox(height: 8),
                         TextField(
                           onChanged: (value) {
-                            // Trigger validation update when text changes
+                            // Update the provider when text changes
+                            ref.read(otherLanguageProvider.notifier).state =
+                                value;
+                            // Also update the controller for UI
+                            _otherLangController.text = value;
+                            // Trigger validation update
                             setState(() {});
                           },
                           controller: _otherLangController,
                           decoration: InputDecoration(
-                            hintText: 'Please specify...',
+                            hintText: 'Please specify (e.g., Somalian)',
                             hintStyle: TextStyle(
                               color: Color(0xFFA0AEC0),
                               fontSize: 14,

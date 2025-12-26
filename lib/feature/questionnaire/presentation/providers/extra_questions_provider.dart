@@ -34,6 +34,7 @@ final modalIdProvider = StateProvider<String?>((ref) => null);
 final selectedAvailabilityProvider = StateProvider<List<Map<String, dynamic>>>(
   (ref) => [],
 );
+final otherLanguageProvider = StateProvider<String>((ref) => '');
 //final otherLanguageProvider = StateProvider<String>((ref) => '');
 final showOtherLanguageInputProvider = StateProvider<bool>((ref) => false);
 

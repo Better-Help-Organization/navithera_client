@@ -63,6 +63,7 @@ class ChatRepositoryImpl implements ChatRepository {
   }) async {
     try {
       final response = await remoteDataSource.getChatThreads(
+        filters: "closed=0",
         page: page,
         take: limit, // This should be 1 by default
         fields: 'client.*,therapist.*,group.*,updatedAt,groupName',

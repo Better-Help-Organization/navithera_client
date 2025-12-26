@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -306,12 +307,119 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
         throw Exception('Failed to update attendance');
       }
     } catch (e) {
+      String errorMessage = 'Failed to update attendance.';
+      if (e is DioException && e.response != null) {
+        // ignore: avoid_print
+
+        final responseData = e.response?.data;
+        String errorMessage = 'Failed to update attendance';
+
+        if (responseData is Map) {
+          errorMessage =
+              responseData['message'] ??
+              responseData['error'] ??
+              'Failed to update attendance';
+        } else if (responseData is String) {
+          try {
+            final parsed = json.decode(responseData);
+            errorMessage = parsed['message'] ?? errorMessage;
+          } catch (_) {
+            errorMessage = responseData;
+          }
+        }
+
+        // return {'success': false, 'message': errorMessage};
+      } else {
+        // ignore: avoid_print
+        print('Error submitting');
+        // return {'success': false, 'message': 'Network error: ${e.toString()}'};
+      }
       print("here: ${e}");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to update attendance: $e'),
-          backgroundColor: Colors.red,
-        ),
+        SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _updateGroupSessionAttendance(
+    String sessionId,
+    bool hasAttended,
+  ) async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final accessToken = prefs.getString('access_token');
+
+      final dio = Dio();
+      if (accessToken != null && accessToken.isNotEmpty) {
+        dio.options.headers['Authorization'] = 'Bearer $accessToken';
+      }
+
+      // Make the API call
+      final response = await dio.post(
+        '${base_url_dev}/session/group-attendance/$sessionId',
+      );
+
+      log("here response: ${response}");
+
+      if (response.statusCode == 201) {
+        // Reload sessions to get updated data
+        final context = navigatorKey.currentContext;
+        if (context != null) {
+          final container = ProviderScope.containerOf(context);
+          await container.read(sessionProvider.notifier).loadSessions();
+          // await container.read(matchedTherapistProvider.notifier).load();
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Attendance ${hasAttended ? 'marked' : 'updated'} successfully',
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        throw Exception('Failed to update attendance');
+      }
+    } catch (e) {
+      String errorMessage = 'Failed to update attendance.';
+      if (e is DioException && e.response != null) {
+        // ignore: avoid_print
+
+        final responseData = e.response?.data;
+        String errorMessage = 'Failed to update attendance';
+
+        if (responseData is Map) {
+          errorMessage =
+              responseData['message'] ??
+              responseData['error'] ??
+              'Failed to update attendance';
+        } else if (responseData is String) {
+          try {
+            final parsed = json.decode(responseData);
+            errorMessage = parsed['message'] ?? errorMessage;
+          } catch (_) {
+            errorMessage = responseData;
+          }
+        }
+
+        // return {'success': false, 'message': errorMessage};
+      } else {
+        // ignore: avoid_print
+        print('Error submitting');
+        // return {'success': false, 'message': 'Network error: ${e.toString()}'};
+      }
+      print("here: ${e}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage), backgroundColor: Colors.red),
       );
     } finally {
       setState(() {
@@ -356,7 +464,12 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
                         ),
                         onPressed: () {
                           Navigator.of(context).pop(); // Close the dialog
-                          _updateSessionAttendance(session.id, true);
+                          // log("session clicked is : ${session.group.length}");
+                          if (session.group.isNotEmpty) {
+                            _updateGroupSessionAttendance(session.id, true);
+                          } else {
+                            _updateSessionAttendance(session.id, true);
+                          }
                         },
                       ),
                   ],
@@ -933,7 +1046,7 @@ class _DayCalendarView extends StatelessWidget {
       final durationMinutes = session.duration % 60;
 
       // Calculate position and height based on time
-      final top = (startHour + 1 / 60) * (600 / 24) - 6;
+      final top = (startHour + 0.1 / 60) * (600 / 24);
       // final height = (durationHours + durationMinutes / 60) * (600 / 24);
       final height = 100;
 
