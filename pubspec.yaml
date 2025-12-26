@@ -79,6 +79,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/promo.mp4
     - assets/images/avatars/
     - assets/sounds/
     - assets/animations/

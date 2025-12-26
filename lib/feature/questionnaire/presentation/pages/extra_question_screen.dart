@@ -1433,12 +1433,14 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
     final totalPagesCount = totalPages;
     final currentPages = pages;
 
-    return WillPopScope(
-      onWillPop: () async {
-        router.go("/categories");
-        return false;
-      },
-      child: Scaffold(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: WillPopScope(
+        onWillPop: () async {
+          router.go("/categories");
+          return false;
+        },
+        child: Scaffold(
         backgroundColor: const Color(0xFFF8FAFC),
         body: SafeArea(
           child: Column(
@@ -1558,8 +1560,9 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 Widget wrapWithContainer(Widget child) {
