@@ -6,7 +6,6 @@ import 'package:navithera_client/core/notification/notification_service.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
-import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
 
 class AuthGate extends ConsumerWidget {
   const AuthGate({super.key});
@@ -91,26 +90,10 @@ class AuthGate extends ConsumerWidget {
           router.go("/blocked-user");
         } else if (pendingRoute != null) {
           // Navigate to the pending route
-          if (pendingRoute.path == '/call-screen' && pendingRoute.callData != null) {
-            // Special handling for call screen - navigate directly using Navigator
-            router.go("/main");
-            final callData = pendingRoute.callData!;
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CallScreen(
-                  roomName: callData['roomName'] as String?,
-                  participantName: callData['participantName'] as String?,
-                  isVideoCall: callData['isVideoCall'] as bool? ?? false,
-                  chatId: callData['chatId'] as String?,
-                ),
-              ),
-            );
-          } else {
-            // Regular route navigation
-            router.go("/main");
-            router.push(pendingRoute.path, extra: pendingRoute.extra);
-          }
+          router.go("/main");
+          router.push(pendingRoute.path, extra: pendingRoute.extra);
           ref.read(pendingRouteProvider.notifier).state = null; // clear it
+          // s
         } else {
           router.go('/main');
         }
