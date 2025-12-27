@@ -135,9 +135,11 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
 
     print("userAnswers: ${fullQuestionNumber}");
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF8FAFC),
+        body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20.0),
           child: questionsAsync.when(
@@ -345,8 +347,9 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
           );
         },
       ),
-    );
-  }
+    ),
+  );
+}
 
   void _previousQuestion() {
     final currentIndex = ref.read(currentQuestionIndexProvider);
@@ -456,3 +459,4 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
     }
   }
 }
+
