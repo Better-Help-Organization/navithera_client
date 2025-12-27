@@ -12,6 +12,7 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/notification/session_selection_service.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
+import 'package:navithera_client/feature/home/presentation/pages/promo_video_widget.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/calendar/presentation/pages/pages/events_example.dart';
@@ -976,7 +977,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   const SizedBox(height: 20),
 
                   // Notification banner
-                  if (user?.hasNotification != null)
+                  if (user?.hasNotification != null) ...[
                     Container(
                       padding: const EdgeInsets.all(14),
                       margin: const EdgeInsets.only(top: 8, bottom: 12),
@@ -1051,11 +1052,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ],
                       ),
                     ),
-
-                  const SizedBox(height: 16),
+                    const SizedBox(height: 16),
+                  ],
 
                   // Live Session Section
                   _buildLiveSessionSection(),
+
+                  // App Usage Promo Video (Collapsible)
+                  const PromoVideoWidget(),
+
+                  const SizedBox(height: 24),
 
                   // Quote Card
                   Container(
@@ -1158,7 +1164,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget _buildLiveSessionSection() {
     final liveSessionState = ref.watch(liveSessionProvider);
 
-    return switch (liveSessionState) {
+    Widget content = switch (liveSessionState) {
       LiveSessionInitial() => const SizedBox.shrink(),
       LiveSessionLoading() => const _LiveSessionSkeleton(),
       LiveSessionError(:final failure) => _InfoBanner(
@@ -1172,7 +1178,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // No title needed, just show the card directly
                 ...activeCalls.map(
                   (call) => _buildLiveSessionCard(call, context),
                 ),
@@ -1211,8 +1216,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      LiveSessionJoinSuccess(:final joinData) =>
-        const SizedBox.shrink(), // Remove card completely
+      LiveSessionJoinSuccess(:final joinData) => const SizedBox.shrink(),
       LiveSessionJoinError(:final failure) => Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.only(bottom: 12),
@@ -1247,9 +1251,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      // TODO: Handle this case.
       LiveSessionState() => throw UnimplementedError(),
     };
+
+    if (content is SizedBox && (content.width == 0.0 || content.height == 0.0)) {
+      return content;
+    }
+
+    return Padding(padding: const EdgeInsets.only(bottom: 24), child: content);
   }
 
   Future<void> _joinLiveSession(String chatId, BuildContext context) async {
