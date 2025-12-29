@@ -1,7 +1,6 @@
 // lib/core/notification/notification_service.dart
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -161,6 +160,14 @@ class FCMService {
 
   Future<void> initialize() async {
     await _fcm.requestPermission(alert: true, badge: true, sound: true);
+
+    // Suppress system notifications when app is in foreground (iOS)
+    // This prevents duplicate notifications - we show custom overlay instead
+    await _fcm.setForegroundNotificationPresentationOptions(
+      alert: false, // Don't show system alert in foreground
+      badge: true,  // Still update badge
+      sound: false, // Don't play system sound in foreground
+    );
 
     FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(handleBackgroundMessage);
