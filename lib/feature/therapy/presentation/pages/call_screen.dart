@@ -80,7 +80,8 @@ class _CallScreenState extends ConsumerState<CallScreen> {
       final response = await dio.post('${base_url_dev}/chat/call/end/$chatId');
 
       if (response.statusCode == 201) {
-        // Call ended successfully
+        // Call ended successfullprint
+        print("Call ended, Test phone #1");
       }
     } catch (e) {
       // Optional: log error

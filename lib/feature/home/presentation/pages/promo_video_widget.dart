@@ -24,23 +24,25 @@ class _PromoVideoWidgetState extends State<PromoVideoWidget> {
 
   void _initializeVideo() {
     _controller = VideoPlayerController.asset('assets/images/promo.mp4')
-      ..initialize().then((_) {
-        if (mounted) {
-          setState(() {
-            _initialized = true;
-            _error = null;
+      ..initialize()
+          .then((_) {
+            if (mounted) {
+              setState(() {
+                _initialized = true;
+                _error = null;
+              });
+              _controller.setLooping(true);
+              _controller.setVolume(1.0);
+            }
+          })
+          .catchError((error) {
+            debugPrint('PromoVideoWidget: Video initialization error: $error');
+            if (mounted) {
+              setState(() {
+                _error = error.toString();
+              });
+            }
           });
-          _controller.setLooping(true);
-          _controller.setVolume(1.0);
-        }
-      }).catchError((error) {
-        debugPrint('PromoVideoWidget: Video initialization error: $error');
-        if (mounted) {
-          setState(() {
-            _error = error.toString();
-          });
-        }
-      });
   }
 
   void _toggleExpanded() {
@@ -118,7 +120,9 @@ class _PromoVideoWidgetState extends State<PromoVideoWidget> {
                     ),
                   ),
                   Icon(
-                    _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
                     color: Colors.grey.shade500,
                   ),
                 ],
@@ -184,11 +188,44 @@ class _PromoVideoWidgetState extends State<PromoVideoWidget> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: AspectRatio(
-          aspectRatio: _controller.value.aspectRatio > 0 ? _controller.value.aspectRatio : 16 / 9,
+          aspectRatio:
+              _controller.value.aspectRatio > 0
+                  ? _controller.value.aspectRatio
+                  : 16 / 9,
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
               VideoPlayer(_controller),
+              // Center Play/Pause Button
+              Positioned.fill(
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        } else {
+                          _controller.play();
+                        }
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        _controller.value.isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               // Gradient overlay for controls
               Positioned(
                 bottom: 0,

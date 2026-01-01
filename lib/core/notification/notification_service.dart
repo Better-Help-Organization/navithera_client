@@ -165,7 +165,7 @@ class FCMService {
     // This prevents duplicate notifications - we show custom overlay instead
     await _fcm.setForegroundNotificationPresentationOptions(
       alert: false, // Don't show system alert in foreground
-      badge: true,  // Still update badge
+      badge: true, // Still update badge
       sound: false, // Don't play system sound in foreground
     );
 
@@ -1385,7 +1385,7 @@ class FCMService {
         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
 
     _join(
-      "wss://demo-eukecq5l.livekit.cloud",
+      "wss://livekit.navigo.et",
       token,
       context,
       isVideoCall: isVideoCall,
@@ -1546,7 +1546,7 @@ class FCMService {
     }
 
     _join(
-      "wss://demo-eukecq5l.livekit.cloud",
+      "wss://livekit.navigo.et",
       token,
       context,
       isVideoCall: isVideocall,

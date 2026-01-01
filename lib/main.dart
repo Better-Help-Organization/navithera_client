@@ -23,7 +23,11 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Initialize Firebase if not already done
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
   try {
     await FCMBackgroundBridge.handleBackgroundMessage(message);
   } catch (e, st) {
@@ -32,19 +36,36 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  final sharedPreferences = await SharedPreferences.getInstance();
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    if (Firebase.apps.isEmpty) {
+      try {
+        await Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        );
+      } on FirebaseException catch (e) {
+        if (e.code == 'duplicate-app') {
+          log('Firebase already initialized: ${e.message}');
+        } else {
+          rethrow;
+        }
+      }
+    }
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    final sharedPreferences = await SharedPreferences.getInstance();
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-      ],
-      child: MyApp(),
-    ),
-  );
+    runApp(
+      ProviderScope(
+        overrides: [
+          sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+        ],
+        child: MyApp(),
+      ),
+    );
+  } catch (e, st) {
+    log('Main initialization error: $e\n$st');
+    rethrow;
+  }
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -60,12 +81,16 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    // Initialize FCM - COMMENTED OUT FOR NOW
-    final fcmService = ref.read(fcmServiceProvider);
-    fcmService.initialize();
-    fcmService.initFCMWeb();
+    try {
+      // Initialize FCM - COMMENTED OUT FOR NOW
+      final fcmService = ref.read(fcmServiceProvider);
+      fcmService.initialize();
+      fcmService.initFCMWeb();
 
-    _listenCallKitActions();
+      _listenCallKitActions();
+    } catch (e, st) {
+      log('initState error: $e\n$st');
+    }
   }
 
   Map<String, dynamic> _asMap(dynamic v) {

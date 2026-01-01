@@ -1254,7 +1254,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       LiveSessionState() => throw UnimplementedError(),
     };
 
-    if (content is SizedBox && (content.width == 0.0 || content.height == 0.0)) {
+    if (content is SizedBox &&
+        (content.width == 0.0 || content.height == 0.0)) {
       return content;
     }
 
@@ -1275,7 +1276,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         // print('JWT Token: ${currentState.joinData.token}');
         // print('Room: ${currentState.joinData.room}');
         await _join(
-          "wss://demo-eukecq5l.livekit.cloud",
+          "wss://livekit.navigo.et",
           currentState.joinData.token,
           context,
           isVideoCall: true,
