@@ -26,25 +26,6 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:536465457827:android:5bcf6ee649b4f05badb516",
-        "android_client_info": {
-          "package_name": "com.Abthon.navithera_client"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAACyTDMbz5v0J1Vy3wjZ3HQgTNOcXVwpo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:536465457827:android:86115b209accdb70adb516",
         "android_client_info": {
           "package_name": "com.Abthon.navithera_therapist"
