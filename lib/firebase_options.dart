@@ -65,7 +65,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyB4tkaoDp42jUqjDZHJ3sTHXu2IfMpAgX8',
-    appId: '1:536465457827:ios:a2a097be854df5efadb516',
+    appId: '1:536465457827:ios:2b914890434f8eb9adb516',
     messagingSenderId: '536465457827',
     projectId: 'navi-care-b7a15',
     storageBucket: 'navi-care-b7a15.firebasestorage.app',

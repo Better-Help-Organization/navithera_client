@@ -457,6 +457,7 @@ mixin _$LoginRequest {
   String get phoneNumber => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get firebaseToken => throw _privateConstructorUsedError;
+  String? get voIpToken => throw _privateConstructorUsedError;
 
   /// Serializes this LoginRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -475,7 +476,12 @@ abstract class $LoginRequestCopyWith<$Res> {
     $Res Function(LoginRequest) then,
   ) = _$LoginRequestCopyWithImpl<$Res, LoginRequest>;
   @useResult
-  $Res call({String phoneNumber, String password, String firebaseToken});
+  $Res call({
+    String phoneNumber,
+    String password,
+    String firebaseToken,
+    String? voIpToken,
+  });
 }
 
 /// @nodoc
@@ -496,6 +502,7 @@ class _$LoginRequestCopyWithImpl<$Res, $Val extends LoginRequest>
     Object? phoneNumber = null,
     Object? password = null,
     Object? firebaseToken = null,
+    Object? voIpToken = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -514,6 +521,11 @@ class _$LoginRequestCopyWithImpl<$Res, $Val extends LoginRequest>
                     ? _value.firebaseToken
                     : firebaseToken // ignore: cast_nullable_to_non_nullable
                         as String,
+            voIpToken:
+                freezed == voIpToken
+                    ? _value.voIpToken
+                    : voIpToken // ignore: cast_nullable_to_non_nullable
+                        as String?,
           )
           as $Val,
     );
@@ -529,7 +541,12 @@ abstract class _$$LoginRequestImplCopyWith<$Res>
   ) = __$$LoginRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String phoneNumber, String password, String firebaseToken});
+  $Res call({
+    String phoneNumber,
+    String password,
+    String firebaseToken,
+    String? voIpToken,
+  });
 }
 
 /// @nodoc
@@ -549,6 +566,7 @@ class __$$LoginRequestImplCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? password = null,
     Object? firebaseToken = null,
+    Object? voIpToken = freezed,
   }) {
     return _then(
       _$LoginRequestImpl(
@@ -567,6 +585,11 @@ class __$$LoginRequestImplCopyWithImpl<$Res>
                 ? _value.firebaseToken
                 : firebaseToken // ignore: cast_nullable_to_non_nullable
                     as String,
+        voIpToken:
+            freezed == voIpToken
+                ? _value.voIpToken
+                : voIpToken // ignore: cast_nullable_to_non_nullable
+                    as String?,
       ),
     );
   }
@@ -579,6 +602,7 @@ class _$LoginRequestImpl implements _LoginRequest {
     required this.phoneNumber,
     required this.password,
     required this.firebaseToken,
+    this.voIpToken,
   });
 
   factory _$LoginRequestImpl.fromJson(Map<String, dynamic> json) =>
@@ -590,10 +614,12 @@ class _$LoginRequestImpl implements _LoginRequest {
   final String password;
   @override
   final String firebaseToken;
+  @override
+  final String? voIpToken;
 
   @override
   String toString() {
-    return 'LoginRequest(phoneNumber: $phoneNumber, password: $password, firebaseToken: $firebaseToken)';
+    return 'LoginRequest(phoneNumber: $phoneNumber, password: $password, firebaseToken: $firebaseToken, voIpToken: $voIpToken)';
   }
 
   @override
@@ -606,13 +632,15 @@ class _$LoginRequestImpl implements _LoginRequest {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.firebaseToken, firebaseToken) ||
-                other.firebaseToken == firebaseToken));
+                other.firebaseToken == firebaseToken) &&
+            (identical(other.voIpToken, voIpToken) ||
+                other.voIpToken == voIpToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, phoneNumber, password, firebaseToken);
+      Object.hash(runtimeType, phoneNumber, password, firebaseToken, voIpToken);
 
   /// Create a copy of LoginRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -633,6 +661,7 @@ abstract class _LoginRequest implements LoginRequest {
     required final String phoneNumber,
     required final String password,
     required final String firebaseToken,
+    final String? voIpToken,
   }) = _$LoginRequestImpl;
 
   factory _LoginRequest.fromJson(Map<String, dynamic> json) =
@@ -644,6 +673,8 @@ abstract class _LoginRequest implements LoginRequest {
   String get password;
   @override
   String get firebaseToken;
+  @override
+  String? get voIpToken;
 
   /// Create a copy of LoginRequest
   /// with the given fields replaced by the non-null parameter values.

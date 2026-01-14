@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
@@ -82,19 +85,36 @@ class ChatListScreen extends ConsumerStatefulWidget {
 
 class _ChatListScreenState extends ConsumerState<ChatListScreen> {
   final ScrollController _scrollController = ScrollController();
+  StreamSubscription<RemoteMessage>? _messageSubscription;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
+    _setupMessageListener();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Initial load shows the full-screen spinner
       _loadChatThreads();
     });
   }
 
+  void _setupMessageListener() {
+    _messageSubscription = FirebaseMessaging.onMessage.listen((
+      RemoteMessage message,
+    ) {
+      // Check mounted before using ref to prevent iOS disposal errors
+      if (!mounted) return;
+
+      // Refresh chat threads when a new message arrives (code '2' is chat message)
+      if (message.data['code'] == '2' || message.data['code'] == 2) {
+        _loadChatThreads(silent: true);
+      }
+    });
+  }
+
   @override
   void dispose() {
+    _messageSubscription?.cancel();
     _scrollController.dispose();
     super.dispose();
   }

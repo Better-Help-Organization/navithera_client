@@ -7,8 +7,9 @@ abstract class AuthRepository {
   Future<Either<Failure, User>> login(
     String phoneNumber,
     String password,
-    String fcm,
-  );
+    String fcm, {
+    String? voIpToken,
+  });
 
   Future<Either<Failure, User>> signup(
     String firstName,

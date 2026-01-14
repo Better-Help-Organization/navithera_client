@@ -548,6 +548,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _currentQuoteIndex = 0;
   Timer? _quoteTimer;
 
+  // Firebase subscription for cleanup
+  StreamSubscription<RemoteMessage>? _messageSubscription;
+
   @override
   void initState() {
     super.initState();
@@ -582,7 +585,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   void _setupMessageReadListener() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    _messageSubscription = FirebaseMessaging.onMessage.listen((
+      RemoteMessage message,
+    ) {
+      // Check mounted before using ref to prevent iOS disposal errors
+      if (!mounted) return;
+
       print("foreground message here: ${message.data}");
       print("Foreground notification received: ${message.notification?.title}");
 
@@ -601,6 +609,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void dispose() {
+    _messageSubscription?.cancel();
     _quoteTimer?.cancel();
     super.dispose();
   }

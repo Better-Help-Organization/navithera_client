@@ -188,8 +188,13 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
   }
 
   void _markChatAsRead() async {
+    // Check if widget is still mounted before using ref
+    if (!mounted) return;
+
     final messageNotifier = ref.read(messageProvider(widget.chat.id).notifier);
     await messageNotifier.markAsRead();
+
+    if (!mounted) return;
     ref.read(chatProvider.notifier).markChatAsRead(widget.chat.id);
   }
 
@@ -197,9 +202,15 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
     print("hey hey");
     // Listen for message read events (adjust this based on your notification system)
     _messageReadSubscription = FirebaseMessaging.onMessage.listen((event) {
+      // IMPORTANT: Check mounted before using ref to prevent iOS disposal errors
+      if (!mounted) return;
+
       if (event.data['code'] == '2' || event.data['code'] == 2) {
         _markChatAsRead();
-
+        // Also refresh messages to show new ones immediately
+        ref
+            .read(messageProvider(widget.chat.id).notifier)
+            .getMessages(silent: true);
         print("hey hey new message");
       }
       print("hey hey event data is ${event.data}");
@@ -1119,6 +1130,8 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
   @override
   void dispose() {
+    // Cancel Firebase message subscription to prevent ref-after-disposed errors on iOS
+    _messageReadSubscription?.cancel();
     WidgetsBinding.instance.removeObserver(this);
     _messageController.dispose();
     _scrollController.dispose();

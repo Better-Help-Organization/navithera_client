@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,9 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
       // Initialize FCM - COMMENTED OUT FOR NOW
       final fcmService = ref.read(fcmServiceProvider);
       fcmService.initialize();
-      fcmService.initFCMWeb();
+      if (kIsWeb) {
+        fcmService.initFCMWeb();
+      }
 
       _listenCallKitActions();
     } catch (e, st) {

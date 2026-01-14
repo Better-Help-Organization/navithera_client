@@ -56,7 +56,7 @@ class _MatchedTherapistRemoteDataSource
     try {
       _value = MatchListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

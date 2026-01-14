@@ -51,7 +51,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
     try {
       _value = ChatListResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -110,7 +110,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
     try {
       _value = ChatMessageResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -162,7 +162,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
     try {
       _value = MessageSendResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -192,7 +192,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
     try {
       _value = GroupChatCreateResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -219,7 +219,7 @@ class _ChatRemoteDataSource implements ChatRemoteDataSource {
     try {
       _value = TherapistInfoResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      // errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;

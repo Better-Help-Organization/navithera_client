@@ -101,10 +101,10 @@ class CallController extends StateNotifier<CallState> {
   EventsListener<RoomEvent>? _listener;
 
   // LiveKit credentials
-  static const String _serverUrl = 'wss://navicare-dmw0dh3w.livekit.cloud';
-  static const String _apiKey = 'API3tXd9NPdnoo6';
+  static const String _serverUrl = 'wss://livekit.navigo.et';
+  static const String _apiKey = 'APIY64mRzLyKhzH';
   static const String _apiSecret =
-      'NviAjniG1zqEKxIlkKAFU3b895WALQlyE5zmafHNTRA';
+      'PeSoRVkmyfNqL8ThefHQ3vN6d8xp8dw8UZbyRAazRduB';
 
   CallController(this.ref) : super(const CallState());
 

@@ -39,6 +39,7 @@ _$LoginRequestImpl _$$LoginRequestImplFromJson(Map<String, dynamic> json) =>
       phoneNumber: json['phoneNumber'] as String,
       password: json['password'] as String,
       firebaseToken: json['firebaseToken'] as String,
+      voIpToken: json['voIpToken'] as String?,
     );
 
 Map<String, dynamic> _$$LoginRequestImplToJson(_$LoginRequestImpl instance) =>
@@ -46,6 +47,7 @@ Map<String, dynamic> _$$LoginRequestImplToJson(_$LoginRequestImpl instance) =>
       'phoneNumber': instance.phoneNumber,
       'password': instance.password,
       'firebaseToken': instance.firebaseToken,
+      'voIpToken': instance.voIpToken,
     };
 
 _$ProfileApiResponseImpl _$$ProfileApiResponseImplFromJson(

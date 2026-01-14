@@ -1,11 +1,14 @@
 // lib/core/notification/notification_service.dart
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_callkit_incoming/entities/android_params.dart';
+import 'package:flutter_callkit_incoming/entities/call_event.dart';
 import 'package:flutter_callkit_incoming/entities/call_kit_params.dart';
 import 'package:flutter_callkit_incoming/entities/ios_params.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
@@ -151,6 +154,24 @@ class FCMService {
 
   Future<String?> getToken() async {
     try {
+      if (!kIsWeb && Platform.isIOS) {
+        // Poll for APNS token
+        String? apnsToken = await _fcm.getAPNSToken();
+        int retries = 0;
+        while (apnsToken == null && retries < 5) {
+          // Wait 2 seconds before retrying
+          await Future.delayed(const Duration(seconds: 2));
+          apnsToken = await _fcm.getAPNSToken();
+          retries++;
+        }
+
+        if (apnsToken == null) {
+          print(
+            "APNS Token unavailable after polling. FCM token will be null.",
+          );
+          return null;
+        }
+      }
       return await _fcm.getToken();
     } catch (e) {
       print('Error getting FCM token: $e');
@@ -158,8 +179,25 @@ class FCMService {
     }
   }
 
+  /// Gets the VoIP push token for iOS. Returns null on non-iOS platforms.
+  Future<String?> getVoIPToken() async {
+    try {
+      final deviceToken = await FlutterCallkitIncoming.getDevicePushTokenVoIP();
+      print('VoIP Token from notification service: $deviceToken');
+      return deviceToken;
+    } catch (e) {
+      print('Error getting VoIP token: $e');
+      return null;
+    }
+  }
+
   Future<void> initialize() async {
-    await _fcm.requestPermission(alert: true, badge: true, sound: true);
+    NotificationSettings settings = await _fcm.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    print('User granted permission: ${settings.authorizationStatus}');
 
     // Suppress system notifications when app is in foreground (iOS)
     // This prevents duplicate notifications - we show custom overlay instead
@@ -177,7 +215,88 @@ class FCMService {
       handleInitialBackgroundMessage(initialMessage);
     }
 
+    // Setup CallKit listeners to handle VoIP push call actions
+    _setupCallKitListeners();
+
     print('FCM initialized. Token: ${await getToken()}');
+  }
+
+  /// Sets up listeners for CallKit events triggered by VoIP pushes.
+  /// This bridges native PushKit/CallKit with Flutter for call handling.
+  void _setupCallKitListeners() {
+    FlutterCallkitIncoming.onEvent.listen((CallEvent? event) {
+      if (event == null) return;
+
+      switch (event.event) {
+        case Event.actionCallIncoming:
+          // Call received - VoIP push triggered native CallKit UI
+          print('CallKit: Incoming call received');
+          break;
+
+        case Event.actionCallAccept:
+          // User accepted the call from CallKit UI
+          print('CallKit: Call accepted');
+          final extra = event.body['extra'] as Map<dynamic, dynamic>?;
+          if (extra != null) {
+            _handleCallAccepted(extra);
+          }
+          break;
+
+        case Event.actionCallDecline:
+          // User declined the call
+          print('CallKit: Call declined');
+          final extra = event.body['extra'] as Map<dynamic, dynamic>?;
+          if (extra != null) {
+            final chatId = extra['chatId']?.toString();
+            if (chatId != null) {
+              rejectCall(chatId);
+            }
+          }
+          break;
+
+        case Event.actionCallEnded:
+          // Call ended
+          print('CallKit: Call ended');
+          break;
+
+        default:
+          break;
+      }
+    });
+  }
+
+  /// Handles the call acceptance from CallKit VoIP push.
+  void _handleCallAccepted(Map<dynamic, dynamic> extra) {
+    final context = navigatorKey.currentContext;
+    if (context == null) {
+      // Context not ready yet, store as pending route
+      _ref.read(pendingRouteProvider.notifier).state = PendingRoute(
+        path: '/call-screen',
+      );
+      return;
+    }
+
+    final room = extra['room']?.toString();
+    final chatId = extra['chatId']?.toString();
+    final isVideoCall = extra['isVideoCall'] == true;
+    final token = extra['token']?.toString();
+    final isGroupCall = extra['isGroupCall'] == true;
+    final callerName = extra['callerName']?.toString() ?? 'Caller';
+
+    if (room == null || chatId == null || token == null) {
+      print('CallKit: Missing required call data');
+      return;
+    }
+
+    _joinCallRoom(
+      room,
+      callerName,
+      context,
+      chatId,
+      isVideoCall,
+      token,
+      isGroupCall,
+    );
   }
 
   Future<void> initFCMWeb() async {
@@ -516,6 +635,7 @@ class FCMService {
   }
 
   void handleBackgroundMessage(RemoteMessage message) async {
+    log("Background ${message.data}");
     log(
       "Full message: ${message.data}",
     ); // This might contain the actual data payload

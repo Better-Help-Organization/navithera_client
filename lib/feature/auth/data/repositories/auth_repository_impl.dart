@@ -25,14 +25,18 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User>> login(
     String phoneNumber,
     String password,
-    String fcm,
-  ) async {
-    print("phoneNumber: $phoneNumber, password: $password, fcm: $fcm");
+    String fcm, {
+    String? voIpToken,
+  }) async {
+    print(
+      "phoneNumber: $phoneNumber, password: $password, fcm: $fcm, voIpToken: $voIpToken",
+    );
     try {
       final loginRequest = LoginRequest(
         phoneNumber: phoneNumber,
         password: password,
         firebaseToken: fcm,
+        voIpToken: voIpToken,
       );
 
       final apiResponse = await remoteDataSource.login(loginRequest);
