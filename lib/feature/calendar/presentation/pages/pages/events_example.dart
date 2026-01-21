@@ -29,7 +29,7 @@ class SessionNotifier extends StateNotifier<List<Session>> {
     try {
       await _attachAuthHeader();
       final response = await _dio.get(
-        '${base_url_dev}/client/me/sessions?fields=therapist.*,schedule,duration,hasTherapistAttended,approvalStatus&take=0',
+        '${base_url_dev}/client/me/sessions?fields=therapist.*,schedule,duration,hasTherapistAttended,approvalStatus,groupAttendance.*&take=0',
       );
 
       final sessionsData = (response.data['data'] as List);
@@ -66,6 +66,7 @@ class Session {
   final String? note;
   final bool hasTherapistAttended;
   final String approvalStatus;
+  final List<dynamic> groupAttendance;
 
   Session({
     required this.id,
@@ -76,6 +77,7 @@ class Session {
     this.group = const [],
     this.note,
     this.hasTherapistAttended = false,
+    this.groupAttendance = const [],
   });
 
   factory Session.fromMap(Map<String, dynamic> map) {
@@ -97,6 +99,8 @@ class Session {
           map['hasTherapistAttended'] is bool
               ? map['hasTherapistAttended'] as bool
               : false,
+      groupAttendance:
+          map['groupAttendance'] is List ? map['groupAttendance'] as List : [],
     );
   }
 
@@ -109,6 +113,7 @@ class Session {
     bool? hasTherapistAttended,
     String? approvalStatus,
     List<Therapist>? group,
+    List<dynamic>? groupAttendance,
   }) {
     return Session(
       id: id ?? this.id,
@@ -119,6 +124,7 @@ class Session {
       hasTherapistAttended: hasTherapistAttended ?? this.hasTherapistAttended,
       approvalStatus: approvalStatus ?? this.approvalStatus,
       group: group ?? this.group,
+      groupAttendance: groupAttendance ?? this.groupAttendance,
     );
   }
 
@@ -433,6 +439,14 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        // Correct attendance check
+        bool isAttended = false;
+        if (session.group.isNotEmpty) {
+          isAttended = session.groupAttendance.isNotEmpty;
+        } else {
+          isAttended = session.hasTherapistAttended;
+        }
+
         return Dialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -455,7 +469,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
                       ),
                     ),
                     // NEW: Attendance button for client
-                    if (!session.hasTherapistAttended &&
+                    if (!isAttended &&
                         session.approvalStatus.toLowerCase() == 'confirmed')
                       IconButton(
                         icon: Icon(
@@ -481,7 +495,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
                 _buildDetailRow('Duration', '${session.duration} minutes'),
                 _buildDetailRow(
                   'Your Therapist Attendance',
-                  session.hasTherapistAttended ? 'Attended' : 'Not Attended',
+                  isAttended ? 'Attended' : 'Not Attended',
                 ),
                 _buildDetailRow('Status', session.approvalStatus),
                 // if (session.note != null && session.note!.isNotEmpty)
@@ -942,7 +956,7 @@ class _DayCalendarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 600, // Fixed height for the day calendar
+      height: 1200, // Fixed height for the day calendar
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -1041,20 +1055,17 @@ class _DayCalendarView extends StatelessWidget {
     return sessions.map((session) {
       final localTime = session.schedule.toLocal();
       final startHour = localTime.hour;
-      final startMinute = localTime.minute;
-      final durationHours = session.duration ~/ 60;
-      final durationMinutes = session.duration % 60;
 
       // Calculate position and height based on time
-      final top = (startHour + 0.1 / 60) * (600 / 24);
-      // final height = (durationHours + durationMinutes / 60) * (600 / 24);
-      final height = 100;
+      final rowHeight = 1200 / 24;
+      final top = startHour * rowHeight;
+      final height = rowHeight;
 
       return Positioned(
         left: 60, // Offset for time markers
         top: top,
         right: 16,
-        height: 20,
+        height: height,
         child: _SessionTimeBlock(
           session: session,
           onTap: () => onSessionTap(session), // NEW: Pass the tap handler
@@ -1075,9 +1086,19 @@ class _SessionTimeBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     print('sessionyyy: ${session.group.length}');
     final Color primaryColor = AppColors.primary;
+
+    // Correct attendance check
+    bool isAttended = false;
+    if (session.group.isNotEmpty) {
+      isAttended = session.groupAttendance.isNotEmpty;
+    } else {
+      isAttended = session.hasTherapistAttended;
+    }
+
     return GestureDetector(
       onTap: onTap, // NEW: Use the onTap parameter
       child: Container(
+        clipBehavior: Clip.hardEdge,
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -1103,21 +1124,24 @@ class _SessionTimeBlock extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
           child: Row(
             children: [
-              Text(
-                session.therapist.fullName,
-                style: TextStyle(
-                  color:
-                      session.approvalStatus == 'pending'
-                          ? Colors.black45
-                          : Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
+              Flexible(
+                child: Text(
+                  session.therapist.fullName,
+                  style: TextStyle(
+                    color:
+                        session.approvalStatus == 'pending'
+                            ? Colors.black45
+                            : Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
-              if (session.hasTherapistAttended)
+              if (isAttended)
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(width: 6),
                     Icon(Icons.check_circle, color: Colors.white, size: 12),
