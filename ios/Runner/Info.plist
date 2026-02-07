@@ -42,8 +42,6 @@
 	<string>This app saves images to your photo library when you choose to export or save them.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app accesses your photo library so you can select and upload images.</string>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>This app uses tracking to improve notifications and overall user experience.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
