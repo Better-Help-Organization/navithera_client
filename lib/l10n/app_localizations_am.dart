@@ -291,4 +291,20 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get yourTherapist => 'የሳይኮሎጂ ባለሙያዎ';
+
+  @override
+  String get deleteAccount => 'መለያ ሰርዝ';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'መለያዎን መሰረዝ ይፈልጋሉ? ይህ ድርጊት መልሰው ማግኘት አይችሉም እና ሁሉም መረጃዎ ለዘለቄታው ይሰረዛል።';
+
+  @override
+  String get confirmDelete => 'ሰርዝ';
+
+  @override
+  String get accountDeletedSuccess => 'መለያዎ በተሳካ ሁኔታ ተሰርዟል';
+
+  @override
+  String get deleteAccountError => 'መለያ መሰረዝ አልተሳካም። እባክዎ እንደገና ይሞክሩ።';
 }

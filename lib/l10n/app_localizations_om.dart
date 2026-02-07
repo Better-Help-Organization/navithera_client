@@ -295,4 +295,22 @@ class AppLocalizationsOm extends AppLocalizations {
 
   @override
   String get yourTherapist => 'Ogeessa fayyaa sammuu kee';
+
+  @override
+  String get deleteAccount => 'Akkaawuntii Haquu';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Akkaawuntii kee haquu barbaaddaa? Gocha kun duubatti hin deebi\'u fi daataan kee hundi yeroo hundaaf ni haqama.';
+
+  @override
+  String get confirmDelete => 'Haquu';
+
+  @override
+  String get accountDeletedSuccess =>
+      'Akkaawuntiin kee milkaa\'inaan haqameera';
+
+  @override
+  String get deleteAccountError =>
+      'Akkaawuntii haquun hin milkoofne. Maaloo irra deebi\'ii yaali.';
 }

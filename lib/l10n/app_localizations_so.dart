@@ -300,4 +300,22 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get yourTherapist => 'Dhakhtarkaaga maskaxda';
+
+  @override
+  String get deleteAccount => 'Tirtir Akoonka';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Ma hubtaa inaad rabto inaad tirtirto akoonkaaga? Tallaabadan lama celin karo oo dhammaan xogtaada waa la tirtiri doonaa weligeed.';
+
+  @override
+  String get confirmDelete => 'Tirtir';
+
+  @override
+  String get accountDeletedSuccess =>
+      'Akoonkaaga si guul leh ayaa loo tirtiray';
+
+  @override
+  String get deleteAccountError =>
+      'Tirtirka akoonka waa lagu guuldarraystay. Fadlan mar kale isku day.';
 }

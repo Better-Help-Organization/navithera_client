@@ -92,5 +92,10 @@
   "setYourHours": "Go'aanso saacadahaaga, si fudud ula xiriir macaamiisha, oo diirada saar waxa aad ugu fiican tahay",
   "supportedByAI": "Waxaa taageera AI, waxaadna wada adiga",
   "leverageSmartTools": "Ka faa'iidayso qalabka casriga ah si aad u horumariso kulamada daaweynta oo aad u bixiso daryeel shakhsi ah",
-  "yourTherapist": "Dhakhtarkaaga maskaxda"
+  "yourTherapist": "Dhakhtarkaaga maskaxda",
+  "deleteAccount": "Tirtir Akoonka",
+  "deleteAccountConfirmation": "Ma hubtaa inaad rabto inaad tirtirto akoonkaaga? Tallaabadan lama celin karo oo dhammaan xogtaada waa la tirtiri doonaa weligeed.",
+  "confirmDelete": "Tirtir",
+  "accountDeletedSuccess": "Akoonkaaga si guul leh ayaa loo tirtiray",
+  "deleteAccountError": "Tirtirka akoonka waa lagu guuldarraystay. Fadlan mar kale isku day."
 }

@@ -661,6 +661,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Therapist  '**
   String get yourTherapist;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.'**
+  String get deleteAccountConfirmation;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get confirmDelete;
+
+  /// No description provided for @accountDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account has been successfully deleted'**
+  String get accountDeletedSuccess;
+
+  /// No description provided for @deleteAccountError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete account. Please try again.'**
+  String get deleteAccountError;
 }
 
 class _AppLocalizationsDelegate

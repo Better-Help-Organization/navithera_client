@@ -33,15 +33,15 @@
 		<string>_dartobservatory._tcp</string>
 	</array>
 	<key>NSCameraUsageDescription</key>
-	<string>This app uses the camera to capture images required for its core features.</string>
+	<string>NaviThera needs access to your camera to enable video calls between therapists and clients during therapy sessions. This allows for face-to-face consultations and better communication.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Allow Flutter tools to connect to the app for debugging and hot reload.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app uses the microphone for audio calls.</string>
+	<string>NaviThera needs access to your microphone to enable audio communication during video and voice calls between therapists and clients. This is essential for therapy sessions and consultations.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app saves images to your photo library when you choose to export or save them.</string>
+	<string>NaviThera needs permission to save images to your photo library when you choose to export or save profile pictures and session-related content.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app accesses your photo library so you can select and upload images.</string>
+	<string>NaviThera needs access to your photo library so you can select and upload profile pictures and share relevant images during therapy sessions.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

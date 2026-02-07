@@ -93,5 +93,10 @@
   "leverageSmartTools":  "ጥበበኛ መሳርሕታት ተጠቐምኩም ክፍለ ጊዜ ሕክምናኻት ምምሕዳር ምምሕዳር ኣድላይ ክትንከብ እናትን።",
   "tired": "ድኻም",
   "angry": "ተቆጢቡ",
-  "yourTherapist": "ተሓጋጋዚኻ"
+  "yourTherapist": "ተሓጋጋዚኻ",
+  "deleteAccount": "ሂሳብ ምስራዝ",
+  "deleteAccountConfirmation": "ሂሳብካ ክትስርዞ ትደሊ ዲኻ? እዚ ተግባር ምምላስ ዘይከኣል እዩ እሞ ኩሉ ሓበሬታኻ ንዘለኣለም ክስረዝ እዩ።",
+  "confirmDelete": "ስረዝ",
+  "accountDeletedSuccess": "ሂሳብካ ብዓወት ተሰሪዙ",
+  "deleteAccountError": "ሂሳብ ምስራዝ ኣይተዓወተን። በጃኻ ደጊምካ ፈትን።"
 }

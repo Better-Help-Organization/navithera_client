@@ -91,5 +91,10 @@
   "tired": "ደከማ",
   "angry": "ተቆጣ",
   "yourTherapist": "የሳይኮሎጂ ባለሙያዎ",
-  "neutral": "ገለልተኛ"
+  "neutral": "ገለልተኛ",
+  "deleteAccount": "መለያ ሰርዝ",
+  "deleteAccountConfirmation": "መለያዎን መሰረዝ ይፈልጋሉ? ይህ ድርጊት መልሰው ማግኘት አይችሉም እና ሁሉም መረጃዎ ለዘለቄታው ይሰረዛል።",
+  "confirmDelete": "ሰርዝ",
+  "accountDeletedSuccess": "መለያዎ በተሳካ ሁኔታ ተሰርዟል",
+  "deleteAccountError": "መለያ መሰረዝ አልተሳካም። እባክዎ እንደገና ይሞክሩ።"
 }

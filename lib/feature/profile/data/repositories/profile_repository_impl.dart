@@ -110,4 +110,41 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Left(Failure.unknownFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Unit>> deleteAccount() async {
+    try {
+      final response = await remoteDataSource.deleteAccount();
+      
+      if (response.response.statusCode != null &&
+          response.response.statusCode! >= 200 &&
+          response.response.statusCode! < 300) {
+        return const Right(unit);
+      } else {
+        return const Left(Failure.serverFailure('Failed to delete account'));
+      }
+    } on DioException catch (e) {
+      String errorMessage = 'Failed to delete account. Please try again.';
+      
+      if (e.response?.data is Map<String, dynamic>) {
+        final responseData = e.response!.data as Map<String, dynamic>;
+        if (responseData.containsKey('message')) {
+          errorMessage = responseData['message'].toString();
+        }
+      } else if (e.response?.statusCode == 401) {
+        errorMessage = 'Authentication failed. Please login again.';
+      } else if (e.response?.statusCode == 403) {
+        errorMessage = 'You do not have permission to delete this account.';
+      } else if (e.response?.statusCode == 500) {
+        errorMessage = 'Server error. Please try again later.';
+      } else if (e.type == DioExceptionType.connectionTimeout || 
+                 e.type == DioExceptionType.receiveTimeout) {
+        errorMessage = 'Connection timeout. Please check your internet connection.';
+      }
+      
+      return Left(Failure.serverFailure(errorMessage));
+    } catch (e) {
+      return const Left(Failure.unknownFailure('An unexpected error occurred'));
+    }
+  }
 }

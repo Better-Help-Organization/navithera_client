@@ -19,6 +19,9 @@ abstract class ProfileRemoteDataSource {
   Future<ProfileModel> getCurrentProfile(
     @Queries() Map<String, dynamic> queries,
   );
+  
+  @DELETE('/account/client')
+  Future<HttpResponse<void>> deleteAccount();
 }
 
 final profileRemoteDataSourceProvider = Provider<ProfileRemoteDataSource>((

@@ -91,5 +91,10 @@
   "leverageSmartTools": "Meeshaalee sammuu fayyadamiitii yeroo gargaarsaa fooyyeessi fi kunuunsa dhuunfaa kennuuf.",
   "tired": "Dadhabe",
   "angry": "Aara",
-  "yourTherapist": "Ogeessa fayyaa sammuu kee"
+  "yourTherapist": "Ogeessa fayyaa sammuu kee",
+  "deleteAccount": "Akkaawuntii Haquu",
+  "deleteAccountConfirmation": "Akkaawuntii kee haquu barbaaddaa? Gocha kun duubatti hin deebi'u fi daataan kee hundi yeroo hundaaf ni haqama.",
+  "confirmDelete": "Haquu",
+  "accountDeletedSuccess": "Akkaawuntiin kee milkaa'inaan haqameera",
+  "deleteAccountError": "Akkaawuntii haquun hin milkoofne. Maaloo irra deebi'ii yaali."
 }

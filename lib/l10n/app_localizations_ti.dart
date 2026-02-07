@@ -296,4 +296,20 @@ class AppLocalizationsTi extends AppLocalizations {
 
   @override
   String get yourTherapist => 'ተሓጋጋዚኻ';
+
+  @override
+  String get deleteAccount => 'ሂሳብ ምስራዝ';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'ሂሳብካ ክትስርዞ ትደሊ ዲኻ? እዚ ተግባር ምምላስ ዘይከኣል እዩ እሞ ኩሉ ሓበሬታኻ ንዘለኣለም ክስረዝ እዩ።';
+
+  @override
+  String get confirmDelete => 'ስረዝ';
+
+  @override
+  String get accountDeletedSuccess => 'ሂሳብካ ብዓወት ተሰሪዙ';
+
+  @override
+  String get deleteAccountError => 'ሂሳብ ምስራዝ ኣይተዓወተን። በጃኻ ደጊምካ ፈትን።';
 }

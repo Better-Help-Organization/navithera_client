@@ -15,6 +15,7 @@ import 'package:navithera_client/feature/home/presentation/pages/home_screen.dar
 import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/feature/notification/presentation/pages/notification_screen.dart';
+import 'package:navithera_client/feature/profile/presentation/providers/delete_account_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:url_launcher/url_launcher.dart';
@@ -125,6 +126,96 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ),
             ],
           ),
+    );
+  }
+
+  Future<void> _showDeleteAccountDialog(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text(AppLocalizations.of(context)!.deleteAccount),
+            content: Text(AppLocalizations.of(context)!.deleteAccountConfirmation),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(AppLocalizations.of(context)!.cancel),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  await _handleDeleteAccount();
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: AppColors.error,
+                ),
+                child: Text(AppLocalizations.of(context)!.confirmDelete),
+              ),
+            ],
+          ),
+    );
+  }
+
+  Future<void> _handleDeleteAccount() async {
+    // Show loading indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    
+    // Trigger delete operation
+    await ref.read(deleteAccountProvider.notifier).deleteAccount();
+    
+    // Dismiss loading indicator
+    if (mounted) Navigator.pop(context);
+    
+    // Check result
+    final deleteState = ref.read(deleteAccountProvider);
+    
+    deleteState.when(
+      initial: () {},
+      loading: () {},
+      success: () async {
+        // Success - show success message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.accountDeletedSuccess),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+        
+        // Logout and cleanup
+        await ref.read(authProvider.notifier).logout();
+        ref.read(matchedTherapistProvider.notifier).reset();
+        ref.read(upcomingSessionProvider.notifier).reset();
+        
+        // Dispose socket
+        final socketService = ref.read(socketServiceProvider.notifier);
+        socketService.state.disconnect();
+        ref.invalidate(socketServiceProvider);
+        
+        // Navigate to login
+        if (mounted) {
+          ref.read(routerProvider).go('/login');
+        }
+      },
+      error: (error) {
+        // Error - show error message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(error),
+              backgroundColor: AppColors.error,
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -323,6 +414,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onTap: () => _showLogoutDialog(context),
                   isLogout: true,
                 ),
+                _buildListTile(
+                  icon: Icons.delete_outline,
+                  title: AppLocalizations.of(context)!.deleteAccount,
+                  onTap: () => _showDeleteAccountDialog(context),
+                  isDestructive: true,
+                ),
               ],
             ),
           ),
@@ -416,10 +513,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     String? badge,
     Color? badgeColor,
     bool isLogout = false,
+    bool isDestructive = false,
   }) {
     //final bool isLogout = title.toLowerCase() == 'logout';
-    final Color iconBgColor = isLogout ? AppColors.error : AppColors.iconGrey;
-    final Color textColor = isLogout ? AppColors.error : AppColors.textPrimary;
+    final Color iconBgColor = (isLogout || isDestructive) ? AppColors.error : AppColors.iconGrey;
+    final Color textColor = (isLogout || isDestructive) ? AppColors.error : AppColors.textPrimary;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

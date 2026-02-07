@@ -298,4 +298,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get yourTherapist => 'Your Therapist  ';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.';
+
+  @override
+  String get confirmDelete => 'Delete';
+
+  @override
+  String get accountDeletedSuccess =>
+      'Your account has been successfully deleted';
+
+  @override
+  String get deleteAccountError =>
+      'Failed to delete account. Please try again.';
 }

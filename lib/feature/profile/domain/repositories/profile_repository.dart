@@ -12,4 +12,6 @@ abstract class ProfileRepository {
   });
 
   Future<Either<Failure, Profile>> getCurrentProfile();
+  
+  Future<Either<Failure, Unit>> deleteAccount();
 }

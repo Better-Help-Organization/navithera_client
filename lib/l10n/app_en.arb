@@ -94,6 +94,11 @@
   "leverageSmartTools": "Leverage smart tools to enhance therapy sessions and deliver personalized care.",
   "tired": "Tired",
   "angry": "Angry",
-  "yourTherapist": "Your Therapist  "
+  "yourTherapist": "Your Therapist  ",
+  "deleteAccount": "Delete Account",
+  "deleteAccountConfirmation": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+  "confirmDelete": "Delete",
+  "accountDeletedSuccess": "Your account has been successfully deleted",
+  "deleteAccountError": "Failed to delete account. Please try again."
 }
 
