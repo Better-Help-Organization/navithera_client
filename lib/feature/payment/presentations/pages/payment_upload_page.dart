@@ -269,7 +269,7 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
         type: FileType.custom,
         allowMultiple: false,
         withReadStream: false,
-        allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx'],
+        allowedExtensions: ['jpg', 'jpeg', 'png', 'webp'],
       );
 
       if (result == null || result.files.isEmpty) {

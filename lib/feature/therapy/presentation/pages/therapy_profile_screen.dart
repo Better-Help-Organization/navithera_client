@@ -1521,22 +1521,31 @@ class _CircleAvatar extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap:
-          hasNetwork
-              ? () {
-                final imageUrl =
-                    '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}';
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder:
-                        (context) => FullScreenImageViewer(
-                          imageUrl: imageUrl,
-                          heroTag: 'therapist-avatar-${therapist.id}',
-                        ),
-                  ),
-                );
-              }
-              : null,
+      onTap: () {
+        if (hasNetwork) {
+          final imageUrl = '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}';
+          Navigator.of(context).push(
+            MaterialPageRoute(
+               builder: (context) => FullScreenImageViewer(
+                 imageUrl: imageUrl,
+                 heroTag: 'therapist-avatar-${therapist.id}',
+                 isAsset: false,
+               ),
+            ),
+          );
+        } else {
+          final assetUrl = getAvatarImage(therapist.avatar ?? 0);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+               builder: (context) => FullScreenImageViewer(
+                 imageUrl: assetUrl,
+                 heroTag: 'therapist-avatar-${therapist.id}',
+                 isAsset: true,
+               ),
+            ),
+          );
+        }
+      },
       child: Container(
         width: size,
         height: size,

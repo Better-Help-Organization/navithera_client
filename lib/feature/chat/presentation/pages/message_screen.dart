@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
@@ -709,11 +711,38 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                             ? CrossAxisAlignment.end
                             : CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        message.content,
+                      Linkify(
+                        onOpen: (link) async {
+                          final uri = Uri.parse(link.url);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(
+                              uri,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Could not open link: ${link.url}',
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        text: message.content,
                         style: TextStyle(
                           color: isMe ? Colors.white : AppColors.primary,
                           fontSize: 16,
+                        ),
+                        linkStyle: TextStyle(
+                          color: isMe ? Colors.blue : AppColors.primary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                        ),
+                        options: const LinkifyOptions(
+                          humanize: false,
+                          looseUrl: true,
                         ),
                       ),
                       const SizedBox(height: 4),

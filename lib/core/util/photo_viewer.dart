@@ -5,11 +5,13 @@ import 'package:photo_view/photo_view.dart';
 class FullScreenImageViewer extends StatefulWidget {
   final String imageUrl;
   final String? heroTag;
+  final bool isAsset;
 
   const FullScreenImageViewer({
     super.key,
     required this.imageUrl,
     this.heroTag,
+    this.isAsset = false,
   });
 
   @override
@@ -35,7 +37,9 @@ class _FullScreenImageViewerState extends State<FullScreenImageViewer> {
           children: [
             Positioned.fill(
               child: PhotoView(
-                imageProvider: NetworkImage(widget.imageUrl),
+                imageProvider: widget.isAsset
+                    ? AssetImage(widget.imageUrl) as ImageProvider
+                    : NetworkImage(widget.imageUrl),
                 heroAttributes:
                     widget.heroTag != null
                         ? PhotoViewHeroAttributes(tag: widget.heroTag!)

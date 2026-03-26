@@ -965,6 +965,32 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                               );
                             },
                           ),
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.lightBlue.withOpacity(0.1),
+                              border: Border.all(color: Colors.lightBlue.shade200),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(Icons.warning_amber_rounded, color: Colors.blue.shade700, size: 20),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Warning: going back is not allowed once you select a package. Please choose carefully",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.blue.shade800,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
 
                           Expanded(
                             child: ListView.builder(
