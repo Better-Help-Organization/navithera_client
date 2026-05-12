@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
@@ -17,15 +18,25 @@ final dioProvider = Provider<Dio>((ref) {
   );
 
   // Add auth interceptor
-  dio.interceptors.add(AuthInterceptor(ref));
-  dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+  if (kDebugMode) {
+    dio.interceptors.add(
+      LogInterceptor(
+        requestBody: false, 
+        responseBody: false, 
+        requestHeader: false,
+        responseHeader: false,
+      ),
+    );
+  }
 
   return dio;
 });
 
 class AuthInterceptor extends Interceptor {
   final Ref ref;
-
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
   AuthInterceptor(this.ref);
 
   @override
@@ -41,8 +52,7 @@ class AuthInterceptor extends Interceptor {
     }
 
     try {
-      final sharedPrefs = await SharedPreferences.getInstance();
-      final token = sharedPrefs.getString('access_token');
+      final token = await _secureStorage.read(key: 'access_token');
 
       if (token != null) {
         options.headers['Authorization'] = 'Bearer $token';
@@ -59,6 +69,7 @@ class AuthInterceptor extends Interceptor {
     if (err.response?.statusCode == 401) {
       // Token expired, try to refresh or logout
       // You can implement token refresh logic here
+      await _secureStorage.deleteAll();
     }
 
     handler.next(err);
