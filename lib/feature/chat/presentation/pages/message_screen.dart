@@ -27,7 +27,8 @@ import 'package:navithera_client/feature/chat/presentation/providers/chat_provid
     show chatProvider;
 import 'package:navithera_client/core/providers/user_status_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 final therapistInfoProvider = FutureProvider.family<UserModel, String>((
   ref,
@@ -471,8 +472,10 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       _busy = true;
     });
 
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     final roomName = _generateRandomRoomName();
 
     print("roomName: $roomName");
@@ -551,10 +554,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       removeOverlay();
 
       // 6. Handle the specific Cancel exception silently
-      if (CancelToken.isCancel(e)) {
-        print("Call flow cancelled by user.");
-        return;
-      }
+      if (CancelToken.isCancel(e)) return;
 
       print("DioException: ${e.toString()}");
       if (!mounted) return;

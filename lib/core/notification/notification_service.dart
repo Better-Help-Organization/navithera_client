@@ -183,7 +183,7 @@ class FCMService {
   Future<String?> getVoIPToken() async {
     try {
       final deviceToken = await FlutterCallkitIncoming.getDevicePushTokenVoIP();
-      print('VoIP Token from notification service: $deviceToken');
+      // print('VoIP Token from notification service: $deviceToken');
       return deviceToken;
     } catch (e) {
       print('Error getting VoIP token: $e');
@@ -218,7 +218,7 @@ class FCMService {
     // Setup CallKit listeners to handle VoIP push call actions
     _setupCallKitListeners();
 
-    print('FCM initialized. Token: ${await getToken()}');
+    // print('FCM initialized. Token: ${await getToken()}');
   }
 
   /// Sets up listeners for CallKit events triggered by VoIP pushes.
@@ -307,7 +307,7 @@ class FCMService {
           "BELdOx18JErKFF0TBMGM1JFR-gqfdYSKzmD8-Qw2hDn-gJVCyhgjXHzgOp_--f1quVjlownrkfz-scO74GZXSiE",
     );
 
-    print("token ${token}");
+    // print("token ${token}");
   }
 
   Future<void> _loadUnreadCount() async {
@@ -784,7 +784,7 @@ class FCMService {
     if (message.notification?.title == "Session scheduled") {
       //final bodyJson = jsonDecode(message.data?.body ?? '{}');
       log("hohohohohoho");
-      log("hohohohohoho: ${message.data}");
+      // log("hohohohohoho: ${message.data}");
       // print("Parsed body JSON: $bodyJson");
       _handleSessionNotification();
       final context = navigatorKey.currentContext;

@@ -3,12 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/constants/emoji_list.dart';
 import 'package:navithera_client/feature/therapy/presentation/widgets/animated_gradient_background.dart';
 import 'package:navithera_client/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/one_to_one_call_provider.dart';
 import '../services/pip_manager.dart';
 
@@ -33,6 +33,9 @@ class CallScreen extends ConsumerStatefulWidget {
 }
 
 class _CallScreenState extends ConsumerState<CallScreen> {
+  final _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
   final Size _previewSize = const Size(120, 160);
   Offset _previewOffset = const Offset(0, 0);
   final EdgeInsets _previewPadding = const EdgeInsets.fromLTRB(12, 12, 12, 120);
@@ -72,8 +75,7 @@ class _CallScreenState extends ConsumerState<CallScreen> {
   }) async {
     final Dio dio = Dio();
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      final accessToken = await _secureStorage.read(key: 'access_token');
 
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 

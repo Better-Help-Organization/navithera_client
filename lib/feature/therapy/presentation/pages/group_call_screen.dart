@@ -3,12 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/constants/emoji_list.dart';
 import 'package:navithera_client/core/util/format_duration.dart';
 import 'package:navithera_client/feature/therapy/presentation/widgets/animated_gradient_background.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/call_provider.dart';
 
 /// Dedicated screen for group video calls with multiple participants
@@ -57,6 +57,10 @@ class _GroupCallScreenState extends ConsumerState<GroupCallScreen> {
     super.dispose();
   }
 
+  final _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
+
   Future<void> _startCall() async {
     final roomName = widget.roomName ?? 'default-room';
     final participantName =
@@ -81,8 +85,7 @@ class _GroupCallScreenState extends ConsumerState<GroupCallScreen> {
   Future<void> EndCall({required String chatId}) async {
     final Dio dio = Dio();
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      final accessToken = await _secureStorage.read(key: 'access_token');
 
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
       await dio.post('${base_url_dev}/chat/call/end/$chatId');

@@ -6,14 +6,15 @@ import '../../domain/entities/profile.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../data_sources/profile_remote_data_source.dart';
 import '../models/profile_models.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;
-  final SharedPreferences sharedPreferences;
+  final FlutterSecureStorage secureStorage;
 
   ProfileRepositoryImpl({
     required this.remoteDataSource,
-    required this.sharedPreferences,
+    required this.secureStorage,
   });
 
   @override
@@ -75,7 +76,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   @override
   Future<Either<Failure, Profile>> getCurrentProfile() async {
     try {
-      final token = sharedPreferences.getString('access_token');
+      final token = await secureStorage.read(key: 'access_token');
       if (token == null) {
         return const Left(Failure.authFailure('No token found'));
       }

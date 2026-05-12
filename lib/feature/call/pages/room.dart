@@ -11,7 +11,8 @@ import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/therapy/presentation/services/pip_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 import '../exts.dart';
 import '../utils.dart';
@@ -196,13 +197,13 @@ class _RoomPageState extends ConsumerState<RoomPage> {
       _listener
         ..on<RoomDisconnectedEvent>((event) async {
           if (event.reason != null) {
-            print('Room disconnected: reason => ${event.reason}');
+            if (kDebugMode) debugPrint('message here');
           }
           WidgetsBindingCompatible.instance?.addPostFrameCallback(
             (timeStamp) =>
                 Navigator.popUntil(context, (route) => route.isFirst),
           );
-          print("xoxochatId: ${widget.chatId}");
+          if (kDebugMode) debugPrint('message here');
           print("xoxochatId: ${widget.isGroup}");
           if (widget.chatId != "" && widget.isGroup == false) {
             EndCall(widget.chatId);
@@ -305,7 +306,7 @@ class _RoomPageState extends ConsumerState<RoomPage> {
   }
 
   void _onE2EEStateEvent(TrackE2EEStateEvent e2eeState) {
-    print('e2ee state: $e2eeState');
+    if (kDebugMode) debugPrint('message here');
   }
 
   void _sortParticipants() {
@@ -381,8 +382,10 @@ class _RoomPageState extends ConsumerState<RoomPage> {
   Future<void> EndCall(String chatId) async {
     final Dio dio = Dio();
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      const secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      );
+      final accessToken = await secureStorage.read(key: 'access_token');
 
       dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
@@ -414,9 +417,8 @@ class _RoomPageState extends ConsumerState<RoomPage> {
     final body = message.notification?.body ?? data['body'];
     final notificationType = data['type']; // Assuming you have a 'type' field
 
-    print('Received FCM notification: $title - $body');
-    print('Notification data: $data');
-
+    if (kDebugMode) debugPrint('message here');
+    if (kDebugMode) debugPrint('message here');
     if (widget.isGroup == true) return;
 
     // Check if this is a "Call Ended" notification

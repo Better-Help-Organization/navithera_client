@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -25,7 +27,6 @@ import 'package:navithera_client/feature/home/presentation/providers/matched_the
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/feature/notification/presentation/pages/notification_screen.dart';
 import 'package:navithera_client/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:navithera_client/core/theme/app_typography.dart';
 import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/core/util/greeting.dart';
@@ -61,8 +62,10 @@ class NotificationService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -196,8 +199,10 @@ class LiveSessionService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -292,8 +297,10 @@ class SessionService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -306,7 +313,7 @@ class SessionService {
       await _attachAuthHeader();
 
       DateTime now = DateTime.now();
-      print("now: ${now}");
+      if (kDebugMode) debugPrint('message here');
 
       final response = await _dio.get(
         '${base_url_dev}/client/me/sessions?filters=schedule>${now},hasTherapistAttended=0,approvalStatus=confirmed&sort=schedule=asc',
@@ -332,8 +339,10 @@ class QuoteService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -346,7 +355,7 @@ class QuoteService {
       await _attachAuthHeader();
       final response = await _dio.get('${base_url_dev}/quote/daily');
 
-      print("response: ${response.data}");
+      if (kDebugMode) debugPrint('message here');
 
       if (response.statusCode == 200) {
         final data = response.data;
@@ -384,8 +393,10 @@ class RatingService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -428,8 +439,10 @@ class MoodService {
   }
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    const secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    );
+    final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -478,7 +491,7 @@ class MoodService {
         },
       );
 
-      print("xoxoresponse: ${response.data}");
+      if (kDebugMode) debugPrint('message here');
 
       if (response.statusCode == 200) {
         final data = response.data;
@@ -591,8 +604,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Check mounted before using ref to prevent iOS disposal errors
       if (!mounted) return;
 
-      print("foreground message here: ${message.data}");
-      print("Foreground notification received: ${message.notification?.title}");
+      if (kDebugMode) debugPrint('message here');
+      if (kDebugMode) debugPrint('message here');
 
       if (message.notification?.title == 'Match accepted') {
         // Refresh therapist when match accepted notification comes
@@ -719,14 +732,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Refresh sessions after handling notification
       ref.read(upcomingSessionProvider.notifier).loadNext();
     } catch (e) {
-      print('Failed to parse notification message: $e');
+      if (kDebugMode) debugPrint('message here');
     }
   }
 
   void _handleSessionSelectionNotification(RemoteMessage message) {
     try {
       final data = message.data;
-      print("xoxoxo: ${data}");
+      if (kDebugMode) debugPrint('message here');
 
       if (data['sessionIds'] != null) {
         List<String> sessionIds = [];

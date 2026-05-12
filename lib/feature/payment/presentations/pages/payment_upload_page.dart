@@ -15,16 +15,19 @@ import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/feature/questionnaire/domain/entities/preference_models.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/questions_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 class FileUploadService {
   // Upload a single payment document and return backend filename (String)
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
   static Future<String> uploadPaymentDocument(
     File file, {
     String? subscriptionId,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token');
+    final accessToken = await _secureStorage.read(key: 'access_token');
 
     if (accessToken == null) {
       throw Exception('No access token found. Please login again.');
@@ -93,11 +96,9 @@ class FileUploadService {
 
       final responseData = json.decode(response.body);
 
-      print("filenamekoko: ${responseData}");
       // Adjust this based on your API response structure
       final filename =
           responseData['data']?['filename'] ?? responseData['filename'];
-      print("filename: ${filename}");
       if (filename is! String || filename.isEmpty) {
         throw Exception('Upload succeeded but no filename returned.');
       }
@@ -115,8 +116,7 @@ class FileUploadService {
     String? receiptUrl,
     String method = 'bank_transfer',
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token');
+    final accessToken = await _secureStorage.read(key: 'access_token');
 
     if (accessToken == null) {
       throw Exception('No access token found. Please login again.');
@@ -326,7 +326,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
       });
 
       // Upload to backend
-      print("Bearer: ${widget.sessionId}");
       final uploadedName = await FileUploadService.uploadPaymentDocument(
         file,
         subscriptionId:
@@ -431,8 +430,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
         method: 'bank_transfer',
       );
 
-      print("response: ${response}");
-
       // Success
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -443,26 +440,24 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
       );
 
       // Use the preferenceId from widget parameter or from riverpod provider
-      final preferenceId = widget.preferenceId;
       final modalId = ref.read(modalIdProvider);
 
-      print("modalId: ${modalId} preferenceId: ${preferenceId}");
 
-      if (modalId == "aa4c9839-e031-417a-b319-2da4bf1092c3") {
-        // If modalId matches specific value, go to blocked user screen directly
-        // router.go('/blocked-user');
-        print("modalId matched");
-      } else {
-        print("modalId here");
-      }
+      // if (modalId == "aa4c9839-e031-417a-b319-2da4bf1092c3") {
+      //   // If modalId matches specific value, go to blocked user screen directly
+      //   // router.go('/blocked-user');
+      //   print("modalId matched");
+      // } else {
+      //   print("modalId here");
+      // }
 
-      if (modalId != "aa4c9839-e031-417a-b319-2da4bf1092c3") {
-        await _handleSubmit(preferenceId);
-      } else {
-        print("No handle submit called");
-        // If no preferenceId, just go to blocked user screen
-        router.go('/blocked-user');
-      }
+      // if (modalId != "aa4c9839-e031-417a-b319-2da4bf1092c3") {
+      //   await _handleSubmit(preferenceId);
+      // } else {
+      //   print("No handle submit called");
+      //   // If no preferenceId, just go to blocked user screen
+      //   router.go('/blocked-user');
+      // }
     } catch (e) {
       String errorMessage = 'Failed to Submit. Please try again.';
       if (e is DioException && e.response != null) {
