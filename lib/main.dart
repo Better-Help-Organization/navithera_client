@@ -6,18 +6,21 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navithera_client/core/localization/providers/locale_provider.dart';
 import 'package:navithera_client/core/notification/notification_service.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
-import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
+import 'package:navithera_client/core/security/rootdetection.dart';
+import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart'
+    hide secureStorageProvider;
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/firebase_options.dart';
 import 'package:navithera_client/l10n/l10n.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import "package:navithera_client/core/localization/fallback_localization.dart";
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -53,13 +56,17 @@ void main() async {
       }
     }
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    final sharedPreferences = await SharedPreferences.getInstance();
+
+    bool isRooted = await FlutterJailbreakDetection.jailbroken;
+    bool developerMode = await FlutterJailbreakDetection.developerMode;
+
+    if (isRooted || developerMode) {
+      runApp(Rootdetection());
+      return;
+    }
 
     runApp(
       ProviderScope(
-        overrides: [
-          sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-        ],
         child: MyApp(),
       ),
     );
