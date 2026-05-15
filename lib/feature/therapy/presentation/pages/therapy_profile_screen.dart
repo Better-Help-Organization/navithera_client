@@ -984,6 +984,7 @@ class TherapistRatingsService {
   }
   final _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
 
   Future<void> _attachAuthHeader() async {
