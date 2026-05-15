@@ -24,6 +24,7 @@ final exchangeRateProvider = StateProvider<double?>((ref) => null);
 
 const _secureStorage = FlutterSecureStorage(
   aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
 );
 // Keep as FutureProvider but use ref.refresh for force reload
 final userPreferencesProvider = FutureProvider<Map<String, dynamic>?>((
