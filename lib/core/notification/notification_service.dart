@@ -1505,7 +1505,7 @@ class FCMService {
         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
 
     _join(
-      "wss://livekit.navigo.et",
+      "wss://livekit.navithera.com",
       token,
       context,
       isVideoCall: isVideoCall,
@@ -1666,7 +1666,7 @@ class FCMService {
     }
 
     _join(
-      "wss://livekit.navigo.et",
+      "wss://livekit.navithera.com",
       token,
       context,
       isVideoCall: isVideocall,
