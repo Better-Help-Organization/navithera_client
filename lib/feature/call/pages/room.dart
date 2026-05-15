@@ -384,6 +384,7 @@ class _RoomPageState extends ConsumerState<RoomPage> {
     try {
       const secureStorage = FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
       );
       final accessToken = await secureStorage.read(key: 'access_token');
 
