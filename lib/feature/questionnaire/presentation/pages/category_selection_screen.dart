@@ -52,6 +52,7 @@ class _CategorySelectionScreenState
 
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
   @override
   Widget build(BuildContext context) {
