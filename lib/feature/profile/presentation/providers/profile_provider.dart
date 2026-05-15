@@ -29,6 +29,7 @@ final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
     remoteDataSource: remoteDataSource,
     secureStorage: const FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     ),
   );
 });
