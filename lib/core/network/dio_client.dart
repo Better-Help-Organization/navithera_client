@@ -36,6 +36,9 @@ class AuthInterceptor extends Interceptor {
   final Ref ref;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(
+      accessibility: KeychainAccessibility.first_unlock
+    )
   );
   AuthInterceptor(this.ref);
 
