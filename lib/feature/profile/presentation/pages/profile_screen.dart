@@ -81,6 +81,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Future<void> _loadAccessToken() async {
     const _secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     setState(() async {
       _accessToken = await _secureStorage.read(key: 'access_token');
@@ -90,6 +91,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Future<void> _showLogoutDialog(BuildContext context) async {
     const _secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     return showDialog(
       context: context,
