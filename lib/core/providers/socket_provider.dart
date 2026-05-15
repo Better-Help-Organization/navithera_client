@@ -17,6 +17,7 @@ class SocketService {
   // Secure storage instance
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
 
   SocketService(this.ref);
