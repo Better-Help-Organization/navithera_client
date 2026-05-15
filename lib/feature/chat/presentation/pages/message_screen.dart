@@ -474,6 +474,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     final roomName = _generateRandomRoomName();
