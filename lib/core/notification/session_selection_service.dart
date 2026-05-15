@@ -29,6 +29,7 @@ class SessionSelectionService {
   // Single secure storage instance shared across methods
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
 
   Future<Map<String, dynamic>?> getSessionDetails(String sessionId) async {
