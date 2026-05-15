@@ -531,7 +531,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
         // Join the call
         await _join(
-          "wss://livekit.navigo.et",
+          "wss://livekit.navithera.com",
           token,
           context,
           isVideoCall: isVideoCall,

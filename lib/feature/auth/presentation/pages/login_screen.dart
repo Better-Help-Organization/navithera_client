@@ -146,7 +146,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           final userStatus = user.status!.toLowerCase();
 
           final firstPreferenceId =
-              user.preferences!.isNotEmpty ? user.preferences!.first.id : null;
+              user.preferences?.isNotEmpty == true
+                  ? user.preferences!.first.id
+                  : null;
 
           print("user Scription: ${firstStatus}");
           final isSubscriptionExpired =
