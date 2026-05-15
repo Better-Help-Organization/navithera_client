@@ -24,6 +24,7 @@ class SessionNotifier extends StateNotifier<List<Session>> {
   bool _isLoading = false;
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
 
   Future<void> loadSessions() async {
@@ -281,6 +282,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
     try {
       const secureStorage = FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
       );
       final accessToken = await secureStorage.read(key: 'access_token');
 
@@ -367,6 +369,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
     try {
       const secureStorage = FlutterSecureStorage(
         aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
       );
       final accessToken = await secureStorage.read(key: 'access_token');
 
