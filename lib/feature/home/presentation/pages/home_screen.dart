@@ -64,6 +64,7 @@ class NotificationService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
@@ -201,6 +202,7 @@ class LiveSessionService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
@@ -299,6 +301,7 @@ class SessionService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
@@ -341,6 +344,7 @@ class QuoteService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
@@ -395,6 +399,7 @@ class RatingService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
@@ -441,6 +446,7 @@ class MoodService {
   Future<void> _attachAuthHeader() async {
     const secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
     );
     final accessToken = await secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
