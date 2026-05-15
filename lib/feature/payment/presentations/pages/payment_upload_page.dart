@@ -22,6 +22,7 @@ class FileUploadService {
   // Upload a single payment document and return backend filename (String)
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
   static Future<String> uploadPaymentDocument(
     File file, {
