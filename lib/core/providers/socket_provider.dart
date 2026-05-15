@@ -39,7 +39,7 @@ class SocketService {
     const basePath = 'dev';
 
     socket = io.io(
-      'https://app.navigo.et',
+      'https://app.navithera.com',
       io.OptionBuilder()
           .setTransports(['websocket'])
           .setPath('/$basePath/socket.io')
