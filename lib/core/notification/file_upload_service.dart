@@ -10,6 +10,7 @@ class FileUploadService {
   // Use secure storage
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
   );
 
   static Future<String> uploadProfilePicture(File imageFile) async {
