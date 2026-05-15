@@ -18,11 +18,13 @@ final dioProvider = Provider<Dio>((ref) {
   );
 
   // Add auth interceptor
+  dio.interceptors.add(AuthInterceptor(ref));
+
   if (kDebugMode) {
     dio.interceptors.add(
       LogInterceptor(
-        requestBody: false, 
-        responseBody: false, 
+        requestBody: false,
+        responseBody: false,
         requestHeader: false,
         responseHeader: false,
       ),
@@ -36,9 +38,7 @@ class AuthInterceptor extends Interceptor {
   final Ref ref;
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(
-      accessibility: KeychainAccessibility.first_unlock
-    )
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
   );
   AuthInterceptor(this.ref);
 
