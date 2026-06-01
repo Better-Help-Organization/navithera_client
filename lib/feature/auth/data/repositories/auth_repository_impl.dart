@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart'; 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../../../core/error/failures.dart';
 import '../data_sources/auth_remote_data_source.dart';
 import '../models/auth_models.dart';
@@ -12,12 +12,12 @@ import '../../../profile/data/data_sources/profile_remote_data_source.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final ProfileRemoteDataSource profileRemoteDataSource;
-  final FlutterSecureStorage secureStorage; 
+  final FlutterSecureStorage secureStorage;
 
   AuthRepositoryImpl({
     required this.remoteDataSource,
     required this.profileRemoteDataSource,
-    required this.secureStorage, 
+    required this.secureStorage,
   });
 
   Future<void> _saveTokens(String access, String refresh) async {
@@ -36,8 +36,12 @@ class AuthRepositoryImpl implements AuthRepository {
     return await secureStorage.read(key: 'access_token');
   }
 
-  Future<void> _clearAll() async {
-    await secureStorage.deleteAll(); 
+  Future<void> _clearAuthState() async {
+    await Future.wait([
+      secureStorage.delete(key: 'acess_token'),
+      secureStorage.delete(key: 'refresh_token'),
+      secureStorage.delete(key: 'current_user')
+    ]);
   }
 
   @override
@@ -83,7 +87,6 @@ class AuthRepositoryImpl implements AuthRepository {
         await _saveUser(basicUser);
         return Right(basicUser);
       }, (completeUser) => Right(completeUser));
-
     } on DioException catch (e) {
       String errorMessage = 'Login failed. Please try again.';
       if (e.response?.data is Map<String, dynamic>) {
@@ -102,18 +105,22 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, void>> logout() async {
+    final refreshToken = await secureStorage.read(key: 'refresh_token');
     try {
-      final refreshToken = await secureStorage.read(key: 'refresh_token'); // ✅
       if (refreshToken != null) {
         await remoteDataSource.logout();
       }
-      await _clearAll(); 
-      return const Right(null);
+      // await _clearAll();
+      // return const Right(null);
     } on DioException catch (e) {
+      await _clearAuthState();
       return Left(Failure.serverFailure(e.message ?? 'Logout failed'));
     } catch (e) {
+      await _clearAuthState();
       return Left(Failure.unknownFailure(e.toString()));
     }
+    await _clearAuthState();
+    return const Right(null);
   }
 
   @override
@@ -162,7 +169,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       await _saveUser(user);
       return Right(user);
-
     } on DioException catch (e) {
       String errorMessage = 'Signup failed. Please try again.';
       if (e.response?.data is Map<String, dynamic>) {
@@ -180,7 +186,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, bool>> isLoggedIn() async {
     try {
-      final token = await _getToken(); 
+      final token = await _getToken();
       return Right(token != null);
     } catch (e) {
       return Left(Failure.unknownFailure(e.toString()));
@@ -195,7 +201,7 @@ class AuthRepositoryImpl implements AuthRepository {
         return const Left(Failure.authFailure('No token found'));
       }
 
-      final userJsonString = await secureStorage.read(key: 'current_user'); 
+      final userJsonString = await secureStorage.read(key: 'current_user');
       if (userJsonString == null) {
         return const Left(Failure.authFailure('No user data found'));
       }
@@ -215,7 +221,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final profileResponse = await remoteDataSource.getCurrentUserProfile();
       final userData = profileResponse.data;
-
 
       final user = User(
         id: userData.id,
@@ -245,7 +250,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       await _saveUser(user);
       return Right(user);
-
     } on DioException catch (e) {
       String errorMessage = "We're having trouble loading your profile.";
       if (e.response?.data is Map<String, dynamic>) {
@@ -259,7 +263,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> updateProfile(UpdateProfileRequest request) async {
+  Future<Either<Failure, User>> updateProfile(
+    UpdateProfileRequest request,
+  ) async {
     try {
       final profileResponse = await remoteDataSource.updateProfile(request);
       final userData = profileResponse.data;
@@ -288,7 +294,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       await _saveUser(updatedUser);
       return Right(updatedUser);
-
     } on DioException catch (e) {
       String errorMessage = 'Profile update failed. Please try again.';
       if (e.response?.data is Map<String, dynamic>) {
@@ -302,9 +307,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> updateProfilePic(UpdateProfilePicRequest request) async {
+  Future<Either<Failure, User>> updateProfilePic(
+    UpdateProfilePicRequest request,
+  ) async {
     try {
-      final profileResponse = await remoteDataSource.updateProfilePicture(request);
+      final profileResponse = await remoteDataSource.updateProfilePicture(
+        request,
+      );
       final userData = profileResponse.data;
 
       final updatedUser = User(
@@ -333,7 +342,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
       await _saveUser(updatedUser);
       return Right(updatedUser);
-
     } on DioException catch (e) {
       String errorMessage = 'Profile picture update failed.';
       if (e.response?.data is Map<String, dynamic>) {
