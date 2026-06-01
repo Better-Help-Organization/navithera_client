@@ -472,17 +472,26 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       _busy = true;
     });
 
-    const secureStorage = FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
-    );
-    final accessToken = await secureStorage.read(key: 'access_token');
-    final roomName = _generateRandomRoomName();
-
-    print("roomName: $roomName");
+    // print("roomName: $roomName");
     print("name: ${widget.chat.id}");
 
     try {
+      const secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+      );
+      final accessToken = await secureStorage.read(key: 'access_token');
+      if (accessToken == null || accessToken.isEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please sign in again before starting a call'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+      final roomName = _generateRandomRoomName();
       final dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer ${accessToken}';
 
