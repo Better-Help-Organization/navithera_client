@@ -38,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   Future<void> _clearAuthState() async {
     await Future.wait([
-      secureStorage.delete(key: 'acess_token'),
+      secureStorage.delete(key: 'access_token'),
       secureStorage.delete(key: 'refresh_token'),
       secureStorage.delete(key: 'current_user')
     ]);
