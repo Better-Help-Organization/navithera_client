@@ -81,18 +81,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Future<void> _loadAccessToken() async {
     const _secureStorage = FlutterSecureStorage(
       aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
     );
-    setState(() async {
-      _accessToken = await _secureStorage.read(key: 'access_token');
+    final accessToken = await _secureStorage.read(key: 'access_token');
+    if (!mounted) return;
+    setState(() {
+      _accessToken = accessToken;
     });
   }
 
   Future<void> _showLogoutDialog(BuildContext context) async {
-    const _secureStorage = FlutterSecureStorage(
-      aOptions: AndroidOptions(encryptedSharedPreferences: true),
-      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
-    );
+    // const _secureStorage = FlutterSecureStorage(
+    //   aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    //   iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    // );
     return showDialog(
       context: context,
       builder:
@@ -120,10 +122,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ref.invalidate(
                     socketServiceProvider,
                   ); // This is key - it destroys the instance
-                  final accessToken = await _secureStorage.read(key: 
-                    'access_token',
-                  );
-                  print("access token: ${accessToken}");
+                  // final accessToken = await _secureStorage.read(key:
+                  //   'access_token',
+                  // );
+                  // // print("access token: ${accessToken}");
                   ref.read(routerProvider).go('/login');
                 },
                 child: Text(AppLocalizations.of(context)!.logout),
