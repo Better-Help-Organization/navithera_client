@@ -59,7 +59,7 @@ class _GroupCallScreenState extends ConsumerState<GroupCallScreen> {
 
   final _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
   );
 
   Future<void> _startCall() async {
@@ -88,7 +88,12 @@ class _GroupCallScreenState extends ConsumerState<GroupCallScreen> {
     try {
       final accessToken = await _secureStorage.read(key: 'access_token');
 
-      dio.options.headers['Authorization'] = 'Bearer $accessToken';
+      // dio.options.headers['Authorization'] = 'Bearer $accessToken';
+      if (accessToken?.isNotEmpty == true) {
+        dio.options.headers['Authorization'] = 'Bearer $accessToken';
+      } else {
+        dio.options.headers.remove('Authorization');
+      }
       await dio.post('${base_url_dev}/chat/call/end/$chatId');
     } catch (e) {
       // Optional: log error
