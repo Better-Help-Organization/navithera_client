@@ -22,7 +22,7 @@ class FileUploadService {
   // Upload a single payment document and return backend filename (String)
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
   );
   static Future<String> uploadPaymentDocument(
     File file, {
@@ -443,7 +443,6 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
       // Use the preferenceId from widget parameter or from riverpod provider
       final modalId = ref.read(modalIdProvider);
 
-
       // if (modalId == "aa4c9839-e031-417a-b319-2da4bf1092c3") {
       //   // If modalId matches specific value, go to blocked user screen directly
       //   // router.go('/blocked-user');
@@ -459,6 +458,11 @@ class _PaymentUploadPageState extends ConsumerState<PaymentUploadPage> {
       //   // If no preferenceId, just go to blocked user screen
       //   router.go('/blocked-user');
       // }
+      if (modalId != "aa4c9839-e031-417a-b319-2da4bf1092c3") {
+        await _handleSubmit(widget.preferenceId);
+      } else {
+        router.go('/blocked-user');
+      }
     } catch (e) {
       String errorMessage = 'Failed to Submit. Please try again.';
       if (e is DioException && e.response != null) {
