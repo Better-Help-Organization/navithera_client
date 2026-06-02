@@ -44,7 +44,7 @@ dependencies:
   googleapis_auth: ^2.0.0
   flutter_dotenv: ^5.2.1
   overlay_support: ^2.1.0
-  flutter_jailbreak_detection: ^1.10.0
+  flutter_jailbreak_detection_plus: ^1.10.7
   flutter_secure_storage: ^10.2.0
   foundation: ^0.0.5
 

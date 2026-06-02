@@ -21,7 +21,7 @@ import 'package:navithera_client/l10n/l10n.dart';
 import 'package:overlay_support/overlay_support.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import "package:navithera_client/core/localization/fallback_localization.dart";
-import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
+import 'package:flutter_jailbreak_detection_plus/flutter_jailbreak_detection_plus.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -111,8 +111,8 @@ void main() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     // ─── SECURITY CHECKS ──────────────────────────────────────────────────
-    bool isRooted = await FlutterJailbreakDetection.jailbroken;
-    bool developerMode = await FlutterJailbreakDetection.developerMode;
+    bool isRooted = await FlutterJailbreakDetectionPlus.jailbroken;
+    bool developerMode = await FlutterJailbreakDetectionPlus.developerMode;
     bool fridaDetected = await _isFridaDetected();
 
     if (isRooted || developerMode || fridaDetected) {

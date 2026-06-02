@@ -448,8 +448,8 @@ Read token for payment submission
 3 - POST /payment
 Submit subscriptionId, amount, filename, receiptUrl, method → navigate to /auth-gate on success
 
-Notes
-Amount is hardcoded as 455 — not read from user input or subscription data
+<!-- Notes
+Amount is hardcoded as 455 — not read from user input or subscription data -->
 
 --------------------------------------------------------------------------------------------------------------------
 subscription_page.dart — triggered on page load and when user taps a subscription plan
