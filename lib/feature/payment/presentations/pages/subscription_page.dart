@@ -13,20 +13,24 @@ import 'package:navithera_client/core/util/format_duration.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 // import 'package:navithera_client/feature/payment/presentations/pages/payment_page.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 // import 'package:web/web.dart' as html;
 
 // Providers
 final vatProvider = StateProvider<double?>((ref) => null);
 final exchangeRateProvider = StateProvider<double?>((ref) => null);
 
+const _secureStorage = FlutterSecureStorage(
+  aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+);
 // Keep as FutureProvider but use ref.refresh for force reload
 final userPreferencesProvider = FutureProvider<Map<String, dynamic>?>((
   ref,
 ) async {
-  final prefs = await SharedPreferences.getInstance();
-  final token = prefs.getString('access_token');
+  final token = await _secureStorage.read(key: 'access_token');
   if (token == null) throw Exception('No token found');
 
   final uri = Uri.parse(
@@ -109,8 +113,7 @@ class SubscriptionService {
     required String? levelId,
     required String? modalId,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('access_token');
+    final token = await _secureStorage.read(key: 'access_token');
     if (token == null) throw Exception('No token found');
 
     // Build query parameters
@@ -159,8 +162,7 @@ class SubscriptionService {
     required String subscriptionId,
     required String? userId,
   }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('access_token');
+    final token = await _secureStorage.read(key: 'access_token');
     if (token == null) throw Exception('No token found');
 
     final uri = Uri.parse('$base_url_dev/subscription');
@@ -178,8 +180,8 @@ class SubscriptionService {
       body: body,
     );
 
-    print("Response status: ${response.statusCode}");
-    print("Response body: ${response.body}");
+    // print("Response status: ${response.statusCode}");
+    // print("Response body: ${response.body}");
 
     if (response.statusCode == 409) {
       // Handle conflict - extract existing subscription ID from error message
@@ -391,9 +393,6 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
     try {
       // Future<void> _checkIfPrefFilled() async {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
-
       try {
         final finalsubscriptionId =
             await SubscriptionService.createSubscription(
@@ -702,8 +701,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
   Future<void> _getVat() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('access_token');
+      final token = await _secureStorage.read(key: 'access_token');
       if (token == null) throw Exception('No token found');
 
       final uri = Uri.parse('$base_url_dev/params?filters=name=vat');
@@ -724,15 +722,14 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         ref.read(vatProvider.notifier).state = vatData;
       }
     } catch (e) {
-      print("Error fetching VAT: $e");
+      if (kDebugMode) debugPrint('Error fetching VAT: $e');
       ref.read(vatProvider.notifier).state = 15.0;
     }
   }
 
   Future<void> _getExchangeRate() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('access_token');
+      final token = await _secureStorage.read(key: 'access_token');
       if (token == null) throw Exception('No token found');
 
       final uri = Uri.parse('$base_url_dev/params?filters=name=exchange_rate');
@@ -755,7 +752,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         ref.read(exchangeRateProvider.notifier).state = exchangeRateData;
       }
     } catch (e) {
-      print("Error fetching exchange rate: $e");
+      if (kDebugMode) debugPrint('Error fetching exchange rate: $e');
       ref.read(exchangeRateProvider.notifier).state = 55.0;
     }
   }
@@ -964,6 +961,38 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                                 ),
                               );
                             },
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: Colors.lightBlue.withOpacity(0.1),
+                              border: Border.all(
+                                color: Colors.lightBlue.shade200,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.warning_amber_rounded,
+                                  color: Colors.blue.shade700,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    "Warning: going back is not allowed once you select a package. Please choose carefully",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.blue.shade800,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
 
                           Expanded(

@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:navithera_client/feature/auth/data/data_sources/auth_remote_data_source.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/error/failures.dart';
 //import '../../data/datasources/auth_remote_data_source.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -25,20 +25,23 @@ class AuthState with _$AuthState {
 }
 
 // Shared Preferences Provider
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('SharedPreferences must be overridden');
+final secureStorageProvider = Provider<FlutterSecureStorage>((ref) {
+  return const FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
 });
 
 // Auth Repository Provider
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final remoteDataSource = ref.read(authRemoteDataSourceProvider);
   final profileRemoteDataSource = ref.read(profileRemoteDataSourceProvider);
-  final sharedPreferences = ref.read(sharedPreferencesProvider);
+  final secureStorage = ref.read(secureStorageProvider);
 
   return AuthRepositoryImpl(
     remoteDataSource: remoteDataSource,
     profileRemoteDataSource: profileRemoteDataSource,
-    sharedPreferences: sharedPreferences,
+    secureStorage: secureStorage,
   );
 });
 
@@ -281,7 +284,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   String _getErrorMessage(Failure failure) {
-    print("failurexyz, ${failure}");
+    // print("failurexyz, ${failure}");
     return failure.when(
       serverFailure: (message) => message,
       networkFailure: (message) => 'Network error: $message',

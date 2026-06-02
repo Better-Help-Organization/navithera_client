@@ -894,6 +894,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
@@ -901,7 +902,6 @@ import 'package:navithera_client/core/theme/app_typography.dart';
 import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/core/util/photo_viewer.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Add to your auth_models.dart or create a new ratings_models.dart
 
@@ -982,10 +982,13 @@ class TherapistRatingsService {
     _dio.options.connectTimeout = const Duration(seconds: 20);
     _dio.options.receiveTimeout = const Duration(seconds: 20);
   }
+  final _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
 
   Future<void> _attachAuthHeader() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
+    final accessToken = await _secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -1001,8 +1004,8 @@ class TherapistRatingsService {
         '${base_url_dev}/ratings?filters=therapist.id=$therapistId',
       );
 
-      print("responseyyyyyy: ${therapistId}");
-      print("responseyyyyyy: ${response}");
+      // print("responseyyyyyy: ${therapistId}");
+      // print("responseyyyyyy: ${response}");
 
       if (response.statusCode == 200) {
         return RatingResponse.fromJson(response.data);
@@ -1521,22 +1524,34 @@ class _CircleAvatar extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap:
-          hasNetwork
-              ? () {
-                final imageUrl =
-                    '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}';
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder:
-                        (context) => FullScreenImageViewer(
-                          imageUrl: imageUrl,
-                          heroTag: 'therapist-avatar-${therapist.id}',
-                        ),
+      onTap: () {
+        if (hasNetwork) {
+          final imageUrl =
+              '${base_url_for_image}${therapist.profile}?v=${DateTime.now().millisecondsSinceEpoch}';
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder:
+                  (context) => FullScreenImageViewer(
+                    imageUrl: imageUrl,
+                    heroTag: 'therapist-avatar-${therapist.id}',
+                    isAsset: false,
                   ),
-                );
-              }
-              : null,
+            ),
+          );
+        } else {
+          final assetUrl = getAvatarImage(therapist.avatar ?? 0);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder:
+                  (context) => FullScreenImageViewer(
+                    imageUrl: assetUrl,
+                    heroTag: 'therapist-avatar-${therapist.id}',
+                    isAsset: true,
+                  ),
+            ),
+          );
+        }
+      },
       child: Container(
         width: size,
         height: size,

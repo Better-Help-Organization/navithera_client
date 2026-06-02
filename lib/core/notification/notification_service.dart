@@ -183,7 +183,7 @@ class FCMService {
   Future<String?> getVoIPToken() async {
     try {
       final deviceToken = await FlutterCallkitIncoming.getDevicePushTokenVoIP();
-      print('VoIP Token from notification service: $deviceToken');
+      // print('VoIP Token from notification service: $deviceToken');
       return deviceToken;
     } catch (e) {
       print('Error getting VoIP token: $e');
@@ -218,7 +218,7 @@ class FCMService {
     // Setup CallKit listeners to handle VoIP push call actions
     _setupCallKitListeners();
 
-    print('FCM initialized. Token: ${await getToken()}');
+    // print('FCM initialized. Token: ${await getToken()}');
   }
 
   /// Sets up listeners for CallKit events triggered by VoIP pushes.
@@ -307,7 +307,7 @@ class FCMService {
           "BELdOx18JErKFF0TBMGM1JFR-gqfdYSKzmD8-Qw2hDn-gJVCyhgjXHzgOp_--f1quVjlownrkfz-scO74GZXSiE",
     );
 
-    print("token ${token}");
+    // print("token ${token}");
   }
 
   Future<void> _loadUnreadCount() async {
@@ -784,7 +784,7 @@ class FCMService {
     if (message.notification?.title == "Session scheduled") {
       //final bodyJson = jsonDecode(message.data?.body ?? '{}');
       log("hohohohohoho");
-      log("hohohohohoho: ${message.data}");
+      // log("hohohohohoho: ${message.data}");
       // print("Parsed body JSON: $bodyJson");
       _handleSessionNotification();
       final context = navigatorKey.currentContext;
@@ -1505,7 +1505,7 @@ class FCMService {
         "eyJhbGciOiJIUzI1NiJ9.eyJ2aWRlbyI6eyJyb29tSm9pbiI6dHJ1ZSwicm9vbSI6InF1aWNrc3RhcnQtcm9vbSIsImNhblB1Ymxpc2giOnRydWUsImNhblN1YnNjcmliZSI6dHJ1ZX0sImlzcyI6IkFQSTNyUGFadUdxYjI4OCIsImV4cCI6MTc2NDMyOTEzNCwibmJmIjowLCJzdWIiOiJxdWlja3N0YXJ0LXVzZXJuYW1lIn0.Ef8iTBjiIGhpVbYBo9mt8hK0sQaqTUzpDcJCjXOrVQs";
 
     _join(
-      "wss://livekit.navigo.et",
+      "wss://livekit.navithera.com",
       token,
       context,
       isVideoCall: isVideoCall,
@@ -1666,7 +1666,7 @@ class FCMService {
     }
 
     _join(
-      "wss://livekit.navigo.et",
+      "wss://livekit.navithera.com",
       token,
       context,
       isVideoCall: isVideocall,

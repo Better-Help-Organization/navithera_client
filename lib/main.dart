@@ -1,29 +1,32 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navithera_client/core/localization/providers/locale_provider.dart';
 import 'package:navithera_client/core/notification/notification_service.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
-import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
+import 'package:navithera_client/core/security/rootdetection.dart';
+import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart'
+    hide secureStorageProvider;
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:navithera_client/firebase_options.dart';
 import 'package:navithera_client/l10n/l10n.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import "package:navithera_client/core/localization/fallback_localization.dart";
+import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // Initialize Firebase if not already done
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -36,9 +39,61 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 }
 
+// ─── FRIDA DETECTION ────────────────────────────────────────────────────────
+Future<bool> _isFridaDetected() async {
+  // Check 1: Frida default server port 27042
+  try {
+    final socket = await Socket.connect(
+      '127.0.0.1',
+      27042,
+      timeout: const Duration(milliseconds: 300),
+    );
+    socket.destroy();
+    log('Frida detected: port 27042 open');
+    return true;
+  } catch (_) {}
+
+  // Check 2: Frida server binary on disk
+  try {
+    final file = File('/data/local/tmp/frida-server');
+    if (await file.exists()) {
+      log('Frida detected: frida-server file found');
+      return true;
+    }
+  } catch (_) {}
+
+  // Check 3: Frida gadget or agent in process memory maps
+  try {
+    final mapsFile = File('/proc/self/maps');
+    if (await mapsFile.exists()) {
+      final content = await mapsFile.readAsString();
+      if (content.contains('frida') || content.contains('gadget')) {
+        log('Frida detected: found in /proc/self/maps');
+        return true;
+      }
+    }
+  } catch (_) {}
+
+  // Check 4: Alternative Frida port 27043
+  try {
+    final socket = await Socket.connect(
+      '127.0.0.1',
+      27043,
+      timeout: const Duration(milliseconds: 300),
+    );
+    socket.destroy();
+    log('Frida detected: port 27043 open');
+    return true;
+  } catch (_) {}
+
+  return false;
+}
+// ────────────────────────────────────────────────────────────────────────────
+
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
+
     if (Firebase.apps.isEmpty) {
       try {
         await Firebase.initializeApp(
@@ -52,14 +107,22 @@ void main() async {
         }
       }
     }
+
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    final sharedPreferences = await SharedPreferences.getInstance();
+
+    // ─── SECURITY CHECKS ──────────────────────────────────────────────────
+    bool isRooted = await FlutterJailbreakDetection.jailbroken;
+    bool developerMode = await FlutterJailbreakDetection.developerMode;
+    bool fridaDetected = await _isFridaDetected();
+
+    if (isRooted || developerMode || fridaDetected) {
+      runApp(Rootdetection());
+      return;
+    }
+    // ──────────────────────────────────────────────────────────────────────
 
     runApp(
       ProviderScope(
-        overrides: [
-          sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-        ],
         child: MyApp(),
       ),
     );
@@ -83,13 +146,11 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
 
     try {
-      // Initialize FCM - COMMENTED OUT FOR NOW
       final fcmService = ref.read(fcmServiceProvider);
       fcmService.initialize();
       if (kIsWeb) {
         fcmService.initFCMWeb();
       }
-
       _listenCallKitActions();
     } catch (e, st) {
       log('initState error: $e\n$st');
@@ -109,7 +170,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         }
       } catch (_) {}
     }
-    // Try toJson on objects coming from plugin models
     try {
       final toJson = (v as dynamic).toJson();
       if (toJson is Map) {
@@ -123,10 +183,8 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
     FlutterCallkitIncoming.onEvent.listen((callEvent) async {
       if (callEvent == null) return;
 
-      // --- normalize the event ---
       final eventMap = _asMap(callEvent);
 
-      // --- event type ---
       String? type =
           (() {
             final m = eventMap;
@@ -149,18 +207,14 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
             return t;
           })();
 
-      // --- body ---
       final body = _asMap(eventMap['body'] ?? (callEvent as dynamic).body);
 
-      // --- extra ---
       Map<String, dynamic> extra = _asMap(body['extra']);
       if (extra.isEmpty) {
         extra = {...body, ..._asMap(body['android']), ..._asMap(body['ios'])};
       }
 
-      // --- idMap from event (FCM payload style) ---
       final idMap = _asMap(eventMap['id']);
-      // Merge any missing pieces into extra
       extra.addAll({
         if (!extra.containsKey('chatId') && idMap['chatId'] != null)
           'chatId': idMap['chatId'],
@@ -176,7 +230,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           'token': idMap['token'],
       });
 
-      // --- Extract variables ---
       final String? chatId =
           (extra['chatId'] ?? idMap['chatId'] ?? body['chatId'])?.toString();
       final String? roomName =
@@ -207,7 +260,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
 
       callerName ??= 'Caller';
       final context = navigatorKey.currentContext;
-      // if (context == null) return;
 
       switch (type) {
         case 'Event.actionCallAccept':
@@ -219,7 +271,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
               isGroupCall != null &&
               token != null) {
             if (context != null) {
-              // App is in foreground/background - navigate directly
               ref
                   .read(fcmServiceProvider)
                   .joinCallFromCallKit(
@@ -231,7 +282,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
                     token: token,
                   );
             } else {
-              // App was terminated - set pending route
               ref.read(pendingRouteProvider.notifier).state = PendingRoute(
                 path: '/call-screen',
               );
@@ -260,18 +310,15 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     final authState = ref.read(authProvider);
     if (state == AppLifecycleState.resumed) {
-      // App came to foreground - mark messages as read and check for new ones
       authState.whenOrNull(
         authenticated: (user) async {
           await ref.read(chatProvider.notifier).getChatThreads(silent: true);
-          // ref.read(socketServiceProvider).connect();
           try {
             final socketService = ref.read(socketServiceProvider);
             await socketService.connect();
             print("Socket connected after login");
           } catch (e) {
             print("Socket connection error: $e");
-            // Don't block navigation if socket fails
           }
           return null;
         },
@@ -282,8 +329,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
           print("disconnected!!!!!!");
           final socketService = ref.read(socketServiceProvider);
           socketService.disconnect();
-          // await ref.read(chatProvider.notifier).getChatThreads(silent: true);
-          // ref.read(socketServiceProvider).connect();
           return null;
         },
       );
@@ -293,8 +338,6 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    //_messageController.dispose();
-    //_scrollController.dispose();
     super.dispose();
   }
 
@@ -311,12 +354,11 @@ class _MyAppState extends ConsumerState<MyApp> with WidgetsBindingObserver {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.teal,
-            brightness: Brightness.light, // or dark
+            brightness: Brightness.light,
           ),
           fontFamily: 'PlusJakartaSans',
         ),
         supportedLocales: L10n.all,
-        // localizationsDelegates: AppLocalizations.localizationsDelegates,
         localizationsDelegates: const [
           ...AppLocalizations.localizationsDelegates,
           FallbackMaterialLocalizationsDelegate(),

@@ -3,10 +3,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:navithera_client/core/constants/base_url.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
@@ -23,8 +23,8 @@ final _fetchUserSubscriptionMessageProvider = FutureProvider<String>((
   ref,
 ) async {
   try {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('access_token');
+    const secureStorage = FlutterSecureStorage();
+    final token = await secureStorage.read(key:'access_token');
     if (token == null) throw Exception('No token found');
 
     // Replace with your actual base URL

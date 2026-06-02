@@ -6,7 +6,8 @@ import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/routes/app_router.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/auth_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart'; // Add intl: ^0.19.0 to pubspec.yaml
 
 // ----------------------------------------------------------------------------
@@ -18,19 +19,24 @@ import 'package:intl/intl.dart'; // Add intl: ^0.19.0 to pubspec.yaml
 // Then import that key here or keep it in a shared place.
 // final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-final sessionSelectionServiceProvider = Provider<SessionSelectionService>((
-  ref,
-) {
+final sessionSelectionServiceProvider = Provider<SessionSelectionService>((ref) {
   return SessionSelectionService();
 });
 
 class SessionSelectionService {
   final Dio _dio = Dio();
 
+  // Single secure storage instance shared across methods
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
+
   Future<Map<String, dynamic>?> getSessionDetails(String sessionId) async {
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      // Secure token read
+      final accessToken = await _secureStorage.read(key: 'access_token');
+      if (accessToken == null) return null;
 
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
@@ -41,13 +47,15 @@ class SessionSelectionService {
       if (response.statusCode == 200) {
         return response.data['data'];
       } else {
-        // ignore: avoid_print
-        print('Failed to get session details: ${response.data}');
+        if (kDebugMode) {
+          debugPrint('Failed to get session details: ${response.statusCode}');
+        }
         return null;
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('Error getting session details: $e');
+      if (kDebugMode) {
+        debugPrint('Error getting session details: $e');
+      }
       return null;
     }
   }
@@ -57,15 +65,13 @@ class SessionSelectionService {
     required List<String> unselectedIds,
   }) async {
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      // Secure token read
+      final accessToken = await _secureStorage.read(key: 'access_token');
+      if (accessToken == null) {
+        return {'success': false, 'message': 'Not authenticated'};
+      }
 
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
-
-      // ignore: avoid_print
-      print("yoyoyo selectedId: $selectedId");
-      // ignore: avoid_print
-      print("yoyoyo unselectedIds: $unselectedIds");
 
       final response = await _dio.post(
         '${base_url_dev}/session/select',
@@ -73,22 +79,17 @@ class SessionSelectionService {
       );
 
       if (response.statusCode == 201) {
-        // ignore: avoid_print
-        print('Session selection submitted successfully');
         return {'success': true, 'message': 'Session selected successfully'};
       } else {
-        // ignore: avoid_print
-        print('Failed to submit session selection: ${response.data}');
         final errorMessage =
             response.data['message'] ?? 'Failed to submit session selection';
         return {'success': false, 'message': errorMessage};
       }
     } catch (e) {
       if (e is DioException && e.response != null) {
-        // ignore: avoid_print
-        print('Server responded with status code: ${e.response?.statusCode}');
-        // ignore: avoid_print
-        print('Response data: ${e.response?.data}');
+        if (kDebugMode) {
+          debugPrint('Server error: ${e.response?.statusCode}');
+        }
 
         final responseData = e.response?.data;
         String errorMessage = 'Failed to submit session selection';
@@ -97,7 +98,7 @@ class SessionSelectionService {
           errorMessage =
               responseData['message'] ??
               responseData['error'] ??
-              'Failed to submit session selection';
+              errorMessage;
         } else if (responseData is String) {
           try {
             final parsed = json.decode(responseData);
@@ -109,8 +110,6 @@ class SessionSelectionService {
 
         return {'success': false, 'message': errorMessage};
       } else {
-        // ignore: avoid_print
-        print('Error submitting session selection: $e');
         return {'success': false, 'message': 'Network error: ${e.toString()}'};
       }
     }

@@ -18,6 +18,8 @@ import 'package:navithera_client/feature/notification/presentation/pages/notific
 import 'package:shared_preferences/shared_preferences.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 //import "package:navithera_client/l10n/app_localizations.dart";
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -77,14 +79,22 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _loadAccessToken() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
+    const _secureStorage = FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+    );
+    final accessToken = await _secureStorage.read(key: 'access_token');
+    if (!mounted) return;
     setState(() {
-      _accessToken = sharedPreferences.getString('access_token');
+      _accessToken = accessToken;
     });
-    print("Access Token: $_accessToken");
   }
 
   Future<void> _showLogoutDialog(BuildContext context) async {
+    // const _secureStorage = FlutterSecureStorage(
+    //   aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    //   iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    // );
     return showDialog(
       context: context,
       builder:
@@ -112,13 +122,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ref.invalidate(
                     socketServiceProvider,
                   ); // This is key - it destroys the instance
-
-                  final sharedPreferences =
-                      await SharedPreferences.getInstance();
-                  final accessToken = sharedPreferences.getString(
-                    'access_token',
-                  );
-                  print("access token: ${accessToken}");
+                  // final accessToken = await _secureStorage.read(key:
+                  //   'access_token',
+                  // );
+                  // // print("access token: ${accessToken}");
                   ref.read(routerProvider).go('/login');
                 },
                 child: Text(AppLocalizations.of(context)!.logout),

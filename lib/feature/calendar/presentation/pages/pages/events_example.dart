@@ -7,8 +7,9 @@ import 'package:navithera_client/core/constants/base_url.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final sessionProvider = StateNotifierProvider<SessionNotifier, List<Session>>((
   ref,
@@ -21,6 +22,10 @@ class SessionNotifier extends StateNotifier<List<Session>> {
 
   final Dio _dio = Dio();
   bool _isLoading = false;
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
 
   Future<void> loadSessions() async {
     if (_isLoading) return;
@@ -46,8 +51,7 @@ class SessionNotifier extends StateNotifier<List<Session>> {
   }
 
   Future<void> _attachAuthHeader() async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token');
+    final accessToken = await _secureStorage.read(key: 'access_token');
     if (accessToken != null && accessToken.isNotEmpty) {
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
     } else {
@@ -276,8 +280,11 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
     });
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString('access_token');
+      const secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+      );
+      final accessToken = await secureStorage.read(key: 'access_token');
 
       final dio = Dio();
       if (accessToken != null && accessToken.isNotEmpty) {
@@ -360,8 +367,11 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
     });
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final accessToken = prefs.getString('access_token');
+      const secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+      );
+      final accessToken = await secureStorage.read(key: 'access_token');
 
       final dio = Dio();
       if (accessToken != null && accessToken.isNotEmpty) {

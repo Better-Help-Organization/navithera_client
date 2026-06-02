@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:livekit_client/livekit_client.dart';
 import 'package:navithera_client/core/constants/base_url.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
@@ -25,7 +27,8 @@ import 'package:navithera_client/feature/chat/presentation/providers/chat_provid
     show chatProvider;
 import 'package:navithera_client/core/providers/user_status_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/message_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter/foundation.dart';
 
 final therapistInfoProvider = FutureProvider.family<UserModel, String>((
   ref,
@@ -469,14 +472,26 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       _busy = true;
     });
 
-    final sharedPreferences = await SharedPreferences.getInstance();
-    final accessToken = sharedPreferences.getString('access_token');
-    final roomName = _generateRandomRoomName();
-
-    print("roomName: $roomName");
+    // print("roomName: $roomName");
     print("name: ${widget.chat.id}");
 
     try {
+      const secureStorage = FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+      );
+      final accessToken = await secureStorage.read(key: 'access_token');
+      if (accessToken == null || accessToken.isEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please sign in again before starting a call'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+      final roomName = _generateRandomRoomName();
       final dio = Dio();
       dio.options.headers['Authorization'] = 'Bearer ${accessToken}';
 
@@ -525,7 +540,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
 
         // Join the call
         await _join(
-          "wss://livekit.navigo.et",
+          "wss://livekit.navithera.com",
           token,
           context,
           isVideoCall: isVideoCall,
@@ -549,10 +564,7 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
       removeOverlay();
 
       // 6. Handle the specific Cancel exception silently
-      if (CancelToken.isCancel(e)) {
-        print("Call flow cancelled by user.");
-        return;
-      }
+      if (CancelToken.isCancel(e)) return;
 
       print("DioException: ${e.toString()}");
       if (!mounted) return;
@@ -709,11 +721,38 @@ class _ChatMessageScreenState extends ConsumerState<ChatMessageScreen>
                             ? CrossAxisAlignment.end
                             : CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        message.content,
+                      Linkify(
+                        onOpen: (link) async {
+                          final uri = Uri.parse(link.url);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(
+                              uri,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Could not open link: ${link.url}',
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                        text: message.content,
                         style: TextStyle(
                           color: isMe ? Colors.white : AppColors.primary,
                           fontSize: 16,
+                        ),
+                        linkStyle: TextStyle(
+                          color: isMe ? Colors.blue : AppColors.primary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                        ),
+                        options: const LinkifyOptions(
+                          humanize: false,
+                          looseUrl: true,
                         ),
                       ),
                       const SizedBox(height: 4),

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/error/failures.dart';
@@ -23,11 +24,13 @@ class ProfileState with _$ProfileState {
 // Profile Repository Provider
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   final remoteDataSource = ref.read(profileRemoteDataSourceProvider);
-  final sharedPreferences = ref.read(sharedPreferencesProvider);
 
   return ProfileRepositoryImpl(
     remoteDataSource: remoteDataSource,
-    sharedPreferences: sharedPreferences,
+    secureStorage: const FlutterSecureStorage(
+      aOptions: AndroidOptions(encryptedSharedPreferences: true),
+      iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    ),
   );
 });
 

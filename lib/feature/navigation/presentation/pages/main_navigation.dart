@@ -108,8 +108,8 @@ class _MainNavigationState extends State<MainNavigation> {
       },
       child: Scaffold(
         body: IndexedStack(index: _selectedIndex, children: _screens),
-        floatingActionButton: _buildLottieFloatingActionButton(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        // floatingActionButton: _buildLottieFloatingActionButton(),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             boxShadow: [

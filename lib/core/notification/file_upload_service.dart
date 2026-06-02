@@ -1,14 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart'; 
 import 'package:navithera_client/core/constants/base_url.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FileUploadService {
+  // Use secure storage
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
+
   static Future<String> uploadProfilePicture(File imageFile) async {
-    final prefs = await SharedPreferences.getInstance();
-    final accessToken = prefs.getString('access_token');
+    // Read token securely
+    final accessToken = await _secureStorage.read(key: 'access_token');
 
     if (accessToken == null) {
       throw Exception('No access token found. Please login again.');
@@ -17,14 +24,11 @@ class FileUploadService {
     final uri = Uri.parse('${base_url_dev}/client/me/upload/profile');
     final request = http.MultipartRequest('POST', uri);
 
-    // Add authorization header
     request.headers['Authorization'] = 'Bearer $accessToken';
 
-    // Get the file extension to determine MIME type
     String extension = imageFile.path.split('.').last.toLowerCase();
     String mimeType;
 
-    // Determine MIME type based on extension
     switch (extension) {
       case 'jpg':
       case 'jpeg':
@@ -40,7 +44,6 @@ class FileUploadService {
         mimeType = 'application/octet-stream';
     }
 
-    // Attach the file with proper MIME type
     request.files.add(
       await http.MultipartFile.fromPath(
         'file',
@@ -55,7 +58,10 @@ class FileUploadService {
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 201) {
-        print('Profile picture uploaded successfully');
+        // Only log in debug mode
+        if (kDebugMode) {
+          debugPrint('Profile picture uploaded successfully');
+        }
         return responseData['data']['filename'];
       } else {
         throw Exception(
@@ -63,7 +69,10 @@ class FileUploadService {
         );
       }
     } catch (e) {
-      print('Error uploading profile picture: $e');
+      // Only log in debug mode
+      if (kDebugMode) {
+        debugPrint('Error uploading profile picture: $e');
+      }
       throw Exception('Error uploading profile picture: $e');
     }
   }

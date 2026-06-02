@@ -6,9 +6,10 @@ import 'package:navithera_client/core/theme/app_colors.dart';
 import 'package:navithera_client/feature/auth/presentation/providers/user_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/extra_questions_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/providers/questions_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/routes/app_router.dart';
 import '../providers/modals_provider.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CategorySelectionScreen extends ConsumerStatefulWidget {
   const CategorySelectionScreen({super.key});
@@ -49,6 +50,10 @@ class _CategorySelectionScreenState
     return const Color(0xFFE67E22); // Default color
   }
 
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  );
   @override
   Widget build(BuildContext context) {
     final modalsAsync = ref.watch(modalsProvider);
@@ -182,9 +187,7 @@ class _CategorySelectionScreenState
                             },
                             onTap: () {
                               Future<void> _checkIfPrefFilled() async {
-                                final sharedPreferences =
-                                    await SharedPreferences.getInstance();
-                                final accessToken = sharedPreferences.getString(
+                                final accessToken = await _secureStorage.read(key: 
                                   'access_token',
                                 );
 
@@ -197,7 +200,7 @@ class _CategorySelectionScreenState
                                     '${base_url_dev}/client/me/preferences?fields=modal.*&filters=modal.id=${category.id}',
                                   );
 
-                                  print("responsexoxo: ${response.data}");
+                                  // print("responsexoxo: ${response.data}");
 
                                   if (response.statusCode == 200) {
                                     ref
@@ -235,7 +238,7 @@ class _CategorySelectionScreenState
                                         .state = [];
 
                                     ref.read(goalsProvider.notifier).state = '';
-                                    print("responsexoxo ${category.name}");
+                                    // print("responsexoxo ${category.name}");
                                     // Check if data array is not empty
                                     final responseData = response.data;
                                     if (responseData['data'] != null &&
