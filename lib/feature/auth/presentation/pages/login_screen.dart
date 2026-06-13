@@ -4,7 +4,7 @@ import 'package:navithera_client/core/localization/providers/locale_provider.dar
 import 'package:navithera_client/core/notification/notification_service.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
 import 'package:navithera_client/core/theme/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/routes/app_router.dart';
 import '../providers/auth_provider.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
@@ -76,7 +76,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       final fcmService = ref.read(fcmServiceProvider);
       // final token = await fcmService.getToken();
       // final token = await fcmService.getToken();
-      final token = "test token";
+      final token = await fcmService.getToken();
       final voIpToken = await fcmService.getVoIPToken();
       print("FCM Token: $token");
       print("VoIP Token from login screen: $voIpToken");

@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navithera_client/core/localization/providers/locale_provider.dart';
 import 'package:navithera_client/core/notification/notification_service.dart';
 import 'package:navithera_client/core/providers/socket_provider.dart';
@@ -111,21 +111,19 @@ void main() async {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     // ─── SECURITY CHECKS ──────────────────────────────────────────────────
-    bool isRooted = await FlutterJailbreakDetectionPlus.jailbroken;
-    bool developerMode = await FlutterJailbreakDetectionPlus.developerMode;
-    bool fridaDetected = await _isFridaDetected();
+    if (!kDebugMode) {
+      bool isRooted = await FlutterJailbreakDetectionPlus.jailbroken;
+      bool developerMode = await FlutterJailbreakDetectionPlus.developerMode;
+      bool fridaDetected = await _isFridaDetected();
 
-    if (isRooted || developerMode || fridaDetected) {
-      runApp(Rootdetection());
-      return;
+      if (isRooted || developerMode || fridaDetected) {
+        runApp(Rootdetection());
+        return;
+      }
     }
     // ──────────────────────────────────────────────────────────────────────
 
-    runApp(
-      ProviderScope(
-        child: MyApp(),
-      ),
-    );
+    runApp(ProviderScope(child: MyApp()));
   } catch (e, st) {
     log('Main initialization error: $e\n$st');
     rethrow;

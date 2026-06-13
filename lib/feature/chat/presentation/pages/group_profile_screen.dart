@@ -8,7 +8,7 @@ import 'package:navithera_client/core/util/avatar_util.dart';
 import 'package:navithera_client/feature/auth/data/models/auth_models.dart';
 import 'package:navithera_client/feature/chat/presentation/widgets/gradient_avatar.dart';
 import 'package:navithera_client/feature/therapy/presentation/pages/call_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class GroupProfileScreen extends StatefulWidget {
   final String groupName;

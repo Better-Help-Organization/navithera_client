@@ -15,7 +15,7 @@ import 'package:navithera_client/feature/home/presentation/pages/home_screen.dar
 import 'package:navithera_client/feature/home/presentation/providers/matched_therapist_provider.dart';
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/feature/notification/presentation/pages/notification_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import "package:navithera_client/l10n/app_localizations.dart";
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
