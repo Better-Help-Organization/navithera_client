@@ -1466,7 +1466,7 @@ class FCMService {
         iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
       );
       // final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = _secureStorage.read(key: 'access_token');
+      final accessToken = await _secureStorage.read(key: 'access_token');
 
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
 
