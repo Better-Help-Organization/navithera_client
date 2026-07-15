@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';         
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';  
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:navithera_client/core/providers/user_status_provider.dart';
 import 'package:navithera_client/feature/chat/presentation/providers/chat_provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
@@ -17,7 +17,7 @@ class SocketService {
   // Secure storage instance
   static const _secureStorage = FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
-    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+    iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
   );
 
   SocketService(this.ref);
@@ -28,6 +28,7 @@ class SocketService {
 
     // Never log the token
     if (kDebugMode) debugPrint('Socket connecting...');
+    if (kDebugMode) debugPrint(accessToken);
 
     if (accessToken == null) {
       if (kDebugMode) debugPrint('No access token found');

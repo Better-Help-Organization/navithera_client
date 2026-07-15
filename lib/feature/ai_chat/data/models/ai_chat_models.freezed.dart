@@ -12,8 +12,7 @@ part of 'ai_chat_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AiChatRequest _$AiChatRequestFromJson(Map<String, dynamic> json) {
   return _AiChatRequest.fromJson(json);
@@ -23,12 +22,8 @@ AiChatRequest _$AiChatRequestFromJson(Map<String, dynamic> json) {
 mixin _$AiChatRequest {
   String get query => throw _privateConstructorUsedError;
 
-  /// Serializes this AiChatRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AiChatRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AiChatRequestCopyWith<AiChatRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,9 +31,8 @@ mixin _$AiChatRequest {
 /// @nodoc
 abstract class $AiChatRequestCopyWith<$Res> {
   factory $AiChatRequestCopyWith(
-    AiChatRequest value,
-    $Res Function(AiChatRequest) then,
-  ) = _$AiChatRequestCopyWithImpl<$Res, AiChatRequest>;
+          AiChatRequest value, $Res Function(AiChatRequest) then) =
+      _$AiChatRequestCopyWithImpl<$Res, AiChatRequest>;
   @useResult
   $Res call({String query});
 }
@@ -53,21 +47,17 @@ class _$AiChatRequestCopyWithImpl<$Res, $Val extends AiChatRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AiChatRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null}) {
-    return _then(
-      _value.copyWith(
-            query:
-                null == query
-                    ? _value.query
-                    : query // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_value.copyWith(
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -75,9 +65,8 @@ class _$AiChatRequestCopyWithImpl<$Res, $Val extends AiChatRequest>
 abstract class _$$AiChatRequestImplCopyWith<$Res>
     implements $AiChatRequestCopyWith<$Res> {
   factory _$$AiChatRequestImplCopyWith(
-    _$AiChatRequestImpl value,
-    $Res Function(_$AiChatRequestImpl) then,
-  ) = __$$AiChatRequestImplCopyWithImpl<$Res>;
+          _$AiChatRequestImpl value, $Res Function(_$AiChatRequestImpl) then) =
+      __$$AiChatRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String query});
@@ -88,24 +77,20 @@ class __$$AiChatRequestImplCopyWithImpl<$Res>
     extends _$AiChatRequestCopyWithImpl<$Res, _$AiChatRequestImpl>
     implements _$$AiChatRequestImplCopyWith<$Res> {
   __$$AiChatRequestImplCopyWithImpl(
-    _$AiChatRequestImpl _value,
-    $Res Function(_$AiChatRequestImpl) _then,
-  ) : super(_value, _then);
+      _$AiChatRequestImpl _value, $Res Function(_$AiChatRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AiChatRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null}) {
-    return _then(
-      _$AiChatRequestImpl(
-        query:
-            null == query
-                ? _value.query
-                : query // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$AiChatRequestImpl(
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -133,13 +118,11 @@ class _$AiChatRequestImpl implements _AiChatRequest {
             (identical(other.query, query) || other.query == query));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, query);
 
-  /// Create a copy of AiChatRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiChatRequestImplCopyWith<_$AiChatRequestImpl> get copyWith =>
@@ -147,7 +130,9 @@ class _$AiChatRequestImpl implements _AiChatRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiChatRequestImplToJson(this);
+    return _$$AiChatRequestImplToJson(
+      this,
+    );
   }
 }
 
@@ -160,11 +145,8 @@ abstract class _AiChatRequest implements AiChatRequest {
 
   @override
   String get query;
-
-  /// Create a copy of AiChatRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AiChatRequestImplCopyWith<_$AiChatRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -180,12 +162,8 @@ mixin _$AiChatResponse {
   List<String> get messages => throw _privateConstructorUsedError;
   AiChatResult get result => throw _privateConstructorUsedError;
 
-  /// Serializes this AiChatResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AiChatResponseCopyWith<AiChatResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -193,16 +171,14 @@ mixin _$AiChatResponse {
 /// @nodoc
 abstract class $AiChatResponseCopyWith<$Res> {
   factory $AiChatResponseCopyWith(
-    AiChatResponse value,
-    $Res Function(AiChatResponse) then,
-  ) = _$AiChatResponseCopyWithImpl<$Res, AiChatResponse>;
+          AiChatResponse value, $Res Function(AiChatResponse) then) =
+      _$AiChatResponseCopyWithImpl<$Res, AiChatResponse>;
   @useResult
-  $Res call({
-    bool success,
-    List<String> errors,
-    List<String> messages,
-    AiChatResult result,
-  });
+  $Res call(
+      {bool success,
+      List<String> errors,
+      List<String> messages,
+      AiChatResult result});
 
   $AiChatResultCopyWith<$Res> get result;
 }
@@ -217,8 +193,6 @@ class _$AiChatResponseCopyWithImpl<$Res, $Val extends AiChatResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -227,35 +201,26 @@ class _$AiChatResponseCopyWithImpl<$Res, $Val extends AiChatResponse>
     Object? messages = null,
     Object? result = null,
   }) {
-    return _then(
-      _value.copyWith(
-            success:
-                null == success
-                    ? _value.success
-                    : success // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            errors:
-                null == errors
-                    ? _value.errors
-                    : errors // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            messages:
-                null == messages
-                    ? _value.messages
-                    : messages // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            result:
-                null == result
-                    ? _value.result
-                    : result // ignore: cast_nullable_to_non_nullable
-                        as AiChatResult,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errors: null == errors
+          ? _value.errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      result: null == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as AiChatResult,
+    ) as $Val);
   }
 
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AiChatResultCopyWith<$Res> get result {
@@ -268,18 +233,16 @@ class _$AiChatResponseCopyWithImpl<$Res, $Val extends AiChatResponse>
 /// @nodoc
 abstract class _$$AiChatResponseImplCopyWith<$Res>
     implements $AiChatResponseCopyWith<$Res> {
-  factory _$$AiChatResponseImplCopyWith(
-    _$AiChatResponseImpl value,
-    $Res Function(_$AiChatResponseImpl) then,
-  ) = __$$AiChatResponseImplCopyWithImpl<$Res>;
+  factory _$$AiChatResponseImplCopyWith(_$AiChatResponseImpl value,
+          $Res Function(_$AiChatResponseImpl) then) =
+      __$$AiChatResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    bool success,
-    List<String> errors,
-    List<String> messages,
-    AiChatResult result,
-  });
+  $Res call(
+      {bool success,
+      List<String> errors,
+      List<String> messages,
+      AiChatResult result});
 
   @override
   $AiChatResultCopyWith<$Res> get result;
@@ -290,12 +253,9 @@ class __$$AiChatResponseImplCopyWithImpl<$Res>
     extends _$AiChatResponseCopyWithImpl<$Res, _$AiChatResponseImpl>
     implements _$$AiChatResponseImplCopyWith<$Res> {
   __$$AiChatResponseImplCopyWithImpl(
-    _$AiChatResponseImpl _value,
-    $Res Function(_$AiChatResponseImpl) _then,
-  ) : super(_value, _then);
+      _$AiChatResponseImpl _value, $Res Function(_$AiChatResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -304,43 +264,37 @@ class __$$AiChatResponseImplCopyWithImpl<$Res>
     Object? messages = null,
     Object? result = null,
   }) {
-    return _then(
-      _$AiChatResponseImpl(
-        success:
-            null == success
-                ? _value.success
-                : success // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        errors:
-            null == errors
-                ? _value._errors
-                : errors // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        messages:
-            null == messages
-                ? _value._messages
-                : messages // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        result:
-            null == result
-                ? _value.result
-                : result // ignore: cast_nullable_to_non_nullable
-                    as AiChatResult,
-      ),
-    );
+    return _then(_$AiChatResponseImpl(
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      errors: null == errors
+          ? _value._errors
+          : errors // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      result: null == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as AiChatResult,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AiChatResponseImpl implements _AiChatResponse {
-  const _$AiChatResponseImpl({
-    required this.success,
-    final List<String> errors = const [],
-    final List<String> messages = const [],
-    required this.result,
-  }) : _errors = errors,
-       _messages = messages;
+  const _$AiChatResponseImpl(
+      {required this.success,
+      final List<String> errors = const [],
+      final List<String> messages = const [],
+      required this.result})
+      : _errors = errors,
+        _messages = messages;
 
   factory _$AiChatResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AiChatResponseImplFromJson(json);
@@ -384,40 +338,36 @@ class _$AiChatResponseImpl implements _AiChatResponse {
             (identical(other.result, result) || other.result == result));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    success,
-    const DeepCollectionEquality().hash(_errors),
-    const DeepCollectionEquality().hash(_messages),
-    result,
-  );
+      runtimeType,
+      success,
+      const DeepCollectionEquality().hash(_errors),
+      const DeepCollectionEquality().hash(_messages),
+      result);
 
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiChatResponseImplCopyWith<_$AiChatResponseImpl> get copyWith =>
       __$$AiChatResponseImplCopyWithImpl<_$AiChatResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiChatResponseImplToJson(this);
+    return _$$AiChatResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AiChatResponse implements AiChatResponse {
-  const factory _AiChatResponse({
-    required final bool success,
-    final List<String> errors,
-    final List<String> messages,
-    required final AiChatResult result,
-  }) = _$AiChatResponseImpl;
+  const factory _AiChatResponse(
+      {required final bool success,
+      final List<String> errors,
+      final List<String> messages,
+      required final AiChatResult result}) = _$AiChatResponseImpl;
 
   factory _AiChatResponse.fromJson(Map<String, dynamic> json) =
       _$AiChatResponseImpl.fromJson;
@@ -430,11 +380,8 @@ abstract class _AiChatResponse implements AiChatResponse {
   List<String> get messages;
   @override
   AiChatResult get result;
-
-  /// Create a copy of AiChatResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AiChatResponseImplCopyWith<_$AiChatResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -447,12 +394,8 @@ AiChatResult _$AiChatResultFromJson(Map<String, dynamic> json) {
 mixin _$AiChatResult {
   String get response => throw _privateConstructorUsedError;
 
-  /// Serializes this AiChatResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AiChatResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AiChatResultCopyWith<AiChatResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -460,9 +403,8 @@ mixin _$AiChatResult {
 /// @nodoc
 abstract class $AiChatResultCopyWith<$Res> {
   factory $AiChatResultCopyWith(
-    AiChatResult value,
-    $Res Function(AiChatResult) then,
-  ) = _$AiChatResultCopyWithImpl<$Res, AiChatResult>;
+          AiChatResult value, $Res Function(AiChatResult) then) =
+      _$AiChatResultCopyWithImpl<$Res, AiChatResult>;
   @useResult
   $Res call({String response});
 }
@@ -477,21 +419,17 @@ class _$AiChatResultCopyWithImpl<$Res, $Val extends AiChatResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AiChatResult
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? response = null}) {
-    return _then(
-      _value.copyWith(
-            response:
-                null == response
-                    ? _value.response
-                    : response // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? response = null,
+  }) {
+    return _then(_value.copyWith(
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -499,9 +437,8 @@ class _$AiChatResultCopyWithImpl<$Res, $Val extends AiChatResult>
 abstract class _$$AiChatResultImplCopyWith<$Res>
     implements $AiChatResultCopyWith<$Res> {
   factory _$$AiChatResultImplCopyWith(
-    _$AiChatResultImpl value,
-    $Res Function(_$AiChatResultImpl) then,
-  ) = __$$AiChatResultImplCopyWithImpl<$Res>;
+          _$AiChatResultImpl value, $Res Function(_$AiChatResultImpl) then) =
+      __$$AiChatResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String response});
@@ -512,24 +449,20 @@ class __$$AiChatResultImplCopyWithImpl<$Res>
     extends _$AiChatResultCopyWithImpl<$Res, _$AiChatResultImpl>
     implements _$$AiChatResultImplCopyWith<$Res> {
   __$$AiChatResultImplCopyWithImpl(
-    _$AiChatResultImpl _value,
-    $Res Function(_$AiChatResultImpl) _then,
-  ) : super(_value, _then);
+      _$AiChatResultImpl _value, $Res Function(_$AiChatResultImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AiChatResult
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? response = null}) {
-    return _then(
-      _$AiChatResultImpl(
-        response:
-            null == response
-                ? _value.response
-                : response // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? response = null,
+  }) {
+    return _then(_$AiChatResultImpl(
+      response: null == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -558,13 +491,11 @@ class _$AiChatResultImpl implements _AiChatResult {
                 other.response == response));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, response);
 
-  /// Create a copy of AiChatResult
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiChatResultImplCopyWith<_$AiChatResultImpl> get copyWith =>
@@ -572,7 +503,9 @@ class _$AiChatResultImpl implements _AiChatResult {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AiChatResultImplToJson(this);
+    return _$$AiChatResultImplToJson(
+      this,
+    );
   }
 }
 
@@ -585,11 +518,8 @@ abstract class _AiChatResult implements AiChatResult {
 
   @override
   String get response;
-
-  /// Create a copy of AiChatResult
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AiChatResultImplCopyWith<_$AiChatResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -607,12 +537,8 @@ mixin _$ChatMessage {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
-  /// Serializes this ChatMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ChatMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ChatMessageCopyWith<ChatMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -620,18 +546,16 @@ mixin _$ChatMessage {
 /// @nodoc
 abstract class $ChatMessageCopyWith<$Res> {
   factory $ChatMessageCopyWith(
-    ChatMessage value,
-    $Res Function(ChatMessage) then,
-  ) = _$ChatMessageCopyWithImpl<$Res, ChatMessage>;
+          ChatMessage value, $Res Function(ChatMessage) then) =
+      _$ChatMessageCopyWithImpl<$Res, ChatMessage>;
   @useResult
-  $Res call({
-    String id,
-    String content,
-    bool isUser,
-    DateTime timestamp,
-    bool isLoading,
-    String? error,
-  });
+  $Res call(
+      {String id,
+      String content,
+      bool isUser,
+      DateTime timestamp,
+      bool isLoading,
+      String? error});
 }
 
 /// @nodoc
@@ -644,8 +568,6 @@ class _$ChatMessageCopyWithImpl<$Res, $Val extends ChatMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChatMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -656,41 +578,32 @@ class _$ChatMessageCopyWithImpl<$Res, $Val extends ChatMessage>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            content:
-                null == content
-                    ? _value.content
-                    : content // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isUser:
-                null == isUser
-                    ? _value.isUser
-                    : isUser // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            isLoading:
-                null == isLoading
-                    ? _value.isLoading
-                    : isLoading // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            error:
-                freezed == error
-                    ? _value.error
-                    : error // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      isUser: null == isUser
+          ? _value.isUser
+          : isUser // ignore: cast_nullable_to_non_nullable
+              as bool,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -698,19 +611,17 @@ class _$ChatMessageCopyWithImpl<$Res, $Val extends ChatMessage>
 abstract class _$$ChatMessageImplCopyWith<$Res>
     implements $ChatMessageCopyWith<$Res> {
   factory _$$ChatMessageImplCopyWith(
-    _$ChatMessageImpl value,
-    $Res Function(_$ChatMessageImpl) then,
-  ) = __$$ChatMessageImplCopyWithImpl<$Res>;
+          _$ChatMessageImpl value, $Res Function(_$ChatMessageImpl) then) =
+      __$$ChatMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String content,
-    bool isUser,
-    DateTime timestamp,
-    bool isLoading,
-    String? error,
-  });
+  $Res call(
+      {String id,
+      String content,
+      bool isUser,
+      DateTime timestamp,
+      bool isLoading,
+      String? error});
 }
 
 /// @nodoc
@@ -718,12 +629,9 @@ class __$$ChatMessageImplCopyWithImpl<$Res>
     extends _$ChatMessageCopyWithImpl<$Res, _$ChatMessageImpl>
     implements _$$ChatMessageImplCopyWith<$Res> {
   __$$ChatMessageImplCopyWithImpl(
-    _$ChatMessageImpl _value,
-    $Res Function(_$ChatMessageImpl) _then,
-  ) : super(_value, _then);
+      _$ChatMessageImpl _value, $Res Function(_$ChatMessageImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ChatMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -734,54 +642,45 @@ class __$$ChatMessageImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? error = freezed,
   }) {
-    return _then(
-      _$ChatMessageImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        content:
-            null == content
-                ? _value.content
-                : content // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isUser:
-            null == isUser
-                ? _value.isUser
-                : isUser // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        isLoading:
-            null == isLoading
-                ? _value.isLoading
-                : isLoading // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        error:
-            freezed == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$ChatMessageImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      isUser: null == isUser
+          ? _value.isUser
+          : isUser // ignore: cast_nullable_to_non_nullable
+              as bool,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChatMessageImpl implements _ChatMessage {
-  const _$ChatMessageImpl({
-    required this.id,
-    required this.content,
-    required this.isUser,
-    required this.timestamp,
-    this.isLoading = false,
-    this.error,
-  });
+  const _$ChatMessageImpl(
+      {required this.id,
+      required this.content,
+      required this.isUser,
+      required this.timestamp,
+      this.isLoading = false,
+      this.error});
 
   factory _$ChatMessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatMessageImplFromJson(json);
@@ -820,21 +719,12 @@ class _$ChatMessageImpl implements _ChatMessage {
             (identical(other.error, error) || other.error == error));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    content,
-    isUser,
-    timestamp,
-    isLoading,
-    error,
-  );
+      runtimeType, id, content, isUser, timestamp, isLoading, error);
 
-  /// Create a copy of ChatMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatMessageImplCopyWith<_$ChatMessageImpl> get copyWith =>
@@ -842,19 +732,20 @@ class _$ChatMessageImpl implements _ChatMessage {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChatMessageImplToJson(this);
+    return _$$ChatMessageImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChatMessage implements ChatMessage {
-  const factory _ChatMessage({
-    required final String id,
-    required final String content,
-    required final bool isUser,
-    required final DateTime timestamp,
-    final bool isLoading,
-    final String? error,
-  }) = _$ChatMessageImpl;
+  const factory _ChatMessage(
+      {required final String id,
+      required final String content,
+      required final bool isUser,
+      required final DateTime timestamp,
+      final bool isLoading,
+      final String? error}) = _$ChatMessageImpl;
 
   factory _ChatMessage.fromJson(Map<String, dynamic> json) =
       _$ChatMessageImpl.fromJson;
@@ -871,11 +762,8 @@ abstract class _ChatMessage implements ChatMessage {
   bool get isLoading;
   @override
   String? get error;
-
-  /// Create a copy of ChatMessage
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ChatMessageImplCopyWith<_$ChatMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -892,12 +780,8 @@ mixin _$UsageInfo {
   bool get isApproachingLimit => throw _privateConstructorUsedError;
   Duration get timeUntilReset => throw _privateConstructorUsedError;
 
-  /// Serializes this UsageInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UsageInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UsageInfoCopyWith<UsageInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -907,13 +791,12 @@ abstract class $UsageInfoCopyWith<$Res> {
   factory $UsageInfoCopyWith(UsageInfo value, $Res Function(UsageInfo) then) =
       _$UsageInfoCopyWithImpl<$Res, UsageInfo>;
   @useResult
-  $Res call({
-    int remaining,
-    int used,
-    int total,
-    bool isApproachingLimit,
-    Duration timeUntilReset,
-  });
+  $Res call(
+      {int remaining,
+      int used,
+      int total,
+      bool isApproachingLimit,
+      Duration timeUntilReset});
 }
 
 /// @nodoc
@@ -926,8 +809,6 @@ class _$UsageInfoCopyWithImpl<$Res, $Val extends UsageInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UsageInfo
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -937,36 +818,28 @@ class _$UsageInfoCopyWithImpl<$Res, $Val extends UsageInfo>
     Object? isApproachingLimit = null,
     Object? timeUntilReset = null,
   }) {
-    return _then(
-      _value.copyWith(
-            remaining:
-                null == remaining
-                    ? _value.remaining
-                    : remaining // ignore: cast_nullable_to_non_nullable
-                        as int,
-            used:
-                null == used
-                    ? _value.used
-                    : used // ignore: cast_nullable_to_non_nullable
-                        as int,
-            total:
-                null == total
-                    ? _value.total
-                    : total // ignore: cast_nullable_to_non_nullable
-                        as int,
-            isApproachingLimit:
-                null == isApproachingLimit
-                    ? _value.isApproachingLimit
-                    : isApproachingLimit // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            timeUntilReset:
-                null == timeUntilReset
-                    ? _value.timeUntilReset
-                    : timeUntilReset // ignore: cast_nullable_to_non_nullable
-                        as Duration,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      remaining: null == remaining
+          ? _value.remaining
+          : remaining // ignore: cast_nullable_to_non_nullable
+              as int,
+      used: null == used
+          ? _value.used
+          : used // ignore: cast_nullable_to_non_nullable
+              as int,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+      isApproachingLimit: null == isApproachingLimit
+          ? _value.isApproachingLimit
+          : isApproachingLimit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      timeUntilReset: null == timeUntilReset
+          ? _value.timeUntilReset
+          : timeUntilReset // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ) as $Val);
   }
 }
 
@@ -974,18 +847,16 @@ class _$UsageInfoCopyWithImpl<$Res, $Val extends UsageInfo>
 abstract class _$$UsageInfoImplCopyWith<$Res>
     implements $UsageInfoCopyWith<$Res> {
   factory _$$UsageInfoImplCopyWith(
-    _$UsageInfoImpl value,
-    $Res Function(_$UsageInfoImpl) then,
-  ) = __$$UsageInfoImplCopyWithImpl<$Res>;
+          _$UsageInfoImpl value, $Res Function(_$UsageInfoImpl) then) =
+      __$$UsageInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int remaining,
-    int used,
-    int total,
-    bool isApproachingLimit,
-    Duration timeUntilReset,
-  });
+  $Res call(
+      {int remaining,
+      int used,
+      int total,
+      bool isApproachingLimit,
+      Duration timeUntilReset});
 }
 
 /// @nodoc
@@ -993,12 +864,9 @@ class __$$UsageInfoImplCopyWithImpl<$Res>
     extends _$UsageInfoCopyWithImpl<$Res, _$UsageInfoImpl>
     implements _$$UsageInfoImplCopyWith<$Res> {
   __$$UsageInfoImplCopyWithImpl(
-    _$UsageInfoImpl _value,
-    $Res Function(_$UsageInfoImpl) _then,
-  ) : super(_value, _then);
+      _$UsageInfoImpl _value, $Res Function(_$UsageInfoImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UsageInfo
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1008,48 +876,40 @@ class __$$UsageInfoImplCopyWithImpl<$Res>
     Object? isApproachingLimit = null,
     Object? timeUntilReset = null,
   }) {
-    return _then(
-      _$UsageInfoImpl(
-        remaining:
-            null == remaining
-                ? _value.remaining
-                : remaining // ignore: cast_nullable_to_non_nullable
-                    as int,
-        used:
-            null == used
-                ? _value.used
-                : used // ignore: cast_nullable_to_non_nullable
-                    as int,
-        total:
-            null == total
-                ? _value.total
-                : total // ignore: cast_nullable_to_non_nullable
-                    as int,
-        isApproachingLimit:
-            null == isApproachingLimit
-                ? _value.isApproachingLimit
-                : isApproachingLimit // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        timeUntilReset:
-            null == timeUntilReset
-                ? _value.timeUntilReset
-                : timeUntilReset // ignore: cast_nullable_to_non_nullable
-                    as Duration,
-      ),
-    );
+    return _then(_$UsageInfoImpl(
+      remaining: null == remaining
+          ? _value.remaining
+          : remaining // ignore: cast_nullable_to_non_nullable
+              as int,
+      used: null == used
+          ? _value.used
+          : used // ignore: cast_nullable_to_non_nullable
+              as int,
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
+              as int,
+      isApproachingLimit: null == isApproachingLimit
+          ? _value.isApproachingLimit
+          : isApproachingLimit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      timeUntilReset: null == timeUntilReset
+          ? _value.timeUntilReset
+          : timeUntilReset // ignore: cast_nullable_to_non_nullable
+              as Duration,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UsageInfoImpl implements _UsageInfo {
-  const _$UsageInfoImpl({
-    required this.remaining,
-    required this.used,
-    required this.total,
-    required this.isApproachingLimit,
-    required this.timeUntilReset,
-  });
+  const _$UsageInfoImpl(
+      {required this.remaining,
+      required this.used,
+      required this.total,
+      required this.isApproachingLimit,
+      required this.timeUntilReset});
 
   factory _$UsageInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$UsageInfoImplFromJson(json);
@@ -1085,20 +945,12 @@ class _$UsageInfoImpl implements _UsageInfo {
                 other.timeUntilReset == timeUntilReset));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    remaining,
-    used,
-    total,
-    isApproachingLimit,
-    timeUntilReset,
-  );
+      runtimeType, remaining, used, total, isApproachingLimit, timeUntilReset);
 
-  /// Create a copy of UsageInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UsageInfoImplCopyWith<_$UsageInfoImpl> get copyWith =>
@@ -1106,18 +958,19 @@ class _$UsageInfoImpl implements _UsageInfo {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UsageInfoImplToJson(this);
+    return _$$UsageInfoImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UsageInfo implements UsageInfo {
-  const factory _UsageInfo({
-    required final int remaining,
-    required final int used,
-    required final int total,
-    required final bool isApproachingLimit,
-    required final Duration timeUntilReset,
-  }) = _$UsageInfoImpl;
+  const factory _UsageInfo(
+      {required final int remaining,
+      required final int used,
+      required final int total,
+      required final bool isApproachingLimit,
+      required final Duration timeUntilReset}) = _$UsageInfoImpl;
 
   factory _UsageInfo.fromJson(Map<String, dynamic> json) =
       _$UsageInfoImpl.fromJson;
@@ -1132,11 +985,8 @@ abstract class _UsageInfo implements UsageInfo {
   bool get isApproachingLimit;
   @override
   Duration get timeUntilReset;
-
-  /// Create a copy of UsageInfo
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UsageInfoImplCopyWith<_$UsageInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

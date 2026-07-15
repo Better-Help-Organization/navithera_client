@@ -12,8 +12,7 @@ part of 'levels_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LevelsResponse _$LevelsResponseFromJson(Map<String, dynamic> json) {
   return _LevelsResponse.fromJson(json);
@@ -23,12 +22,8 @@ LevelsResponse _$LevelsResponseFromJson(Map<String, dynamic> json) {
 mixin _$LevelsResponse {
   List<LevelModel> get data => throw _privateConstructorUsedError;
 
-  /// Serializes this LevelsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LevelsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LevelsResponseCopyWith<LevelsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,9 +31,8 @@ mixin _$LevelsResponse {
 /// @nodoc
 abstract class $LevelsResponseCopyWith<$Res> {
   factory $LevelsResponseCopyWith(
-    LevelsResponse value,
-    $Res Function(LevelsResponse) then,
-  ) = _$LevelsResponseCopyWithImpl<$Res, LevelsResponse>;
+          LevelsResponse value, $Res Function(LevelsResponse) then) =
+      _$LevelsResponseCopyWithImpl<$Res, LevelsResponse>;
   @useResult
   $Res call({List<LevelModel> data});
 }
@@ -53,31 +47,26 @@ class _$LevelsResponseCopyWithImpl<$Res, $Val extends LevelsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LevelsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<LevelModel>,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LevelModel>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LevelsResponseImplCopyWith<$Res>
     implements $LevelsResponseCopyWith<$Res> {
-  factory _$$LevelsResponseImplCopyWith(
-    _$LevelsResponseImpl value,
-    $Res Function(_$LevelsResponseImpl) then,
-  ) = __$$LevelsResponseImplCopyWithImpl<$Res>;
+  factory _$$LevelsResponseImplCopyWith(_$LevelsResponseImpl value,
+          $Res Function(_$LevelsResponseImpl) then) =
+      __$$LevelsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<LevelModel> data});
@@ -88,24 +77,20 @@ class __$$LevelsResponseImplCopyWithImpl<$Res>
     extends _$LevelsResponseCopyWithImpl<$Res, _$LevelsResponseImpl>
     implements _$$LevelsResponseImplCopyWith<$Res> {
   __$$LevelsResponseImplCopyWithImpl(
-    _$LevelsResponseImpl _value,
-    $Res Function(_$LevelsResponseImpl) _then,
-  ) : super(_value, _then);
+      _$LevelsResponseImpl _value, $Res Function(_$LevelsResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LevelsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$LevelsResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<LevelModel>,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$LevelsResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LevelModel>,
+    ));
   }
 }
 
@@ -113,7 +98,7 @@ class __$$LevelsResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LevelsResponseImpl implements _LevelsResponse {
   const _$LevelsResponseImpl({required final List<LevelModel> data})
-    : _data = data;
+      : _data = data;
 
   factory _$LevelsResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LevelsResponseImplFromJson(json);
@@ -139,25 +124,23 @@ class _$LevelsResponseImpl implements _LevelsResponse {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of LevelsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LevelsResponseImplCopyWith<_$LevelsResponseImpl> get copyWith =>
       __$$LevelsResponseImplCopyWithImpl<_$LevelsResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LevelsResponseImplToJson(this);
+    return _$$LevelsResponseImplToJson(
+      this,
+    );
   }
 }
 
@@ -170,11 +153,8 @@ abstract class _LevelsResponse implements LevelsResponse {
 
   @override
   List<LevelModel> get data;
-
-  /// Create a copy of LevelsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LevelsResponseImplCopyWith<_$LevelsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

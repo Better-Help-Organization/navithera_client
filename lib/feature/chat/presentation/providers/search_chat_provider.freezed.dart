@@ -12,8 +12,7 @@ part of 'search_chat_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchChatState {
@@ -22,41 +21,35 @@ mixin _$SearchChatState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(SearchInitial value) initial,
@@ -64,7 +57,8 @@ mixin _$SearchChatState {
     required TResult Function(SearchLoaded value) loaded,
     required TResult Function(SearchError value) error,
     required TResult Function(SearchEmpty value) empty,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SearchInitial value)? initial,
@@ -72,7 +66,8 @@ mixin _$SearchChatState {
     TResult? Function(SearchLoaded value)? loaded,
     TResult? Function(SearchError value)? error,
     TResult? Function(SearchEmpty value)? empty,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SearchInitial value)? initial,
@@ -81,15 +76,15 @@ mixin _$SearchChatState {
     TResult Function(SearchError value)? error,
     TResult Function(SearchEmpty value)? empty,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $SearchChatStateCopyWith<$Res> {
   factory $SearchChatStateCopyWith(
-    SearchChatState value,
-    $Res Function(SearchChatState) then,
-  ) = _$SearchChatStateCopyWithImpl<$Res, SearchChatState>;
+          SearchChatState value, $Res Function(SearchChatState) then) =
+      _$SearchChatStateCopyWithImpl<$Res, SearchChatState>;
 }
 
 /// @nodoc
@@ -101,17 +96,13 @@ class _$SearchChatStateCopyWithImpl<$Res, $Val extends SearchChatState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$SearchInitialImplCopyWith<$Res> {
   factory _$$SearchInitialImplCopyWith(
-    _$SearchInitialImpl value,
-    $Res Function(_$SearchInitialImpl) then,
-  ) = __$$SearchInitialImplCopyWithImpl<$Res>;
+          _$SearchInitialImpl value, $Res Function(_$SearchInitialImpl) then) =
+      __$$SearchInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -119,12 +110,8 @@ class __$$SearchInitialImplCopyWithImpl<$Res>
     extends _$SearchChatStateCopyWithImpl<$Res, _$SearchInitialImpl>
     implements _$$SearchInitialImplCopyWith<$Res> {
   __$$SearchInitialImplCopyWithImpl(
-    _$SearchInitialImpl _value,
-    $Res Function(_$SearchInitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
+      _$SearchInitialImpl _value, $Res Function(_$SearchInitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -152,11 +139,8 @@ class _$SearchInitialImpl implements SearchInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
   }) {
@@ -169,11 +153,8 @@ class _$SearchInitialImpl implements SearchInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
   }) {
@@ -186,11 +167,8 @@ class _$SearchInitialImpl implements SearchInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -249,9 +227,8 @@ abstract class SearchInitial implements SearchChatState {
 /// @nodoc
 abstract class _$$SearchLoadingImplCopyWith<$Res> {
   factory _$$SearchLoadingImplCopyWith(
-    _$SearchLoadingImpl value,
-    $Res Function(_$SearchLoadingImpl) then,
-  ) = __$$SearchLoadingImplCopyWithImpl<$Res>;
+          _$SearchLoadingImpl value, $Res Function(_$SearchLoadingImpl) then) =
+      __$$SearchLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -259,12 +236,8 @@ class __$$SearchLoadingImplCopyWithImpl<$Res>
     extends _$SearchChatStateCopyWithImpl<$Res, _$SearchLoadingImpl>
     implements _$$SearchLoadingImplCopyWith<$Res> {
   __$$SearchLoadingImplCopyWithImpl(
-    _$SearchLoadingImpl _value,
-    $Res Function(_$SearchLoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
+      _$SearchLoadingImpl _value, $Res Function(_$SearchLoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -292,11 +265,8 @@ class _$SearchLoadingImpl implements SearchLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
   }) {
@@ -309,11 +279,8 @@ class _$SearchLoadingImpl implements SearchLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
   }) {
@@ -326,11 +293,8 @@ class _$SearchLoadingImpl implements SearchLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -389,15 +353,11 @@ abstract class SearchLoading implements SearchChatState {
 /// @nodoc
 abstract class _$$SearchLoadedImplCopyWith<$Res> {
   factory _$$SearchLoadedImplCopyWith(
-    _$SearchLoadedImpl value,
-    $Res Function(_$SearchLoadedImpl) then,
-  ) = __$$SearchLoadedImplCopyWithImpl<$Res>;
+          _$SearchLoadedImpl value, $Res Function(_$SearchLoadedImpl) then) =
+      __$$SearchLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({
-    List<ChatThread> threads,
-    Pagination pagination,
-    bool canLoadMore,
-  });
+  $Res call(
+      {List<ChatThread> threads, Pagination pagination, bool canLoadMore});
 
   $PaginationCopyWith<$Res> get pagination;
 }
@@ -407,12 +367,9 @@ class __$$SearchLoadedImplCopyWithImpl<$Res>
     extends _$SearchChatStateCopyWithImpl<$Res, _$SearchLoadedImpl>
     implements _$$SearchLoadedImplCopyWith<$Res> {
   __$$SearchLoadedImplCopyWithImpl(
-    _$SearchLoadedImpl _value,
-    $Res Function(_$SearchLoadedImpl) _then,
-  ) : super(_value, _then);
+      _$SearchLoadedImpl _value, $Res Function(_$SearchLoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -420,26 +377,22 @@ class __$$SearchLoadedImplCopyWithImpl<$Res>
     Object? pagination = null,
     Object? canLoadMore = null,
   }) {
-    return _then(
-      _$SearchLoadedImpl(
-        null == threads
-            ? _value._threads
-            : threads // ignore: cast_nullable_to_non_nullable
-                as List<ChatThread>,
-        null == pagination
-            ? _value.pagination
-            : pagination // ignore: cast_nullable_to_non_nullable
-                as Pagination,
-        null == canLoadMore
-            ? _value.canLoadMore
-            : canLoadMore // ignore: cast_nullable_to_non_nullable
-                as bool,
-      ),
-    );
+    return _then(_$SearchLoadedImpl(
+      null == threads
+          ? _value._threads
+          : threads // ignore: cast_nullable_to_non_nullable
+              as List<ChatThread>,
+      null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -453,10 +406,8 @@ class __$$SearchLoadedImplCopyWithImpl<$Res>
 
 class _$SearchLoadedImpl implements SearchLoaded {
   const _$SearchLoadedImpl(
-    final List<ChatThread> threads,
-    this.pagination,
-    this.canLoadMore,
-  ) : _threads = threads;
+      final List<ChatThread> threads, this.pagination, this.canLoadMore)
+      : _threads = threads;
 
   final List<ChatThread> _threads;
   @override
@@ -489,16 +440,10 @@ class _$SearchLoadedImpl implements SearchLoaded {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_threads),
-    pagination,
-    canLoadMore,
-  );
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_threads), pagination, canLoadMore);
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchLoadedImplCopyWith<_$SearchLoadedImpl> get copyWith =>
@@ -510,11 +455,8 @@ class _$SearchLoadedImpl implements SearchLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
   }) {
@@ -527,11 +469,8 @@ class _$SearchLoadedImpl implements SearchLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
   }) {
@@ -544,11 +483,8 @@ class _$SearchLoadedImpl implements SearchLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -601,19 +537,13 @@ class _$SearchLoadedImpl implements SearchLoaded {
 }
 
 abstract class SearchLoaded implements SearchChatState {
-  const factory SearchLoaded(
-    final List<ChatThread> threads,
-    final Pagination pagination,
-    final bool canLoadMore,
-  ) = _$SearchLoadedImpl;
+  const factory SearchLoaded(final List<ChatThread> threads,
+      final Pagination pagination, final bool canLoadMore) = _$SearchLoadedImpl;
 
   List<ChatThread> get threads;
   Pagination get pagination;
   bool get canLoadMore;
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SearchLoadedImplCopyWith<_$SearchLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -621,9 +551,8 @@ abstract class SearchLoaded implements SearchChatState {
 /// @nodoc
 abstract class _$$SearchErrorImplCopyWith<$Res> {
   factory _$$SearchErrorImplCopyWith(
-    _$SearchErrorImpl value,
-    $Res Function(_$SearchErrorImpl) then,
-  ) = __$$SearchErrorImplCopyWithImpl<$Res>;
+          _$SearchErrorImpl value, $Res Function(_$SearchErrorImpl) then) =
+      __$$SearchErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -635,27 +564,22 @@ class __$$SearchErrorImplCopyWithImpl<$Res>
     extends _$SearchChatStateCopyWithImpl<$Res, _$SearchErrorImpl>
     implements _$$SearchErrorImplCopyWith<$Res> {
   __$$SearchErrorImplCopyWithImpl(
-    _$SearchErrorImpl _value,
-    $Res Function(_$SearchErrorImpl) _then,
-  ) : super(_value, _then);
+      _$SearchErrorImpl _value, $Res Function(_$SearchErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$SearchErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$SearchErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -689,9 +613,7 @@ class _$SearchErrorImpl implements SearchError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchErrorImplCopyWith<_$SearchErrorImpl> get copyWith =>
@@ -703,11 +625,8 @@ class _$SearchErrorImpl implements SearchError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
   }) {
@@ -720,11 +639,8 @@ class _$SearchErrorImpl implements SearchError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
   }) {
@@ -737,11 +653,8 @@ class _$SearchErrorImpl implements SearchError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -797,10 +710,7 @@ abstract class SearchError implements SearchChatState {
   const factory SearchError(final Failure failure) = _$SearchErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SearchErrorImplCopyWith<_$SearchErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -808,9 +718,8 @@ abstract class SearchError implements SearchChatState {
 /// @nodoc
 abstract class _$$SearchEmptyImplCopyWith<$Res> {
   factory _$$SearchEmptyImplCopyWith(
-    _$SearchEmptyImpl value,
-    $Res Function(_$SearchEmptyImpl) then,
-  ) = __$$SearchEmptyImplCopyWithImpl<$Res>;
+          _$SearchEmptyImpl value, $Res Function(_$SearchEmptyImpl) then) =
+      __$$SearchEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -818,12 +727,8 @@ class __$$SearchEmptyImplCopyWithImpl<$Res>
     extends _$SearchChatStateCopyWithImpl<$Res, _$SearchEmptyImpl>
     implements _$$SearchEmptyImplCopyWith<$Res> {
   __$$SearchEmptyImplCopyWithImpl(
-    _$SearchEmptyImpl _value,
-    $Res Function(_$SearchEmptyImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of SearchChatState
-  /// with the given fields replaced by the non-null parameter values.
+      _$SearchEmptyImpl _value, $Res Function(_$SearchEmptyImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -851,11 +756,8 @@ class _$SearchEmptyImpl implements SearchEmpty {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
     required TResult Function() empty,
   }) {
@@ -868,11 +770,8 @@ class _$SearchEmptyImpl implements SearchEmpty {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
     TResult? Function()? empty,
   }) {
@@ -885,11 +784,8 @@ class _$SearchEmptyImpl implements SearchEmpty {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<ChatThread> threads,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<ChatThread> threads, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     TResult Function()? empty,
     required TResult orElse(),

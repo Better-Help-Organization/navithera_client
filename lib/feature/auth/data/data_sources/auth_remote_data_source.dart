@@ -35,7 +35,15 @@ abstract class AuthRemoteDataSource {
   Future<ProfileApiResponse> getCurrentUserProfile({
     @Query('fields')
     String fields =
-        'preference.*,answer.*,subscription.*,activeSubscription.*,createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,username,emergencyContact,isVisible,isEmailAuthenticated,isPhoneNumberAuthenticated,updatedAt,deletedAt,profile,avatar,hasNotification.*',
+        'preference.id,preference.gender,preference.goal,'
+            'answer.id,answer.text,'
+            'activeSubscription.id,activeSubscription.createdAt,activeSubscription.updatedAt,'
+            'activeSubscription.status,activeSubscription.end_date,activeSubscription.price,'
+            // 'hasNotification.id,hasNotification.updatedAt,hasNotification.createdAt,'
+            // 'hasNotification.title,hasNotification.body,hasNotification.message,hasNotification.code,'
+            'createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,'
+            'username,emergencyContact,isVisible,isEmailAuthenticated,isPhoneNumberAuthenticated,'
+            'updatedAt,deletedAt,profile,avatar',
   });
 
   @POST('/auth/logout')

@@ -12,8 +12,7 @@ part of 'ai_chat_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AiChatState {
@@ -22,9 +21,7 @@ mixin _$AiChatState {
   String? get error => throw _privateConstructorUsedError;
   UsageInfo? get usageInfo => throw _privateConstructorUsedError;
 
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AiChatStateCopyWith<AiChatState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -32,16 +29,14 @@ mixin _$AiChatState {
 /// @nodoc
 abstract class $AiChatStateCopyWith<$Res> {
   factory $AiChatStateCopyWith(
-    AiChatState value,
-    $Res Function(AiChatState) then,
-  ) = _$AiChatStateCopyWithImpl<$Res, AiChatState>;
+          AiChatState value, $Res Function(AiChatState) then) =
+      _$AiChatStateCopyWithImpl<$Res, AiChatState>;
   @useResult
-  $Res call({
-    List<ChatMessage> messages,
-    bool isLoading,
-    String? error,
-    UsageInfo? usageInfo,
-  });
+  $Res call(
+      {List<ChatMessage> messages,
+      bool isLoading,
+      String? error,
+      UsageInfo? usageInfo});
 
   $UsageInfoCopyWith<$Res>? get usageInfo;
 }
@@ -56,8 +51,6 @@ class _$AiChatStateCopyWithImpl<$Res, $Val extends AiChatState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,35 +59,26 @@ class _$AiChatStateCopyWithImpl<$Res, $Val extends AiChatState>
     Object? error = freezed,
     Object? usageInfo = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            messages:
-                null == messages
-                    ? _value.messages
-                    : messages // ignore: cast_nullable_to_non_nullable
-                        as List<ChatMessage>,
-            isLoading:
-                null == isLoading
-                    ? _value.isLoading
-                    : isLoading // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            error:
-                freezed == error
-                    ? _value.error
-                    : error // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            usageInfo:
-                freezed == usageInfo
-                    ? _value.usageInfo
-                    : usageInfo // ignore: cast_nullable_to_non_nullable
-                        as UsageInfo?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      messages: null == messages
+          ? _value.messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<ChatMessage>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      usageInfo: freezed == usageInfo
+          ? _value.usageInfo
+          : usageInfo // ignore: cast_nullable_to_non_nullable
+              as UsageInfo?,
+    ) as $Val);
   }
 
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UsageInfoCopyWith<$Res>? get usageInfo {
@@ -112,17 +96,15 @@ class _$AiChatStateCopyWithImpl<$Res, $Val extends AiChatState>
 abstract class _$$AiChatStateImplCopyWith<$Res>
     implements $AiChatStateCopyWith<$Res> {
   factory _$$AiChatStateImplCopyWith(
-    _$AiChatStateImpl value,
-    $Res Function(_$AiChatStateImpl) then,
-  ) = __$$AiChatStateImplCopyWithImpl<$Res>;
+          _$AiChatStateImpl value, $Res Function(_$AiChatStateImpl) then) =
+      __$$AiChatStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<ChatMessage> messages,
-    bool isLoading,
-    String? error,
-    UsageInfo? usageInfo,
-  });
+  $Res call(
+      {List<ChatMessage> messages,
+      bool isLoading,
+      String? error,
+      UsageInfo? usageInfo});
 
   @override
   $UsageInfoCopyWith<$Res>? get usageInfo;
@@ -133,12 +115,9 @@ class __$$AiChatStateImplCopyWithImpl<$Res>
     extends _$AiChatStateCopyWithImpl<$Res, _$AiChatStateImpl>
     implements _$$AiChatStateImplCopyWith<$Res> {
   __$$AiChatStateImplCopyWithImpl(
-    _$AiChatStateImpl _value,
-    $Res Function(_$AiChatStateImpl) _then,
-  ) : super(_value, _then);
+      _$AiChatStateImpl _value, $Res Function(_$AiChatStateImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -147,42 +126,36 @@ class __$$AiChatStateImplCopyWithImpl<$Res>
     Object? error = freezed,
     Object? usageInfo = freezed,
   }) {
-    return _then(
-      _$AiChatStateImpl(
-        messages:
-            null == messages
-                ? _value._messages
-                : messages // ignore: cast_nullable_to_non_nullable
-                    as List<ChatMessage>,
-        isLoading:
-            null == isLoading
-                ? _value.isLoading
-                : isLoading // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        error:
-            freezed == error
-                ? _value.error
-                : error // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        usageInfo:
-            freezed == usageInfo
-                ? _value.usageInfo
-                : usageInfo // ignore: cast_nullable_to_non_nullable
-                    as UsageInfo?,
-      ),
-    );
+    return _then(_$AiChatStateImpl(
+      messages: null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<ChatMessage>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      usageInfo: freezed == usageInfo
+          ? _value.usageInfo
+          : usageInfo // ignore: cast_nullable_to_non_nullable
+              as UsageInfo?,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$AiChatStateImpl implements _AiChatState {
-  const _$AiChatStateImpl({
-    final List<ChatMessage> messages = const [],
-    this.isLoading = false,
-    this.error,
-    this.usageInfo,
-  }) : _messages = messages;
+  const _$AiChatStateImpl(
+      {final List<ChatMessage> messages = const [],
+      this.isLoading = false,
+      this.error,
+      this.usageInfo})
+      : _messages = messages;
 
   final List<ChatMessage> _messages;
   @override
@@ -221,16 +194,13 @@ class _$AiChatStateImpl implements _AiChatState {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_messages),
-    isLoading,
-    error,
-    usageInfo,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_messages),
+      isLoading,
+      error,
+      usageInfo);
 
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AiChatStateImplCopyWith<_$AiChatStateImpl> get copyWith =>
@@ -238,12 +208,11 @@ class _$AiChatStateImpl implements _AiChatState {
 }
 
 abstract class _AiChatState implements AiChatState {
-  const factory _AiChatState({
-    final List<ChatMessage> messages,
-    final bool isLoading,
-    final String? error,
-    final UsageInfo? usageInfo,
-  }) = _$AiChatStateImpl;
+  const factory _AiChatState(
+      {final List<ChatMessage> messages,
+      final bool isLoading,
+      final String? error,
+      final UsageInfo? usageInfo}) = _$AiChatStateImpl;
 
   @override
   List<ChatMessage> get messages;
@@ -253,11 +222,8 @@ abstract class _AiChatState implements AiChatState {
   String? get error;
   @override
   UsageInfo? get usageInfo;
-
-  /// Create a copy of AiChatState
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AiChatStateImplCopyWith<_$AiChatStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

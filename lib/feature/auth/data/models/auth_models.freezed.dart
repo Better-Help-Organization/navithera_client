@@ -12,8 +12,7 @@ part of 'auth_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ApiResponse _$ApiResponseFromJson(Map<String, dynamic> json) {
   return _ApiResponse.fromJson(json);
@@ -25,12 +24,8 @@ mixin _$ApiResponse {
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
 
-  /// Serializes this ApiResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ApiResponseCopyWith<ApiResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -38,9 +33,8 @@ mixin _$ApiResponse {
 /// @nodoc
 abstract class $ApiResponseCopyWith<$Res> {
   factory $ApiResponseCopyWith(
-    ApiResponse value,
-    $Res Function(ApiResponse) then,
-  ) = _$ApiResponseCopyWithImpl<$Res, ApiResponse>;
+          ApiResponse value, $Res Function(ApiResponse) then) =
+      _$ApiResponseCopyWithImpl<$Res, ApiResponse>;
   @useResult
   $Res call({AuthData data, String message, int statusCode});
 
@@ -57,8 +51,6 @@ class _$ApiResponseCopyWithImpl<$Res, $Val extends ApiResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,30 +58,22 @@ class _$ApiResponseCopyWithImpl<$Res, $Val extends ApiResponse>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as AuthData,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AuthData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AuthDataCopyWith<$Res> get data {
@@ -103,9 +87,8 @@ class _$ApiResponseCopyWithImpl<$Res, $Val extends ApiResponse>
 abstract class _$$ApiResponseImplCopyWith<$Res>
     implements $ApiResponseCopyWith<$Res> {
   factory _$$ApiResponseImplCopyWith(
-    _$ApiResponseImpl value,
-    $Res Function(_$ApiResponseImpl) then,
-  ) = __$$ApiResponseImplCopyWithImpl<$Res>;
+          _$ApiResponseImpl value, $Res Function(_$ApiResponseImpl) then) =
+      __$$ApiResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AuthData data, String message, int statusCode});
@@ -119,12 +102,9 @@ class __$$ApiResponseImplCopyWithImpl<$Res>
     extends _$ApiResponseCopyWithImpl<$Res, _$ApiResponseImpl>
     implements _$$ApiResponseImplCopyWith<$Res> {
   __$$ApiResponseImplCopyWithImpl(
-    _$ApiResponseImpl _value,
-    $Res Function(_$ApiResponseImpl) _then,
-  ) : super(_value, _then);
+      _$ApiResponseImpl _value, $Res Function(_$ApiResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -132,36 +112,28 @@ class __$$ApiResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _$ApiResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as AuthData,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$ApiResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as AuthData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ApiResponseImpl implements _ApiResponse {
-  const _$ApiResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-  });
+  const _$ApiResponseImpl(
+      {required this.data, required this.message, required this.statusCode});
 
   factory _$ApiResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ApiResponseImplFromJson(json);
@@ -189,13 +161,11 @@ class _$ApiResponseImpl implements _ApiResponse {
                 other.statusCode == statusCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, data, message, statusCode);
 
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ApiResponseImplCopyWith<_$ApiResponseImpl> get copyWith =>
@@ -203,16 +173,17 @@ class _$ApiResponseImpl implements _ApiResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ApiResponseImplToJson(this);
+    return _$$ApiResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ApiResponse implements ApiResponse {
-  const factory _ApiResponse({
-    required final AuthData data,
-    required final String message,
-    required final int statusCode,
-  }) = _$ApiResponseImpl;
+  const factory _ApiResponse(
+      {required final AuthData data,
+      required final String message,
+      required final int statusCode}) = _$ApiResponseImpl;
 
   factory _ApiResponse.fromJson(Map<String, dynamic> json) =
       _$ApiResponseImpl.fromJson;
@@ -223,11 +194,8 @@ abstract class _ApiResponse implements ApiResponse {
   String get message;
   @override
   int get statusCode;
-
-  /// Create a copy of ApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ApiResponseImplCopyWith<_$ApiResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -242,12 +210,8 @@ mixin _$AuthData {
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
 
-  /// Serializes this AuthData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AuthDataCopyWith<AuthData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -272,8 +236,6 @@ class _$AuthDataCopyWithImpl<$Res, $Val extends AuthData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -281,30 +243,22 @@ class _$AuthDataCopyWithImpl<$Res, $Val extends AuthData>
     Object? accessToken = null,
     Object? refreshToken = null,
   }) {
-    return _then(
-      _value.copyWith(
-            user:
-                null == user
-                    ? _value.user
-                    : user // ignore: cast_nullable_to_non_nullable
-                        as UserModel,
-            accessToken:
-                null == accessToken
-                    ? _value.accessToken
-                    : accessToken // ignore: cast_nullable_to_non_nullable
-                        as String,
-            refreshToken:
-                null == refreshToken
-                    ? _value.refreshToken
-                    : refreshToken // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res> get user {
@@ -318,9 +272,8 @@ class _$AuthDataCopyWithImpl<$Res, $Val extends AuthData>
 abstract class _$$AuthDataImplCopyWith<$Res>
     implements $AuthDataCopyWith<$Res> {
   factory _$$AuthDataImplCopyWith(
-    _$AuthDataImpl value,
-    $Res Function(_$AuthDataImpl) then,
-  ) = __$$AuthDataImplCopyWithImpl<$Res>;
+          _$AuthDataImpl value, $Res Function(_$AuthDataImpl) then) =
+      __$$AuthDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({UserModel user, String accessToken, String refreshToken});
@@ -334,12 +287,9 @@ class __$$AuthDataImplCopyWithImpl<$Res>
     extends _$AuthDataCopyWithImpl<$Res, _$AuthDataImpl>
     implements _$$AuthDataImplCopyWith<$Res> {
   __$$AuthDataImplCopyWithImpl(
-    _$AuthDataImpl _value,
-    $Res Function(_$AuthDataImpl) _then,
-  ) : super(_value, _then);
+      _$AuthDataImpl _value, $Res Function(_$AuthDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -347,36 +297,30 @@ class __$$AuthDataImplCopyWithImpl<$Res>
     Object? accessToken = null,
     Object? refreshToken = null,
   }) {
-    return _then(
-      _$AuthDataImpl(
-        user:
-            null == user
-                ? _value.user
-                : user // ignore: cast_nullable_to_non_nullable
-                    as UserModel,
-        accessToken:
-            null == accessToken
-                ? _value.accessToken
-                : accessToken // ignore: cast_nullable_to_non_nullable
-                    as String,
-        refreshToken:
-            null == refreshToken
-                ? _value.refreshToken
-                : refreshToken // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+    return _then(_$AuthDataImpl(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      accessToken: null == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      refreshToken: null == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AuthDataImpl implements _AuthData {
-  const _$AuthDataImpl({
-    required this.user,
-    required this.accessToken,
-    required this.refreshToken,
-  });
+  const _$AuthDataImpl(
+      {required this.user,
+      required this.accessToken,
+      required this.refreshToken});
 
   factory _$AuthDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthDataImplFromJson(json);
@@ -405,13 +349,11 @@ class _$AuthDataImpl implements _AuthData {
                 other.refreshToken == refreshToken));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user, accessToken, refreshToken);
 
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthDataImplCopyWith<_$AuthDataImpl> get copyWith =>
@@ -419,16 +361,17 @@ class _$AuthDataImpl implements _AuthData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AuthDataImplToJson(this);
+    return _$$AuthDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AuthData implements AuthData {
-  const factory _AuthData({
-    required final UserModel user,
-    required final String accessToken,
-    required final String refreshToken,
-  }) = _$AuthDataImpl;
+  const factory _AuthData(
+      {required final UserModel user,
+      required final String accessToken,
+      required final String refreshToken}) = _$AuthDataImpl;
 
   factory _AuthData.fromJson(Map<String, dynamic> json) =
       _$AuthDataImpl.fromJson;
@@ -439,11 +382,8 @@ abstract class _AuthData implements AuthData {
   String get accessToken;
   @override
   String get refreshToken;
-
-  /// Create a copy of AuthData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AuthDataImplCopyWith<_$AuthDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -459,12 +399,8 @@ mixin _$LoginRequest {
   String get firebaseToken => throw _privateConstructorUsedError;
   String? get voIpToken => throw _privateConstructorUsedError;
 
-  /// Serializes this LoginRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LoginRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LoginRequestCopyWith<LoginRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -472,16 +408,14 @@ mixin _$LoginRequest {
 /// @nodoc
 abstract class $LoginRequestCopyWith<$Res> {
   factory $LoginRequestCopyWith(
-    LoginRequest value,
-    $Res Function(LoginRequest) then,
-  ) = _$LoginRequestCopyWithImpl<$Res, LoginRequest>;
+          LoginRequest value, $Res Function(LoginRequest) then) =
+      _$LoginRequestCopyWithImpl<$Res, LoginRequest>;
   @useResult
-  $Res call({
-    String phoneNumber,
-    String password,
-    String firebaseToken,
-    String? voIpToken,
-  });
+  $Res call(
+      {String phoneNumber,
+      String password,
+      String firebaseToken,
+      String? voIpToken});
 }
 
 /// @nodoc
@@ -494,8 +428,6 @@ class _$LoginRequestCopyWithImpl<$Res, $Val extends LoginRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LoginRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -504,31 +436,24 @@ class _$LoginRequestCopyWithImpl<$Res, $Val extends LoginRequest>
     Object? firebaseToken = null,
     Object? voIpToken = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            phoneNumber:
-                null == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String,
-            password:
-                null == password
-                    ? _value.password
-                    : password // ignore: cast_nullable_to_non_nullable
-                        as String,
-            firebaseToken:
-                null == firebaseToken
-                    ? _value.firebaseToken
-                    : firebaseToken // ignore: cast_nullable_to_non_nullable
-                        as String,
-            voIpToken:
-                freezed == voIpToken
-                    ? _value.voIpToken
-                    : voIpToken // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      firebaseToken: null == firebaseToken
+          ? _value.firebaseToken
+          : firebaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      voIpToken: freezed == voIpToken
+          ? _value.voIpToken
+          : voIpToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -536,17 +461,15 @@ class _$LoginRequestCopyWithImpl<$Res, $Val extends LoginRequest>
 abstract class _$$LoginRequestImplCopyWith<$Res>
     implements $LoginRequestCopyWith<$Res> {
   factory _$$LoginRequestImplCopyWith(
-    _$LoginRequestImpl value,
-    $Res Function(_$LoginRequestImpl) then,
-  ) = __$$LoginRequestImplCopyWithImpl<$Res>;
+          _$LoginRequestImpl value, $Res Function(_$LoginRequestImpl) then) =
+      __$$LoginRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String phoneNumber,
-    String password,
-    String firebaseToken,
-    String? voIpToken,
-  });
+  $Res call(
+      {String phoneNumber,
+      String password,
+      String firebaseToken,
+      String? voIpToken});
 }
 
 /// @nodoc
@@ -554,12 +477,9 @@ class __$$LoginRequestImplCopyWithImpl<$Res>
     extends _$LoginRequestCopyWithImpl<$Res, _$LoginRequestImpl>
     implements _$$LoginRequestImplCopyWith<$Res> {
   __$$LoginRequestImplCopyWithImpl(
-    _$LoginRequestImpl _value,
-    $Res Function(_$LoginRequestImpl) _then,
-  ) : super(_value, _then);
+      _$LoginRequestImpl _value, $Res Function(_$LoginRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LoginRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -568,42 +488,35 @@ class __$$LoginRequestImplCopyWithImpl<$Res>
     Object? firebaseToken = null,
     Object? voIpToken = freezed,
   }) {
-    return _then(
-      _$LoginRequestImpl(
-        phoneNumber:
-            null == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String,
-        password:
-            null == password
-                ? _value.password
-                : password // ignore: cast_nullable_to_non_nullable
-                    as String,
-        firebaseToken:
-            null == firebaseToken
-                ? _value.firebaseToken
-                : firebaseToken // ignore: cast_nullable_to_non_nullable
-                    as String,
-        voIpToken:
-            freezed == voIpToken
-                ? _value.voIpToken
-                : voIpToken // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$LoginRequestImpl(
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      firebaseToken: null == firebaseToken
+          ? _value.firebaseToken
+          : firebaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      voIpToken: freezed == voIpToken
+          ? _value.voIpToken
+          : voIpToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LoginRequestImpl implements _LoginRequest {
-  const _$LoginRequestImpl({
-    required this.phoneNumber,
-    required this.password,
-    required this.firebaseToken,
-    this.voIpToken,
-  });
+  const _$LoginRequestImpl(
+      {required this.phoneNumber,
+      required this.password,
+      required this.firebaseToken,
+      this.voIpToken});
 
   factory _$LoginRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginRequestImplFromJson(json);
@@ -637,14 +550,12 @@ class _$LoginRequestImpl implements _LoginRequest {
                 other.voIpToken == voIpToken));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, phoneNumber, password, firebaseToken, voIpToken);
 
-  /// Create a copy of LoginRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LoginRequestImplCopyWith<_$LoginRequestImpl> get copyWith =>
@@ -652,17 +563,18 @@ class _$LoginRequestImpl implements _LoginRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoginRequestImplToJson(this);
+    return _$$LoginRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LoginRequest implements LoginRequest {
-  const factory _LoginRequest({
-    required final String phoneNumber,
-    required final String password,
-    required final String firebaseToken,
-    final String? voIpToken,
-  }) = _$LoginRequestImpl;
+  const factory _LoginRequest(
+      {required final String phoneNumber,
+      required final String password,
+      required final String firebaseToken,
+      final String? voIpToken}) = _$LoginRequestImpl;
 
   factory _LoginRequest.fromJson(Map<String, dynamic> json) =
       _$LoginRequestImpl.fromJson;
@@ -675,11 +587,8 @@ abstract class _LoginRequest implements LoginRequest {
   String get firebaseToken;
   @override
   String? get voIpToken;
-
-  /// Create a copy of LoginRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LoginRequestImplCopyWith<_$LoginRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -695,12 +604,8 @@ mixin _$ProfileApiResponse {
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
 
-  /// Serializes this ProfileApiResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProfileApiResponseCopyWith<ProfileApiResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -708,9 +613,8 @@ mixin _$ProfileApiResponse {
 /// @nodoc
 abstract class $ProfileApiResponseCopyWith<$Res> {
   factory $ProfileApiResponseCopyWith(
-    ProfileApiResponse value,
-    $Res Function(ProfileApiResponse) then,
-  ) = _$ProfileApiResponseCopyWithImpl<$Res, ProfileApiResponse>;
+          ProfileApiResponse value, $Res Function(ProfileApiResponse) then) =
+      _$ProfileApiResponseCopyWithImpl<$Res, ProfileApiResponse>;
   @useResult
   $Res call({UserModel data, String message, int statusCode});
 
@@ -727,8 +631,6 @@ class _$ProfileApiResponseCopyWithImpl<$Res, $Val extends ProfileApiResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -736,30 +638,22 @@ class _$ProfileApiResponseCopyWithImpl<$Res, $Val extends ProfileApiResponse>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as UserModel,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res> get data {
@@ -772,10 +666,9 @@ class _$ProfileApiResponseCopyWithImpl<$Res, $Val extends ProfileApiResponse>
 /// @nodoc
 abstract class _$$ProfileApiResponseImplCopyWith<$Res>
     implements $ProfileApiResponseCopyWith<$Res> {
-  factory _$$ProfileApiResponseImplCopyWith(
-    _$ProfileApiResponseImpl value,
-    $Res Function(_$ProfileApiResponseImpl) then,
-  ) = __$$ProfileApiResponseImplCopyWithImpl<$Res>;
+  factory _$$ProfileApiResponseImplCopyWith(_$ProfileApiResponseImpl value,
+          $Res Function(_$ProfileApiResponseImpl) then) =
+      __$$ProfileApiResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({UserModel data, String message, int statusCode});
@@ -788,13 +681,10 @@ abstract class _$$ProfileApiResponseImplCopyWith<$Res>
 class __$$ProfileApiResponseImplCopyWithImpl<$Res>
     extends _$ProfileApiResponseCopyWithImpl<$Res, _$ProfileApiResponseImpl>
     implements _$$ProfileApiResponseImplCopyWith<$Res> {
-  __$$ProfileApiResponseImplCopyWithImpl(
-    _$ProfileApiResponseImpl _value,
-    $Res Function(_$ProfileApiResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$ProfileApiResponseImplCopyWithImpl(_$ProfileApiResponseImpl _value,
+      $Res Function(_$ProfileApiResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -802,43 +692,35 @@ class __$$ProfileApiResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _$ProfileApiResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as UserModel,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$ProfileApiResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ProfileApiResponseImpl implements _ProfileApiResponse {
-  const _$ProfileApiResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-  });
+  const _$ProfileApiResponseImpl(
+      {required this.data, required this.message, required this.statusCode});
 
   factory _$ProfileApiResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileApiResponseImplFromJson(json);
 
   @override
   final UserModel data;
-  // Direct user data, not wrapped in AuthData
+// Direct user data, not wrapped in AuthData
   @override
   final String message;
   @override
@@ -860,48 +742,42 @@ class _$ProfileApiResponseImpl implements _ProfileApiResponse {
                 other.statusCode == statusCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, data, message, statusCode);
 
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileApiResponseImplCopyWith<_$ProfileApiResponseImpl> get copyWith =>
       __$$ProfileApiResponseImplCopyWithImpl<_$ProfileApiResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ProfileApiResponseImplToJson(this);
+    return _$$ProfileApiResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ProfileApiResponse implements ProfileApiResponse {
-  const factory _ProfileApiResponse({
-    required final UserModel data,
-    required final String message,
-    required final int statusCode,
-  }) = _$ProfileApiResponseImpl;
+  const factory _ProfileApiResponse(
+      {required final UserModel data,
+      required final String message,
+      required final int statusCode}) = _$ProfileApiResponseImpl;
 
   factory _ProfileApiResponse.fromJson(Map<String, dynamic> json) =
       _$ProfileApiResponseImpl.fromJson;
 
   @override
-  UserModel get data; // Direct user data, not wrapped in AuthData
-  @override
+  UserModel get data;
+  @override // Direct user data, not wrapped in AuthData
   String get message;
   @override
   int get statusCode;
-
-  /// Create a copy of ProfileApiResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProfileApiResponseImplCopyWith<_$ProfileApiResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -922,12 +798,8 @@ mixin _$SignupRequest {
   String get username => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
 
-  /// Serializes this SignupRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SignupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SignupRequestCopyWith<SignupRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -935,21 +807,19 @@ mixin _$SignupRequest {
 /// @nodoc
 abstract class $SignupRequestCopyWith<$Res> {
   factory $SignupRequestCopyWith(
-    SignupRequest value,
-    $Res Function(SignupRequest) then,
-  ) = _$SignupRequestCopyWithImpl<$Res, SignupRequest>;
+          SignupRequest value, $Res Function(SignupRequest) then) =
+      _$SignupRequestCopyWithImpl<$Res, SignupRequest>;
   @useResult
-  $Res call({
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String gender,
-    String firebaseToken,
-    String dob,
-    String username,
-    String phoneNumber,
-  });
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String gender,
+      String firebaseToken,
+      String dob,
+      String username,
+      String phoneNumber});
 }
 
 /// @nodoc
@@ -962,8 +832,6 @@ class _$SignupRequestCopyWithImpl<$Res, $Val extends SignupRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SignupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -977,56 +845,44 @@ class _$SignupRequestCopyWithImpl<$Res, $Val extends SignupRequest>
     Object? username = null,
     Object? phoneNumber = null,
   }) {
-    return _then(
-      _value.copyWith(
-            firstName:
-                null == firstName
-                    ? _value.firstName
-                    : firstName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            lastName:
-                null == lastName
-                    ? _value.lastName
-                    : lastName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            password:
-                null == password
-                    ? _value.password
-                    : password // ignore: cast_nullable_to_non_nullable
-                        as String,
-            gender:
-                null == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String,
-            firebaseToken:
-                null == firebaseToken
-                    ? _value.firebaseToken
-                    : firebaseToken // ignore: cast_nullable_to_non_nullable
-                        as String,
-            dob:
-                null == dob
-                    ? _value.dob
-                    : dob // ignore: cast_nullable_to_non_nullable
-                        as String,
-            username:
-                null == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String,
-            phoneNumber:
-                null == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      firebaseToken: null == firebaseToken
+          ? _value.firebaseToken
+          : firebaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -1034,22 +890,20 @@ class _$SignupRequestCopyWithImpl<$Res, $Val extends SignupRequest>
 abstract class _$$SignupRequestImplCopyWith<$Res>
     implements $SignupRequestCopyWith<$Res> {
   factory _$$SignupRequestImplCopyWith(
-    _$SignupRequestImpl value,
-    $Res Function(_$SignupRequestImpl) then,
-  ) = __$$SignupRequestImplCopyWithImpl<$Res>;
+          _$SignupRequestImpl value, $Res Function(_$SignupRequestImpl) then) =
+      __$$SignupRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String gender,
-    String firebaseToken,
-    String dob,
-    String username,
-    String phoneNumber,
-  });
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String gender,
+      String firebaseToken,
+      String dob,
+      String username,
+      String phoneNumber});
 }
 
 /// @nodoc
@@ -1057,12 +911,9 @@ class __$$SignupRequestImplCopyWithImpl<$Res>
     extends _$SignupRequestCopyWithImpl<$Res, _$SignupRequestImpl>
     implements _$$SignupRequestImplCopyWith<$Res> {
   __$$SignupRequestImplCopyWithImpl(
-    _$SignupRequestImpl _value,
-    $Res Function(_$SignupRequestImpl) _then,
-  ) : super(_value, _then);
+      _$SignupRequestImpl _value, $Res Function(_$SignupRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SignupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1076,72 +927,60 @@ class __$$SignupRequestImplCopyWithImpl<$Res>
     Object? username = null,
     Object? phoneNumber = null,
   }) {
-    return _then(
-      _$SignupRequestImpl(
-        firstName:
-            null == firstName
-                ? _value.firstName
-                : firstName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        lastName:
-            null == lastName
-                ? _value.lastName
-                : lastName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        password:
-            null == password
-                ? _value.password
-                : password // ignore: cast_nullable_to_non_nullable
-                    as String,
-        gender:
-            null == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String,
-        firebaseToken:
-            null == firebaseToken
-                ? _value.firebaseToken
-                : firebaseToken // ignore: cast_nullable_to_non_nullable
-                    as String,
-        dob:
-            null == dob
-                ? _value.dob
-                : dob // ignore: cast_nullable_to_non_nullable
-                    as String,
-        username:
-            null == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String,
-        phoneNumber:
-            null == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+    return _then(_$SignupRequestImpl(
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      firebaseToken: null == firebaseToken
+          ? _value.firebaseToken
+          : firebaseToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SignupRequestImpl implements _SignupRequest {
-  const _$SignupRequestImpl({
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.password,
-    required this.gender,
-    required this.firebaseToken,
-    required this.dob,
-    required this.username,
-    required this.phoneNumber,
-  });
+  const _$SignupRequestImpl(
+      {required this.firstName,
+      required this.lastName,
+      required this.email,
+      required this.password,
+      required this.gender,
+      required this.firebaseToken,
+      required this.dob,
+      required this.username,
+      required this.phoneNumber});
 
   factory _$SignupRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$SignupRequestImplFromJson(json);
@@ -1192,24 +1031,12 @@ class _$SignupRequestImpl implements _SignupRequest {
                 other.phoneNumber == phoneNumber));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    firstName,
-    lastName,
-    email,
-    password,
-    gender,
-    firebaseToken,
-    dob,
-    username,
-    phoneNumber,
-  );
+  int get hashCode => Object.hash(runtimeType, firstName, lastName, email,
+      password, gender, firebaseToken, dob, username, phoneNumber);
 
-  /// Create a copy of SignupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SignupRequestImplCopyWith<_$SignupRequestImpl> get copyWith =>
@@ -1217,22 +1044,23 @@ class _$SignupRequestImpl implements _SignupRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SignupRequestImplToJson(this);
+    return _$$SignupRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SignupRequest implements SignupRequest {
-  const factory _SignupRequest({
-    required final String firstName,
-    required final String lastName,
-    required final String email,
-    required final String password,
-    required final String gender,
-    required final String firebaseToken,
-    required final String dob,
-    required final String username,
-    required final String phoneNumber,
-  }) = _$SignupRequestImpl;
+  const factory _SignupRequest(
+      {required final String firstName,
+      required final String lastName,
+      required final String email,
+      required final String password,
+      required final String gender,
+      required final String firebaseToken,
+      required final String dob,
+      required final String username,
+      required final String phoneNumber}) = _$SignupRequestImpl;
 
   factory _SignupRequest.fromJson(Map<String, dynamic> json) =
       _$SignupRequestImpl.fromJson;
@@ -1255,11 +1083,8 @@ abstract class _SignupRequest implements SignupRequest {
   String get username;
   @override
   String get phoneNumber;
-
-  /// Create a copy of SignupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SignupRequestImplCopyWith<_$SignupRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1275,12 +1100,8 @@ mixin _$ExpertiseData {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   String? get expertise => throw _privateConstructorUsedError;
 
-  /// Serializes this ExpertiseData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ExpertiseData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ExpertiseDataCopyWith<ExpertiseData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1288,16 +1109,11 @@ mixin _$ExpertiseData {
 /// @nodoc
 abstract class $ExpertiseDataCopyWith<$Res> {
   factory $ExpertiseDataCopyWith(
-    ExpertiseData value,
-    $Res Function(ExpertiseData) then,
-  ) = _$ExpertiseDataCopyWithImpl<$Res, ExpertiseData>;
+          ExpertiseData value, $Res Function(ExpertiseData) then) =
+      _$ExpertiseDataCopyWithImpl<$Res, ExpertiseData>;
   @useResult
-  $Res call({
-    String id,
-    DateTime? updatedAt,
-    DateTime? createdAt,
-    String? expertise,
-  });
+  $Res call(
+      {String id, DateTime? updatedAt, DateTime? createdAt, String? expertise});
 }
 
 /// @nodoc
@@ -1310,8 +1126,6 @@ class _$ExpertiseDataCopyWithImpl<$Res, $Val extends ExpertiseData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ExpertiseData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1320,31 +1134,24 @@ class _$ExpertiseDataCopyWithImpl<$Res, $Val extends ExpertiseData>
     Object? createdAt = freezed,
     Object? expertise = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            expertise:
-                freezed == expertise
-                    ? _value.expertise
-                    : expertise // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expertise: freezed == expertise
+          ? _value.expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -1352,17 +1159,12 @@ class _$ExpertiseDataCopyWithImpl<$Res, $Val extends ExpertiseData>
 abstract class _$$ExpertiseDataImplCopyWith<$Res>
     implements $ExpertiseDataCopyWith<$Res> {
   factory _$$ExpertiseDataImplCopyWith(
-    _$ExpertiseDataImpl value,
-    $Res Function(_$ExpertiseDataImpl) then,
-  ) = __$$ExpertiseDataImplCopyWithImpl<$Res>;
+          _$ExpertiseDataImpl value, $Res Function(_$ExpertiseDataImpl) then) =
+      __$$ExpertiseDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    DateTime? updatedAt,
-    DateTime? createdAt,
-    String? expertise,
-  });
+  $Res call(
+      {String id, DateTime? updatedAt, DateTime? createdAt, String? expertise});
 }
 
 /// @nodoc
@@ -1370,12 +1172,9 @@ class __$$ExpertiseDataImplCopyWithImpl<$Res>
     extends _$ExpertiseDataCopyWithImpl<$Res, _$ExpertiseDataImpl>
     implements _$$ExpertiseDataImplCopyWith<$Res> {
   __$$ExpertiseDataImplCopyWithImpl(
-    _$ExpertiseDataImpl _value,
-    $Res Function(_$ExpertiseDataImpl) _then,
-  ) : super(_value, _then);
+      _$ExpertiseDataImpl _value, $Res Function(_$ExpertiseDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ExpertiseData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1384,42 +1183,32 @@ class __$$ExpertiseDataImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? expertise = freezed,
   }) {
-    return _then(
-      _$ExpertiseDataImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        expertise:
-            freezed == expertise
-                ? _value.expertise
-                : expertise // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$ExpertiseDataImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      expertise: freezed == expertise
+          ? _value.expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ExpertiseDataImpl implements _ExpertiseData {
-  const _$ExpertiseDataImpl({
-    required this.id,
-    this.updatedAt,
-    this.createdAt,
-    this.expertise,
-  });
+  const _$ExpertiseDataImpl(
+      {required this.id, this.updatedAt, this.createdAt, this.expertise});
 
   factory _$ExpertiseDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExpertiseDataImplFromJson(json);
@@ -1452,14 +1241,12 @@ class _$ExpertiseDataImpl implements _ExpertiseData {
                 other.expertise == expertise));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, updatedAt, createdAt, expertise);
 
-  /// Create a copy of ExpertiseData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ExpertiseDataImplCopyWith<_$ExpertiseDataImpl> get copyWith =>
@@ -1467,17 +1254,18 @@ class _$ExpertiseDataImpl implements _ExpertiseData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ExpertiseDataImplToJson(this);
+    return _$$ExpertiseDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ExpertiseData implements ExpertiseData {
-  const factory _ExpertiseData({
-    required final String id,
-    final DateTime? updatedAt,
-    final DateTime? createdAt,
-    final String? expertise,
-  }) = _$ExpertiseDataImpl;
+  const factory _ExpertiseData(
+      {required final String id,
+      final DateTime? updatedAt,
+      final DateTime? createdAt,
+      final String? expertise}) = _$ExpertiseDataImpl;
 
   factory _ExpertiseData.fromJson(Map<String, dynamic> json) =
       _$ExpertiseDataImpl.fromJson;
@@ -1490,11 +1278,8 @@ abstract class _ExpertiseData implements ExpertiseData {
   DateTime? get createdAt;
   @override
   String? get expertise;
-
-  /// Create a copy of ExpertiseData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ExpertiseDataImplCopyWith<_$ExpertiseDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1523,9 +1308,11 @@ mixin _$UserModel {
   bool? get isEmailAuthenticated => throw _privateConstructorUsedError;
   bool? get isPhoneNumberAuthenticated => throw _privateConstructorUsedError;
   @JsonKey(name: 'preference')
-  List<PrefData>? get preferences => throw _privateConstructorUsedError; // Map 'preference' to 'preferences'
+  List<PrefData>? get preferences =>
+      throw _privateConstructorUsedError; // Map 'preference' to 'preferences'
   @JsonKey(name: 'answer')
-  List<AnsData>? get answers => throw _privateConstructorUsedError; // Map 'answer' to 'answers'
+  List<AnsData>? get answers =>
+      throw _privateConstructorUsedError; // Map 'answer' to 'answers'
   @JsonKey(name: 'activeSubscription')
   SubscriptionData? get activeSubscription =>
       throw _privateConstructorUsedError;
@@ -1537,12 +1324,8 @@ mixin _$UserModel {
   String? get bio => throw _privateConstructorUsedError;
   NotificationItem? get hasNotification => throw _privateConstructorUsedError;
 
-  /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserModelCopyWith<UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1552,34 +1335,33 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({
-    String id,
-    String email,
-    String firstName,
-    String lastName,
-    DateTime createdAt,
-    String? status,
-    String? gender,
-    DateTime? dob,
-    String? username,
-    String? phoneNumber,
-    bool? isVisible,
-    DateTime? updatedAt,
-    dynamic emergencyContact,
-    DateTime? deletedAt,
-    bool? isLinked,
-    bool? isEmailAuthenticated,
-    bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') List<PrefData>? preferences,
-    @JsonKey(name: 'answer') List<AnsData>? answers,
-    @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
-    int? avatar,
-    String? profile,
-    bool? isOnline,
-    String? bio,
-    NotificationItem? hasNotification,
-  });
+  $Res call(
+      {String id,
+      String email,
+      String firstName,
+      String lastName,
+      DateTime createdAt,
+      String? status,
+      String? gender,
+      DateTime? dob,
+      String? username,
+      String? phoneNumber,
+      bool? isVisible,
+      DateTime? updatedAt,
+      dynamic emergencyContact,
+      DateTime? deletedAt,
+      bool? isLinked,
+      bool? isEmailAuthenticated,
+      bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') List<PrefData>? preferences,
+      @JsonKey(name: 'answer') List<AnsData>? answers,
+      @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
+      int? avatar,
+      String? profile,
+      bool? isOnline,
+      String? bio,
+      NotificationItem? hasNotification});
 
   $SubscriptionDataCopyWith<$Res>? get activeSubscription;
   $NotificationItemCopyWith<$Res>? get hasNotification;
@@ -1595,8 +1377,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1627,145 +1407,114 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? bio = freezed,
     Object? hasNotification = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            firstName:
-                null == firstName
-                    ? _value.firstName
-                    : firstName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            lastName:
-                null == lastName
-                    ? _value.lastName
-                    : lastName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            status:
-                freezed == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            dob:
-                freezed == dob
-                    ? _value.dob
-                    : dob // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            username:
-                freezed == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            phoneNumber:
-                freezed == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isVisible:
-                freezed == isVisible
-                    ? _value.isVisible
-                    : isVisible // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            emergencyContact:
-                freezed == emergencyContact
-                    ? _value.emergencyContact
-                    : emergencyContact // ignore: cast_nullable_to_non_nullable
-                        as dynamic,
-            deletedAt:
-                freezed == deletedAt
-                    ? _value.deletedAt
-                    : deletedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            isLinked:
-                freezed == isLinked
-                    ? _value.isLinked
-                    : isLinked // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            isEmailAuthenticated:
-                freezed == isEmailAuthenticated
-                    ? _value.isEmailAuthenticated
-                    : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            isPhoneNumberAuthenticated:
-                freezed == isPhoneNumberAuthenticated
-                    ? _value.isPhoneNumberAuthenticated
-                    : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            preferences:
-                freezed == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as List<PrefData>?,
-            answers:
-                freezed == answers
-                    ? _value.answers
-                    : answers // ignore: cast_nullable_to_non_nullable
-                        as List<AnsData>?,
-            activeSubscription:
-                freezed == activeSubscription
-                    ? _value.activeSubscription
-                    : activeSubscription // ignore: cast_nullable_to_non_nullable
-                        as SubscriptionData?,
-            expertise:
-                freezed == expertise
-                    ? _value.expertise
-                    : expertise // ignore: cast_nullable_to_non_nullable
-                        as List<ExpertiseData>?,
-            avatar:
-                freezed == avatar
-                    ? _value.avatar
-                    : avatar // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            profile:
-                freezed == profile
-                    ? _value.profile
-                    : profile // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isOnline:
-                freezed == isOnline
-                    ? _value.isOnline
-                    : isOnline // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            bio:
-                freezed == bio
-                    ? _value.bio
-                    : bio // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            hasNotification:
-                freezed == hasNotification
-                    ? _value.hasNotification
-                    : hasNotification // ignore: cast_nullable_to_non_nullable
-                        as NotificationItem?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      emergencyContact: freezed == emergencyContact
+          ? _value.emergencyContact
+          : emergencyContact // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isLinked: freezed == isLinked
+          ? _value.isLinked
+          : isLinked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isEmailAuthenticated: freezed == isEmailAuthenticated
+          ? _value.isEmailAuthenticated
+          : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isPhoneNumberAuthenticated: freezed == isPhoneNumberAuthenticated
+          ? _value.isPhoneNumberAuthenticated
+          : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as List<PrefData>?,
+      answers: freezed == answers
+          ? _value.answers
+          : answers // ignore: cast_nullable_to_non_nullable
+              as List<AnsData>?,
+      activeSubscription: freezed == activeSubscription
+          ? _value.activeSubscription
+          : activeSubscription // ignore: cast_nullable_to_non_nullable
+              as SubscriptionData?,
+      expertise: freezed == expertise
+          ? _value.expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as List<ExpertiseData>?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasNotification: freezed == hasNotification
+          ? _value.hasNotification
+          : hasNotification // ignore: cast_nullable_to_non_nullable
+              as NotificationItem?,
+    ) as $Val);
   }
 
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SubscriptionDataCopyWith<$Res>? get activeSubscription {
@@ -1778,8 +1527,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     });
   }
 
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NotificationItemCopyWith<$Res>? get hasNotification {
@@ -1797,39 +1544,37 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
 abstract class _$$UserModelImplCopyWith<$Res>
     implements $UserModelCopyWith<$Res> {
   factory _$$UserModelImplCopyWith(
-    _$UserModelImpl value,
-    $Res Function(_$UserModelImpl) then,
-  ) = __$$UserModelImplCopyWithImpl<$Res>;
+          _$UserModelImpl value, $Res Function(_$UserModelImpl) then) =
+      __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String email,
-    String firstName,
-    String lastName,
-    DateTime createdAt,
-    String? status,
-    String? gender,
-    DateTime? dob,
-    String? username,
-    String? phoneNumber,
-    bool? isVisible,
-    DateTime? updatedAt,
-    dynamic emergencyContact,
-    DateTime? deletedAt,
-    bool? isLinked,
-    bool? isEmailAuthenticated,
-    bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') List<PrefData>? preferences,
-    @JsonKey(name: 'answer') List<AnsData>? answers,
-    @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
-    int? avatar,
-    String? profile,
-    bool? isOnline,
-    String? bio,
-    NotificationItem? hasNotification,
-  });
+  $Res call(
+      {String id,
+      String email,
+      String firstName,
+      String lastName,
+      DateTime createdAt,
+      String? status,
+      String? gender,
+      DateTime? dob,
+      String? username,
+      String? phoneNumber,
+      bool? isVisible,
+      DateTime? updatedAt,
+      dynamic emergencyContact,
+      DateTime? deletedAt,
+      bool? isLinked,
+      bool? isEmailAuthenticated,
+      bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') List<PrefData>? preferences,
+      @JsonKey(name: 'answer') List<AnsData>? answers,
+      @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
+      int? avatar,
+      String? profile,
+      bool? isOnline,
+      String? bio,
+      NotificationItem? hasNotification});
 
   @override
   $SubscriptionDataCopyWith<$Res>? get activeSubscription;
@@ -1842,12 +1587,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     extends _$UserModelCopyWithImpl<$Res, _$UserModelImpl>
     implements _$$UserModelImplCopyWith<$Res> {
   __$$UserModelImplCopyWithImpl(
-    _$UserModelImpl _value,
-    $Res Function(_$UserModelImpl) _then,
-  ) : super(_value, _then);
+      _$UserModelImpl _value, $Res Function(_$UserModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1878,176 +1620,148 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? bio = freezed,
     Object? hasNotification = freezed,
   }) {
-    return _then(
-      _$UserModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        firstName:
-            null == firstName
-                ? _value.firstName
-                : firstName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        lastName:
-            null == lastName
-                ? _value.lastName
-                : lastName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        status:
-            freezed == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        dob:
-            freezed == dob
-                ? _value.dob
-                : dob // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        username:
-            freezed == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        phoneNumber:
-            freezed == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isVisible:
-            freezed == isVisible
-                ? _value.isVisible
-                : isVisible // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        emergencyContact:
-            freezed == emergencyContact
-                ? _value.emergencyContact
-                : emergencyContact // ignore: cast_nullable_to_non_nullable
-                    as dynamic,
-        deletedAt:
-            freezed == deletedAt
-                ? _value.deletedAt
-                : deletedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        isLinked:
-            freezed == isLinked
-                ? _value.isLinked
-                : isLinked // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        isEmailAuthenticated:
-            freezed == isEmailAuthenticated
-                ? _value.isEmailAuthenticated
-                : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        isPhoneNumberAuthenticated:
-            freezed == isPhoneNumberAuthenticated
-                ? _value.isPhoneNumberAuthenticated
-                : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        preferences:
-            freezed == preferences
-                ? _value._preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as List<PrefData>?,
-        answers:
-            freezed == answers
-                ? _value._answers
-                : answers // ignore: cast_nullable_to_non_nullable
-                    as List<AnsData>?,
-        activeSubscription:
-            freezed == activeSubscription
-                ? _value.activeSubscription
-                : activeSubscription // ignore: cast_nullable_to_non_nullable
-                    as SubscriptionData?,
-        expertise:
-            freezed == expertise
-                ? _value._expertise
-                : expertise // ignore: cast_nullable_to_non_nullable
-                    as List<ExpertiseData>?,
-        avatar:
-            freezed == avatar
-                ? _value.avatar
-                : avatar // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        profile:
-            freezed == profile
-                ? _value.profile
-                : profile // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isOnline:
-            freezed == isOnline
-                ? _value.isOnline
-                : isOnline // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        bio:
-            freezed == bio
-                ? _value.bio
-                : bio // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        hasNotification:
-            freezed == hasNotification
-                ? _value.hasNotification
-                : hasNotification // ignore: cast_nullable_to_non_nullable
-                    as NotificationItem?,
-      ),
-    );
+    return _then(_$UserModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      emergencyContact: freezed == emergencyContact
+          ? _value.emergencyContact
+          : emergencyContact // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isLinked: freezed == isLinked
+          ? _value.isLinked
+          : isLinked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isEmailAuthenticated: freezed == isEmailAuthenticated
+          ? _value.isEmailAuthenticated
+          : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isPhoneNumberAuthenticated: freezed == isPhoneNumberAuthenticated
+          ? _value.isPhoneNumberAuthenticated
+          : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value._preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as List<PrefData>?,
+      answers: freezed == answers
+          ? _value._answers
+          : answers // ignore: cast_nullable_to_non_nullable
+              as List<AnsData>?,
+      activeSubscription: freezed == activeSubscription
+          ? _value.activeSubscription
+          : activeSubscription // ignore: cast_nullable_to_non_nullable
+              as SubscriptionData?,
+      expertise: freezed == expertise
+          ? _value._expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as List<ExpertiseData>?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isOnline: freezed == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      bio: freezed == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasNotification: freezed == hasNotification
+          ? _value.hasNotification
+          : hasNotification // ignore: cast_nullable_to_non_nullable
+              as NotificationItem?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
-  const _$UserModelImpl({
-    required this.id,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.createdAt,
-    this.status,
-    this.gender,
-    this.dob,
-    this.username,
-    this.phoneNumber,
-    this.isVisible,
-    this.updatedAt,
-    this.emergencyContact,
-    this.deletedAt,
-    this.isLinked,
-    this.isEmailAuthenticated,
-    this.isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') final List<PrefData>? preferences,
-    @JsonKey(name: 'answer') final List<AnsData>? answers,
-    @JsonKey(name: 'activeSubscription') this.activeSubscription,
-    @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
-    this.avatar,
-    this.profile,
-    this.isOnline,
-    this.bio,
-    this.hasNotification,
-  }) : _preferences = preferences,
-       _answers = answers,
-       _expertise = expertise;
+  const _$UserModelImpl(
+      {required this.id,
+      required this.email,
+      required this.firstName,
+      required this.lastName,
+      required this.createdAt,
+      this.status,
+      this.gender,
+      this.dob,
+      this.username,
+      this.phoneNumber,
+      this.isVisible,
+      this.updatedAt,
+      this.emergencyContact,
+      this.deletedAt,
+      this.isLinked,
+      this.isEmailAuthenticated,
+      this.isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') final List<PrefData>? preferences,
+      @JsonKey(name: 'answer') final List<AnsData>? answers,
+      @JsonKey(name: 'activeSubscription') this.activeSubscription,
+      @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
+      this.avatar,
+      this.profile,
+      this.isOnline,
+      this.bio,
+      this.hasNotification})
+      : _preferences = preferences,
+        _answers = answers,
+        _expertise = expertise;
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -2097,9 +1811,9 @@ class _$UserModelImpl implements _UserModel {
     return EqualUnmodifiableListView(value);
   }
 
-  // Map 'preference' to 'preferences'
+// Map 'preference' to 'preferences'
   final List<AnsData>? _answers;
-  // Map 'preference' to 'preferences'
+// Map 'preference' to 'preferences'
   @override
   @JsonKey(name: 'answer')
   List<AnsData>? get answers {
@@ -2110,7 +1824,7 @@ class _$UserModelImpl implements _UserModel {
     return EqualUnmodifiableListView(value);
   }
 
-  // Map 'answer' to 'answers'
+// Map 'answer' to 'answers'
   @override
   @JsonKey(name: 'activeSubscription')
   final SubscriptionData? activeSubscription;
@@ -2165,33 +1879,25 @@ class _$UserModelImpl implements _UserModel {
                 other.isVisible == isVisible) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(
-              other.emergencyContact,
-              emergencyContact,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other.emergencyContact, emergencyContact) &&
             (identical(other.deletedAt, deletedAt) ||
                 other.deletedAt == deletedAt) &&
             (identical(other.isLinked, isLinked) ||
                 other.isLinked == isLinked) &&
             (identical(other.isEmailAuthenticated, isEmailAuthenticated) ||
                 other.isEmailAuthenticated == isEmailAuthenticated) &&
-            (identical(
-                  other.isPhoneNumberAuthenticated,
-                  isPhoneNumberAuthenticated,
-                ) ||
+            (identical(other.isPhoneNumberAuthenticated,
+                    isPhoneNumberAuthenticated) ||
                 other.isPhoneNumberAuthenticated ==
                     isPhoneNumberAuthenticated) &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._preferences, _preferences) &&
             const DeepCollectionEquality().equals(other._answers, _answers) &&
             (identical(other.activeSubscription, activeSubscription) ||
                 other.activeSubscription == activeSubscription) &&
-            const DeepCollectionEquality().equals(
-              other._expertise,
-              _expertise,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._expertise, _expertise) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.isOnline, isOnline) ||
@@ -2201,41 +1907,39 @@ class _$UserModelImpl implements _UserModel {
                 other.hasNotification == hasNotification));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    email,
-    firstName,
-    lastName,
-    createdAt,
-    status,
-    gender,
-    dob,
-    username,
-    phoneNumber,
-    isVisible,
-    updatedAt,
-    const DeepCollectionEquality().hash(emergencyContact),
-    deletedAt,
-    isLinked,
-    isEmailAuthenticated,
-    isPhoneNumberAuthenticated,
-    const DeepCollectionEquality().hash(_preferences),
-    const DeepCollectionEquality().hash(_answers),
-    activeSubscription,
-    const DeepCollectionEquality().hash(_expertise),
-    avatar,
-    profile,
-    isOnline,
-    bio,
-    hasNotification,
-  ]);
+        runtimeType,
+        id,
+        email,
+        firstName,
+        lastName,
+        createdAt,
+        status,
+        gender,
+        dob,
+        username,
+        phoneNumber,
+        isVisible,
+        updatedAt,
+        const DeepCollectionEquality().hash(emergencyContact),
+        deletedAt,
+        isLinked,
+        isEmailAuthenticated,
+        isPhoneNumberAuthenticated,
+        const DeepCollectionEquality().hash(_preferences),
+        const DeepCollectionEquality().hash(_answers),
+        activeSubscription,
+        const DeepCollectionEquality().hash(_expertise),
+        avatar,
+        profile,
+        isOnline,
+        bio,
+        hasNotification
+      ]);
 
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
@@ -2243,40 +1947,41 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserModelImplToJson(this);
+    return _$$UserModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserModel implements UserModel {
-  const factory _UserModel({
-    required final String id,
-    required final String email,
-    required final String firstName,
-    required final String lastName,
-    required final DateTime createdAt,
-    final String? status,
-    final String? gender,
-    final DateTime? dob,
-    final String? username,
-    final String? phoneNumber,
-    final bool? isVisible,
-    final DateTime? updatedAt,
-    final dynamic emergencyContact,
-    final DateTime? deletedAt,
-    final bool? isLinked,
-    final bool? isEmailAuthenticated,
-    final bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') final List<PrefData>? preferences,
-    @JsonKey(name: 'answer') final List<AnsData>? answers,
-    @JsonKey(name: 'activeSubscription')
-    final SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
-    final int? avatar,
-    final String? profile,
-    final bool? isOnline,
-    final String? bio,
-    final NotificationItem? hasNotification,
-  }) = _$UserModelImpl;
+  const factory _UserModel(
+      {required final String id,
+      required final String email,
+      required final String firstName,
+      required final String lastName,
+      required final DateTime createdAt,
+      final String? status,
+      final String? gender,
+      final DateTime? dob,
+      final String? username,
+      final String? phoneNumber,
+      final bool? isVisible,
+      final DateTime? updatedAt,
+      final dynamic emergencyContact,
+      final DateTime? deletedAt,
+      final bool? isLinked,
+      final bool? isEmailAuthenticated,
+      final bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') final List<PrefData>? preferences,
+      @JsonKey(name: 'answer') final List<AnsData>? answers,
+      @JsonKey(name: 'activeSubscription')
+      final SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
+      final int? avatar,
+      final String? profile,
+      final bool? isOnline,
+      final String? bio,
+      final NotificationItem? hasNotification}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -2317,11 +2022,11 @@ abstract class _UserModel implements UserModel {
   bool? get isPhoneNumberAuthenticated;
   @override
   @JsonKey(name: 'preference')
-  List<PrefData>? get preferences; // Map 'preference' to 'preferences'
-  @override
+  List<PrefData>? get preferences;
+  @override // Map 'preference' to 'preferences'
   @JsonKey(name: 'answer')
-  List<AnsData>? get answers; // Map 'answer' to 'answers'
-  @override
+  List<AnsData>? get answers;
+  @override // Map 'answer' to 'answers'
   @JsonKey(name: 'activeSubscription')
   SubscriptionData? get activeSubscription;
   @override
@@ -2337,11 +2042,8 @@ abstract class _UserModel implements UserModel {
   String? get bio;
   @override
   NotificationItem? get hasNotification;
-
-  /// Create a copy of UserModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2356,12 +2058,8 @@ mixin _$PrefData {
   String? get gender => throw _privateConstructorUsedError;
   String? get goal => throw _privateConstructorUsedError;
 
-  /// Serializes this PrefData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PrefData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PrefDataCopyWith<PrefData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2384,8 +2082,6 @@ class _$PrefDataCopyWithImpl<$Res, $Val extends PrefData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PrefData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2393,26 +2089,20 @@ class _$PrefDataCopyWithImpl<$Res, $Val extends PrefData>
     Object? gender = freezed,
     Object? goal = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                freezed == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -2420,9 +2110,8 @@ class _$PrefDataCopyWithImpl<$Res, $Val extends PrefData>
 abstract class _$$PrefDataImplCopyWith<$Res>
     implements $PrefDataCopyWith<$Res> {
   factory _$$PrefDataImplCopyWith(
-    _$PrefDataImpl value,
-    $Res Function(_$PrefDataImpl) then,
-  ) = __$$PrefDataImplCopyWithImpl<$Res>;
+          _$PrefDataImpl value, $Res Function(_$PrefDataImpl) then) =
+      __$$PrefDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? id, String? gender, String? goal});
@@ -2433,12 +2122,9 @@ class __$$PrefDataImplCopyWithImpl<$Res>
     extends _$PrefDataCopyWithImpl<$Res, _$PrefDataImpl>
     implements _$$PrefDataImplCopyWith<$Res> {
   __$$PrefDataImplCopyWithImpl(
-    _$PrefDataImpl _value,
-    $Res Function(_$PrefDataImpl) _then,
-  ) : super(_value, _then);
+      _$PrefDataImpl _value, $Res Function(_$PrefDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PrefData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2446,25 +2132,20 @@ class __$$PrefDataImplCopyWithImpl<$Res>
     Object? gender = freezed,
     Object? goal = freezed,
   }) {
-    return _then(
-      _$PrefDataImpl(
-        id:
-            freezed == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PrefDataImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -2498,13 +2179,11 @@ class _$PrefDataImpl implements _PrefData {
             (identical(other.goal, goal) || other.goal == goal));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, gender, goal);
 
-  /// Create a copy of PrefData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PrefDataImplCopyWith<_$PrefDataImpl> get copyWith =>
@@ -2512,16 +2191,17 @@ class _$PrefDataImpl implements _PrefData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PrefDataImplToJson(this);
+    return _$$PrefDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PrefData implements PrefData {
-  const factory _PrefData({
-    final String? id,
-    final String? gender,
-    final String? goal,
-  }) = _$PrefDataImpl;
+  const factory _PrefData(
+      {final String? id,
+      final String? gender,
+      final String? goal}) = _$PrefDataImpl;
 
   factory _PrefData.fromJson(Map<String, dynamic> json) =
       _$PrefDataImpl.fromJson;
@@ -2532,11 +2212,8 @@ abstract class _PrefData implements PrefData {
   String? get gender;
   @override
   String? get goal;
-
-  /// Create a copy of PrefData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PrefDataImplCopyWith<_$PrefDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2550,12 +2227,8 @@ mixin _$AnsData {
   String? get id => throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
 
-  /// Serializes this AnsData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AnsData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AnsDataCopyWith<AnsData> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2577,35 +2250,30 @@ class _$AnsDataCopyWithImpl<$Res, $Val extends AnsData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AnsData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = freezed, Object? text = freezed}) {
-    return _then(
-      _value.copyWith(
-            id:
-                freezed == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            text:
-                freezed == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? id = freezed,
+    Object? text = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$AnsDataImplCopyWith<$Res> implements $AnsDataCopyWith<$Res> {
   factory _$$AnsDataImplCopyWith(
-    _$AnsDataImpl value,
-    $Res Function(_$AnsDataImpl) then,
-  ) = __$$AnsDataImplCopyWithImpl<$Res>;
+          _$AnsDataImpl value, $Res Function(_$AnsDataImpl) then) =
+      __$$AnsDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? id, String? text});
@@ -2616,29 +2284,25 @@ class __$$AnsDataImplCopyWithImpl<$Res>
     extends _$AnsDataCopyWithImpl<$Res, _$AnsDataImpl>
     implements _$$AnsDataImplCopyWith<$Res> {
   __$$AnsDataImplCopyWithImpl(
-    _$AnsDataImpl _value,
-    $Res Function(_$AnsDataImpl) _then,
-  ) : super(_value, _then);
+      _$AnsDataImpl _value, $Res Function(_$AnsDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AnsData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = freezed, Object? text = freezed}) {
-    return _then(
-      _$AnsDataImpl(
-        id:
-            freezed == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        text:
-            freezed == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+  $Res call({
+    Object? id = freezed,
+    Object? text = freezed,
+  }) {
+    return _then(_$AnsDataImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -2669,13 +2333,11 @@ class _$AnsDataImpl implements _AnsData {
             (identical(other.text, text) || other.text == text));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, text);
 
-  /// Create a copy of AnsData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AnsDataImplCopyWith<_$AnsDataImpl> get copyWith =>
@@ -2683,7 +2345,9 @@ class _$AnsDataImpl implements _AnsData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AnsDataImplToJson(this);
+    return _$$AnsDataImplToJson(
+      this,
+    );
   }
 }
 
@@ -2697,11 +2361,8 @@ abstract class _AnsData implements AnsData {
   String? get id;
   @override
   String? get text;
-
-  /// Create a copy of AnsData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AnsDataImplCopyWith<_$AnsDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2719,38 +2380,30 @@ mixin _$UpdateProfileRequest {
   String? get username => throw _privateConstructorUsedError;
   String? get phoneNumber => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateProfileRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateProfileRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateProfileRequestCopyWith<UpdateProfileRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UpdateProfileRequestCopyWith<$Res> {
-  factory $UpdateProfileRequestCopyWith(
-    UpdateProfileRequest value,
-    $Res Function(UpdateProfileRequest) then,
-  ) = _$UpdateProfileRequestCopyWithImpl<$Res, UpdateProfileRequest>;
+  factory $UpdateProfileRequestCopyWith(UpdateProfileRequest value,
+          $Res Function(UpdateProfileRequest) then) =
+      _$UpdateProfileRequestCopyWithImpl<$Res, UpdateProfileRequest>;
   @useResult
-  $Res call({
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? gender,
-    String? username,
-    String? phoneNumber,
-  });
+  $Res call(
+      {String? firstName,
+      String? lastName,
+      String? email,
+      String? gender,
+      String? username,
+      String? phoneNumber});
 }
 
 /// @nodoc
-class _$UpdateProfileRequestCopyWithImpl<
-  $Res,
-  $Val extends UpdateProfileRequest
->
+class _$UpdateProfileRequestCopyWithImpl<$Res,
+        $Val extends UpdateProfileRequest>
     implements $UpdateProfileRequestCopyWith<$Res> {
   _$UpdateProfileRequestCopyWithImpl(this._value, this._then);
 
@@ -2759,8 +2412,6 @@ class _$UpdateProfileRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateProfileRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2771,74 +2422,60 @@ class _$UpdateProfileRequestCopyWithImpl<
     Object? username = freezed,
     Object? phoneNumber = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            firstName:
-                freezed == firstName
-                    ? _value.firstName
-                    : firstName // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            lastName:
-                freezed == lastName
-                    ? _value.lastName
-                    : lastName // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            email:
-                freezed == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            username:
-                freezed == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            phoneNumber:
-                freezed == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$UpdateProfileRequestImplCopyWith<$Res>
     implements $UpdateProfileRequestCopyWith<$Res> {
-  factory _$$UpdateProfileRequestImplCopyWith(
-    _$UpdateProfileRequestImpl value,
-    $Res Function(_$UpdateProfileRequestImpl) then,
-  ) = __$$UpdateProfileRequestImplCopyWithImpl<$Res>;
+  factory _$$UpdateProfileRequestImplCopyWith(_$UpdateProfileRequestImpl value,
+          $Res Function(_$UpdateProfileRequestImpl) then) =
+      __$$UpdateProfileRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? firstName,
-    String? lastName,
-    String? email,
-    String? gender,
-    String? username,
-    String? phoneNumber,
-  });
+  $Res call(
+      {String? firstName,
+      String? lastName,
+      String? email,
+      String? gender,
+      String? username,
+      String? phoneNumber});
 }
 
 /// @nodoc
 class __$$UpdateProfileRequestImplCopyWithImpl<$Res>
     extends _$UpdateProfileRequestCopyWithImpl<$Res, _$UpdateProfileRequestImpl>
     implements _$$UpdateProfileRequestImplCopyWith<$Res> {
-  __$$UpdateProfileRequestImplCopyWithImpl(
-    _$UpdateProfileRequestImpl _value,
-    $Res Function(_$UpdateProfileRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$UpdateProfileRequestImplCopyWithImpl(_$UpdateProfileRequestImpl _value,
+      $Res Function(_$UpdateProfileRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UpdateProfileRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2849,54 +2486,45 @@ class __$$UpdateProfileRequestImplCopyWithImpl<$Res>
     Object? username = freezed,
     Object? phoneNumber = freezed,
   }) {
-    return _then(
-      _$UpdateProfileRequestImpl(
-        firstName:
-            freezed == firstName
-                ? _value.firstName
-                : firstName // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        lastName:
-            freezed == lastName
-                ? _value.lastName
-                : lastName // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        email:
-            freezed == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        username:
-            freezed == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        phoneNumber:
-            freezed == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$UpdateProfileRequestImpl(
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UpdateProfileRequestImpl implements _UpdateProfileRequest {
-  const _$UpdateProfileRequestImpl({
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.gender,
-    this.username,
-    this.phoneNumber,
-  });
+  const _$UpdateProfileRequestImpl(
+      {this.firstName,
+      this.lastName,
+      this.email,
+      this.gender,
+      this.username,
+      this.phoneNumber});
 
   factory _$UpdateProfileRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$UpdateProfileRequestImplFromJson(json);
@@ -2909,7 +2537,7 @@ class _$UpdateProfileRequestImpl implements _UpdateProfileRequest {
   final String? email;
   @override
   final String? gender;
-  // String? dob,
+// String? dob,
   @override
   final String? username;
   @override
@@ -2937,45 +2565,35 @@ class _$UpdateProfileRequestImpl implements _UpdateProfileRequest {
                 other.phoneNumber == phoneNumber));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    firstName,
-    lastName,
-    email,
-    gender,
-    username,
-    phoneNumber,
-  );
+      runtimeType, firstName, lastName, email, gender, username, phoneNumber);
 
-  /// Create a copy of UpdateProfileRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateProfileRequestImplCopyWith<_$UpdateProfileRequestImpl>
-  get copyWith =>
-      __$$UpdateProfileRequestImplCopyWithImpl<_$UpdateProfileRequestImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$UpdateProfileRequestImplCopyWithImpl<_$UpdateProfileRequestImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UpdateProfileRequestImplToJson(this);
+    return _$$UpdateProfileRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UpdateProfileRequest implements UpdateProfileRequest {
-  const factory _UpdateProfileRequest({
-    final String? firstName,
-    final String? lastName,
-    final String? email,
-    final String? gender,
-    final String? username,
-    final String? phoneNumber,
-  }) = _$UpdateProfileRequestImpl;
+  const factory _UpdateProfileRequest(
+      {final String? firstName,
+      final String? lastName,
+      final String? email,
+      final String? gender,
+      final String? username,
+      final String? phoneNumber}) = _$UpdateProfileRequestImpl;
 
   factory _UpdateProfileRequest.fromJson(Map<String, dynamic> json) =
       _$UpdateProfileRequestImpl.fromJson;
@@ -2987,23 +2605,19 @@ abstract class _UpdateProfileRequest implements UpdateProfileRequest {
   @override
   String? get email;
   @override
-  String? get gender; // String? dob,
-  @override
+  String? get gender;
+  @override // String? dob,
   String? get username;
   @override
   String? get phoneNumber;
-
-  /// Create a copy of UpdateProfileRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateProfileRequestImplCopyWith<_$UpdateProfileRequestImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 UpdateProfilePicRequest _$UpdateProfilePicRequestFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _UpdateProfilePicRequest.fromJson(json);
 }
 
@@ -3011,31 +2625,24 @@ UpdateProfilePicRequest _$UpdateProfilePicRequestFromJson(
 mixin _$UpdateProfilePicRequest {
   int? get avatar => throw _privateConstructorUsedError;
 
-  /// Serializes this UpdateProfilePicRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UpdateProfilePicRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UpdateProfilePicRequestCopyWith<UpdateProfilePicRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UpdateProfilePicRequestCopyWith<$Res> {
-  factory $UpdateProfilePicRequestCopyWith(
-    UpdateProfilePicRequest value,
-    $Res Function(UpdateProfilePicRequest) then,
-  ) = _$UpdateProfilePicRequestCopyWithImpl<$Res, UpdateProfilePicRequest>;
+  factory $UpdateProfilePicRequestCopyWith(UpdateProfilePicRequest value,
+          $Res Function(UpdateProfilePicRequest) then) =
+      _$UpdateProfilePicRequestCopyWithImpl<$Res, UpdateProfilePicRequest>;
   @useResult
   $Res call({int? avatar});
 }
 
 /// @nodoc
-class _$UpdateProfilePicRequestCopyWithImpl<
-  $Res,
-  $Val extends UpdateProfilePicRequest
->
+class _$UpdateProfilePicRequestCopyWithImpl<$Res,
+        $Val extends UpdateProfilePicRequest>
     implements $UpdateProfilePicRequestCopyWith<$Res> {
   _$UpdateProfilePicRequestCopyWithImpl(this._value, this._then);
 
@@ -3044,21 +2651,17 @@ class _$UpdateProfilePicRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UpdateProfilePicRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? avatar = freezed}) {
-    return _then(
-      _value.copyWith(
-            avatar:
-                freezed == avatar
-                    ? _value.avatar
-                    : avatar // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? avatar = freezed,
+  }) {
+    return _then(_value.copyWith(
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
@@ -3066,9 +2669,9 @@ class _$UpdateProfilePicRequestCopyWithImpl<
 abstract class _$$UpdateProfilePicRequestImplCopyWith<$Res>
     implements $UpdateProfilePicRequestCopyWith<$Res> {
   factory _$$UpdateProfilePicRequestImplCopyWith(
-    _$UpdateProfilePicRequestImpl value,
-    $Res Function(_$UpdateProfilePicRequestImpl) then,
-  ) = __$$UpdateProfilePicRequestImplCopyWithImpl<$Res>;
+          _$UpdateProfilePicRequestImpl value,
+          $Res Function(_$UpdateProfilePicRequestImpl) then) =
+      __$$UpdateProfilePicRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int? avatar});
@@ -3076,31 +2679,25 @@ abstract class _$$UpdateProfilePicRequestImplCopyWith<$Res>
 
 /// @nodoc
 class __$$UpdateProfilePicRequestImplCopyWithImpl<$Res>
-    extends
-        _$UpdateProfilePicRequestCopyWithImpl<
-          $Res,
-          _$UpdateProfilePicRequestImpl
-        >
+    extends _$UpdateProfilePicRequestCopyWithImpl<$Res,
+        _$UpdateProfilePicRequestImpl>
     implements _$$UpdateProfilePicRequestImplCopyWith<$Res> {
   __$$UpdateProfilePicRequestImplCopyWithImpl(
-    _$UpdateProfilePicRequestImpl _value,
-    $Res Function(_$UpdateProfilePicRequestImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateProfilePicRequestImpl _value,
+      $Res Function(_$UpdateProfilePicRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UpdateProfilePicRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? avatar = freezed}) {
-    return _then(
-      _$UpdateProfilePicRequestImpl(
-        avatar:
-            freezed == avatar
-                ? _value.avatar
-                : avatar // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+  $Res call({
+    Object? avatar = freezed,
+  }) {
+    return _then(_$UpdateProfilePicRequestImpl(
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
@@ -3128,23 +2725,22 @@ class _$UpdateProfilePicRequestImpl implements _UpdateProfilePicRequest {
             (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, avatar);
 
-  /// Create a copy of UpdateProfilePicRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpdateProfilePicRequestImplCopyWith<_$UpdateProfilePicRequestImpl>
-  get copyWith => __$$UpdateProfilePicRequestImplCopyWithImpl<
-    _$UpdateProfilePicRequestImpl
-  >(this, _$identity);
+      get copyWith => __$$UpdateProfilePicRequestImplCopyWithImpl<
+          _$UpdateProfilePicRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UpdateProfilePicRequestImplToJson(this);
+    return _$$UpdateProfilePicRequestImplToJson(
+      this,
+    );
   }
 }
 
@@ -3157,18 +2753,14 @@ abstract class _UpdateProfilePicRequest implements UpdateProfilePicRequest {
 
   @override
   int? get avatar;
-
-  /// Create a copy of UpdateProfilePicRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpdateProfilePicRequestImplCopyWith<_$UpdateProfilePicRequestImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ForgotPasswordRequest _$ForgotPasswordRequestFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _ForgotPasswordRequest.fromJson(json);
 }
 
@@ -3176,31 +2768,24 @@ ForgotPasswordRequest _$ForgotPasswordRequestFromJson(
 mixin _$ForgotPasswordRequest {
   String get email => throw _privateConstructorUsedError;
 
-  /// Serializes this ForgotPasswordRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ForgotPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ForgotPasswordRequestCopyWith<ForgotPasswordRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ForgotPasswordRequestCopyWith<$Res> {
-  factory $ForgotPasswordRequestCopyWith(
-    ForgotPasswordRequest value,
-    $Res Function(ForgotPasswordRequest) then,
-  ) = _$ForgotPasswordRequestCopyWithImpl<$Res, ForgotPasswordRequest>;
+  factory $ForgotPasswordRequestCopyWith(ForgotPasswordRequest value,
+          $Res Function(ForgotPasswordRequest) then) =
+      _$ForgotPasswordRequestCopyWithImpl<$Res, ForgotPasswordRequest>;
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class _$ForgotPasswordRequestCopyWithImpl<
-  $Res,
-  $Val extends ForgotPasswordRequest
->
+class _$ForgotPasswordRequestCopyWithImpl<$Res,
+        $Val extends ForgotPasswordRequest>
     implements $ForgotPasswordRequestCopyWith<$Res> {
   _$ForgotPasswordRequestCopyWithImpl(this._value, this._then);
 
@@ -3209,21 +2794,17 @@ class _$ForgotPasswordRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ForgotPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? email = null}) {
-    return _then(
-      _value.copyWith(
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -3231,9 +2812,9 @@ class _$ForgotPasswordRequestCopyWithImpl<
 abstract class _$$ForgotPasswordRequestImplCopyWith<$Res>
     implements $ForgotPasswordRequestCopyWith<$Res> {
   factory _$$ForgotPasswordRequestImplCopyWith(
-    _$ForgotPasswordRequestImpl value,
-    $Res Function(_$ForgotPasswordRequestImpl) then,
-  ) = __$$ForgotPasswordRequestImplCopyWithImpl<$Res>;
+          _$ForgotPasswordRequestImpl value,
+          $Res Function(_$ForgotPasswordRequestImpl) then) =
+      __$$ForgotPasswordRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email});
@@ -3241,28 +2822,24 @@ abstract class _$$ForgotPasswordRequestImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ForgotPasswordRequestImplCopyWithImpl<$Res>
-    extends
-        _$ForgotPasswordRequestCopyWithImpl<$Res, _$ForgotPasswordRequestImpl>
+    extends _$ForgotPasswordRequestCopyWithImpl<$Res,
+        _$ForgotPasswordRequestImpl>
     implements _$$ForgotPasswordRequestImplCopyWith<$Res> {
-  __$$ForgotPasswordRequestImplCopyWithImpl(
-    _$ForgotPasswordRequestImpl _value,
-    $Res Function(_$ForgotPasswordRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$ForgotPasswordRequestImplCopyWithImpl(_$ForgotPasswordRequestImpl _value,
+      $Res Function(_$ForgotPasswordRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ForgotPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? email = null}) {
-    return _then(
-      _$ForgotPasswordRequestImpl(
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$ForgotPasswordRequestImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3290,25 +2867,22 @@ class _$ForgotPasswordRequestImpl implements _ForgotPasswordRequest {
             (identical(other.email, email) || other.email == email));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, email);
 
-  /// Create a copy of ForgotPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ForgotPasswordRequestImplCopyWith<_$ForgotPasswordRequestImpl>
-  get copyWith =>
-      __$$ForgotPasswordRequestImplCopyWithImpl<_$ForgotPasswordRequestImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$ForgotPasswordRequestImplCopyWithImpl<
+          _$ForgotPasswordRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ForgotPasswordRequestImplToJson(this);
+    return _$$ForgotPasswordRequestImplToJson(
+      this,
+    );
   }
 }
 
@@ -3321,13 +2895,10 @@ abstract class _ForgotPasswordRequest implements ForgotPasswordRequest {
 
   @override
   String get email;
-
-  /// Create a copy of ForgotPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ForgotPasswordRequestImplCopyWith<_$ForgotPasswordRequestImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ResetPasswordRequest _$ResetPasswordRequestFromJson(Map<String, dynamic> json) {
@@ -3341,36 +2912,25 @@ mixin _$ResetPasswordRequest {
   String get passwordConfirm => throw _privateConstructorUsedError;
   String get otp => throw _privateConstructorUsedError;
 
-  /// Serializes this ResetPasswordRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ResetPasswordRequestCopyWith<ResetPasswordRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ResetPasswordRequestCopyWith<$Res> {
-  factory $ResetPasswordRequestCopyWith(
-    ResetPasswordRequest value,
-    $Res Function(ResetPasswordRequest) then,
-  ) = _$ResetPasswordRequestCopyWithImpl<$Res, ResetPasswordRequest>;
+  factory $ResetPasswordRequestCopyWith(ResetPasswordRequest value,
+          $Res Function(ResetPasswordRequest) then) =
+      _$ResetPasswordRequestCopyWithImpl<$Res, ResetPasswordRequest>;
   @useResult
-  $Res call({
-    String email,
-    String password,
-    String passwordConfirm,
-    String otp,
-  });
+  $Res call(
+      {String email, String password, String passwordConfirm, String otp});
 }
 
 /// @nodoc
-class _$ResetPasswordRequestCopyWithImpl<
-  $Res,
-  $Val extends ResetPasswordRequest
->
+class _$ResetPasswordRequestCopyWithImpl<$Res,
+        $Val extends ResetPasswordRequest>
     implements $ResetPasswordRequestCopyWith<$Res> {
   _$ResetPasswordRequestCopyWithImpl(this._value, this._then);
 
@@ -3379,8 +2939,6 @@ class _$ResetPasswordRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3389,62 +2947,47 @@ class _$ResetPasswordRequestCopyWithImpl<
     Object? passwordConfirm = null,
     Object? otp = null,
   }) {
-    return _then(
-      _value.copyWith(
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            password:
-                null == password
-                    ? _value.password
-                    : password // ignore: cast_nullable_to_non_nullable
-                        as String,
-            passwordConfirm:
-                null == passwordConfirm
-                    ? _value.passwordConfirm
-                    : passwordConfirm // ignore: cast_nullable_to_non_nullable
-                        as String,
-            otp:
-                null == otp
-                    ? _value.otp
-                    : otp // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      passwordConfirm: null == passwordConfirm
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String,
+      otp: null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ResetPasswordRequestImplCopyWith<$Res>
     implements $ResetPasswordRequestCopyWith<$Res> {
-  factory _$$ResetPasswordRequestImplCopyWith(
-    _$ResetPasswordRequestImpl value,
-    $Res Function(_$ResetPasswordRequestImpl) then,
-  ) = __$$ResetPasswordRequestImplCopyWithImpl<$Res>;
+  factory _$$ResetPasswordRequestImplCopyWith(_$ResetPasswordRequestImpl value,
+          $Res Function(_$ResetPasswordRequestImpl) then) =
+      __$$ResetPasswordRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String email,
-    String password,
-    String passwordConfirm,
-    String otp,
-  });
+  $Res call(
+      {String email, String password, String passwordConfirm, String otp});
 }
 
 /// @nodoc
 class __$$ResetPasswordRequestImplCopyWithImpl<$Res>
     extends _$ResetPasswordRequestCopyWithImpl<$Res, _$ResetPasswordRequestImpl>
     implements _$$ResetPasswordRequestImplCopyWith<$Res> {
-  __$$ResetPasswordRequestImplCopyWithImpl(
-    _$ResetPasswordRequestImpl _value,
-    $Res Function(_$ResetPasswordRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$ResetPasswordRequestImplCopyWithImpl(_$ResetPasswordRequestImpl _value,
+      $Res Function(_$ResetPasswordRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3453,42 +2996,35 @@ class __$$ResetPasswordRequestImplCopyWithImpl<$Res>
     Object? passwordConfirm = null,
     Object? otp = null,
   }) {
-    return _then(
-      _$ResetPasswordRequestImpl(
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        password:
-            null == password
-                ? _value.password
-                : password // ignore: cast_nullable_to_non_nullable
-                    as String,
-        passwordConfirm:
-            null == passwordConfirm
-                ? _value.passwordConfirm
-                : passwordConfirm // ignore: cast_nullable_to_non_nullable
-                    as String,
-        otp:
-            null == otp
-                ? _value.otp
-                : otp // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+    return _then(_$ResetPasswordRequestImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      passwordConfirm: null == passwordConfirm
+          ? _value.passwordConfirm
+          : passwordConfirm // ignore: cast_nullable_to_non_nullable
+              as String,
+      otp: null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ResetPasswordRequestImpl implements _ResetPasswordRequest {
-  const _$ResetPasswordRequestImpl({
-    required this.email,
-    required this.password,
-    required this.passwordConfirm,
-    required this.otp,
-  });
+  const _$ResetPasswordRequestImpl(
+      {required this.email,
+      required this.password,
+      required this.passwordConfirm,
+      required this.otp});
 
   factory _$ResetPasswordRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResetPasswordRequestImplFromJson(json);
@@ -3520,36 +3056,33 @@ class _$ResetPasswordRequestImpl implements _ResetPasswordRequest {
             (identical(other.otp, otp) || other.otp == otp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, email, password, passwordConfirm, otp);
 
-  /// Create a copy of ResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetPasswordRequestImplCopyWith<_$ResetPasswordRequestImpl>
-  get copyWith =>
-      __$$ResetPasswordRequestImplCopyWithImpl<_$ResetPasswordRequestImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$ResetPasswordRequestImplCopyWithImpl<_$ResetPasswordRequestImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResetPasswordRequestImplToJson(this);
+    return _$$ResetPasswordRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ResetPasswordRequest implements ResetPasswordRequest {
-  const factory _ResetPasswordRequest({
-    required final String email,
-    required final String password,
-    required final String passwordConfirm,
-    required final String otp,
-  }) = _$ResetPasswordRequestImpl;
+  const factory _ResetPasswordRequest(
+      {required final String email,
+      required final String password,
+      required final String passwordConfirm,
+      required final String otp}) = _$ResetPasswordRequestImpl;
 
   factory _ResetPasswordRequest.fromJson(Map<String, dynamic> json) =
       _$ResetPasswordRequestImpl.fromJson;
@@ -3562,18 +3095,14 @@ abstract class _ResetPasswordRequest implements ResetPasswordRequest {
   String get passwordConfirm;
   @override
   String get otp;
-
-  /// Create a copy of ResetPasswordRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ResetPasswordRequestImplCopyWith<_$ResetPasswordRequestImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ForgotPasswordResponse _$ForgotPasswordResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _ForgotPasswordResponse.fromJson(json);
 }
 
@@ -3583,31 +3112,24 @@ mixin _$ForgotPasswordResponse {
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
 
-  /// Serializes this ForgotPasswordResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ForgotPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ForgotPasswordResponseCopyWith<ForgotPasswordResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ForgotPasswordResponseCopyWith<$Res> {
-  factory $ForgotPasswordResponseCopyWith(
-    ForgotPasswordResponse value,
-    $Res Function(ForgotPasswordResponse) then,
-  ) = _$ForgotPasswordResponseCopyWithImpl<$Res, ForgotPasswordResponse>;
+  factory $ForgotPasswordResponseCopyWith(ForgotPasswordResponse value,
+          $Res Function(ForgotPasswordResponse) then) =
+      _$ForgotPasswordResponseCopyWithImpl<$Res, ForgotPasswordResponse>;
   @useResult
   $Res call({String data, String message, int statusCode});
 }
 
 /// @nodoc
-class _$ForgotPasswordResponseCopyWithImpl<
-  $Res,
-  $Val extends ForgotPasswordResponse
->
+class _$ForgotPasswordResponseCopyWithImpl<$Res,
+        $Val extends ForgotPasswordResponse>
     implements $ForgotPasswordResponseCopyWith<$Res> {
   _$ForgotPasswordResponseCopyWithImpl(this._value, this._then);
 
@@ -3616,8 +3138,6 @@ class _$ForgotPasswordResponseCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ForgotPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3625,26 +3145,20 @@ class _$ForgotPasswordResponseCopyWithImpl<
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as String,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
@@ -3652,9 +3166,9 @@ class _$ForgotPasswordResponseCopyWithImpl<
 abstract class _$$ForgotPasswordResponseImplCopyWith<$Res>
     implements $ForgotPasswordResponseCopyWith<$Res> {
   factory _$$ForgotPasswordResponseImplCopyWith(
-    _$ForgotPasswordResponseImpl value,
-    $Res Function(_$ForgotPasswordResponseImpl) then,
-  ) = __$$ForgotPasswordResponseImplCopyWithImpl<$Res>;
+          _$ForgotPasswordResponseImpl value,
+          $Res Function(_$ForgotPasswordResponseImpl) then) =
+      __$$ForgotPasswordResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String data, String message, int statusCode});
@@ -3662,16 +3176,14 @@ abstract class _$$ForgotPasswordResponseImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ForgotPasswordResponseImplCopyWithImpl<$Res>
-    extends
-        _$ForgotPasswordResponseCopyWithImpl<$Res, _$ForgotPasswordResponseImpl>
+    extends _$ForgotPasswordResponseCopyWithImpl<$Res,
+        _$ForgotPasswordResponseImpl>
     implements _$$ForgotPasswordResponseImplCopyWith<$Res> {
   __$$ForgotPasswordResponseImplCopyWithImpl(
-    _$ForgotPasswordResponseImpl _value,
-    $Res Function(_$ForgotPasswordResponseImpl) _then,
-  ) : super(_value, _then);
+      _$ForgotPasswordResponseImpl _value,
+      $Res Function(_$ForgotPasswordResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ForgotPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3679,36 +3191,28 @@ class __$$ForgotPasswordResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _$ForgotPasswordResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as String,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$ForgotPasswordResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ForgotPasswordResponseImpl implements _ForgotPasswordResponse {
-  const _$ForgotPasswordResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-  });
+  const _$ForgotPasswordResponseImpl(
+      {required this.data, required this.message, required this.statusCode});
 
   factory _$ForgotPasswordResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ForgotPasswordResponseImplFromJson(json);
@@ -3736,34 +3240,30 @@ class _$ForgotPasswordResponseImpl implements _ForgotPasswordResponse {
                 other.statusCode == statusCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, data, message, statusCode);
 
-  /// Create a copy of ForgotPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ForgotPasswordResponseImplCopyWith<_$ForgotPasswordResponseImpl>
-  get copyWith =>
-      __$$ForgotPasswordResponseImplCopyWithImpl<_$ForgotPasswordResponseImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$ForgotPasswordResponseImplCopyWithImpl<
+          _$ForgotPasswordResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ForgotPasswordResponseImplToJson(this);
+    return _$$ForgotPasswordResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ForgotPasswordResponse implements ForgotPasswordResponse {
-  const factory _ForgotPasswordResponse({
-    required final String data,
-    required final String message,
-    required final int statusCode,
-  }) = _$ForgotPasswordResponseImpl;
+  const factory _ForgotPasswordResponse(
+      {required final String data,
+      required final String message,
+      required final int statusCode}) = _$ForgotPasswordResponseImpl;
 
   factory _ForgotPasswordResponse.fromJson(Map<String, dynamic> json) =
       _$ForgotPasswordResponseImpl.fromJson;
@@ -3774,18 +3274,14 @@ abstract class _ForgotPasswordResponse implements ForgotPasswordResponse {
   String get message;
   @override
   int get statusCode;
-
-  /// Create a copy of ForgotPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ForgotPasswordResponseImplCopyWith<_$ForgotPasswordResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ResetPasswordResponse _$ResetPasswordResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _ResetPasswordResponse.fromJson(json);
 }
 
@@ -3795,22 +3291,17 @@ mixin _$ResetPasswordResponse {
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
 
-  /// Serializes this ResetPasswordResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ResetPasswordResponseCopyWith<ResetPasswordResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ResetPasswordResponseCopyWith<$Res> {
-  factory $ResetPasswordResponseCopyWith(
-    ResetPasswordResponse value,
-    $Res Function(ResetPasswordResponse) then,
-  ) = _$ResetPasswordResponseCopyWithImpl<$Res, ResetPasswordResponse>;
+  factory $ResetPasswordResponseCopyWith(ResetPasswordResponse value,
+          $Res Function(ResetPasswordResponse) then) =
+      _$ResetPasswordResponseCopyWithImpl<$Res, ResetPasswordResponse>;
   @useResult
   $Res call({ResetPasswordData data, String message, int statusCode});
 
@@ -3818,10 +3309,8 @@ abstract class $ResetPasswordResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ResetPasswordResponseCopyWithImpl<
-  $Res,
-  $Val extends ResetPasswordResponse
->
+class _$ResetPasswordResponseCopyWithImpl<$Res,
+        $Val extends ResetPasswordResponse>
     implements $ResetPasswordResponseCopyWith<$Res> {
   _$ResetPasswordResponseCopyWithImpl(this._value, this._then);
 
@@ -3830,8 +3319,6 @@ class _$ResetPasswordResponseCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3839,30 +3326,22 @@ class _$ResetPasswordResponseCopyWithImpl<
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as ResetPasswordData,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ResetPasswordData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ResetPasswordDataCopyWith<$Res> get data {
@@ -3876,9 +3355,9 @@ class _$ResetPasswordResponseCopyWithImpl<
 abstract class _$$ResetPasswordResponseImplCopyWith<$Res>
     implements $ResetPasswordResponseCopyWith<$Res> {
   factory _$$ResetPasswordResponseImplCopyWith(
-    _$ResetPasswordResponseImpl value,
-    $Res Function(_$ResetPasswordResponseImpl) then,
-  ) = __$$ResetPasswordResponseImplCopyWithImpl<$Res>;
+          _$ResetPasswordResponseImpl value,
+          $Res Function(_$ResetPasswordResponseImpl) then) =
+      __$$ResetPasswordResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({ResetPasswordData data, String message, int statusCode});
@@ -3889,16 +3368,13 @@ abstract class _$$ResetPasswordResponseImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ResetPasswordResponseImplCopyWithImpl<$Res>
-    extends
-        _$ResetPasswordResponseCopyWithImpl<$Res, _$ResetPasswordResponseImpl>
+    extends _$ResetPasswordResponseCopyWithImpl<$Res,
+        _$ResetPasswordResponseImpl>
     implements _$$ResetPasswordResponseImplCopyWith<$Res> {
-  __$$ResetPasswordResponseImplCopyWithImpl(
-    _$ResetPasswordResponseImpl _value,
-    $Res Function(_$ResetPasswordResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$ResetPasswordResponseImplCopyWithImpl(_$ResetPasswordResponseImpl _value,
+      $Res Function(_$ResetPasswordResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3906,36 +3382,28 @@ class __$$ResetPasswordResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _$ResetPasswordResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as ResetPasswordData,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$ResetPasswordResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ResetPasswordData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ResetPasswordResponseImpl implements _ResetPasswordResponse {
-  const _$ResetPasswordResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-  });
+  const _$ResetPasswordResponseImpl(
+      {required this.data, required this.message, required this.statusCode});
 
   factory _$ResetPasswordResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResetPasswordResponseImplFromJson(json);
@@ -3963,34 +3431,30 @@ class _$ResetPasswordResponseImpl implements _ResetPasswordResponse {
                 other.statusCode == statusCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, data, message, statusCode);
 
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetPasswordResponseImplCopyWith<_$ResetPasswordResponseImpl>
-  get copyWith =>
-      __$$ResetPasswordResponseImplCopyWithImpl<_$ResetPasswordResponseImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$ResetPasswordResponseImplCopyWithImpl<
+          _$ResetPasswordResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResetPasswordResponseImplToJson(this);
+    return _$$ResetPasswordResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ResetPasswordResponse implements ResetPasswordResponse {
-  const factory _ResetPasswordResponse({
-    required final ResetPasswordData data,
-    required final String message,
-    required final int statusCode,
-  }) = _$ResetPasswordResponseImpl;
+  const factory _ResetPasswordResponse(
+      {required final ResetPasswordData data,
+      required final String message,
+      required final int statusCode}) = _$ResetPasswordResponseImpl;
 
   factory _ResetPasswordResponse.fromJson(Map<String, dynamic> json) =
       _$ResetPasswordResponseImpl.fromJson;
@@ -4001,13 +3465,10 @@ abstract class _ResetPasswordResponse implements ResetPasswordResponse {
   String get message;
   @override
   int get statusCode;
-
-  /// Create a copy of ResetPasswordResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ResetPasswordResponseImplCopyWith<_$ResetPasswordResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ResetPasswordData _$ResetPasswordDataFromJson(Map<String, dynamic> json) {
@@ -4018,12 +3479,8 @@ ResetPasswordData _$ResetPasswordDataFromJson(Map<String, dynamic> json) {
 mixin _$ResetPasswordData {
   String get message => throw _privateConstructorUsedError;
 
-  /// Serializes this ResetPasswordData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ResetPasswordDataCopyWith<ResetPasswordData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4031,9 +3488,8 @@ mixin _$ResetPasswordData {
 /// @nodoc
 abstract class $ResetPasswordDataCopyWith<$Res> {
   factory $ResetPasswordDataCopyWith(
-    ResetPasswordData value,
-    $Res Function(ResetPasswordData) then,
-  ) = _$ResetPasswordDataCopyWithImpl<$Res, ResetPasswordData>;
+          ResetPasswordData value, $Res Function(ResetPasswordData) then) =
+      _$ResetPasswordDataCopyWithImpl<$Res, ResetPasswordData>;
   @useResult
   $Res call({String message});
 }
@@ -4048,31 +3504,26 @@ class _$ResetPasswordDataCopyWithImpl<$Res, $Val extends ResetPasswordData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _value.copyWith(
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ResetPasswordDataImplCopyWith<$Res>
     implements $ResetPasswordDataCopyWith<$Res> {
-  factory _$$ResetPasswordDataImplCopyWith(
-    _$ResetPasswordDataImpl value,
-    $Res Function(_$ResetPasswordDataImpl) then,
-  ) = __$$ResetPasswordDataImplCopyWithImpl<$Res>;
+  factory _$$ResetPasswordDataImplCopyWith(_$ResetPasswordDataImpl value,
+          $Res Function(_$ResetPasswordDataImpl) then) =
+      __$$ResetPasswordDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -4082,25 +3533,21 @@ abstract class _$$ResetPasswordDataImplCopyWith<$Res>
 class __$$ResetPasswordDataImplCopyWithImpl<$Res>
     extends _$ResetPasswordDataCopyWithImpl<$Res, _$ResetPasswordDataImpl>
     implements _$$ResetPasswordDataImplCopyWith<$Res> {
-  __$$ResetPasswordDataImplCopyWithImpl(
-    _$ResetPasswordDataImpl _value,
-    $Res Function(_$ResetPasswordDataImpl) _then,
-  ) : super(_value, _then);
+  __$$ResetPasswordDataImplCopyWithImpl(_$ResetPasswordDataImpl _value,
+      $Res Function(_$ResetPasswordDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$ResetPasswordDataImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ResetPasswordDataImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -4128,24 +3575,22 @@ class _$ResetPasswordDataImpl implements _ResetPasswordData {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of ResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetPasswordDataImplCopyWith<_$ResetPasswordDataImpl> get copyWith =>
       __$$ResetPasswordDataImplCopyWithImpl<_$ResetPasswordDataImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResetPasswordDataImplToJson(this);
+    return _$$ResetPasswordDataImplToJson(
+      this,
+    );
   }
 }
 
@@ -4158,11 +3603,8 @@ abstract class _ResetPasswordData implements ResetPasswordData {
 
   @override
   String get message;
-
-  /// Create a copy of ResetPasswordData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ResetPasswordDataImplCopyWith<_$ResetPasswordDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4183,12 +3625,8 @@ mixin _$SubscriptionData {
   int? get old_price => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
 
-  /// Serializes this SubscriptionData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SubscriptionData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SubscriptionDataCopyWith<SubscriptionData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4196,21 +3634,19 @@ mixin _$SubscriptionData {
 /// @nodoc
 abstract class $SubscriptionDataCopyWith<$Res> {
   factory $SubscriptionDataCopyWith(
-    SubscriptionData value,
-    $Res Function(SubscriptionData) then,
-  ) = _$SubscriptionDataCopyWithImpl<$Res, SubscriptionData>;
+          SubscriptionData value, $Res Function(SubscriptionData) then) =
+      _$SubscriptionDataCopyWithImpl<$Res, SubscriptionData>;
   @useResult
-  $Res call({
-    String id,
-    DateTime updatedAt,
-    DateTime createdAt,
-    int? type,
-    String? status,
-    String? start_date,
-    String? end_date,
-    int? old_price,
-    int? price,
-  });
+  $Res call(
+      {String id,
+      DateTime updatedAt,
+      DateTime createdAt,
+      int? type,
+      String? status,
+      String? start_date,
+      String? end_date,
+      int? old_price,
+      int? price});
 }
 
 /// @nodoc
@@ -4223,8 +3659,6 @@ class _$SubscriptionDataCopyWithImpl<$Res, $Val extends SubscriptionData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SubscriptionData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4238,92 +3672,75 @@ class _$SubscriptionDataCopyWithImpl<$Res, $Val extends SubscriptionData>
     Object? old_price = freezed,
     Object? price = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            type:
-                freezed == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            status:
-                freezed == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            start_date:
-                freezed == start_date
-                    ? _value.start_date
-                    : start_date // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            end_date:
-                freezed == end_date
-                    ? _value.end_date
-                    : end_date // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            old_price:
-                freezed == old_price
-                    ? _value.old_price
-                    : old_price // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            price:
-                freezed == price
-                    ? _value.price
-                    : price // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      old_price: freezed == old_price
+          ? _value.old_price
+          : old_price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$SubscriptionDataImplCopyWith<$Res>
     implements $SubscriptionDataCopyWith<$Res> {
-  factory _$$SubscriptionDataImplCopyWith(
-    _$SubscriptionDataImpl value,
-    $Res Function(_$SubscriptionDataImpl) then,
-  ) = __$$SubscriptionDataImplCopyWithImpl<$Res>;
+  factory _$$SubscriptionDataImplCopyWith(_$SubscriptionDataImpl value,
+          $Res Function(_$SubscriptionDataImpl) then) =
+      __$$SubscriptionDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    DateTime updatedAt,
-    DateTime createdAt,
-    int? type,
-    String? status,
-    String? start_date,
-    String? end_date,
-    int? old_price,
-    int? price,
-  });
+  $Res call(
+      {String id,
+      DateTime updatedAt,
+      DateTime createdAt,
+      int? type,
+      String? status,
+      String? start_date,
+      String? end_date,
+      int? old_price,
+      int? price});
 }
 
 /// @nodoc
 class __$$SubscriptionDataImplCopyWithImpl<$Res>
     extends _$SubscriptionDataCopyWithImpl<$Res, _$SubscriptionDataImpl>
     implements _$$SubscriptionDataImplCopyWith<$Res> {
-  __$$SubscriptionDataImplCopyWithImpl(
-    _$SubscriptionDataImpl _value,
-    $Res Function(_$SubscriptionDataImpl) _then,
-  ) : super(_value, _then);
+  __$$SubscriptionDataImplCopyWithImpl(_$SubscriptionDataImpl _value,
+      $Res Function(_$SubscriptionDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SubscriptionData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -4337,72 +3754,60 @@ class __$$SubscriptionDataImplCopyWithImpl<$Res>
     Object? old_price = freezed,
     Object? price = freezed,
   }) {
-    return _then(
-      _$SubscriptionDataImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        type:
-            freezed == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        status:
-            freezed == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        start_date:
-            freezed == start_date
-                ? _value.start_date
-                : start_date // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        end_date:
-            freezed == end_date
-                ? _value.end_date
-                : end_date // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        old_price:
-            freezed == old_price
-                ? _value.old_price
-                : old_price // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        price:
-            freezed == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$SubscriptionDataImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      start_date: freezed == start_date
+          ? _value.start_date
+          : start_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      end_date: freezed == end_date
+          ? _value.end_date
+          : end_date // ignore: cast_nullable_to_non_nullable
+              as String?,
+      old_price: freezed == old_price
+          ? _value.old_price
+          : old_price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SubscriptionDataImpl implements _SubscriptionData {
-  const _$SubscriptionDataImpl({
-    required this.id,
-    required this.updatedAt,
-    required this.createdAt,
-    this.type,
-    this.status,
-    this.start_date,
-    this.end_date,
-    this.old_price,
-    this.price,
-  });
+  const _$SubscriptionDataImpl(
+      {required this.id,
+      required this.updatedAt,
+      required this.createdAt,
+      this.type,
+      this.status,
+      this.start_date,
+      this.end_date,
+      this.old_price,
+      this.price});
 
   factory _$SubscriptionDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$SubscriptionDataImplFromJson(json);
@@ -4452,50 +3857,37 @@ class _$SubscriptionDataImpl implements _SubscriptionData {
             (identical(other.price, price) || other.price == price));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    updatedAt,
-    createdAt,
-    type,
-    status,
-    start_date,
-    end_date,
-    old_price,
-    price,
-  );
+  int get hashCode => Object.hash(runtimeType, id, updatedAt, createdAt, type,
+      status, start_date, end_date, old_price, price);
 
-  /// Create a copy of SubscriptionData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SubscriptionDataImplCopyWith<_$SubscriptionDataImpl> get copyWith =>
       __$$SubscriptionDataImplCopyWithImpl<_$SubscriptionDataImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SubscriptionDataImplToJson(this);
+    return _$$SubscriptionDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SubscriptionData implements SubscriptionData {
-  const factory _SubscriptionData({
-    required final String id,
-    required final DateTime updatedAt,
-    required final DateTime createdAt,
-    final int? type,
-    final String? status,
-    final String? start_date,
-    final String? end_date,
-    final int? old_price,
-    final int? price,
-  }) = _$SubscriptionDataImpl;
+  const factory _SubscriptionData(
+      {required final String id,
+      required final DateTime updatedAt,
+      required final DateTime createdAt,
+      final int? type,
+      final String? status,
+      final String? start_date,
+      final String? end_date,
+      final int? old_price,
+      final int? price}) = _$SubscriptionDataImpl;
 
   factory _SubscriptionData.fromJson(Map<String, dynamic> json) =
       _$SubscriptionDataImpl.fromJson;
@@ -4518,11 +3910,8 @@ abstract class _SubscriptionData implements SubscriptionData {
   int? get old_price;
   @override
   int? get price;
-
-  /// Create a copy of SubscriptionData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SubscriptionDataImplCopyWith<_$SubscriptionDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

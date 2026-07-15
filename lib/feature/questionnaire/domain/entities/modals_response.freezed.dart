@@ -12,8 +12,7 @@ part of 'modals_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ModalsResponse _$ModalsResponseFromJson(Map<String, dynamic> json) {
   return _ModalsResponse.fromJson(json);
@@ -23,12 +22,8 @@ ModalsResponse _$ModalsResponseFromJson(Map<String, dynamic> json) {
 mixin _$ModalsResponse {
   List<TherapyModal> get data => throw _privateConstructorUsedError;
 
-  /// Serializes this ModalsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ModalsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ModalsResponseCopyWith<ModalsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,9 +31,8 @@ mixin _$ModalsResponse {
 /// @nodoc
 abstract class $ModalsResponseCopyWith<$Res> {
   factory $ModalsResponseCopyWith(
-    ModalsResponse value,
-    $Res Function(ModalsResponse) then,
-  ) = _$ModalsResponseCopyWithImpl<$Res, ModalsResponse>;
+          ModalsResponse value, $Res Function(ModalsResponse) then) =
+      _$ModalsResponseCopyWithImpl<$Res, ModalsResponse>;
   @useResult
   $Res call({List<TherapyModal> data});
 }
@@ -53,31 +47,26 @@ class _$ModalsResponseCopyWithImpl<$Res, $Val extends ModalsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ModalsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<TherapyModal>,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TherapyModal>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ModalsResponseImplCopyWith<$Res>
     implements $ModalsResponseCopyWith<$Res> {
-  factory _$$ModalsResponseImplCopyWith(
-    _$ModalsResponseImpl value,
-    $Res Function(_$ModalsResponseImpl) then,
-  ) = __$$ModalsResponseImplCopyWithImpl<$Res>;
+  factory _$$ModalsResponseImplCopyWith(_$ModalsResponseImpl value,
+          $Res Function(_$ModalsResponseImpl) then) =
+      __$$ModalsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<TherapyModal> data});
@@ -88,24 +77,20 @@ class __$$ModalsResponseImplCopyWithImpl<$Res>
     extends _$ModalsResponseCopyWithImpl<$Res, _$ModalsResponseImpl>
     implements _$$ModalsResponseImplCopyWith<$Res> {
   __$$ModalsResponseImplCopyWithImpl(
-    _$ModalsResponseImpl _value,
-    $Res Function(_$ModalsResponseImpl) _then,
-  ) : super(_value, _then);
+      _$ModalsResponseImpl _value, $Res Function(_$ModalsResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ModalsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$ModalsResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<TherapyModal>,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$ModalsResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TherapyModal>,
+    ));
   }
 }
 
@@ -113,7 +98,7 @@ class __$$ModalsResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ModalsResponseImpl implements _ModalsResponse {
   const _$ModalsResponseImpl({required final List<TherapyModal> data})
-    : _data = data;
+      : _data = data;
 
   factory _$ModalsResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ModalsResponseImplFromJson(json);
@@ -139,25 +124,23 @@ class _$ModalsResponseImpl implements _ModalsResponse {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of ModalsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ModalsResponseImplCopyWith<_$ModalsResponseImpl> get copyWith =>
       __$$ModalsResponseImplCopyWithImpl<_$ModalsResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModalsResponseImplToJson(this);
+    return _$$ModalsResponseImplToJson(
+      this,
+    );
   }
 }
 
@@ -170,11 +153,8 @@ abstract class _ModalsResponse implements ModalsResponse {
 
   @override
   List<TherapyModal> get data;
-
-  /// Create a copy of ModalsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ModalsResponseImplCopyWith<_$ModalsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

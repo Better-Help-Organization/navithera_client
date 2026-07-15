@@ -12,8 +12,7 @@ part of 'notification_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$NotificationState {
@@ -21,53 +20,49 @@ mixin _$NotificationState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+    required TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult? Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(NotificationInitial value) initial,
     required TResult Function(NotificationLoading value) loading,
     required TResult Function(NotificationLoaded value) loaded,
     required TResult Function(NotificationError value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(NotificationInitial value)? initial,
     TResult? Function(NotificationLoading value)? loading,
     TResult? Function(NotificationLoaded value)? loaded,
     TResult? Function(NotificationError value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(NotificationInitial value)? initial,
@@ -75,15 +70,15 @@ mixin _$NotificationState {
     TResult Function(NotificationLoaded value)? loaded,
     TResult Function(NotificationError value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NotificationStateCopyWith<$Res> {
   factory $NotificationStateCopyWith(
-    NotificationState value,
-    $Res Function(NotificationState) then,
-  ) = _$NotificationStateCopyWithImpl<$Res, NotificationState>;
+          NotificationState value, $Res Function(NotificationState) then) =
+      _$NotificationStateCopyWithImpl<$Res, NotificationState>;
 }
 
 /// @nodoc
@@ -95,30 +90,22 @@ class _$NotificationStateCopyWithImpl<$Res, $Val extends NotificationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$NotificationInitialImplCopyWith<$Res> {
-  factory _$$NotificationInitialImplCopyWith(
-    _$NotificationInitialImpl value,
-    $Res Function(_$NotificationInitialImpl) then,
-  ) = __$$NotificationInitialImplCopyWithImpl<$Res>;
+  factory _$$NotificationInitialImplCopyWith(_$NotificationInitialImpl value,
+          $Res Function(_$NotificationInitialImpl) then) =
+      __$$NotificationInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$NotificationInitialImplCopyWithImpl<$Res>
     extends _$NotificationStateCopyWithImpl<$Res, _$NotificationInitialImpl>
     implements _$$NotificationInitialImplCopyWith<$Res> {
-  __$$NotificationInitialImplCopyWithImpl(
-    _$NotificationInitialImpl _value,
-    $Res Function(_$NotificationInitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
+  __$$NotificationInitialImplCopyWithImpl(_$NotificationInitialImpl _value,
+      $Res Function(_$NotificationInitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -146,12 +133,9 @@ class _$NotificationInitialImpl implements NotificationInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+    required TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return initial();
@@ -162,12 +146,9 @@ class _$NotificationInitialImpl implements NotificationInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult? Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return initial?.call();
@@ -178,12 +159,9 @@ class _$NotificationInitialImpl implements NotificationInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -237,23 +215,18 @@ abstract class NotificationInitial implements NotificationState {
 
 /// @nodoc
 abstract class _$$NotificationLoadingImplCopyWith<$Res> {
-  factory _$$NotificationLoadingImplCopyWith(
-    _$NotificationLoadingImpl value,
-    $Res Function(_$NotificationLoadingImpl) then,
-  ) = __$$NotificationLoadingImplCopyWithImpl<$Res>;
+  factory _$$NotificationLoadingImplCopyWith(_$NotificationLoadingImpl value,
+          $Res Function(_$NotificationLoadingImpl) then) =
+      __$$NotificationLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$NotificationLoadingImplCopyWithImpl<$Res>
     extends _$NotificationStateCopyWithImpl<$Res, _$NotificationLoadingImpl>
     implements _$$NotificationLoadingImplCopyWith<$Res> {
-  __$$NotificationLoadingImplCopyWithImpl(
-    _$NotificationLoadingImpl _value,
-    $Res Function(_$NotificationLoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
+  __$$NotificationLoadingImplCopyWithImpl(_$NotificationLoadingImpl _value,
+      $Res Function(_$NotificationLoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -281,12 +254,9 @@ class _$NotificationLoadingImpl implements NotificationLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+    required TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return loading();
@@ -297,12 +267,9 @@ class _$NotificationLoadingImpl implements NotificationLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult? Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
@@ -313,12 +280,9 @@ class _$NotificationLoadingImpl implements NotificationLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -372,16 +336,14 @@ abstract class NotificationLoading implements NotificationState {
 
 /// @nodoc
 abstract class _$$NotificationLoadedImplCopyWith<$Res> {
-  factory _$$NotificationLoadedImplCopyWith(
-    _$NotificationLoadedImpl value,
-    $Res Function(_$NotificationLoadedImpl) then,
-  ) = __$$NotificationLoadedImplCopyWithImpl<$Res>;
+  factory _$$NotificationLoadedImplCopyWith(_$NotificationLoadedImpl value,
+          $Res Function(_$NotificationLoadedImpl) then) =
+      __$$NotificationLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({
-    List<NotificationItem> notifications,
-    Pagination pagination,
-    bool canLoadMore,
-  });
+  $Res call(
+      {List<NotificationItem> notifications,
+      Pagination pagination,
+      bool canLoadMore});
 
   $PaginationCopyWith<$Res> get pagination;
 }
@@ -390,13 +352,10 @@ abstract class _$$NotificationLoadedImplCopyWith<$Res> {
 class __$$NotificationLoadedImplCopyWithImpl<$Res>
     extends _$NotificationStateCopyWithImpl<$Res, _$NotificationLoadedImpl>
     implements _$$NotificationLoadedImplCopyWith<$Res> {
-  __$$NotificationLoadedImplCopyWithImpl(
-    _$NotificationLoadedImpl _value,
-    $Res Function(_$NotificationLoadedImpl) _then,
-  ) : super(_value, _then);
+  __$$NotificationLoadedImplCopyWithImpl(_$NotificationLoadedImpl _value,
+      $Res Function(_$NotificationLoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -404,26 +363,22 @@ class __$$NotificationLoadedImplCopyWithImpl<$Res>
     Object? pagination = null,
     Object? canLoadMore = null,
   }) {
-    return _then(
-      _$NotificationLoadedImpl(
-        null == notifications
-            ? _value._notifications
-            : notifications // ignore: cast_nullable_to_non_nullable
-                as List<NotificationItem>,
-        null == pagination
-            ? _value.pagination
-            : pagination // ignore: cast_nullable_to_non_nullable
-                as Pagination,
-        null == canLoadMore
-            ? _value.canLoadMore
-            : canLoadMore // ignore: cast_nullable_to_non_nullable
-                as bool,
-      ),
-    );
+    return _then(_$NotificationLoadedImpl(
+      null == notifications
+          ? _value._notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as List<NotificationItem>,
+      null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -436,11 +391,9 @@ class __$$NotificationLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NotificationLoadedImpl implements NotificationLoaded {
-  const _$NotificationLoadedImpl(
-    final List<NotificationItem> notifications,
-    this.pagination,
-    this.canLoadMore,
-  ) : _notifications = notifications;
+  const _$NotificationLoadedImpl(final List<NotificationItem> notifications,
+      this.pagination, this.canLoadMore)
+      : _notifications = notifications;
 
   final List<NotificationItem> _notifications;
   @override
@@ -465,10 +418,8 @@ class _$NotificationLoadedImpl implements NotificationLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NotificationLoadedImpl &&
-            const DeepCollectionEquality().equals(
-              other._notifications,
-              _notifications,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._notifications, _notifications) &&
             (identical(other.pagination, pagination) ||
                 other.pagination == pagination) &&
             (identical(other.canLoadMore, canLoadMore) ||
@@ -477,34 +428,26 @@ class _$NotificationLoadedImpl implements NotificationLoaded {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_notifications),
-    pagination,
-    canLoadMore,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_notifications),
+      pagination,
+      canLoadMore);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationLoadedImplCopyWith<_$NotificationLoadedImpl> get copyWith =>
       __$$NotificationLoadedImplCopyWithImpl<_$NotificationLoadedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+    required TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return loaded(notifications, pagination, canLoadMore);
@@ -515,12 +458,9 @@ class _$NotificationLoadedImpl implements NotificationLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult? Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return loaded?.call(notifications, pagination, canLoadMore);
@@ -531,12 +471,9 @@ class _$NotificationLoadedImpl implements NotificationLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -586,28 +523,23 @@ class _$NotificationLoadedImpl implements NotificationLoaded {
 
 abstract class NotificationLoaded implements NotificationState {
   const factory NotificationLoaded(
-    final List<NotificationItem> notifications,
-    final Pagination pagination,
-    final bool canLoadMore,
-  ) = _$NotificationLoadedImpl;
+      final List<NotificationItem> notifications,
+      final Pagination pagination,
+      final bool canLoadMore) = _$NotificationLoadedImpl;
 
   List<NotificationItem> get notifications;
   Pagination get pagination;
   bool get canLoadMore;
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$NotificationLoadedImplCopyWith<_$NotificationLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$NotificationErrorImplCopyWith<$Res> {
-  factory _$$NotificationErrorImplCopyWith(
-    _$NotificationErrorImpl value,
-    $Res Function(_$NotificationErrorImpl) then,
-  ) = __$$NotificationErrorImplCopyWithImpl<$Res>;
+  factory _$$NotificationErrorImplCopyWith(_$NotificationErrorImpl value,
+          $Res Function(_$NotificationErrorImpl) then) =
+      __$$NotificationErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -618,28 +550,23 @@ abstract class _$$NotificationErrorImplCopyWith<$Res> {
 class __$$NotificationErrorImplCopyWithImpl<$Res>
     extends _$NotificationStateCopyWithImpl<$Res, _$NotificationErrorImpl>
     implements _$$NotificationErrorImplCopyWith<$Res> {
-  __$$NotificationErrorImplCopyWithImpl(
-    _$NotificationErrorImpl _value,
-    $Res Function(_$NotificationErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$NotificationErrorImplCopyWithImpl(_$NotificationErrorImpl _value,
+      $Res Function(_$NotificationErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$NotificationErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$NotificationErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -673,28 +600,21 @@ class _$NotificationErrorImpl implements NotificationError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationErrorImplCopyWith<_$NotificationErrorImpl> get copyWith =>
       __$$NotificationErrorImplCopyWithImpl<_$NotificationErrorImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+    required TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return error(failure);
@@ -705,12 +625,9 @@ class _$NotificationErrorImpl implements NotificationError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult? Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
@@ -721,12 +638,9 @@ class _$NotificationErrorImpl implements NotificationError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<NotificationItem> notifications,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+    TResult Function(List<NotificationItem> notifications,
+            Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -779,10 +693,7 @@ abstract class NotificationError implements NotificationState {
       _$NotificationErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of NotificationState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$NotificationErrorImplCopyWith<_$NotificationErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,8 +12,7 @@ part of 'user_answer.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserAnswer _$UserAnswerFromJson(Map<String, dynamic> json) {
   return _UserAnswer.fromJson(json);
@@ -28,12 +27,8 @@ mixin _$UserAnswer {
       throw _privateConstructorUsedError; // For multiple choice
   String? get text => throw _privateConstructorUsedError;
 
-  /// Serializes this UserAnswer to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserAnswer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserAnswerCopyWith<UserAnswer> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -41,16 +36,14 @@ mixin _$UserAnswer {
 /// @nodoc
 abstract class $UserAnswerCopyWith<$Res> {
   factory $UserAnswerCopyWith(
-    UserAnswer value,
-    $Res Function(UserAnswer) then,
-  ) = _$UserAnswerCopyWithImpl<$Res, UserAnswer>;
+          UserAnswer value, $Res Function(UserAnswer) then) =
+      _$UserAnswerCopyWithImpl<$Res, UserAnswer>;
   @useResult
-  $Res call({
-    String questionId,
-    String? selectedOptionId,
-    List<String>? selectedOptionIds,
-    String? text,
-  });
+  $Res call(
+      {String questionId,
+      String? selectedOptionId,
+      List<String>? selectedOptionIds,
+      String? text});
 }
 
 /// @nodoc
@@ -63,8 +56,6 @@ class _$UserAnswerCopyWithImpl<$Res, $Val extends UserAnswer>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserAnswer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,31 +64,24 @@ class _$UserAnswerCopyWithImpl<$Res, $Val extends UserAnswer>
     Object? selectedOptionIds = freezed,
     Object? text = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            questionId:
-                null == questionId
-                    ? _value.questionId
-                    : questionId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            selectedOptionId:
-                freezed == selectedOptionId
-                    ? _value.selectedOptionId
-                    : selectedOptionId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            selectedOptionIds:
-                freezed == selectedOptionIds
-                    ? _value.selectedOptionIds
-                    : selectedOptionIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            text:
-                freezed == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedOptionId: freezed == selectedOptionId
+          ? _value.selectedOptionId
+          : selectedOptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedOptionIds: freezed == selectedOptionIds
+          ? _value.selectedOptionIds
+          : selectedOptionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -105,17 +89,15 @@ class _$UserAnswerCopyWithImpl<$Res, $Val extends UserAnswer>
 abstract class _$$UserAnswerImplCopyWith<$Res>
     implements $UserAnswerCopyWith<$Res> {
   factory _$$UserAnswerImplCopyWith(
-    _$UserAnswerImpl value,
-    $Res Function(_$UserAnswerImpl) then,
-  ) = __$$UserAnswerImplCopyWithImpl<$Res>;
+          _$UserAnswerImpl value, $Res Function(_$UserAnswerImpl) then) =
+      __$$UserAnswerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String questionId,
-    String? selectedOptionId,
-    List<String>? selectedOptionIds,
-    String? text,
-  });
+  $Res call(
+      {String questionId,
+      String? selectedOptionId,
+      List<String>? selectedOptionIds,
+      String? text});
 }
 
 /// @nodoc
@@ -123,12 +105,9 @@ class __$$UserAnswerImplCopyWithImpl<$Res>
     extends _$UserAnswerCopyWithImpl<$Res, _$UserAnswerImpl>
     implements _$$UserAnswerImplCopyWith<$Res> {
   __$$UserAnswerImplCopyWithImpl(
-    _$UserAnswerImpl _value,
-    $Res Function(_$UserAnswerImpl) _then,
-  ) : super(_value, _then);
+      _$UserAnswerImpl _value, $Res Function(_$UserAnswerImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UserAnswer
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,42 +116,36 @@ class __$$UserAnswerImplCopyWithImpl<$Res>
     Object? selectedOptionIds = freezed,
     Object? text = freezed,
   }) {
-    return _then(
-      _$UserAnswerImpl(
-        questionId:
-            null == questionId
-                ? _value.questionId
-                : questionId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        selectedOptionId:
-            freezed == selectedOptionId
-                ? _value.selectedOptionId
-                : selectedOptionId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        selectedOptionIds:
-            freezed == selectedOptionIds
-                ? _value._selectedOptionIds
-                : selectedOptionIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        text:
-            freezed == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$UserAnswerImpl(
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedOptionId: freezed == selectedOptionId
+          ? _value.selectedOptionId
+          : selectedOptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedOptionIds: freezed == selectedOptionIds
+          ? _value._selectedOptionIds
+          : selectedOptionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserAnswerImpl implements _UserAnswer {
-  const _$UserAnswerImpl({
-    required this.questionId,
-    this.selectedOptionId,
-    final List<String>? selectedOptionIds,
-    this.text,
-  }) : _selectedOptionIds = selectedOptionIds;
+  const _$UserAnswerImpl(
+      {required this.questionId,
+      this.selectedOptionId,
+      final List<String>? selectedOptionIds,
+      this.text})
+      : _selectedOptionIds = selectedOptionIds;
 
   factory _$UserAnswerImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserAnswerImplFromJson(json);
@@ -181,9 +154,9 @@ class _$UserAnswerImpl implements _UserAnswer {
   final String questionId;
   @override
   final String? selectedOptionId;
-  // For single choice
+// For single choice
   final List<String>? _selectedOptionIds;
-  // For single choice
+// For single choice
   @override
   List<String>? get selectedOptionIds {
     final value = _selectedOptionIds;
@@ -194,7 +167,7 @@ class _$UserAnswerImpl implements _UserAnswer {
     return EqualUnmodifiableListView(value);
   }
 
-  // For multiple choice
+// For multiple choice
   @override
   final String? text;
 
@@ -212,26 +185,17 @@ class _$UserAnswerImpl implements _UserAnswer {
                 other.questionId == questionId) &&
             (identical(other.selectedOptionId, selectedOptionId) ||
                 other.selectedOptionId == selectedOptionId) &&
-            const DeepCollectionEquality().equals(
-              other._selectedOptionIds,
-              _selectedOptionIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedOptionIds, _selectedOptionIds) &&
             (identical(other.text, text) || other.text == text));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    questionId,
-    selectedOptionId,
-    const DeepCollectionEquality().hash(_selectedOptionIds),
-    text,
-  );
+  int get hashCode => Object.hash(runtimeType, questionId, selectedOptionId,
+      const DeepCollectionEquality().hash(_selectedOptionIds), text);
 
-  /// Create a copy of UserAnswer
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserAnswerImplCopyWith<_$UserAnswerImpl> get copyWith =>
@@ -239,17 +203,18 @@ class _$UserAnswerImpl implements _UserAnswer {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserAnswerImplToJson(this);
+    return _$$UserAnswerImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserAnswer implements UserAnswer {
-  const factory _UserAnswer({
-    required final String questionId,
-    final String? selectedOptionId,
-    final List<String>? selectedOptionIds,
-    final String? text,
-  }) = _$UserAnswerImpl;
+  const factory _UserAnswer(
+      {required final String questionId,
+      final String? selectedOptionId,
+      final List<String>? selectedOptionIds,
+      final String? text}) = _$UserAnswerImpl;
 
   factory _UserAnswer.fromJson(Map<String, dynamic> json) =
       _$UserAnswerImpl.fromJson;
@@ -257,16 +222,13 @@ abstract class _UserAnswer implements UserAnswer {
   @override
   String get questionId;
   @override
-  String? get selectedOptionId; // For single choice
-  @override
-  List<String>? get selectedOptionIds; // For multiple choice
-  @override
+  String? get selectedOptionId;
+  @override // For single choice
+  List<String>? get selectedOptionIds;
+  @override // For multiple choice
   String? get text;
-
-  /// Create a copy of UserAnswer
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserAnswerImplCopyWith<_$UserAnswerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/profile.dart';
 import '../../domain/repositories/profile_repository.dart';
@@ -83,7 +83,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
       final queries = {
         'fields':
-            'preference.*,answer.*,createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,username,emergencyContact,isVisible,avatar',
+            'preference.language,createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,username,emergencyContact,isVisible,avatar',
       };
 
       final response = await remoteDataSource.getCurrentProfile(queries);

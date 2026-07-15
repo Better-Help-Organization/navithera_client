@@ -12,8 +12,7 @@ part of 'users_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UsersState {
@@ -22,52 +21,48 @@ mixin _$UsersState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(Error value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(Error value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -75,15 +70,15 @@ mixin _$UsersState {
     TResult Function(Loaded value)? loaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UsersStateCopyWith<$Res> {
   factory $UsersStateCopyWith(
-    UsersState value,
-    $Res Function(UsersState) then,
-  ) = _$UsersStateCopyWithImpl<$Res, UsersState>;
+          UsersState value, $Res Function(UsersState) then) =
+      _$UsersStateCopyWithImpl<$Res, UsersState>;
 }
 
 /// @nodoc
@@ -95,17 +90,13 @@ class _$UsersStateCopyWithImpl<$Res, $Val extends UsersState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -113,12 +104,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -146,11 +133,8 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return initial();
@@ -162,11 +146,8 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return initial?.call();
@@ -178,11 +159,8 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -237,9 +215,8 @@ abstract class Initial implements UsersState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -247,12 +224,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -280,11 +253,8 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return loading();
@@ -296,11 +266,8 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
@@ -312,11 +279,8 @@ class _$LoadingImpl implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -371,9 +335,8 @@ abstract class Loading implements UsersState {
 /// @nodoc
 abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(
-    _$LoadedImpl value,
-    $Res Function(_$LoadedImpl) then,
-  ) = __$$LoadedImplCopyWithImpl<$Res>;
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<UserModel> users, Pagination pagination, bool canLoadMore});
 
@@ -385,12 +348,9 @@ class __$$LoadedImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
-    _$LoadedImpl _value,
-    $Res Function(_$LoadedImpl) _then,
-  ) : super(_value, _then);
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -398,26 +358,22 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? pagination = null,
     Object? canLoadMore = null,
   }) {
-    return _then(
-      _$LoadedImpl(
-        null == users
-            ? _value._users
-            : users // ignore: cast_nullable_to_non_nullable
-                as List<UserModel>,
-        null == pagination
-            ? _value.pagination
-            : pagination // ignore: cast_nullable_to_non_nullable
-                as Pagination,
-        null == canLoadMore
-            ? _value.canLoadMore
-            : canLoadMore // ignore: cast_nullable_to_non_nullable
-                as bool,
-      ),
-    );
+    return _then(_$LoadedImpl(
+      null == users
+          ? _value._users
+          : users // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>,
+      null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      null == canLoadMore
+          ? _value.canLoadMore
+          : canLoadMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -431,10 +387,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements Loaded {
   const _$LoadedImpl(
-    final List<UserModel> users,
-    this.pagination,
-    this.canLoadMore,
-  ) : _users = users;
+      final List<UserModel> users, this.pagination, this.canLoadMore)
+      : _users = users;
 
   final List<UserModel> _users;
   @override
@@ -467,16 +421,10 @@ class _$LoadedImpl implements Loaded {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_users),
-    pagination,
-    canLoadMore,
-  );
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_users), pagination, canLoadMore);
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
@@ -488,11 +436,8 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return loaded(users, pagination, canLoadMore);
@@ -504,11 +449,8 @@ class _$LoadedImpl implements Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return loaded?.call(users, pagination, canLoadMore);
@@ -520,11 +462,8 @@ class _$LoadedImpl implements Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -573,19 +512,13 @@ class _$LoadedImpl implements Loaded {
 }
 
 abstract class Loaded implements UsersState {
-  const factory Loaded(
-    final List<UserModel> users,
-    final Pagination pagination,
-    final bool canLoadMore,
-  ) = _$LoadedImpl;
+  const factory Loaded(final List<UserModel> users, final Pagination pagination,
+      final bool canLoadMore) = _$LoadedImpl;
 
   List<UserModel> get users;
   Pagination get pagination;
   bool get canLoadMore;
-
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -593,9 +526,8 @@ abstract class Loaded implements UsersState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-    _$ErrorImpl value,
-    $Res Function(_$ErrorImpl) then,
-  ) = __$$ErrorImplCopyWithImpl<$Res>;
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -607,27 +539,22 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$UsersStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-    _$ErrorImpl _value,
-    $Res Function(_$ErrorImpl) _then,
-  ) : super(_value, _then);
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$ErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$ErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -661,9 +588,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -675,11 +600,8 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)
+        loaded,
     required TResult Function(Failure failure) error,
   }) {
     return error(failure);
@@ -691,11 +613,8 @@ class _$ErrorImpl implements Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
@@ -707,11 +626,8 @@ class _$ErrorImpl implements Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(
-      List<UserModel> users,
-      Pagination pagination,
-      bool canLoadMore,
-    )?
-    loaded,
+            List<UserModel> users, Pagination pagination, bool canLoadMore)?
+        loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
@@ -763,10 +679,7 @@ abstract class Error implements UsersState {
   const factory Error(final Failure failure) = _$ErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of UsersState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

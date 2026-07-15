@@ -12,8 +12,7 @@ part of 'questions_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 QuestionsResponse _$QuestionsResponseFromJson(Map<String, dynamic> json) {
   return _QuestionsResponse.fromJson(json);
@@ -23,12 +22,8 @@ QuestionsResponse _$QuestionsResponseFromJson(Map<String, dynamic> json) {
 mixin _$QuestionsResponse {
   List<Question> get data => throw _privateConstructorUsedError;
 
-  /// Serializes this QuestionsResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of QuestionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $QuestionsResponseCopyWith<QuestionsResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,9 +31,8 @@ mixin _$QuestionsResponse {
 /// @nodoc
 abstract class $QuestionsResponseCopyWith<$Res> {
   factory $QuestionsResponseCopyWith(
-    QuestionsResponse value,
-    $Res Function(QuestionsResponse) then,
-  ) = _$QuestionsResponseCopyWithImpl<$Res, QuestionsResponse>;
+          QuestionsResponse value, $Res Function(QuestionsResponse) then) =
+      _$QuestionsResponseCopyWithImpl<$Res, QuestionsResponse>;
   @useResult
   $Res call({List<Question> data});
 }
@@ -53,31 +47,26 @@ class _$QuestionsResponseCopyWithImpl<$Res, $Val extends QuestionsResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of QuestionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<Question>,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Question>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$QuestionsResponseImplCopyWith<$Res>
     implements $QuestionsResponseCopyWith<$Res> {
-  factory _$$QuestionsResponseImplCopyWith(
-    _$QuestionsResponseImpl value,
-    $Res Function(_$QuestionsResponseImpl) then,
-  ) = __$$QuestionsResponseImplCopyWithImpl<$Res>;
+  factory _$$QuestionsResponseImplCopyWith(_$QuestionsResponseImpl value,
+          $Res Function(_$QuestionsResponseImpl) then) =
+      __$$QuestionsResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Question> data});
@@ -87,25 +76,21 @@ abstract class _$$QuestionsResponseImplCopyWith<$Res>
 class __$$QuestionsResponseImplCopyWithImpl<$Res>
     extends _$QuestionsResponseCopyWithImpl<$Res, _$QuestionsResponseImpl>
     implements _$$QuestionsResponseImplCopyWith<$Res> {
-  __$$QuestionsResponseImplCopyWithImpl(
-    _$QuestionsResponseImpl _value,
-    $Res Function(_$QuestionsResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$QuestionsResponseImplCopyWithImpl(_$QuestionsResponseImpl _value,
+      $Res Function(_$QuestionsResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of QuestionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$QuestionsResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<Question>,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$QuestionsResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Question>,
+    ));
   }
 }
 
@@ -113,7 +98,7 @@ class __$$QuestionsResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$QuestionsResponseImpl implements _QuestionsResponse {
   const _$QuestionsResponseImpl({required final List<Question> data})
-    : _data = data;
+      : _data = data;
 
   factory _$QuestionsResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuestionsResponseImplFromJson(json);
@@ -139,25 +124,23 @@ class _$QuestionsResponseImpl implements _QuestionsResponse {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of QuestionsResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$QuestionsResponseImplCopyWith<_$QuestionsResponseImpl> get copyWith =>
       __$$QuestionsResponseImplCopyWithImpl<_$QuestionsResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuestionsResponseImplToJson(this);
+    return _$$QuestionsResponseImplToJson(
+      this,
+    );
   }
 }
 
@@ -170,11 +153,8 @@ abstract class _QuestionsResponse implements QuestionsResponse {
 
   @override
   List<Question> get data;
-
-  /// Create a copy of QuestionsResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$QuestionsResponseImplCopyWith<_$QuestionsResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,8 +12,7 @@ part of 'live_session_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ChatListResponse _$ChatListResponseFromJson(Map<String, dynamic> json) {
   return _ChatListResponse.fromJson(json);
@@ -29,12 +28,8 @@ mixin _$ChatListResponse {
   String? get path => throw _privateConstructorUsedError;
   DateTime? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this ChatListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ChatListResponseCopyWith<ChatListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,19 +37,17 @@ mixin _$ChatListResponse {
 /// @nodoc
 abstract class $ChatListResponseCopyWith<$Res> {
   factory $ChatListResponseCopyWith(
-    ChatListResponse value,
-    $Res Function(ChatListResponse) then,
-  ) = _$ChatListResponseCopyWithImpl<$Res, ChatListResponse>;
+          ChatListResponse value, $Res Function(ChatListResponse) then) =
+      _$ChatListResponseCopyWithImpl<$Res, ChatListResponse>;
   @useResult
-  $Res call({
-    List<ChatItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<ChatItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   $PaginationCopyWith<$Res>? get pagination;
 }
@@ -69,8 +62,6 @@ class _$ChatListResponseCopyWithImpl<$Res, $Val extends ChatListResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,50 +73,38 @@ class _$ChatListResponseCopyWithImpl<$Res, $Val extends ChatListResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<ChatItem>,
-            pagination:
-                freezed == pagination
-                    ? _value.pagination
-                    : pagination // ignore: cast_nullable_to_non_nullable
-                        as Pagination?,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            statusCode:
-                freezed == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<ChatItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res>? get pagination {
@@ -142,21 +121,19 @@ class _$ChatListResponseCopyWithImpl<$Res, $Val extends ChatListResponse>
 /// @nodoc
 abstract class _$$ChatListResponseImplCopyWith<$Res>
     implements $ChatListResponseCopyWith<$Res> {
-  factory _$$ChatListResponseImplCopyWith(
-    _$ChatListResponseImpl value,
-    $Res Function(_$ChatListResponseImpl) then,
-  ) = __$$ChatListResponseImplCopyWithImpl<$Res>;
+  factory _$$ChatListResponseImplCopyWith(_$ChatListResponseImpl value,
+          $Res Function(_$ChatListResponseImpl) then) =
+      __$$ChatListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<ChatItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<ChatItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   @override
   $PaginationCopyWith<$Res>? get pagination;
@@ -166,13 +143,10 @@ abstract class _$$ChatListResponseImplCopyWith<$Res>
 class __$$ChatListResponseImplCopyWithImpl<$Res>
     extends _$ChatListResponseCopyWithImpl<$Res, _$ChatListResponseImpl>
     implements _$$ChatListResponseImplCopyWith<$Res> {
-  __$$ChatListResponseImplCopyWithImpl(
-    _$ChatListResponseImpl _value,
-    $Res Function(_$ChatListResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$ChatListResponseImplCopyWithImpl(_$ChatListResponseImpl _value,
+      $Res Function(_$ChatListResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -184,60 +158,51 @@ class __$$ChatListResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$ChatListResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<ChatItem>,
-        pagination:
-            freezed == pagination
-                ? _value.pagination
-                : pagination // ignore: cast_nullable_to_non_nullable
-                    as Pagination?,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        statusCode:
-            freezed == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$ChatListResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<ChatItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChatListResponseImpl implements _ChatListResponse {
-  const _$ChatListResponseImpl({
-    required final List<ChatItem> data,
-    this.pagination,
-    this.message,
-    this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  }) : _data = data;
+  const _$ChatListResponseImpl(
+      {required final List<ChatItem> data,
+      this.pagination,
+      this.message,
+      this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp})
+      : _data = data;
 
   factory _$ChatListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatListResponseImplFromJson(json);
@@ -285,46 +250,42 @@ class _$ChatListResponseImpl implements _ChatListResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    pagination,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      pagination,
+      message,
+      statusCode,
+      method,
+      path,
+      timestamp);
 
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatListResponseImplCopyWith<_$ChatListResponseImpl> get copyWith =>
       __$$ChatListResponseImplCopyWithImpl<_$ChatListResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChatListResponseImplToJson(this);
+    return _$$ChatListResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChatListResponse implements ChatListResponse {
-  const factory _ChatListResponse({
-    required final List<ChatItem> data,
-    final Pagination? pagination,
-    final String? message,
-    final int? statusCode,
-    final String? method,
-    final String? path,
-    final DateTime? timestamp,
-  }) = _$ChatListResponseImpl;
+  const factory _ChatListResponse(
+      {required final List<ChatItem> data,
+      final Pagination? pagination,
+      final String? message,
+      final int? statusCode,
+      final String? method,
+      final String? path,
+      final DateTime? timestamp}) = _$ChatListResponseImpl;
 
   factory _ChatListResponse.fromJson(Map<String, dynamic> json) =
       _$ChatListResponseImpl.fromJson;
@@ -343,11 +304,8 @@ abstract class _ChatListResponse implements ChatListResponse {
   String? get path;
   @override
   DateTime? get timestamp;
-
-  /// Create a copy of ChatListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ChatListResponseImplCopyWith<_$ChatListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -367,12 +325,8 @@ mixin _$ChatItem {
   LastMessage? get lastMessage => throw _privateConstructorUsedError;
   int get unreadCount => throw _privateConstructorUsedError;
 
-  /// Serializes this ChatItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ChatItemCopyWith<ChatItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -382,16 +336,15 @@ abstract class $ChatItemCopyWith<$Res> {
   factory $ChatItemCopyWith(ChatItem value, $Res Function(ChatItem) then) =
       _$ChatItemCopyWithImpl<$Res, ChatItem>;
   @useResult
-  $Res call({
-    String id,
-    String? activeCallRoom,
-    String? groupName,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    List<UserModel>? group,
-    LastMessage? lastMessage,
-    int unreadCount,
-  });
+  $Res call(
+      {String id,
+      String? activeCallRoom,
+      String? groupName,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      List<UserModel>? group,
+      LastMessage? lastMessage,
+      int unreadCount});
 
   $LastMessageCopyWith<$Res>? get lastMessage;
 }
@@ -406,8 +359,6 @@ class _$ChatItemCopyWithImpl<$Res, $Val extends ChatItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -420,55 +371,42 @@ class _$ChatItemCopyWithImpl<$Res, $Val extends ChatItem>
     Object? lastMessage = freezed,
     Object? unreadCount = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            activeCallRoom:
-                freezed == activeCallRoom
-                    ? _value.activeCallRoom
-                    : activeCallRoom // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            groupName:
-                freezed == groupName
-                    ? _value.groupName
-                    : groupName // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            group:
-                freezed == group
-                    ? _value.group
-                    : group // ignore: cast_nullable_to_non_nullable
-                        as List<UserModel>?,
-            lastMessage:
-                freezed == lastMessage
-                    ? _value.lastMessage
-                    : lastMessage // ignore: cast_nullable_to_non_nullable
-                        as LastMessage?,
-            unreadCount:
-                null == unreadCount
-                    ? _value.unreadCount
-                    : unreadCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      activeCallRoom: freezed == activeCallRoom
+          ? _value.activeCallRoom
+          : activeCallRoom // ignore: cast_nullable_to_non_nullable
+              as String?,
+      groupName: freezed == groupName
+          ? _value.groupName
+          : groupName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>?,
+      lastMessage: freezed == lastMessage
+          ? _value.lastMessage
+          : lastMessage // ignore: cast_nullable_to_non_nullable
+              as LastMessage?,
+      unreadCount: null == unreadCount
+          ? _value.unreadCount
+          : unreadCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LastMessageCopyWith<$Res>? get lastMessage {
@@ -486,21 +424,19 @@ class _$ChatItemCopyWithImpl<$Res, $Val extends ChatItem>
 abstract class _$$ChatItemImplCopyWith<$Res>
     implements $ChatItemCopyWith<$Res> {
   factory _$$ChatItemImplCopyWith(
-    _$ChatItemImpl value,
-    $Res Function(_$ChatItemImpl) then,
-  ) = __$$ChatItemImplCopyWithImpl<$Res>;
+          _$ChatItemImpl value, $Res Function(_$ChatItemImpl) then) =
+      __$$ChatItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String? activeCallRoom,
-    String? groupName,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    List<UserModel>? group,
-    LastMessage? lastMessage,
-    int unreadCount,
-  });
+  $Res call(
+      {String id,
+      String? activeCallRoom,
+      String? groupName,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      List<UserModel>? group,
+      LastMessage? lastMessage,
+      int unreadCount});
 
   @override
   $LastMessageCopyWith<$Res>? get lastMessage;
@@ -511,12 +447,9 @@ class __$$ChatItemImplCopyWithImpl<$Res>
     extends _$ChatItemCopyWithImpl<$Res, _$ChatItemImpl>
     implements _$$ChatItemImplCopyWith<$Res> {
   __$$ChatItemImplCopyWithImpl(
-    _$ChatItemImpl _value,
-    $Res Function(_$ChatItemImpl) _then,
-  ) : super(_value, _then);
+      _$ChatItemImpl _value, $Res Function(_$ChatItemImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -529,66 +462,56 @@ class __$$ChatItemImplCopyWithImpl<$Res>
     Object? lastMessage = freezed,
     Object? unreadCount = null,
   }) {
-    return _then(
-      _$ChatItemImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        activeCallRoom:
-            freezed == activeCallRoom
-                ? _value.activeCallRoom
-                : activeCallRoom // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        groupName:
-            freezed == groupName
-                ? _value.groupName
-                : groupName // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        group:
-            freezed == group
-                ? _value._group
-                : group // ignore: cast_nullable_to_non_nullable
-                    as List<UserModel>?,
-        lastMessage:
-            freezed == lastMessage
-                ? _value.lastMessage
-                : lastMessage // ignore: cast_nullable_to_non_nullable
-                    as LastMessage?,
-        unreadCount:
-            null == unreadCount
-                ? _value.unreadCount
-                : unreadCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$ChatItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      activeCallRoom: freezed == activeCallRoom
+          ? _value.activeCallRoom
+          : activeCallRoom // ignore: cast_nullable_to_non_nullable
+              as String?,
+      groupName: freezed == groupName
+          ? _value.groupName
+          : groupName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      group: freezed == group
+          ? _value._group
+          : group // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>?,
+      lastMessage: freezed == lastMessage
+          ? _value.lastMessage
+          : lastMessage // ignore: cast_nullable_to_non_nullable
+              as LastMessage?,
+      unreadCount: null == unreadCount
+          ? _value.unreadCount
+          : unreadCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChatItemImpl implements _ChatItem {
-  const _$ChatItemImpl({
-    required this.id,
-    this.activeCallRoom,
-    this.groupName,
-    this.createdAt,
-    this.updatedAt,
-    final List<UserModel>? group,
-    this.lastMessage,
-    this.unreadCount = 0,
-  }) : _group = group;
+  const _$ChatItemImpl(
+      {required this.id,
+      this.activeCallRoom,
+      this.groupName,
+      this.createdAt,
+      this.updatedAt,
+      final List<UserModel>? group,
+      this.lastMessage,
+      this.unreadCount = 0})
+      : _group = group;
 
   factory _$ChatItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatItemImplFromJson(json);
@@ -645,23 +568,20 @@ class _$ChatItemImpl implements _ChatItem {
                 other.unreadCount == unreadCount));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    activeCallRoom,
-    groupName,
-    createdAt,
-    updatedAt,
-    const DeepCollectionEquality().hash(_group),
-    lastMessage,
-    unreadCount,
-  );
+      runtimeType,
+      id,
+      activeCallRoom,
+      groupName,
+      createdAt,
+      updatedAt,
+      const DeepCollectionEquality().hash(_group),
+      lastMessage,
+      unreadCount);
 
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatItemImplCopyWith<_$ChatItemImpl> get copyWith =>
@@ -669,21 +589,22 @@ class _$ChatItemImpl implements _ChatItem {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChatItemImplToJson(this);
+    return _$$ChatItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChatItem implements ChatItem {
-  const factory _ChatItem({
-    required final String id,
-    final String? activeCallRoom,
-    final String? groupName,
-    final DateTime? createdAt,
-    final DateTime? updatedAt,
-    final List<UserModel>? group,
-    final LastMessage? lastMessage,
-    final int unreadCount,
-  }) = _$ChatItemImpl;
+  const factory _ChatItem(
+      {required final String id,
+      final String? activeCallRoom,
+      final String? groupName,
+      final DateTime? createdAt,
+      final DateTime? updatedAt,
+      final List<UserModel>? group,
+      final LastMessage? lastMessage,
+      final int unreadCount}) = _$ChatItemImpl;
 
   factory _ChatItem.fromJson(Map<String, dynamic> json) =
       _$ChatItemImpl.fromJson;
@@ -704,11 +625,8 @@ abstract class _ChatItem implements ChatItem {
   LastMessage? get lastMessage;
   @override
   int get unreadCount;
-
-  /// Create a copy of ChatItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ChatItemImplCopyWith<_$ChatItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -725,12 +643,8 @@ mixin _$LastMessage {
   UserModel? get client => throw _privateConstructorUsedError;
   UserModel? get therapist => throw _privateConstructorUsedError;
 
-  /// Serializes this LastMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LastMessageCopyWith<LastMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -738,17 +652,15 @@ mixin _$LastMessage {
 /// @nodoc
 abstract class $LastMessageCopyWith<$Res> {
   factory $LastMessageCopyWith(
-    LastMessage value,
-    $Res Function(LastMessage) then,
-  ) = _$LastMessageCopyWithImpl<$Res, LastMessage>;
+          LastMessage value, $Res Function(LastMessage) then) =
+      _$LastMessageCopyWithImpl<$Res, LastMessage>;
   @useResult
-  $Res call({
-    String? id,
-    String? content,
-    bool? isRead,
-    UserModel? client,
-    UserModel? therapist,
-  });
+  $Res call(
+      {String? id,
+      String? content,
+      bool? isRead,
+      UserModel? client,
+      UserModel? therapist});
 
   $UserModelCopyWith<$Res>? get client;
   $UserModelCopyWith<$Res>? get therapist;
@@ -764,8 +676,6 @@ class _$LastMessageCopyWithImpl<$Res, $Val extends LastMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -775,40 +685,30 @@ class _$LastMessageCopyWithImpl<$Res, $Val extends LastMessage>
     Object? client = freezed,
     Object? therapist = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                freezed == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            content:
-                freezed == content
-                    ? _value.content
-                    : content // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isRead:
-                freezed == isRead
-                    ? _value.isRead
-                    : isRead // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            client:
-                freezed == client
-                    ? _value.client
-                    : client // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-            therapist:
-                freezed == therapist
-                    ? _value.therapist
-                    : therapist // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRead: freezed == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      therapist: freezed == therapist
+          ? _value.therapist
+          : therapist // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+    ) as $Val);
   }
 
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get client {
@@ -821,8 +721,6 @@ class _$LastMessageCopyWithImpl<$Res, $Val extends LastMessage>
     });
   }
 
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get therapist {
@@ -840,18 +738,16 @@ class _$LastMessageCopyWithImpl<$Res, $Val extends LastMessage>
 abstract class _$$LastMessageImplCopyWith<$Res>
     implements $LastMessageCopyWith<$Res> {
   factory _$$LastMessageImplCopyWith(
-    _$LastMessageImpl value,
-    $Res Function(_$LastMessageImpl) then,
-  ) = __$$LastMessageImplCopyWithImpl<$Res>;
+          _$LastMessageImpl value, $Res Function(_$LastMessageImpl) then) =
+      __$$LastMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? id,
-    String? content,
-    bool? isRead,
-    UserModel? client,
-    UserModel? therapist,
-  });
+  $Res call(
+      {String? id,
+      String? content,
+      bool? isRead,
+      UserModel? client,
+      UserModel? therapist});
 
   @override
   $UserModelCopyWith<$Res>? get client;
@@ -864,12 +760,9 @@ class __$$LastMessageImplCopyWithImpl<$Res>
     extends _$LastMessageCopyWithImpl<$Res, _$LastMessageImpl>
     implements _$$LastMessageImplCopyWith<$Res> {
   __$$LastMessageImplCopyWithImpl(
-    _$LastMessageImpl _value,
-    $Res Function(_$LastMessageImpl) _then,
-  ) : super(_value, _then);
+      _$LastMessageImpl _value, $Res Function(_$LastMessageImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -879,48 +772,36 @@ class __$$LastMessageImplCopyWithImpl<$Res>
     Object? client = freezed,
     Object? therapist = freezed,
   }) {
-    return _then(
-      _$LastMessageImpl(
-        id:
-            freezed == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        content:
-            freezed == content
-                ? _value.content
-                : content // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isRead:
-            freezed == isRead
-                ? _value.isRead
-                : isRead // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        client:
-            freezed == client
-                ? _value.client
-                : client // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-        therapist:
-            freezed == therapist
-                ? _value.therapist
-                : therapist // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-      ),
-    );
+    return _then(_$LastMessageImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      content: freezed == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRead: freezed == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      therapist: freezed == therapist
+          ? _value.therapist
+          : therapist // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LastMessageImpl implements _LastMessage {
-  const _$LastMessageImpl({
-    this.id,
-    this.content,
-    this.isRead,
-    this.client,
-    this.therapist,
-  });
+  const _$LastMessageImpl(
+      {this.id, this.content, this.isRead, this.client, this.therapist});
 
   factory _$LastMessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$LastMessageImplFromJson(json);
@@ -954,14 +835,12 @@ class _$LastMessageImpl implements _LastMessage {
                 other.therapist == therapist));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, content, isRead, client, therapist);
 
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LastMessageImplCopyWith<_$LastMessageImpl> get copyWith =>
@@ -969,18 +848,19 @@ class _$LastMessageImpl implements _LastMessage {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LastMessageImplToJson(this);
+    return _$$LastMessageImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LastMessage implements LastMessage {
-  const factory _LastMessage({
-    final String? id,
-    final String? content,
-    final bool? isRead,
-    final UserModel? client,
-    final UserModel? therapist,
-  }) = _$LastMessageImpl;
+  const factory _LastMessage(
+      {final String? id,
+      final String? content,
+      final bool? isRead,
+      final UserModel? client,
+      final UserModel? therapist}) = _$LastMessageImpl;
 
   factory _LastMessage.fromJson(Map<String, dynamic> json) =
       _$LastMessageImpl.fromJson;
@@ -995,11 +875,8 @@ abstract class _LastMessage implements LastMessage {
   UserModel? get client;
   @override
   UserModel? get therapist;
-
-  /// Create a copy of LastMessage
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LastMessageImplCopyWith<_$LastMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1015,12 +892,8 @@ mixin _$Pagination {
   int? get currentPage => throw _privateConstructorUsedError;
   int? get pageSize => throw _privateConstructorUsedError;
 
-  /// Serializes this Pagination to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PaginationCopyWith<Pagination> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1028,16 +901,11 @@ mixin _$Pagination {
 /// @nodoc
 abstract class $PaginationCopyWith<$Res> {
   factory $PaginationCopyWith(
-    Pagination value,
-    $Res Function(Pagination) then,
-  ) = _$PaginationCopyWithImpl<$Res, Pagination>;
+          Pagination value, $Res Function(Pagination) then) =
+      _$PaginationCopyWithImpl<$Res, Pagination>;
   @useResult
-  $Res call({
-    int? totalItems,
-    int? totalPages,
-    int? currentPage,
-    int? pageSize,
-  });
+  $Res call(
+      {int? totalItems, int? totalPages, int? currentPage, int? pageSize});
 }
 
 /// @nodoc
@@ -1050,8 +918,6 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1060,31 +926,24 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
     Object? currentPage = freezed,
     Object? pageSize = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            totalItems:
-                freezed == totalItems
-                    ? _value.totalItems
-                    : totalItems // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            totalPages:
-                freezed == totalPages
-                    ? _value.totalPages
-                    : totalPages // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            currentPage:
-                freezed == currentPage
-                    ? _value.currentPage
-                    : currentPage // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            pageSize:
-                freezed == pageSize
-                    ? _value.pageSize
-                    : pageSize // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      totalItems: freezed == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      currentPage: freezed == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pageSize: freezed == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
@@ -1092,17 +951,12 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
 abstract class _$$PaginationImplCopyWith<$Res>
     implements $PaginationCopyWith<$Res> {
   factory _$$PaginationImplCopyWith(
-    _$PaginationImpl value,
-    $Res Function(_$PaginationImpl) then,
-  ) = __$$PaginationImplCopyWithImpl<$Res>;
+          _$PaginationImpl value, $Res Function(_$PaginationImpl) then) =
+      __$$PaginationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int? totalItems,
-    int? totalPages,
-    int? currentPage,
-    int? pageSize,
-  });
+  $Res call(
+      {int? totalItems, int? totalPages, int? currentPage, int? pageSize});
 }
 
 /// @nodoc
@@ -1110,12 +964,9 @@ class __$$PaginationImplCopyWithImpl<$Res>
     extends _$PaginationCopyWithImpl<$Res, _$PaginationImpl>
     implements _$$PaginationImplCopyWith<$Res> {
   __$$PaginationImplCopyWithImpl(
-    _$PaginationImpl _value,
-    $Res Function(_$PaginationImpl) _then,
-  ) : super(_value, _then);
+      _$PaginationImpl _value, $Res Function(_$PaginationImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1124,42 +975,32 @@ class __$$PaginationImplCopyWithImpl<$Res>
     Object? currentPage = freezed,
     Object? pageSize = freezed,
   }) {
-    return _then(
-      _$PaginationImpl(
-        totalItems:
-            freezed == totalItems
-                ? _value.totalItems
-                : totalItems // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        totalPages:
-            freezed == totalPages
-                ? _value.totalPages
-                : totalPages // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        currentPage:
-            freezed == currentPage
-                ? _value.currentPage
-                : currentPage // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        pageSize:
-            freezed == pageSize
-                ? _value.pageSize
-                : pageSize // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$PaginationImpl(
+      totalItems: freezed == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      currentPage: freezed == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pageSize: freezed == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PaginationImpl implements _Pagination {
-  const _$PaginationImpl({
-    this.totalItems,
-    this.totalPages,
-    this.currentPage,
-    this.pageSize,
-  });
+  const _$PaginationImpl(
+      {this.totalItems, this.totalPages, this.currentPage, this.pageSize});
 
   factory _$PaginationImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaginationImplFromJson(json);
@@ -1193,14 +1034,12 @@ class _$PaginationImpl implements _Pagination {
                 other.pageSize == pageSize));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, totalItems, totalPages, currentPage, pageSize);
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
@@ -1208,17 +1047,18 @@ class _$PaginationImpl implements _Pagination {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaginationImplToJson(this);
+    return _$$PaginationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Pagination implements Pagination {
-  const factory _Pagination({
-    final int? totalItems,
-    final int? totalPages,
-    final int? currentPage,
-    final int? pageSize,
-  }) = _$PaginationImpl;
+  const factory _Pagination(
+      {final int? totalItems,
+      final int? totalPages,
+      final int? currentPage,
+      final int? pageSize}) = _$PaginationImpl;
 
   factory _Pagination.fromJson(Map<String, dynamic> json) =
       _$PaginationImpl.fromJson;
@@ -1231,11 +1071,8 @@ abstract class _Pagination implements Pagination {
   int? get currentPage;
   @override
   int? get pageSize;
-
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1253,12 +1090,8 @@ mixin _$JoinCallResponse {
   String? get path => throw _privateConstructorUsedError;
   DateTime? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this JoinCallResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $JoinCallResponseCopyWith<JoinCallResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1266,18 +1099,16 @@ mixin _$JoinCallResponse {
 /// @nodoc
 abstract class $JoinCallResponseCopyWith<$Res> {
   factory $JoinCallResponseCopyWith(
-    JoinCallResponse value,
-    $Res Function(JoinCallResponse) then,
-  ) = _$JoinCallResponseCopyWithImpl<$Res, JoinCallResponse>;
+          JoinCallResponse value, $Res Function(JoinCallResponse) then) =
+      _$JoinCallResponseCopyWithImpl<$Res, JoinCallResponse>;
   @useResult
-  $Res call({
-    JoinCallData? data,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {JoinCallData? data,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   $JoinCallDataCopyWith<$Res>? get data;
 }
@@ -1292,8 +1123,6 @@ class _$JoinCallResponseCopyWithImpl<$Res, $Val extends JoinCallResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1304,45 +1133,34 @@ class _$JoinCallResponseCopyWithImpl<$Res, $Val extends JoinCallResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                freezed == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as JoinCallData?,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            statusCode:
-                freezed == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as JoinCallData?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $JoinCallDataCopyWith<$Res>? get data {
@@ -1359,20 +1177,18 @@ class _$JoinCallResponseCopyWithImpl<$Res, $Val extends JoinCallResponse>
 /// @nodoc
 abstract class _$$JoinCallResponseImplCopyWith<$Res>
     implements $JoinCallResponseCopyWith<$Res> {
-  factory _$$JoinCallResponseImplCopyWith(
-    _$JoinCallResponseImpl value,
-    $Res Function(_$JoinCallResponseImpl) then,
-  ) = __$$JoinCallResponseImplCopyWithImpl<$Res>;
+  factory _$$JoinCallResponseImplCopyWith(_$JoinCallResponseImpl value,
+          $Res Function(_$JoinCallResponseImpl) then) =
+      __$$JoinCallResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    JoinCallData? data,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {JoinCallData? data,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   @override
   $JoinCallDataCopyWith<$Res>? get data;
@@ -1382,13 +1198,10 @@ abstract class _$$JoinCallResponseImplCopyWith<$Res>
 class __$$JoinCallResponseImplCopyWithImpl<$Res>
     extends _$JoinCallResponseCopyWithImpl<$Res, _$JoinCallResponseImpl>
     implements _$$JoinCallResponseImplCopyWith<$Res> {
-  __$$JoinCallResponseImplCopyWithImpl(
-    _$JoinCallResponseImpl _value,
-    $Res Function(_$JoinCallResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$JoinCallResponseImplCopyWithImpl(_$JoinCallResponseImpl _value,
+      $Res Function(_$JoinCallResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1399,54 +1212,45 @@ class __$$JoinCallResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$JoinCallResponseImpl(
-        data:
-            freezed == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as JoinCallData?,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        statusCode:
-            freezed == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$JoinCallResponseImpl(
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as JoinCallData?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$JoinCallResponseImpl implements _JoinCallResponse {
-  const _$JoinCallResponseImpl({
-    this.data,
-    this.message,
-    this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  });
+  const _$JoinCallResponseImpl(
+      {this.data,
+      this.message,
+      this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp});
 
   factory _$JoinCallResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$JoinCallResponseImplFromJson(json);
@@ -1484,44 +1288,34 @@ class _$JoinCallResponseImpl implements _JoinCallResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    data,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType, data, message, statusCode, method, path, timestamp);
 
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$JoinCallResponseImplCopyWith<_$JoinCallResponseImpl> get copyWith =>
       __$$JoinCallResponseImplCopyWithImpl<_$JoinCallResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JoinCallResponseImplToJson(this);
+    return _$$JoinCallResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _JoinCallResponse implements JoinCallResponse {
-  const factory _JoinCallResponse({
-    final JoinCallData? data,
-    final String? message,
-    final int? statusCode,
-    final String? method,
-    final String? path,
-    final DateTime? timestamp,
-  }) = _$JoinCallResponseImpl;
+  const factory _JoinCallResponse(
+      {final JoinCallData? data,
+      final String? message,
+      final int? statusCode,
+      final String? method,
+      final String? path,
+      final DateTime? timestamp}) = _$JoinCallResponseImpl;
 
   factory _JoinCallResponse.fromJson(Map<String, dynamic> json) =
       _$JoinCallResponseImpl.fromJson;
@@ -1538,11 +1332,8 @@ abstract class _JoinCallResponse implements JoinCallResponse {
   String? get path;
   @override
   DateTime? get timestamp;
-
-  /// Create a copy of JoinCallResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$JoinCallResponseImplCopyWith<_$JoinCallResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1556,12 +1347,8 @@ mixin _$JoinCallData {
   String get token => throw _privateConstructorUsedError;
   String get room => throw _privateConstructorUsedError;
 
-  /// Serializes this JoinCallData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of JoinCallData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $JoinCallDataCopyWith<JoinCallData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1569,9 +1356,8 @@ mixin _$JoinCallData {
 /// @nodoc
 abstract class $JoinCallDataCopyWith<$Res> {
   factory $JoinCallDataCopyWith(
-    JoinCallData value,
-    $Res Function(JoinCallData) then,
-  ) = _$JoinCallDataCopyWithImpl<$Res, JoinCallData>;
+          JoinCallData value, $Res Function(JoinCallData) then) =
+      _$JoinCallDataCopyWithImpl<$Res, JoinCallData>;
   @useResult
   $Res call({String token, String room});
 }
@@ -1586,26 +1372,22 @@ class _$JoinCallDataCopyWithImpl<$Res, $Val extends JoinCallData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JoinCallData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? token = null, Object? room = null}) {
-    return _then(
-      _value.copyWith(
-            token:
-                null == token
-                    ? _value.token
-                    : token // ignore: cast_nullable_to_non_nullable
-                        as String,
-            room:
-                null == room
-                    ? _value.room
-                    : room // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? token = null,
+    Object? room = null,
+  }) {
+    return _then(_value.copyWith(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: null == room
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -1613,9 +1395,8 @@ class _$JoinCallDataCopyWithImpl<$Res, $Val extends JoinCallData>
 abstract class _$$JoinCallDataImplCopyWith<$Res>
     implements $JoinCallDataCopyWith<$Res> {
   factory _$$JoinCallDataImplCopyWith(
-    _$JoinCallDataImpl value,
-    $Res Function(_$JoinCallDataImpl) then,
-  ) = __$$JoinCallDataImplCopyWithImpl<$Res>;
+          _$JoinCallDataImpl value, $Res Function(_$JoinCallDataImpl) then) =
+      __$$JoinCallDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String token, String room});
@@ -1626,29 +1407,25 @@ class __$$JoinCallDataImplCopyWithImpl<$Res>
     extends _$JoinCallDataCopyWithImpl<$Res, _$JoinCallDataImpl>
     implements _$$JoinCallDataImplCopyWith<$Res> {
   __$$JoinCallDataImplCopyWithImpl(
-    _$JoinCallDataImpl _value,
-    $Res Function(_$JoinCallDataImpl) _then,
-  ) : super(_value, _then);
+      _$JoinCallDataImpl _value, $Res Function(_$JoinCallDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of JoinCallData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? token = null, Object? room = null}) {
-    return _then(
-      _$JoinCallDataImpl(
-        token:
-            null == token
-                ? _value.token
-                : token // ignore: cast_nullable_to_non_nullable
-                    as String,
-        room:
-            null == room
-                ? _value.room
-                : room // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? token = null,
+    Object? room = null,
+  }) {
+    return _then(_$JoinCallDataImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      room: null == room
+          ? _value.room
+          : room // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1679,13 +1456,11 @@ class _$JoinCallDataImpl implements _JoinCallData {
             (identical(other.room, room) || other.room == room));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, token, room);
 
-  /// Create a copy of JoinCallData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$JoinCallDataImplCopyWith<_$JoinCallDataImpl> get copyWith =>
@@ -1693,15 +1468,16 @@ class _$JoinCallDataImpl implements _JoinCallData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$JoinCallDataImplToJson(this);
+    return _$$JoinCallDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _JoinCallData implements JoinCallData {
-  const factory _JoinCallData({
-    required final String token,
-    required final String room,
-  }) = _$JoinCallDataImpl;
+  const factory _JoinCallData(
+      {required final String token,
+      required final String room}) = _$JoinCallDataImpl;
 
   factory _JoinCallData.fromJson(Map<String, dynamic> json) =
       _$JoinCallDataImpl.fromJson;
@@ -1710,11 +1486,8 @@ abstract class _JoinCallData implements JoinCallData {
   String get token;
   @override
   String get room;
-
-  /// Create a copy of JoinCallData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$JoinCallDataImplCopyWith<_$JoinCallDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

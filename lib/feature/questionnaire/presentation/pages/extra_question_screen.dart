@@ -9,6 +9,11 @@ import 'package:navithera_client/feature/questionnaire/presentation/providers/ex
 import 'package:navithera_client/feature/questionnaire/presentation/providers/questions_provider.dart';
 import 'package:navithera_client/feature/questionnaire/presentation/widgets/progress_indicator.dart';
 
+const Set<String> specialModalIds = {
+  'c372808e-7d34-43f9-97d5-57adfd7ba5bc', // Group Therapy
+  '8a08b922-60c1-4189-b243-e480ecbf1243'
+};
+
 final numQuestionsProvider = StateProvider<int>((ref) => 0);
 
 class ExtraQuestionsScreen extends ConsumerStatefulWidget {
@@ -70,17 +75,17 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
 
   int get totalPages {
     final modalId = ref.read(modalIdProvider);
-    return modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91' ? 4 : 5;
+    return (modalId != null && specialModalIds.contains(modalId)) ? 4 : 5;
   }
 
   List<Widget> get pages {
     final modalId = ref.read(modalIdProvider);
+    final isSpecial = modalId != null && specialModalIds.contains(modalId);
 
-    if (modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91') {
+    if (isSpecial) {
       // Skip levels page (4 pages total)
       return [
         wrapWithContainer(_buildLanguagesContent()),
-        // wrapWithContainer(_buildLevelsContent()), // Skipped
         _buildAvailabilityContent(),
         wrapWithContainer(_buildGoalsContent()),
         wrapWithContainer(_buildGenderContent()),
@@ -99,17 +104,9 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
 
   bool _isPageValid(int index) {
     final modalId = ref.read(modalIdProvider);
-    final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
+    final isSpecialModal = modalId != null && specialModalIds.contains(modalId);
 
-    // Adjust index mapping based on whether levels page is included
-    int actualPageIndex;
-    if (isSpecialModal) {
-      actualPageIndex = index;
-    } else {
-      actualPageIndex = index;
-    }
-
-    switch (actualPageIndex) {
+    switch (index) {
       case 0: // languages (always first)
         final selected = ref.read(selectedLanguagesProvider);
         if (selected.isEmpty) return false;
@@ -117,33 +114,29 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
         final hasOther = selected.contains('other');
         if (hasOther) {
           final otherLangText = ref.read(otherLanguageProvider).trim();
-          return otherLangText.isNotEmpty; // Use provider instead of controller
+          return otherLangText.isNotEmpty;
         }
         return true;
 
       case 1: // levels OR availability (depending on modal)
         if (!isSpecialModal) {
-          return ref.read(selectedLevelProvider) != null; // levels validation
+          return ref.read(selectedLevelProvider) != null;
         } else {
-          return ref
-              .read(selectedAvailabilityProvider)
-              .isNotEmpty; // availability validation
+          return ref.read(selectedAvailabilityProvider).isNotEmpty;
         }
 
       case 2: // availability OR goals (depending on modal)
         if (!isSpecialModal) {
-          return ref
-              .read(selectedAvailabilityProvider)
-              .isNotEmpty; // availability validation
+          return ref.read(selectedAvailabilityProvider).isNotEmpty;
         } else {
-          return ref.read(goalsProvider).trim().isNotEmpty; // goals validation
+          return ref.read(goalsProvider).trim().isNotEmpty;
         }
 
       case 3: // goals OR gender (depending on modal)
         if (!isSpecialModal) {
-          return ref.read(goalsProvider).trim().isNotEmpty; // goals validation
+          return ref.read(goalsProvider).trim().isNotEmpty;
         } else {
-          return ref.read(selectedGenderProvider) != null; // gender validation
+          return ref.read(selectedGenderProvider) != null;
         }
 
       case 4: // gender (only in normal flow)
@@ -218,13 +211,14 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
             );
           }).toList();
 
-      final isSpecialModal = modalId == 'c37e045d-811b-4fb2-bca4-d3595e41ef91';
+      final isSpecialModal =
+          modalId != null && specialModalIds.contains(modalId);
       final isUpdate = widget.preferenceId != null;
 
       if (isUpdate) {
         if (isSpecialModal) {
           final request = PreferenceUpdateWithoutLevelRequest(
-            modalId: modalId ?? '15712652-72bc-400e-8f51-784bef64d09a',
+            modalId: modalId,
             gender: selectedGender?.toLowerCase() ?? "",
             languageIds: cleanedSelectedLanguages,
             goal: goals.isNotEmpty ? goals : null,
@@ -1441,128 +1435,132 @@ class _ExtraQuestionsScreenState extends ConsumerState<ExtraQuestionsScreen> {
           return false;
         },
         child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAFC),
-        body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  top: 20.0,
-                  right: 20.0,
-                ),
-                child:
-                    widget.preferenceId != null
-                        ? QuestionnaireProgressIndicator(
-                          currentIndex: _currentIndex,
-                          totalQuestions: totalPagesCount, // Use dynamic total
-                        )
-                        : QuestionnaireProgressIndicator(
-                          currentIndex: _currentIndex + numQuestions,
-                          totalQuestions:
-                              numQuestions +
-                              totalPagesCount, // Use dynamic total
-                        ),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  onPageChanged:
-                      (index) => setState(() => _currentIndex = index),
-                  children: currentPages, // Use dynamic pages
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Container(
-          color: const Color(0xFFF8FAFC),
-          padding: const EdgeInsets.all(24),
-          child: Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed:
-                      _isLoading
-                          ? null
-                          : () {
-                            if (_currentIndex > 0) {
-                              _previousQuestion();
-                            } else {
-                              Navigator.of(context).pop();
-                            }
-                          },
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF7EB09B),
-                    side: const BorderSide(color: Color(0xFF7EB09B)),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Previous',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                flex: _currentIndex == 0 ? 1 : 2,
-                child: ElevatedButton(
-                  onPressed:
-                      _isLoading
-                          ? null
-                          : (_isPageValid(_currentIndex)
-                              ? _nextQuestion
-                              : null),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        _isPageValid(_currentIndex)
-                            ? const Color(0xFF7EB09B)
-                            : const Color(0xFFE2E8F0),
-                    foregroundColor:
-                        _isPageValid(_currentIndex)
-                            ? Colors.white
-                            : const Color(0xFFA0AEC0),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: _isPageValid(_currentIndex) ? 2 : 0,
+          backgroundColor: const Color(0xFFF8FAFC),
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20.0,
+                    top: 20.0,
+                    right: 20.0,
                   ),
                   child:
-                      _isLoading
-                          ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
-                              ),
-                            ),
+                      widget.preferenceId != null
+                          ? QuestionnaireProgressIndicator(
+                            currentIndex: _currentIndex,
+                            totalQuestions:
+                                totalPagesCount, // Use dynamic total
                           )
-                          : Text(
-                            _currentIndex == totalPagesCount - 1
-                                ? 'Complete'
-                                : 'Next', // Dynamic button text
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          : QuestionnaireProgressIndicator(
+                            currentIndex: _currentIndex + numQuestions,
+                            totalQuestions:
+                                numQuestions +
+                                totalPagesCount, // Use dynamic total
                           ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: PageView(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged:
+                        (index) => setState(() => _currentIndex = index),
+                    children: currentPages, // Use dynamic pages
+                  ),
+                ),
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            color: const Color(0xFFF8FAFC),
+            padding: const EdgeInsets.all(24),
+            child: Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed:
+                        _isLoading
+                            ? null
+                            : () {
+                              if (_currentIndex > 0) {
+                                _previousQuestion();
+                              } else {
+                                Navigator.of(context).pop();
+                              }
+                            },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF7EB09B),
+                      side: const BorderSide(color: Color(0xFF7EB09B)),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Previous',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  flex: _currentIndex == 0 ? 1 : 2,
+                  child: ElevatedButton(
+                    onPressed:
+                        _isLoading
+                            ? null
+                            : (_isPageValid(_currentIndex)
+                                ? _nextQuestion
+                                : null),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          _isPageValid(_currentIndex)
+                              ? const Color(0xFF7EB09B)
+                              : const Color(0xFFE2E8F0),
+                      foregroundColor:
+                          _isPageValid(_currentIndex)
+                              ? Colors.white
+                              : const Color(0xFFA0AEC0),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: _isPageValid(_currentIndex) ? 2 : 0,
+                    ),
+                    child:
+                        _isLoading
+                            ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                            : Text(
+                              _currentIndex == totalPagesCount - 1
+                                  ? 'Complete'
+                                  : 'Next', // Dynamic button text
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
 
 Widget wrapWithContainer(Widget child) {

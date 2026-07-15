@@ -12,8 +12,7 @@ part of 'users_list_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UsersListResponse _$UsersListResponseFromJson(Map<String, dynamic> json) {
   return _UsersListResponse.fromJson(json);
@@ -26,12 +25,8 @@ mixin _$UsersListResponse {
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
 
-  /// Serializes this UsersListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UsersListResponseCopyWith<UsersListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,16 +34,14 @@ mixin _$UsersListResponse {
 /// @nodoc
 abstract class $UsersListResponseCopyWith<$Res> {
   factory $UsersListResponseCopyWith(
-    UsersListResponse value,
-    $Res Function(UsersListResponse) then,
-  ) = _$UsersListResponseCopyWithImpl<$Res, UsersListResponse>;
+          UsersListResponse value, $Res Function(UsersListResponse) then) =
+      _$UsersListResponseCopyWithImpl<$Res, UsersListResponse>;
   @useResult
-  $Res call({
-    List<UserModel> data,
-    Pagination pagination,
-    String message,
-    int statusCode,
-  });
+  $Res call(
+      {List<UserModel> data,
+      Pagination pagination,
+      String message,
+      int statusCode});
 
   $PaginationCopyWith<$Res> get pagination;
 }
@@ -63,8 +56,6 @@ class _$UsersListResponseCopyWithImpl<$Res, $Val extends UsersListResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,35 +64,26 @@ class _$UsersListResponseCopyWithImpl<$Res, $Val extends UsersListResponse>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<UserModel>,
-            pagination:
-                null == pagination
-                    ? _value.pagination
-                    : pagination // ignore: cast_nullable_to_non_nullable
-                        as Pagination,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>,
+      pagination: null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -114,18 +96,16 @@ class _$UsersListResponseCopyWithImpl<$Res, $Val extends UsersListResponse>
 /// @nodoc
 abstract class _$$UsersListResponseImplCopyWith<$Res>
     implements $UsersListResponseCopyWith<$Res> {
-  factory _$$UsersListResponseImplCopyWith(
-    _$UsersListResponseImpl value,
-    $Res Function(_$UsersListResponseImpl) then,
-  ) = __$$UsersListResponseImplCopyWithImpl<$Res>;
+  factory _$$UsersListResponseImplCopyWith(_$UsersListResponseImpl value,
+          $Res Function(_$UsersListResponseImpl) then) =
+      __$$UsersListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<UserModel> data,
-    Pagination pagination,
-    String message,
-    int statusCode,
-  });
+  $Res call(
+      {List<UserModel> data,
+      Pagination pagination,
+      String message,
+      int statusCode});
 
   @override
   $PaginationCopyWith<$Res> get pagination;
@@ -135,13 +115,10 @@ abstract class _$$UsersListResponseImplCopyWith<$Res>
 class __$$UsersListResponseImplCopyWithImpl<$Res>
     extends _$UsersListResponseCopyWithImpl<$Res, _$UsersListResponseImpl>
     implements _$$UsersListResponseImplCopyWith<$Res> {
-  __$$UsersListResponseImplCopyWithImpl(
-    _$UsersListResponseImpl _value,
-    $Res Function(_$UsersListResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$UsersListResponseImplCopyWithImpl(_$UsersListResponseImpl _value,
+      $Res Function(_$UsersListResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,42 +127,36 @@ class __$$UsersListResponseImplCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(
-      _$UsersListResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<UserModel>,
-        pagination:
-            null == pagination
-                ? _value.pagination
-                : pagination // ignore: cast_nullable_to_non_nullable
-                    as Pagination,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$UsersListResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<UserModel>,
+      pagination: null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UsersListResponseImpl implements _UsersListResponse {
-  const _$UsersListResponseImpl({
-    required final List<UserModel> data,
-    required this.pagination,
-    required this.message,
-    required this.statusCode,
-  }) : _data = data;
+  const _$UsersListResponseImpl(
+      {required final List<UserModel> data,
+      required this.pagination,
+      required this.message,
+      required this.statusCode})
+      : _data = data;
 
   factory _$UsersListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$UsersListResponseImplFromJson(json);
@@ -223,40 +194,36 @@ class _$UsersListResponseImpl implements _UsersListResponse {
                 other.statusCode == statusCode));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    pagination,
-    message,
-    statusCode,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      pagination,
+      message,
+      statusCode);
 
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UsersListResponseImplCopyWith<_$UsersListResponseImpl> get copyWith =>
       __$$UsersListResponseImplCopyWithImpl<_$UsersListResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UsersListResponseImplToJson(this);
+    return _$$UsersListResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UsersListResponse implements UsersListResponse {
-  const factory _UsersListResponse({
-    required final List<UserModel> data,
-    required final Pagination pagination,
-    required final String message,
-    required final int statusCode,
-  }) = _$UsersListResponseImpl;
+  const factory _UsersListResponse(
+      {required final List<UserModel> data,
+      required final Pagination pagination,
+      required final String message,
+      required final int statusCode}) = _$UsersListResponseImpl;
 
   factory _UsersListResponse.fromJson(Map<String, dynamic> json) =
       _$UsersListResponseImpl.fromJson;
@@ -269,11 +236,8 @@ abstract class _UsersListResponse implements UsersListResponse {
   String get message;
   @override
   int get statusCode;
-
-  /// Create a copy of UsersListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UsersListResponseImplCopyWith<_$UsersListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -289,12 +253,8 @@ mixin _$Pagination {
   int get currentPage => throw _privateConstructorUsedError;
   int get pageSize => throw _privateConstructorUsedError;
 
-  /// Serializes this Pagination to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PaginationCopyWith<Pagination> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -302,9 +262,8 @@ mixin _$Pagination {
 /// @nodoc
 abstract class $PaginationCopyWith<$Res> {
   factory $PaginationCopyWith(
-    Pagination value,
-    $Res Function(Pagination) then,
-  ) = _$PaginationCopyWithImpl<$Res, Pagination>;
+          Pagination value, $Res Function(Pagination) then) =
+      _$PaginationCopyWithImpl<$Res, Pagination>;
   @useResult
   $Res call({int totalItems, int totalPages, int currentPage, int pageSize});
 }
@@ -319,8 +278,6 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -329,31 +286,24 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
     Object? currentPage = null,
     Object? pageSize = null,
   }) {
-    return _then(
-      _value.copyWith(
-            totalItems:
-                null == totalItems
-                    ? _value.totalItems
-                    : totalItems // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalPages:
-                null == totalPages
-                    ? _value.totalPages
-                    : totalPages // ignore: cast_nullable_to_non_nullable
-                        as int,
-            currentPage:
-                null == currentPage
-                    ? _value.currentPage
-                    : currentPage // ignore: cast_nullable_to_non_nullable
-                        as int,
-            pageSize:
-                null == pageSize
-                    ? _value.pageSize
-                    : pageSize // ignore: cast_nullable_to_non_nullable
-                        as int,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
   }
 }
 
@@ -361,9 +311,8 @@ class _$PaginationCopyWithImpl<$Res, $Val extends Pagination>
 abstract class _$$PaginationImplCopyWith<$Res>
     implements $PaginationCopyWith<$Res> {
   factory _$$PaginationImplCopyWith(
-    _$PaginationImpl value,
-    $Res Function(_$PaginationImpl) then,
-  ) = __$$PaginationImplCopyWithImpl<$Res>;
+          _$PaginationImpl value, $Res Function(_$PaginationImpl) then) =
+      __$$PaginationImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int totalItems, int totalPages, int currentPage, int pageSize});
@@ -374,12 +323,9 @@ class __$$PaginationImplCopyWithImpl<$Res>
     extends _$PaginationCopyWithImpl<$Res, _$PaginationImpl>
     implements _$$PaginationImplCopyWith<$Res> {
   __$$PaginationImplCopyWithImpl(
-    _$PaginationImpl _value,
-    $Res Function(_$PaginationImpl) _then,
-  ) : super(_value, _then);
+      _$PaginationImpl _value, $Res Function(_$PaginationImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -388,42 +334,35 @@ class __$$PaginationImplCopyWithImpl<$Res>
     Object? currentPage = null,
     Object? pageSize = null,
   }) {
-    return _then(
-      _$PaginationImpl(
-        totalItems:
-            null == totalItems
-                ? _value.totalItems
-                : totalItems // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalPages:
-            null == totalPages
-                ? _value.totalPages
-                : totalPages // ignore: cast_nullable_to_non_nullable
-                    as int,
-        currentPage:
-            null == currentPage
-                ? _value.currentPage
-                : currentPage // ignore: cast_nullable_to_non_nullable
-                    as int,
-        pageSize:
-            null == pageSize
-                ? _value.pageSize
-                : pageSize // ignore: cast_nullable_to_non_nullable
-                    as int,
-      ),
-    );
+    return _then(_$PaginationImpl(
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      pageSize: null == pageSize
+          ? _value.pageSize
+          : pageSize // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PaginationImpl implements _Pagination {
-  const _$PaginationImpl({
-    required this.totalItems,
-    required this.totalPages,
-    required this.currentPage,
-    required this.pageSize,
-  });
+  const _$PaginationImpl(
+      {required this.totalItems,
+      required this.totalPages,
+      required this.currentPage,
+      required this.pageSize});
 
   factory _$PaginationImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaginationImplFromJson(json);
@@ -457,14 +396,12 @@ class _$PaginationImpl implements _Pagination {
                 other.pageSize == pageSize));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, totalItems, totalPages, currentPage, pageSize);
 
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
@@ -472,17 +409,18 @@ class _$PaginationImpl implements _Pagination {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaginationImplToJson(this);
+    return _$$PaginationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Pagination implements Pagination {
-  const factory _Pagination({
-    required final int totalItems,
-    required final int totalPages,
-    required final int currentPage,
-    required final int pageSize,
-  }) = _$PaginationImpl;
+  const factory _Pagination(
+      {required final int totalItems,
+      required final int totalPages,
+      required final int currentPage,
+      required final int pageSize}) = _$PaginationImpl;
 
   factory _Pagination.fromJson(Map<String, dynamic> json) =
       _$PaginationImpl.fromJson;
@@ -495,11 +433,8 @@ abstract class _Pagination implements Pagination {
   int get currentPage;
   @override
   int get pageSize;
-
-  /// Create a copy of Pagination
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PaginationImplCopyWith<_$PaginationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

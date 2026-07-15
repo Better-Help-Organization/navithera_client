@@ -12,8 +12,7 @@ part of 'upcoming_session_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SessionListResponse _$SessionListResponseFromJson(Map<String, dynamic> json) {
   return _SessionListResponse.fromJson(json);
@@ -29,12 +28,8 @@ mixin _$SessionListResponse {
   String? get path => throw _privateConstructorUsedError;
   DateTime? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this SessionListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SessionListResponseCopyWith<SessionListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,19 +37,17 @@ mixin _$SessionListResponse {
 /// @nodoc
 abstract class $SessionListResponseCopyWith<$Res> {
   factory $SessionListResponseCopyWith(
-    SessionListResponse value,
-    $Res Function(SessionListResponse) then,
-  ) = _$SessionListResponseCopyWithImpl<$Res, SessionListResponse>;
+          SessionListResponse value, $Res Function(SessionListResponse) then) =
+      _$SessionListResponseCopyWithImpl<$Res, SessionListResponse>;
   @useResult
-  $Res call({
-    List<SessionItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<SessionItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   $PaginationCopyWith<$Res>? get pagination;
 }
@@ -69,8 +62,6 @@ class _$SessionListResponseCopyWithImpl<$Res, $Val extends SessionListResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,50 +73,38 @@ class _$SessionListResponseCopyWithImpl<$Res, $Val extends SessionListResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<SessionItem>,
-            pagination:
-                freezed == pagination
-                    ? _value.pagination
-                    : pagination // ignore: cast_nullable_to_non_nullable
-                        as Pagination?,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            statusCode:
-                freezed == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<SessionItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res>? get pagination {
@@ -142,21 +121,19 @@ class _$SessionListResponseCopyWithImpl<$Res, $Val extends SessionListResponse>
 /// @nodoc
 abstract class _$$SessionListResponseImplCopyWith<$Res>
     implements $SessionListResponseCopyWith<$Res> {
-  factory _$$SessionListResponseImplCopyWith(
-    _$SessionListResponseImpl value,
-    $Res Function(_$SessionListResponseImpl) then,
-  ) = __$$SessionListResponseImplCopyWithImpl<$Res>;
+  factory _$$SessionListResponseImplCopyWith(_$SessionListResponseImpl value,
+          $Res Function(_$SessionListResponseImpl) then) =
+      __$$SessionListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<SessionItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<SessionItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   @override
   $PaginationCopyWith<$Res>? get pagination;
@@ -166,13 +143,10 @@ abstract class _$$SessionListResponseImplCopyWith<$Res>
 class __$$SessionListResponseImplCopyWithImpl<$Res>
     extends _$SessionListResponseCopyWithImpl<$Res, _$SessionListResponseImpl>
     implements _$$SessionListResponseImplCopyWith<$Res> {
-  __$$SessionListResponseImplCopyWithImpl(
-    _$SessionListResponseImpl _value,
-    $Res Function(_$SessionListResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$SessionListResponseImplCopyWithImpl(_$SessionListResponseImpl _value,
+      $Res Function(_$SessionListResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -184,60 +158,51 @@ class __$$SessionListResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$SessionListResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<SessionItem>,
-        pagination:
-            freezed == pagination
-                ? _value.pagination
-                : pagination // ignore: cast_nullable_to_non_nullable
-                    as Pagination?,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        statusCode:
-            freezed == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$SessionListResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<SessionItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SessionListResponseImpl implements _SessionListResponse {
-  const _$SessionListResponseImpl({
-    required final List<SessionItem> data,
-    this.pagination,
-    this.message,
-    this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  }) : _data = data;
+  const _$SessionListResponseImpl(
+      {required final List<SessionItem> data,
+      this.pagination,
+      this.message,
+      this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp})
+      : _data = data;
 
   factory _$SessionListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$SessionListResponseImplFromJson(json);
@@ -285,46 +250,42 @@ class _$SessionListResponseImpl implements _SessionListResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    pagination,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      pagination,
+      message,
+      statusCode,
+      method,
+      path,
+      timestamp);
 
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SessionListResponseImplCopyWith<_$SessionListResponseImpl> get copyWith =>
       __$$SessionListResponseImplCopyWithImpl<_$SessionListResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SessionListResponseImplToJson(this);
+    return _$$SessionListResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SessionListResponse implements SessionListResponse {
-  const factory _SessionListResponse({
-    required final List<SessionItem> data,
-    final Pagination? pagination,
-    final String? message,
-    final int? statusCode,
-    final String? method,
-    final String? path,
-    final DateTime? timestamp,
-  }) = _$SessionListResponseImpl;
+  const factory _SessionListResponse(
+      {required final List<SessionItem> data,
+      final Pagination? pagination,
+      final String? message,
+      final int? statusCode,
+      final String? method,
+      final String? path,
+      final DateTime? timestamp}) = _$SessionListResponseImpl;
 
   factory _SessionListResponse.fromJson(Map<String, dynamic> json) =
       _$SessionListResponseImpl.fromJson;
@@ -343,11 +304,8 @@ abstract class _SessionListResponse implements SessionListResponse {
   String? get path;
   @override
   DateTime? get timestamp;
-
-  /// Create a copy of SessionListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SessionListResponseImplCopyWith<_$SessionListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -370,17 +328,15 @@ mixin _$SessionItem {
   String? get type => throw _privateConstructorUsedError;
   String? get note => throw _privateConstructorUsedError;
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get client => throw _privateConstructorUsedError; // Add therapist field
+  UserModel? get client =>
+      throw _privateConstructorUsedError; // Add therapist field
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get therapist => throw _privateConstructorUsedError; // Add any other therapist-related fields you need
+  UserModel? get therapist =>
+      throw _privateConstructorUsedError; // Add any other therapist-related fields you need
   List<dynamic>? get group => throw _privateConstructorUsedError;
 
-  /// Serializes this SessionItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SessionItemCopyWith<SessionItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -388,26 +344,25 @@ mixin _$SessionItem {
 /// @nodoc
 abstract class $SessionItemCopyWith<$Res> {
   factory $SessionItemCopyWith(
-    SessionItem value,
-    $Res Function(SessionItem) then,
-  ) = _$SessionItemCopyWithImpl<$Res, SessionItem>;
+          SessionItem value, $Res Function(SessionItem) then) =
+      _$SessionItemCopyWithImpl<$Res, SessionItem>;
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-    DateTime schedule,
-    String? approvalStatus,
-    @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
-    bool? hasTherapistAttended,
-    @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
-    bool? hasClientAttended,
-    int? duration,
-    String? type,
-    String? note,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? therapist,
-    List<dynamic>? group,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
+      DateTime schedule,
+      String? approvalStatus,
+      @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
+      bool? hasTherapistAttended,
+      @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
+      bool? hasClientAttended,
+      int? duration,
+      String? type,
+      String? note,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
+      UserModel? therapist,
+      List<dynamic>? group});
 
   $UserModelCopyWith<$Res>? get client;
   $UserModelCopyWith<$Res>? get therapist;
@@ -423,8 +378,6 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -440,70 +393,54 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
     Object? therapist = freezed,
     Object? group = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            schedule:
-                null == schedule
-                    ? _value.schedule
-                    : schedule // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            approvalStatus:
-                freezed == approvalStatus
-                    ? _value.approvalStatus
-                    : approvalStatus // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            hasTherapistAttended:
-                freezed == hasTherapistAttended
-                    ? _value.hasTherapistAttended
-                    : hasTherapistAttended // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            hasClientAttended:
-                freezed == hasClientAttended
-                    ? _value.hasClientAttended
-                    : hasClientAttended // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            duration:
-                freezed == duration
-                    ? _value.duration
-                    : duration // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            type:
-                freezed == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            note:
-                freezed == note
-                    ? _value.note
-                    : note // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            client:
-                freezed == client
-                    ? _value.client
-                    : client // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-            therapist:
-                freezed == therapist
-                    ? _value.therapist
-                    : therapist // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-            group:
-                freezed == group
-                    ? _value.group
-                    : group // ignore: cast_nullable_to_non_nullable
-                        as List<dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      approvalStatus: freezed == approvalStatus
+          ? _value.approvalStatus
+          : approvalStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasTherapistAttended: freezed == hasTherapistAttended
+          ? _value.hasTherapistAttended
+          : hasTherapistAttended // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      hasClientAttended: freezed == hasClientAttended
+          ? _value.hasClientAttended
+          : hasClientAttended // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      therapist: freezed == therapist
+          ? _value.therapist
+          : therapist // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      group: freezed == group
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+    ) as $Val);
   }
 
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get client {
@@ -516,8 +453,6 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
     });
   }
 
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get therapist {
@@ -535,27 +470,26 @@ class _$SessionItemCopyWithImpl<$Res, $Val extends SessionItem>
 abstract class _$$SessionItemImplCopyWith<$Res>
     implements $SessionItemCopyWith<$Res> {
   factory _$$SessionItemImplCopyWith(
-    _$SessionItemImpl value,
-    $Res Function(_$SessionItemImpl) then,
-  ) = __$$SessionItemImplCopyWithImpl<$Res>;
+          _$SessionItemImpl value, $Res Function(_$SessionItemImpl) then) =
+      __$$SessionItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-    DateTime schedule,
-    String? approvalStatus,
-    @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
-    bool? hasTherapistAttended,
-    @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
-    bool? hasClientAttended,
-    int? duration,
-    String? type,
-    String? note,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? therapist,
-    List<dynamic>? group,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
+      DateTime schedule,
+      String? approvalStatus,
+      @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
+      bool? hasTherapistAttended,
+      @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
+      bool? hasClientAttended,
+      int? duration,
+      String? type,
+      String? note,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson) UserModel? client,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
+      UserModel? therapist,
+      List<dynamic>? group});
 
   @override
   $UserModelCopyWith<$Res>? get client;
@@ -568,12 +502,9 @@ class __$$SessionItemImplCopyWithImpl<$Res>
     extends _$SessionItemCopyWithImpl<$Res, _$SessionItemImpl>
     implements _$$SessionItemImplCopyWith<$Res> {
   __$$SessionItemImplCopyWithImpl(
-    _$SessionItemImpl _value,
-    $Res Function(_$SessionItemImpl) _then,
-  ) : super(_value, _then);
+      _$SessionItemImpl _value, $Res Function(_$SessionItemImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -589,87 +520,74 @@ class __$$SessionItemImplCopyWithImpl<$Res>
     Object? therapist = freezed,
     Object? group = freezed,
   }) {
-    return _then(
-      _$SessionItemImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        schedule:
-            null == schedule
-                ? _value.schedule
-                : schedule // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        approvalStatus:
-            freezed == approvalStatus
-                ? _value.approvalStatus
-                : approvalStatus // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        hasTherapistAttended:
-            freezed == hasTherapistAttended
-                ? _value.hasTherapistAttended
-                : hasTherapistAttended // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        hasClientAttended:
-            freezed == hasClientAttended
-                ? _value.hasClientAttended
-                : hasClientAttended // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        duration:
-            freezed == duration
-                ? _value.duration
-                : duration // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        type:
-            freezed == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        note:
-            freezed == note
-                ? _value.note
-                : note // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        client:
-            freezed == client
-                ? _value.client
-                : client // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-        therapist:
-            freezed == therapist
-                ? _value.therapist
-                : therapist // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-        group:
-            freezed == group
-                ? _value._group
-                : group // ignore: cast_nullable_to_non_nullable
-                    as List<dynamic>?,
-      ),
-    );
+    return _then(_$SessionItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      schedule: null == schedule
+          ? _value.schedule
+          : schedule // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      approvalStatus: freezed == approvalStatus
+          ? _value.approvalStatus
+          : approvalStatus // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasTherapistAttended: freezed == hasTherapistAttended
+          ? _value.hasTherapistAttended
+          : hasTherapistAttended // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      hasClientAttended: freezed == hasClientAttended
+          ? _value.hasClientAttended
+          : hasClientAttended // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      duration: freezed == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int?,
+      type: freezed == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String?,
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      therapist: freezed == therapist
+          ? _value.therapist
+          : therapist // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      group: freezed == group
+          ? _value._group
+          : group // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$SessionItemImpl implements _SessionItem {
-  const _$SessionItemImpl({
-    required this.id,
-    @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-    required this.schedule,
-    this.approvalStatus,
-    @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
-    this.hasTherapistAttended,
-    @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
-    this.hasClientAttended,
-    this.duration,
-    this.type,
-    this.note,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.client,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.therapist,
-    final List<dynamic>? group,
-  }) : _group = group;
+  const _$SessionItemImpl(
+      {required this.id,
+      @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
+      required this.schedule,
+      this.approvalStatus,
+      @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
+      this.hasTherapistAttended,
+      @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
+      this.hasClientAttended,
+      this.duration,
+      this.type,
+      this.note,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.client,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson) this.therapist,
+      final List<dynamic>? group})
+      : _group = group;
 
   factory _$SessionItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$SessionItemImplFromJson(json);
@@ -696,13 +614,13 @@ class _$SessionItemImpl implements _SessionItem {
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
   final UserModel? client;
-  // Add therapist field
+// Add therapist field
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
   final UserModel? therapist;
-  // Add any other therapist-related fields you need
+// Add any other therapist-related fields you need
   final List<dynamic>? _group;
-  // Add any other therapist-related fields you need
+// Add any other therapist-related fields you need
   @override
   List<dynamic>? get group {
     final value = _group;
@@ -741,26 +659,23 @@ class _$SessionItemImpl implements _SessionItem {
             const DeepCollectionEquality().equals(other._group, _group));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    schedule,
-    approvalStatus,
-    hasTherapistAttended,
-    hasClientAttended,
-    duration,
-    type,
-    note,
-    client,
-    therapist,
-    const DeepCollectionEquality().hash(_group),
-  );
+      runtimeType,
+      id,
+      schedule,
+      approvalStatus,
+      hasTherapistAttended,
+      hasClientAttended,
+      duration,
+      type,
+      note,
+      client,
+      therapist,
+      const DeepCollectionEquality().hash(_group));
 
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SessionItemImplCopyWith<_$SessionItemImpl> get copyWith =>
@@ -768,29 +683,30 @@ class _$SessionItemImpl implements _SessionItem {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SessionItemImplToJson(this);
+    return _$$SessionItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _SessionItem implements SessionItem {
-  const factory _SessionItem({
-    required final String id,
-    @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
-    required final DateTime schedule,
-    final String? approvalStatus,
-    @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
-    final bool? hasTherapistAttended,
-    @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
-    final bool? hasClientAttended,
-    final int? duration,
-    final String? type,
-    final String? note,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-    final UserModel? client,
-    @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-    final UserModel? therapist,
-    final List<dynamic>? group,
-  }) = _$SessionItemImpl;
+  const factory _SessionItem(
+      {required final String id,
+      @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
+      required final DateTime schedule,
+      final String? approvalStatus,
+      @JsonKey(name: 'hasTherapistAttended', fromJson: _boolFromJson)
+      final bool? hasTherapistAttended,
+      @JsonKey(name: 'hasclientAttended', fromJson: _boolFromJson)
+      final bool? hasClientAttended,
+      final int? duration,
+      final String? type,
+      final String? note,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
+      final UserModel? client,
+      @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
+      final UserModel? therapist,
+      final List<dynamic>? group}) = _$SessionItemImpl;
 
   factory _SessionItem.fromJson(Map<String, dynamic> json) =
       _$SessionItemImpl.fromJson;
@@ -816,17 +732,14 @@ abstract class _SessionItem implements SessionItem {
   String? get note;
   @override
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get client; // Add therapist field
-  @override
+  UserModel? get client;
+  @override // Add therapist field
   @JsonKey(fromJson: _userFromJson, toJson: _userToJson)
-  UserModel? get therapist; // Add any other therapist-related fields you need
-  @override
+  UserModel? get therapist;
+  @override // Add any other therapist-related fields you need
   List<dynamic>? get group;
-
-  /// Create a copy of SessionItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SessionItemImplCopyWith<_$SessionItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

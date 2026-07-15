@@ -12,8 +12,7 @@ part of 'live_session_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LiveSessionState {
@@ -26,7 +25,8 @@ mixin _$LiveSessionState {
     required TResult Function() joining,
     required TResult Function(JoinCallData joinData) joinSuccess,
     required TResult Function(Failure failure) joinError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
@@ -36,7 +36,8 @@ mixin _$LiveSessionState {
     TResult? Function()? joining,
     TResult? Function(JoinCallData joinData)? joinSuccess,
     TResult? Function(Failure failure)? joinError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -47,7 +48,8 @@ mixin _$LiveSessionState {
     TResult Function(JoinCallData joinData)? joinSuccess,
     TResult Function(Failure failure)? joinError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LiveSessionInitial value) initial,
@@ -57,7 +59,8 @@ mixin _$LiveSessionState {
     required TResult Function(LiveSessionJoining value) joining,
     required TResult Function(LiveSessionJoinSuccess value) joinSuccess,
     required TResult Function(LiveSessionJoinError value) joinError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LiveSessionInitial value)? initial,
@@ -67,7 +70,8 @@ mixin _$LiveSessionState {
     TResult? Function(LiveSessionJoining value)? joining,
     TResult? Function(LiveSessionJoinSuccess value)? joinSuccess,
     TResult? Function(LiveSessionJoinError value)? joinError,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LiveSessionInitial value)? initial,
@@ -78,15 +82,15 @@ mixin _$LiveSessionState {
     TResult Function(LiveSessionJoinSuccess value)? joinSuccess,
     TResult Function(LiveSessionJoinError value)? joinError,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LiveSessionStateCopyWith<$Res> {
   factory $LiveSessionStateCopyWith(
-    LiveSessionState value,
-    $Res Function(LiveSessionState) then,
-  ) = _$LiveSessionStateCopyWithImpl<$Res, LiveSessionState>;
+          LiveSessionState value, $Res Function(LiveSessionState) then) =
+      _$LiveSessionStateCopyWithImpl<$Res, LiveSessionState>;
 }
 
 /// @nodoc
@@ -98,30 +102,22 @@ class _$LiveSessionStateCopyWithImpl<$Res, $Val extends LiveSessionState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$LiveSessionInitialImplCopyWith<$Res> {
-  factory _$$LiveSessionInitialImplCopyWith(
-    _$LiveSessionInitialImpl value,
-    $Res Function(_$LiveSessionInitialImpl) then,
-  ) = __$$LiveSessionInitialImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionInitialImplCopyWith(_$LiveSessionInitialImpl value,
+          $Res Function(_$LiveSessionInitialImpl) then) =
+      __$$LiveSessionInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$LiveSessionInitialImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionInitialImpl>
     implements _$$LiveSessionInitialImplCopyWith<$Res> {
-  __$$LiveSessionInitialImplCopyWithImpl(
-    _$LiveSessionInitialImpl _value,
-    $Res Function(_$LiveSessionInitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
+  __$$LiveSessionInitialImplCopyWithImpl(_$LiveSessionInitialImpl _value,
+      $Res Function(_$LiveSessionInitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -242,23 +238,18 @@ abstract class LiveSessionInitial implements LiveSessionState {
 
 /// @nodoc
 abstract class _$$LiveSessionLoadingImplCopyWith<$Res> {
-  factory _$$LiveSessionLoadingImplCopyWith(
-    _$LiveSessionLoadingImpl value,
-    $Res Function(_$LiveSessionLoadingImpl) then,
-  ) = __$$LiveSessionLoadingImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionLoadingImplCopyWith(_$LiveSessionLoadingImpl value,
+          $Res Function(_$LiveSessionLoadingImpl) then) =
+      __$$LiveSessionLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$LiveSessionLoadingImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionLoadingImpl>
     implements _$$LiveSessionLoadingImplCopyWith<$Res> {
-  __$$LiveSessionLoadingImplCopyWithImpl(
-    _$LiveSessionLoadingImpl _value,
-    $Res Function(_$LiveSessionLoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
+  __$$LiveSessionLoadingImplCopyWithImpl(_$LiveSessionLoadingImpl _value,
+      $Res Function(_$LiveSessionLoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -379,10 +370,9 @@ abstract class LiveSessionLoading implements LiveSessionState {
 
 /// @nodoc
 abstract class _$$LiveSessionLoadedImplCopyWith<$Res> {
-  factory _$$LiveSessionLoadedImplCopyWith(
-    _$LiveSessionLoadedImpl value,
-    $Res Function(_$LiveSessionLoadedImpl) then,
-  ) = __$$LiveSessionLoadedImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionLoadedImplCopyWith(_$LiveSessionLoadedImpl value,
+          $Res Function(_$LiveSessionLoadedImpl) then) =
+      __$$LiveSessionLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<ChatItem> activeCalls});
 }
@@ -391,24 +381,21 @@ abstract class _$$LiveSessionLoadedImplCopyWith<$Res> {
 class __$$LiveSessionLoadedImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionLoadedImpl>
     implements _$$LiveSessionLoadedImplCopyWith<$Res> {
-  __$$LiveSessionLoadedImplCopyWithImpl(
-    _$LiveSessionLoadedImpl _value,
-    $Res Function(_$LiveSessionLoadedImpl) _then,
-  ) : super(_value, _then);
+  __$$LiveSessionLoadedImplCopyWithImpl(_$LiveSessionLoadedImpl _value,
+      $Res Function(_$LiveSessionLoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? activeCalls = null}) {
-    return _then(
-      _$LiveSessionLoadedImpl(
-        null == activeCalls
-            ? _value._activeCalls
-            : activeCalls // ignore: cast_nullable_to_non_nullable
-                as List<ChatItem>,
-      ),
-    );
+  $Res call({
+    Object? activeCalls = null,
+  }) {
+    return _then(_$LiveSessionLoadedImpl(
+      null == activeCalls
+          ? _value._activeCalls
+          : activeCalls // ignore: cast_nullable_to_non_nullable
+              as List<ChatItem>,
+    ));
   }
 }
 
@@ -416,7 +403,7 @@ class __$$LiveSessionLoadedImplCopyWithImpl<$Res>
 
 class _$LiveSessionLoadedImpl implements LiveSessionLoaded {
   const _$LiveSessionLoadedImpl(final List<ChatItem> activeCalls)
-    : _activeCalls = activeCalls;
+      : _activeCalls = activeCalls;
 
   final List<ChatItem> _activeCalls;
   @override
@@ -436,28 +423,20 @@ class _$LiveSessionLoadedImpl implements LiveSessionLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LiveSessionLoadedImpl &&
-            const DeepCollectionEquality().equals(
-              other._activeCalls,
-              _activeCalls,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._activeCalls, _activeCalls));
   }
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_activeCalls),
-  );
+      runtimeType, const DeepCollectionEquality().hash(_activeCalls));
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LiveSessionLoadedImplCopyWith<_$LiveSessionLoadedImpl> get copyWith =>
       __$$LiveSessionLoadedImplCopyWithImpl<_$LiveSessionLoadedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -557,20 +536,16 @@ abstract class LiveSessionLoaded implements LiveSessionState {
       _$LiveSessionLoadedImpl;
 
   List<ChatItem> get activeCalls;
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LiveSessionLoadedImplCopyWith<_$LiveSessionLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LiveSessionErrorImplCopyWith<$Res> {
-  factory _$$LiveSessionErrorImplCopyWith(
-    _$LiveSessionErrorImpl value,
-    $Res Function(_$LiveSessionErrorImpl) then,
-  ) = __$$LiveSessionErrorImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionErrorImplCopyWith(_$LiveSessionErrorImpl value,
+          $Res Function(_$LiveSessionErrorImpl) then) =
+      __$$LiveSessionErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -581,28 +556,23 @@ abstract class _$$LiveSessionErrorImplCopyWith<$Res> {
 class __$$LiveSessionErrorImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionErrorImpl>
     implements _$$LiveSessionErrorImplCopyWith<$Res> {
-  __$$LiveSessionErrorImplCopyWithImpl(
-    _$LiveSessionErrorImpl _value,
-    $Res Function(_$LiveSessionErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$LiveSessionErrorImplCopyWithImpl(_$LiveSessionErrorImpl _value,
+      $Res Function(_$LiveSessionErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$LiveSessionErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$LiveSessionErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -636,16 +606,12 @@ class _$LiveSessionErrorImpl implements LiveSessionError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LiveSessionErrorImplCopyWith<_$LiveSessionErrorImpl> get copyWith =>
       __$$LiveSessionErrorImplCopyWithImpl<_$LiveSessionErrorImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -745,33 +711,25 @@ abstract class LiveSessionError implements LiveSessionState {
       _$LiveSessionErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LiveSessionErrorImplCopyWith<_$LiveSessionErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LiveSessionJoiningImplCopyWith<$Res> {
-  factory _$$LiveSessionJoiningImplCopyWith(
-    _$LiveSessionJoiningImpl value,
-    $Res Function(_$LiveSessionJoiningImpl) then,
-  ) = __$$LiveSessionJoiningImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionJoiningImplCopyWith(_$LiveSessionJoiningImpl value,
+          $Res Function(_$LiveSessionJoiningImpl) then) =
+      __$$LiveSessionJoiningImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$LiveSessionJoiningImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionJoiningImpl>
     implements _$$LiveSessionJoiningImplCopyWith<$Res> {
-  __$$LiveSessionJoiningImplCopyWithImpl(
-    _$LiveSessionJoiningImpl _value,
-    $Res Function(_$LiveSessionJoiningImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
+  __$$LiveSessionJoiningImplCopyWithImpl(_$LiveSessionJoiningImpl _value,
+      $Res Function(_$LiveSessionJoiningImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -893,9 +851,9 @@ abstract class LiveSessionJoining implements LiveSessionState {
 /// @nodoc
 abstract class _$$LiveSessionJoinSuccessImplCopyWith<$Res> {
   factory _$$LiveSessionJoinSuccessImplCopyWith(
-    _$LiveSessionJoinSuccessImpl value,
-    $Res Function(_$LiveSessionJoinSuccessImpl) then,
-  ) = __$$LiveSessionJoinSuccessImplCopyWithImpl<$Res>;
+          _$LiveSessionJoinSuccessImpl value,
+          $Res Function(_$LiveSessionJoinSuccessImpl) then) =
+      __$$LiveSessionJoinSuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({JoinCallData joinData});
 
@@ -907,27 +865,23 @@ class __$$LiveSessionJoinSuccessImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionJoinSuccessImpl>
     implements _$$LiveSessionJoinSuccessImplCopyWith<$Res> {
   __$$LiveSessionJoinSuccessImplCopyWithImpl(
-    _$LiveSessionJoinSuccessImpl _value,
-    $Res Function(_$LiveSessionJoinSuccessImpl) _then,
-  ) : super(_value, _then);
+      _$LiveSessionJoinSuccessImpl _value,
+      $Res Function(_$LiveSessionJoinSuccessImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? joinData = null}) {
-    return _then(
-      _$LiveSessionJoinSuccessImpl(
-        null == joinData
-            ? _value.joinData
-            : joinData // ignore: cast_nullable_to_non_nullable
-                as JoinCallData,
-      ),
-    );
+  $Res call({
+    Object? joinData = null,
+  }) {
+    return _then(_$LiveSessionJoinSuccessImpl(
+      null == joinData
+          ? _value.joinData
+          : joinData // ignore: cast_nullable_to_non_nullable
+              as JoinCallData,
+    ));
   }
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $JoinCallDataCopyWith<$Res> get joinData {
@@ -962,17 +916,12 @@ class _$LiveSessionJoinSuccessImpl implements LiveSessionJoinSuccess {
   @override
   int get hashCode => Object.hash(runtimeType, joinData);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LiveSessionJoinSuccessImplCopyWith<_$LiveSessionJoinSuccessImpl>
-  get copyWith =>
-      __$$LiveSessionJoinSuccessImplCopyWithImpl<_$LiveSessionJoinSuccessImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$LiveSessionJoinSuccessImplCopyWithImpl<
+          _$LiveSessionJoinSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1072,20 +1021,16 @@ abstract class LiveSessionJoinSuccess implements LiveSessionState {
       _$LiveSessionJoinSuccessImpl;
 
   JoinCallData get joinData;
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LiveSessionJoinSuccessImplCopyWith<_$LiveSessionJoinSuccessImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$LiveSessionJoinErrorImplCopyWith<$Res> {
-  factory _$$LiveSessionJoinErrorImplCopyWith(
-    _$LiveSessionJoinErrorImpl value,
-    $Res Function(_$LiveSessionJoinErrorImpl) then,
-  ) = __$$LiveSessionJoinErrorImplCopyWithImpl<$Res>;
+  factory _$$LiveSessionJoinErrorImplCopyWith(_$LiveSessionJoinErrorImpl value,
+          $Res Function(_$LiveSessionJoinErrorImpl) then) =
+      __$$LiveSessionJoinErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -1096,28 +1041,23 @@ abstract class _$$LiveSessionJoinErrorImplCopyWith<$Res> {
 class __$$LiveSessionJoinErrorImplCopyWithImpl<$Res>
     extends _$LiveSessionStateCopyWithImpl<$Res, _$LiveSessionJoinErrorImpl>
     implements _$$LiveSessionJoinErrorImplCopyWith<$Res> {
-  __$$LiveSessionJoinErrorImplCopyWithImpl(
-    _$LiveSessionJoinErrorImpl _value,
-    $Res Function(_$LiveSessionJoinErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$LiveSessionJoinErrorImplCopyWithImpl(_$LiveSessionJoinErrorImpl _value,
+      $Res Function(_$LiveSessionJoinErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$LiveSessionJoinErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$LiveSessionJoinErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -1151,17 +1091,13 @@ class _$LiveSessionJoinErrorImpl implements LiveSessionJoinError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LiveSessionJoinErrorImplCopyWith<_$LiveSessionJoinErrorImpl>
-  get copyWith =>
-      __$$LiveSessionJoinErrorImplCopyWithImpl<_$LiveSessionJoinErrorImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$LiveSessionJoinErrorImplCopyWithImpl<_$LiveSessionJoinErrorImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1261,10 +1197,7 @@ abstract class LiveSessionJoinError implements LiveSessionState {
       _$LiveSessionJoinErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of LiveSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LiveSessionJoinErrorImplCopyWith<_$LiveSessionJoinErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

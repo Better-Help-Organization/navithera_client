@@ -12,8 +12,7 @@ part of 'languages_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LanguagesResponse _$LanguagesResponseFromJson(Map<String, dynamic> json) {
   return _LanguagesResponse.fromJson(json);
@@ -23,12 +22,8 @@ LanguagesResponse _$LanguagesResponseFromJson(Map<String, dynamic> json) {
 mixin _$LanguagesResponse {
   List<LanguageModel> get data => throw _privateConstructorUsedError;
 
-  /// Serializes this LanguagesResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LanguagesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LanguagesResponseCopyWith<LanguagesResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -36,9 +31,8 @@ mixin _$LanguagesResponse {
 /// @nodoc
 abstract class $LanguagesResponseCopyWith<$Res> {
   factory $LanguagesResponseCopyWith(
-    LanguagesResponse value,
-    $Res Function(LanguagesResponse) then,
-  ) = _$LanguagesResponseCopyWithImpl<$Res, LanguagesResponse>;
+          LanguagesResponse value, $Res Function(LanguagesResponse) then) =
+      _$LanguagesResponseCopyWithImpl<$Res, LanguagesResponse>;
   @useResult
   $Res call({List<LanguageModel> data});
 }
@@ -53,31 +47,26 @@ class _$LanguagesResponseCopyWithImpl<$Res, $Val extends LanguagesResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LanguagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<LanguageModel>,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LanguageModel>,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LanguagesResponseImplCopyWith<$Res>
     implements $LanguagesResponseCopyWith<$Res> {
-  factory _$$LanguagesResponseImplCopyWith(
-    _$LanguagesResponseImpl value,
-    $Res Function(_$LanguagesResponseImpl) then,
-  ) = __$$LanguagesResponseImplCopyWithImpl<$Res>;
+  factory _$$LanguagesResponseImplCopyWith(_$LanguagesResponseImpl value,
+          $Res Function(_$LanguagesResponseImpl) then) =
+      __$$LanguagesResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<LanguageModel> data});
@@ -87,25 +76,21 @@ abstract class _$$LanguagesResponseImplCopyWith<$Res>
 class __$$LanguagesResponseImplCopyWithImpl<$Res>
     extends _$LanguagesResponseCopyWithImpl<$Res, _$LanguagesResponseImpl>
     implements _$$LanguagesResponseImplCopyWith<$Res> {
-  __$$LanguagesResponseImplCopyWithImpl(
-    _$LanguagesResponseImpl _value,
-    $Res Function(_$LanguagesResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$LanguagesResponseImplCopyWithImpl(_$LanguagesResponseImpl _value,
+      $Res Function(_$LanguagesResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LanguagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? data = null}) {
-    return _then(
-      _$LanguagesResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<LanguageModel>,
-      ),
-    );
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$LanguagesResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<LanguageModel>,
+    ));
   }
 }
 
@@ -113,7 +98,7 @@ class __$$LanguagesResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LanguagesResponseImpl implements _LanguagesResponse {
   const _$LanguagesResponseImpl({required final List<LanguageModel> data})
-    : _data = data;
+      : _data = data;
 
   factory _$LanguagesResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LanguagesResponseImplFromJson(json);
@@ -139,25 +124,23 @@ class _$LanguagesResponseImpl implements _LanguagesResponse {
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
-  /// Create a copy of LanguagesResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LanguagesResponseImplCopyWith<_$LanguagesResponseImpl> get copyWith =>
       __$$LanguagesResponseImplCopyWithImpl<_$LanguagesResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LanguagesResponseImplToJson(this);
+    return _$$LanguagesResponseImplToJson(
+      this,
+    );
   }
 }
 
@@ -170,11 +153,8 @@ abstract class _LanguagesResponse implements LanguagesResponse {
 
   @override
   List<LanguageModel> get data;
-
-  /// Create a copy of LanguagesResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LanguagesResponseImplCopyWith<_$LanguagesResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

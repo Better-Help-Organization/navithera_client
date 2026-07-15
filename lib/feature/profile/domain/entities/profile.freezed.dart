@@ -12,8 +12,7 @@ part of 'profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Profile {
@@ -27,9 +26,7 @@ mixin _$Profile {
   String? get username => throw _privateConstructorUsedError;
   int? get avatar => throw _privateConstructorUsedError;
 
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -38,17 +35,16 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({
-    String id,
-    String firstName,
-    String lastName,
-    String email,
-    String? phoneNumber,
-    String? gender,
-    String? dateOfBirth,
-    String? username,
-    int? avatar,
-  });
+  $Res call(
+      {String id,
+      String firstName,
+      String lastName,
+      String email,
+      String? phoneNumber,
+      String? gender,
+      String? dateOfBirth,
+      String? username,
+      int? avatar});
 }
 
 /// @nodoc
@@ -61,8 +57,6 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,78 +70,64 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     Object? username = freezed,
     Object? avatar = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            firstName:
-                null == firstName
-                    ? _value.firstName
-                    : firstName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            lastName:
-                null == lastName
-                    ? _value.lastName
-                    : lastName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            phoneNumber:
-                freezed == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            dateOfBirth:
-                freezed == dateOfBirth
-                    ? _value.dateOfBirth
-                    : dateOfBirth // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            username:
-                freezed == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            avatar:
-                freezed == avatar
-                    ? _value.avatar
-                    : avatar // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   factory _$$ProfileImplCopyWith(
-    _$ProfileImpl value,
-    $Res Function(_$ProfileImpl) then,
-  ) = __$$ProfileImplCopyWithImpl<$Res>;
+          _$ProfileImpl value, $Res Function(_$ProfileImpl) then) =
+      __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String firstName,
-    String lastName,
-    String email,
-    String? phoneNumber,
-    String? gender,
-    String? dateOfBirth,
-    String? username,
-    int? avatar,
-  });
+  $Res call(
+      {String id,
+      String firstName,
+      String lastName,
+      String email,
+      String? phoneNumber,
+      String? gender,
+      String? dateOfBirth,
+      String? username,
+      int? avatar});
 }
 
 /// @nodoc
@@ -155,12 +135,9 @@ class __$$ProfileImplCopyWithImpl<$Res>
     extends _$ProfileCopyWithImpl<$Res, _$ProfileImpl>
     implements _$$ProfileImplCopyWith<$Res> {
   __$$ProfileImplCopyWithImpl(
-    _$ProfileImpl _value,
-    $Res Function(_$ProfileImpl) _then,
-  ) : super(_value, _then);
+      _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -174,72 +151,60 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? username = freezed,
     Object? avatar = freezed,
   }) {
-    return _then(
-      _$ProfileImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        firstName:
-            null == firstName
-                ? _value.firstName
-                : firstName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        lastName:
-            null == lastName
-                ? _value.lastName
-                : lastName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        phoneNumber:
-            freezed == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        dateOfBirth:
-            freezed == dateOfBirth
-                ? _value.dateOfBirth
-                : dateOfBirth // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        username:
-            freezed == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        avatar:
-            freezed == avatar
-                ? _value.avatar
-                : avatar // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$ProfileImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
+          ? _value.dateOfBirth
+          : dateOfBirth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$ProfileImpl implements _Profile {
-  const _$ProfileImpl({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    this.phoneNumber,
-    this.gender,
-    this.dateOfBirth,
-    this.username,
-    this.avatar,
-  });
+  const _$ProfileImpl(
+      {required this.id,
+      required this.firstName,
+      required this.lastName,
+      required this.email,
+      this.phoneNumber,
+      this.gender,
+      this.dateOfBirth,
+      this.username,
+      this.avatar});
 
   @override
   final String id;
@@ -287,22 +252,10 @@ class _$ProfileImpl implements _Profile {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    gender,
-    dateOfBirth,
-    username,
-    avatar,
-  );
+  int get hashCode => Object.hash(runtimeType, id, firstName, lastName, email,
+      phoneNumber, gender, dateOfBirth, username, avatar);
 
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
@@ -310,17 +263,16 @@ class _$ProfileImpl implements _Profile {
 }
 
 abstract class _Profile implements Profile {
-  const factory _Profile({
-    required final String id,
-    required final String firstName,
-    required final String lastName,
-    required final String email,
-    final String? phoneNumber,
-    final String? gender,
-    final String? dateOfBirth,
-    final String? username,
-    final int? avatar,
-  }) = _$ProfileImpl;
+  const factory _Profile(
+      {required final String id,
+      required final String firstName,
+      required final String lastName,
+      required final String email,
+      final String? phoneNumber,
+      final String? gender,
+      final String? dateOfBirth,
+      final String? username,
+      final int? avatar}) = _$ProfileImpl;
 
   @override
   String get id;
@@ -340,11 +292,8 @@ abstract class _Profile implements Profile {
   String? get username;
   @override
   int? get avatar;
-
-  /// Create a copy of Profile
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

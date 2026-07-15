@@ -12,8 +12,7 @@ part of 'preference_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PreferenceRequest _$PreferenceRequestFromJson(Map<String, dynamic> json) {
   return _PreferenceRequest.fromJson(json);
@@ -29,12 +28,8 @@ mixin _$PreferenceRequest {
   List<AvailabilitySlot> get availability => throw _privateConstructorUsedError;
   String? get otherLang => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceRequestCopyWith<PreferenceRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,19 +37,17 @@ mixin _$PreferenceRequest {
 /// @nodoc
 abstract class $PreferenceRequestCopyWith<$Res> {
   factory $PreferenceRequestCopyWith(
-    PreferenceRequest value,
-    $Res Function(PreferenceRequest) then,
-  ) = _$PreferenceRequestCopyWithImpl<$Res, PreferenceRequest>;
+          PreferenceRequest value, $Res Function(PreferenceRequest) then) =
+      _$PreferenceRequestCopyWithImpl<$Res, PreferenceRequest>;
   @useResult
-  $Res call({
-    String modalId,
-    String gender,
-    List<String> languageIds,
-    String? goal,
-    String levelId,
-    List<AvailabilitySlot> availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String modalId,
+      String gender,
+      List<String> languageIds,
+      String? goal,
+      String levelId,
+      List<AvailabilitySlot> availability,
+      String? otherLang});
 }
 
 /// @nodoc
@@ -67,8 +60,6 @@ class _$PreferenceRequestCopyWithImpl<$Res, $Val extends PreferenceRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,80 +71,65 @@ class _$PreferenceRequestCopyWithImpl<$Res, $Val extends PreferenceRequest>
     Object? availability = null,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            modalId:
-                null == modalId
-                    ? _value.modalId
-                    : modalId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            gender:
-                null == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String,
-            languageIds:
-                null == languageIds
-                    ? _value.languageIds
-                    : languageIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            levelId:
-                null == levelId
-                    ? _value.levelId
-                    : levelId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            availability:
-                null == availability
-                    ? _value.availability
-                    : availability // ignore: cast_nullable_to_non_nullable
-                        as List<AvailabilitySlot>,
-            otherLang:
-                freezed == otherLang
-                    ? _value.otherLang
-                    : otherLang // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageIds: null == languageIds
+          ? _value.languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      levelId: null == levelId
+          ? _value.levelId
+          : levelId // ignore: cast_nullable_to_non_nullable
+              as String,
+      availability: null == availability
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PreferenceRequestImplCopyWith<$Res>
     implements $PreferenceRequestCopyWith<$Res> {
-  factory _$$PreferenceRequestImplCopyWith(
-    _$PreferenceRequestImpl value,
-    $Res Function(_$PreferenceRequestImpl) then,
-  ) = __$$PreferenceRequestImplCopyWithImpl<$Res>;
+  factory _$$PreferenceRequestImplCopyWith(_$PreferenceRequestImpl value,
+          $Res Function(_$PreferenceRequestImpl) then) =
+      __$$PreferenceRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String modalId,
-    String gender,
-    List<String> languageIds,
-    String? goal,
-    String levelId,
-    List<AvailabilitySlot> availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String modalId,
+      String gender,
+      List<String> languageIds,
+      String? goal,
+      String levelId,
+      List<AvailabilitySlot> availability,
+      String? otherLang});
 }
 
 /// @nodoc
 class __$$PreferenceRequestImplCopyWithImpl<$Res>
     extends _$PreferenceRequestCopyWithImpl<$Res, _$PreferenceRequestImpl>
     implements _$$PreferenceRequestImplCopyWith<$Res> {
-  __$$PreferenceRequestImplCopyWithImpl(
-    _$PreferenceRequestImpl _value,
-    $Res Function(_$PreferenceRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$PreferenceRequestImplCopyWithImpl(_$PreferenceRequestImpl _value,
+      $Res Function(_$PreferenceRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,61 +141,52 @@ class __$$PreferenceRequestImplCopyWithImpl<$Res>
     Object? availability = null,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _$PreferenceRequestImpl(
-        modalId:
-            null == modalId
-                ? _value.modalId
-                : modalId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        gender:
-            null == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String,
-        languageIds:
-            null == languageIds
-                ? _value._languageIds
-                : languageIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        levelId:
-            null == levelId
-                ? _value.levelId
-                : levelId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        availability:
-            null == availability
-                ? _value._availability
-                : availability // ignore: cast_nullable_to_non_nullable
-                    as List<AvailabilitySlot>,
-        otherLang:
-            freezed == otherLang
-                ? _value.otherLang
-                : otherLang // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceRequestImpl(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageIds: null == languageIds
+          ? _value._languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      levelId: null == levelId
+          ? _value.levelId
+          : levelId // ignore: cast_nullable_to_non_nullable
+              as String,
+      availability: null == availability
+          ? _value._availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PreferenceRequestImpl implements _PreferenceRequest {
-  const _$PreferenceRequestImpl({
-    required this.modalId,
-    required this.gender,
-    required final List<String> languageIds,
-    this.goal,
-    required this.levelId,
-    required final List<AvailabilitySlot> availability,
-    this.otherLang,
-  }) : _languageIds = languageIds,
-       _availability = availability;
+  const _$PreferenceRequestImpl(
+      {required this.modalId,
+      required this.gender,
+      required final List<String> languageIds,
+      this.goal,
+      required this.levelId,
+      required final List<AvailabilitySlot> availability,
+      this.otherLang})
+      : _languageIds = languageIds,
+        _availability = availability;
 
   factory _$PreferenceRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PreferenceRequestImplFromJson(json);
@@ -263,60 +230,52 @@ class _$PreferenceRequestImpl implements _PreferenceRequest {
             other is _$PreferenceRequestImpl &&
             (identical(other.modalId, modalId) || other.modalId == modalId) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            const DeepCollectionEquality().equals(
-              other._languageIds,
-              _languageIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languageIds, _languageIds) &&
             (identical(other.goal, goal) || other.goal == goal) &&
             (identical(other.levelId, levelId) || other.levelId == levelId) &&
-            const DeepCollectionEquality().equals(
-              other._availability,
-              _availability,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availability, _availability) &&
             (identical(other.otherLang, otherLang) ||
                 other.otherLang == otherLang));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    modalId,
-    gender,
-    const DeepCollectionEquality().hash(_languageIds),
-    goal,
-    levelId,
-    const DeepCollectionEquality().hash(_availability),
-    otherLang,
-  );
+      runtimeType,
+      modalId,
+      gender,
+      const DeepCollectionEquality().hash(_languageIds),
+      goal,
+      levelId,
+      const DeepCollectionEquality().hash(_availability),
+      otherLang);
 
-  /// Create a copy of PreferenceRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceRequestImplCopyWith<_$PreferenceRequestImpl> get copyWith =>
       __$$PreferenceRequestImplCopyWithImpl<_$PreferenceRequestImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceRequestImplToJson(this);
+    return _$$PreferenceRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceRequest implements PreferenceRequest {
-  const factory _PreferenceRequest({
-    required final String modalId,
-    required final String gender,
-    required final List<String> languageIds,
-    final String? goal,
-    required final String levelId,
-    required final List<AvailabilitySlot> availability,
-    final String? otherLang,
-  }) = _$PreferenceRequestImpl;
+  const factory _PreferenceRequest(
+      {required final String modalId,
+      required final String gender,
+      required final List<String> languageIds,
+      final String? goal,
+      required final String levelId,
+      required final List<AvailabilitySlot> availability,
+      final String? otherLang}) = _$PreferenceRequestImpl;
 
   factory _PreferenceRequest.fromJson(Map<String, dynamic> json) =
       _$PreferenceRequestImpl.fromJson;
@@ -335,18 +294,14 @@ abstract class _PreferenceRequest implements PreferenceRequest {
   List<AvailabilitySlot> get availability;
   @override
   String? get otherLang;
-
-  /// Create a copy of PreferenceRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceRequestImplCopyWith<_$PreferenceRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 PreferenceRequestWithoutLevel _$PreferenceRequestWithoutLevelFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PreferenceRequestWithoutLevel.fromJson(json);
 }
 
@@ -359,42 +314,32 @@ mixin _$PreferenceRequestWithoutLevel {
   List<AvailabilitySlot> get availability => throw _privateConstructorUsedError;
   String? get otherLang => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceRequestWithoutLevel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceRequestWithoutLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceRequestWithoutLevelCopyWith<PreferenceRequestWithoutLevel>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PreferenceRequestWithoutLevelCopyWith<$Res> {
   factory $PreferenceRequestWithoutLevelCopyWith(
-    PreferenceRequestWithoutLevel value,
-    $Res Function(PreferenceRequestWithoutLevel) then,
-  ) =
-      _$PreferenceRequestWithoutLevelCopyWithImpl<
-        $Res,
-        PreferenceRequestWithoutLevel
-      >;
+          PreferenceRequestWithoutLevel value,
+          $Res Function(PreferenceRequestWithoutLevel) then) =
+      _$PreferenceRequestWithoutLevelCopyWithImpl<$Res,
+          PreferenceRequestWithoutLevel>;
   @useResult
-  $Res call({
-    String modalId,
-    String gender,
-    List<String> languageIds,
-    String? goal,
-    List<AvailabilitySlot> availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String modalId,
+      String gender,
+      List<String> languageIds,
+      String? goal,
+      List<AvailabilitySlot> availability,
+      String? otherLang});
 }
 
 /// @nodoc
-class _$PreferenceRequestWithoutLevelCopyWithImpl<
-  $Res,
-  $Val extends PreferenceRequestWithoutLevel
->
+class _$PreferenceRequestWithoutLevelCopyWithImpl<$Res,
+        $Val extends PreferenceRequestWithoutLevel>
     implements $PreferenceRequestWithoutLevelCopyWith<$Res> {
   _$PreferenceRequestWithoutLevelCopyWithImpl(this._value, this._then);
 
@@ -403,8 +348,6 @@ class _$PreferenceRequestWithoutLevelCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceRequestWithoutLevel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -415,41 +358,32 @@ class _$PreferenceRequestWithoutLevelCopyWithImpl<
     Object? availability = null,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            modalId:
-                null == modalId
-                    ? _value.modalId
-                    : modalId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            gender:
-                null == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String,
-            languageIds:
-                null == languageIds
-                    ? _value.languageIds
-                    : languageIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            availability:
-                null == availability
-                    ? _value.availability
-                    : availability // ignore: cast_nullable_to_non_nullable
-                        as List<AvailabilitySlot>,
-            otherLang:
-                freezed == otherLang
-                    ? _value.otherLang
-                    : otherLang // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageIds: null == languageIds
+          ? _value.languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: null == availability
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -457,36 +391,30 @@ class _$PreferenceRequestWithoutLevelCopyWithImpl<
 abstract class _$$PreferenceRequestWithoutLevelImplCopyWith<$Res>
     implements $PreferenceRequestWithoutLevelCopyWith<$Res> {
   factory _$$PreferenceRequestWithoutLevelImplCopyWith(
-    _$PreferenceRequestWithoutLevelImpl value,
-    $Res Function(_$PreferenceRequestWithoutLevelImpl) then,
-  ) = __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>;
+          _$PreferenceRequestWithoutLevelImpl value,
+          $Res Function(_$PreferenceRequestWithoutLevelImpl) then) =
+      __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String modalId,
-    String gender,
-    List<String> languageIds,
-    String? goal,
-    List<AvailabilitySlot> availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String modalId,
+      String gender,
+      List<String> languageIds,
+      String? goal,
+      List<AvailabilitySlot> availability,
+      String? otherLang});
 }
 
 /// @nodoc
 class __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>
-    extends
-        _$PreferenceRequestWithoutLevelCopyWithImpl<
-          $Res,
-          _$PreferenceRequestWithoutLevelImpl
-        >
+    extends _$PreferenceRequestWithoutLevelCopyWithImpl<$Res,
+        _$PreferenceRequestWithoutLevelImpl>
     implements _$$PreferenceRequestWithoutLevelImplCopyWith<$Res> {
   __$$PreferenceRequestWithoutLevelImplCopyWithImpl(
-    _$PreferenceRequestWithoutLevelImpl _value,
-    $Res Function(_$PreferenceRequestWithoutLevelImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceRequestWithoutLevelImpl _value,
+      $Res Function(_$PreferenceRequestWithoutLevelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceRequestWithoutLevel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -497,40 +425,32 @@ class __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>
     Object? availability = null,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _$PreferenceRequestWithoutLevelImpl(
-        modalId:
-            null == modalId
-                ? _value.modalId
-                : modalId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        gender:
-            null == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String,
-        languageIds:
-            null == languageIds
-                ? _value._languageIds
-                : languageIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        availability:
-            null == availability
-                ? _value._availability
-                : availability // ignore: cast_nullable_to_non_nullable
-                    as List<AvailabilitySlot>,
-        otherLang:
-            freezed == otherLang
-                ? _value.otherLang
-                : otherLang // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceRequestWithoutLevelImpl(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      languageIds: null == languageIds
+          ? _value._languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: null == availability
+          ? _value._availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -538,19 +458,19 @@ class __$$PreferenceRequestWithoutLevelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PreferenceRequestWithoutLevelImpl
     implements _PreferenceRequestWithoutLevel {
-  const _$PreferenceRequestWithoutLevelImpl({
-    required this.modalId,
-    required this.gender,
-    required final List<String> languageIds,
-    this.goal,
-    required final List<AvailabilitySlot> availability,
-    this.otherLang,
-  }) : _languageIds = languageIds,
-       _availability = availability;
+  const _$PreferenceRequestWithoutLevelImpl(
+      {required this.modalId,
+      required this.gender,
+      required final List<String> languageIds,
+      this.goal,
+      required final List<AvailabilitySlot> availability,
+      this.otherLang})
+      : _languageIds = languageIds,
+        _availability = availability;
 
   factory _$PreferenceRequestWithoutLevelImpl.fromJson(
-    Map<String, dynamic> json,
-  ) => _$$PreferenceRequestWithoutLevelImplFromJson(json);
+          Map<String, dynamic> json) =>
+      _$$PreferenceRequestWithoutLevelImplFromJson(json);
 
   @override
   final String modalId;
@@ -589,59 +509,51 @@ class _$PreferenceRequestWithoutLevelImpl
             other is _$PreferenceRequestWithoutLevelImpl &&
             (identical(other.modalId, modalId) || other.modalId == modalId) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            const DeepCollectionEquality().equals(
-              other._languageIds,
-              _languageIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languageIds, _languageIds) &&
             (identical(other.goal, goal) || other.goal == goal) &&
-            const DeepCollectionEquality().equals(
-              other._availability,
-              _availability,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availability, _availability) &&
             (identical(other.otherLang, otherLang) ||
                 other.otherLang == otherLang));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    modalId,
-    gender,
-    const DeepCollectionEquality().hash(_languageIds),
-    goal,
-    const DeepCollectionEquality().hash(_availability),
-    otherLang,
-  );
+      runtimeType,
+      modalId,
+      gender,
+      const DeepCollectionEquality().hash(_languageIds),
+      goal,
+      const DeepCollectionEquality().hash(_availability),
+      otherLang);
 
-  /// Create a copy of PreferenceRequestWithoutLevel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceRequestWithoutLevelImplCopyWith<
-    _$PreferenceRequestWithoutLevelImpl
-  >
-  get copyWith => __$$PreferenceRequestWithoutLevelImplCopyWithImpl<
-    _$PreferenceRequestWithoutLevelImpl
-  >(this, _$identity);
+          _$PreferenceRequestWithoutLevelImpl>
+      get copyWith => __$$PreferenceRequestWithoutLevelImplCopyWithImpl<
+          _$PreferenceRequestWithoutLevelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceRequestWithoutLevelImplToJson(this);
+    return _$$PreferenceRequestWithoutLevelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceRequestWithoutLevel
     implements PreferenceRequestWithoutLevel {
-  const factory _PreferenceRequestWithoutLevel({
-    required final String modalId,
-    required final String gender,
-    required final List<String> languageIds,
-    final String? goal,
-    required final List<AvailabilitySlot> availability,
-    final String? otherLang,
-  }) = _$PreferenceRequestWithoutLevelImpl;
+  const factory _PreferenceRequestWithoutLevel(
+      {required final String modalId,
+      required final String gender,
+      required final List<String> languageIds,
+      final String? goal,
+      required final List<AvailabilitySlot> availability,
+      final String? otherLang}) = _$PreferenceRequestWithoutLevelImpl;
 
   factory _PreferenceRequestWithoutLevel.fromJson(Map<String, dynamic> json) =
       _$PreferenceRequestWithoutLevelImpl.fromJson;
@@ -658,20 +570,15 @@ abstract class _PreferenceRequestWithoutLevel
   List<AvailabilitySlot> get availability;
   @override
   String? get otherLang;
-
-  /// Create a copy of PreferenceRequestWithoutLevel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceRequestWithoutLevelImplCopyWith<
-    _$PreferenceRequestWithoutLevelImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          _$PreferenceRequestWithoutLevelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PreferenceRequestModalOnly _$PreferenceRequestModalOnlyFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PreferenceRequestModalOnly.fromJson(json);
 }
 
@@ -679,35 +586,25 @@ PreferenceRequestModalOnly _$PreferenceRequestModalOnlyFromJson(
 mixin _$PreferenceRequestModalOnly {
   String get modalId => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceRequestModalOnly to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceRequestModalOnly
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceRequestModalOnlyCopyWith<PreferenceRequestModalOnly>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PreferenceRequestModalOnlyCopyWith<$Res> {
-  factory $PreferenceRequestModalOnlyCopyWith(
-    PreferenceRequestModalOnly value,
-    $Res Function(PreferenceRequestModalOnly) then,
-  ) =
-      _$PreferenceRequestModalOnlyCopyWithImpl<
-        $Res,
-        PreferenceRequestModalOnly
-      >;
+  factory $PreferenceRequestModalOnlyCopyWith(PreferenceRequestModalOnly value,
+          $Res Function(PreferenceRequestModalOnly) then) =
+      _$PreferenceRequestModalOnlyCopyWithImpl<$Res,
+          PreferenceRequestModalOnly>;
   @useResult
   $Res call({String modalId});
 }
 
 /// @nodoc
-class _$PreferenceRequestModalOnlyCopyWithImpl<
-  $Res,
-  $Val extends PreferenceRequestModalOnly
->
+class _$PreferenceRequestModalOnlyCopyWithImpl<$Res,
+        $Val extends PreferenceRequestModalOnly>
     implements $PreferenceRequestModalOnlyCopyWith<$Res> {
   _$PreferenceRequestModalOnlyCopyWithImpl(this._value, this._then);
 
@@ -716,21 +613,17 @@ class _$PreferenceRequestModalOnlyCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceRequestModalOnly
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? modalId = null}) {
-    return _then(
-      _value.copyWith(
-            modalId:
-                null == modalId
-                    ? _value.modalId
-                    : modalId // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? modalId = null,
+  }) {
+    return _then(_value.copyWith(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -738,9 +631,9 @@ class _$PreferenceRequestModalOnlyCopyWithImpl<
 abstract class _$$PreferenceRequestModalOnlyImplCopyWith<$Res>
     implements $PreferenceRequestModalOnlyCopyWith<$Res> {
   factory _$$PreferenceRequestModalOnlyImplCopyWith(
-    _$PreferenceRequestModalOnlyImpl value,
-    $Res Function(_$PreferenceRequestModalOnlyImpl) then,
-  ) = __$$PreferenceRequestModalOnlyImplCopyWithImpl<$Res>;
+          _$PreferenceRequestModalOnlyImpl value,
+          $Res Function(_$PreferenceRequestModalOnlyImpl) then) =
+      __$$PreferenceRequestModalOnlyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String modalId});
@@ -748,31 +641,25 @@ abstract class _$$PreferenceRequestModalOnlyImplCopyWith<$Res>
 
 /// @nodoc
 class __$$PreferenceRequestModalOnlyImplCopyWithImpl<$Res>
-    extends
-        _$PreferenceRequestModalOnlyCopyWithImpl<
-          $Res,
-          _$PreferenceRequestModalOnlyImpl
-        >
+    extends _$PreferenceRequestModalOnlyCopyWithImpl<$Res,
+        _$PreferenceRequestModalOnlyImpl>
     implements _$$PreferenceRequestModalOnlyImplCopyWith<$Res> {
   __$$PreferenceRequestModalOnlyImplCopyWithImpl(
-    _$PreferenceRequestModalOnlyImpl _value,
-    $Res Function(_$PreferenceRequestModalOnlyImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceRequestModalOnlyImpl _value,
+      $Res Function(_$PreferenceRequestModalOnlyImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceRequestModalOnly
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? modalId = null}) {
-    return _then(
-      _$PreferenceRequestModalOnlyImpl(
-        modalId:
-            null == modalId
-                ? _value.modalId
-                : modalId // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? modalId = null,
+  }) {
+    return _then(_$PreferenceRequestModalOnlyImpl(
+      modalId: null == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -782,8 +669,8 @@ class _$PreferenceRequestModalOnlyImpl implements _PreferenceRequestModalOnly {
   const _$PreferenceRequestModalOnlyImpl({required this.modalId});
 
   factory _$PreferenceRequestModalOnlyImpl.fromJson(
-    Map<String, dynamic> json,
-  ) => _$$PreferenceRequestModalOnlyImplFromJson(json);
+          Map<String, dynamic> json) =>
+      _$$PreferenceRequestModalOnlyImplFromJson(json);
 
   @override
   final String modalId;
@@ -801,23 +688,22 @@ class _$PreferenceRequestModalOnlyImpl implements _PreferenceRequestModalOnly {
             (identical(other.modalId, modalId) || other.modalId == modalId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, modalId);
 
-  /// Create a copy of PreferenceRequestModalOnly
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceRequestModalOnlyImplCopyWith<_$PreferenceRequestModalOnlyImpl>
-  get copyWith => __$$PreferenceRequestModalOnlyImplCopyWithImpl<
-    _$PreferenceRequestModalOnlyImpl
-  >(this, _$identity);
+      get copyWith => __$$PreferenceRequestModalOnlyImplCopyWithImpl<
+          _$PreferenceRequestModalOnlyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceRequestModalOnlyImplToJson(this);
+    return _$$PreferenceRequestModalOnlyImplToJson(
+      this,
+    );
   }
 }
 
@@ -831,13 +717,10 @@ abstract class _PreferenceRequestModalOnly
 
   @override
   String get modalId;
-
-  /// Create a copy of PreferenceRequestModalOnly
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceRequestModalOnlyImplCopyWith<_$PreferenceRequestModalOnlyImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AvailabilitySlot _$AvailabilitySlotFromJson(Map<String, dynamic> json) {
@@ -849,12 +732,8 @@ mixin _$AvailabilitySlot {
   String get day => throw _privateConstructorUsedError;
   String get day_period => throw _privateConstructorUsedError;
 
-  /// Serializes this AvailabilitySlot to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AvailabilitySlot
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AvailabilitySlotCopyWith<AvailabilitySlot> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -862,9 +741,8 @@ mixin _$AvailabilitySlot {
 /// @nodoc
 abstract class $AvailabilitySlotCopyWith<$Res> {
   factory $AvailabilitySlotCopyWith(
-    AvailabilitySlot value,
-    $Res Function(AvailabilitySlot) then,
-  ) = _$AvailabilitySlotCopyWithImpl<$Res, AvailabilitySlot>;
+          AvailabilitySlot value, $Res Function(AvailabilitySlot) then) =
+      _$AvailabilitySlotCopyWithImpl<$Res, AvailabilitySlot>;
   @useResult
   $Res call({String day, String day_period});
 }
@@ -879,36 +757,31 @@ class _$AvailabilitySlotCopyWithImpl<$Res, $Val extends AvailabilitySlot>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AvailabilitySlot
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? day = null, Object? day_period = null}) {
-    return _then(
-      _value.copyWith(
-            day:
-                null == day
-                    ? _value.day
-                    : day // ignore: cast_nullable_to_non_nullable
-                        as String,
-            day_period:
-                null == day_period
-                    ? _value.day_period
-                    : day_period // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? day = null,
+    Object? day_period = null,
+  }) {
+    return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      day_period: null == day_period
+          ? _value.day_period
+          : day_period // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$AvailabilitySlotImplCopyWith<$Res>
     implements $AvailabilitySlotCopyWith<$Res> {
-  factory _$$AvailabilitySlotImplCopyWith(
-    _$AvailabilitySlotImpl value,
-    $Res Function(_$AvailabilitySlotImpl) then,
-  ) = __$$AvailabilitySlotImplCopyWithImpl<$Res>;
+  factory _$$AvailabilitySlotImplCopyWith(_$AvailabilitySlotImpl value,
+          $Res Function(_$AvailabilitySlotImpl) then) =
+      __$$AvailabilitySlotImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String day, String day_period});
@@ -918,30 +791,26 @@ abstract class _$$AvailabilitySlotImplCopyWith<$Res>
 class __$$AvailabilitySlotImplCopyWithImpl<$Res>
     extends _$AvailabilitySlotCopyWithImpl<$Res, _$AvailabilitySlotImpl>
     implements _$$AvailabilitySlotImplCopyWith<$Res> {
-  __$$AvailabilitySlotImplCopyWithImpl(
-    _$AvailabilitySlotImpl _value,
-    $Res Function(_$AvailabilitySlotImpl) _then,
-  ) : super(_value, _then);
+  __$$AvailabilitySlotImplCopyWithImpl(_$AvailabilitySlotImpl _value,
+      $Res Function(_$AvailabilitySlotImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AvailabilitySlot
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? day = null, Object? day_period = null}) {
-    return _then(
-      _$AvailabilitySlotImpl(
-        day:
-            null == day
-                ? _value.day
-                : day // ignore: cast_nullable_to_non_nullable
-                    as String,
-        day_period:
-            null == day_period
-                ? _value.day_period
-                : day_period // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? day = null,
+    Object? day_period = null,
+  }) {
+    return _then(_$AvailabilitySlotImpl(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      day_period: null == day_period
+          ? _value.day_period
+          : day_period // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -973,32 +842,29 @@ class _$AvailabilitySlotImpl implements _AvailabilitySlot {
                 other.day_period == day_period));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, day, day_period);
 
-  /// Create a copy of AvailabilitySlot
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AvailabilitySlotImplCopyWith<_$AvailabilitySlotImpl> get copyWith =>
       __$$AvailabilitySlotImplCopyWithImpl<_$AvailabilitySlotImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AvailabilitySlotImplToJson(this);
+    return _$$AvailabilitySlotImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AvailabilitySlot implements AvailabilitySlot {
-  const factory _AvailabilitySlot({
-    required final String day,
-    required final String day_period,
-  }) = _$AvailabilitySlotImpl;
+  const factory _AvailabilitySlot(
+      {required final String day,
+      required final String day_period}) = _$AvailabilitySlotImpl;
 
   factory _AvailabilitySlot.fromJson(Map<String, dynamic> json) =
       _$AvailabilitySlotImpl.fromJson;
@@ -1007,18 +873,14 @@ abstract class _AvailabilitySlot implements AvailabilitySlot {
   String get day;
   @override
   String get day_period;
-
-  /// Create a copy of AvailabilitySlot
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AvailabilitySlotImplCopyWith<_$AvailabilitySlotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 PreferenceUpdateRequest _$PreferenceUpdateRequestFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PreferenceUpdateRequest.fromJson(json);
 }
 
@@ -1033,39 +895,31 @@ mixin _$PreferenceUpdateRequest {
       throw _privateConstructorUsedError;
   String? get otherLang => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceUpdateRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceUpdateRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceUpdateRequestCopyWith<PreferenceUpdateRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PreferenceUpdateRequestCopyWith<$Res> {
-  factory $PreferenceUpdateRequestCopyWith(
-    PreferenceUpdateRequest value,
-    $Res Function(PreferenceUpdateRequest) then,
-  ) = _$PreferenceUpdateRequestCopyWithImpl<$Res, PreferenceUpdateRequest>;
+  factory $PreferenceUpdateRequestCopyWith(PreferenceUpdateRequest value,
+          $Res Function(PreferenceUpdateRequest) then) =
+      _$PreferenceUpdateRequestCopyWithImpl<$Res, PreferenceUpdateRequest>;
   @useResult
-  $Res call({
-    String? modalId,
-    String? gender,
-    List<String>? languageIds,
-    String? goal,
-    String? levelId,
-    List<AvailabilitySlot>? availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String? modalId,
+      String? gender,
+      List<String>? languageIds,
+      String? goal,
+      String? levelId,
+      List<AvailabilitySlot>? availability,
+      String? otherLang});
 }
 
 /// @nodoc
-class _$PreferenceUpdateRequestCopyWithImpl<
-  $Res,
-  $Val extends PreferenceUpdateRequest
->
+class _$PreferenceUpdateRequestCopyWithImpl<$Res,
+        $Val extends PreferenceUpdateRequest>
     implements $PreferenceUpdateRequestCopyWith<$Res> {
   _$PreferenceUpdateRequestCopyWithImpl(this._value, this._then);
 
@@ -1074,8 +928,6 @@ class _$PreferenceUpdateRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceUpdateRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1087,46 +939,36 @@ class _$PreferenceUpdateRequestCopyWithImpl<
     Object? availability = freezed,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            modalId:
-                freezed == modalId
-                    ? _value.modalId
-                    : modalId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            languageIds:
-                freezed == languageIds
-                    ? _value.languageIds
-                    : languageIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            levelId:
-                freezed == levelId
-                    ? _value.levelId
-                    : levelId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            availability:
-                freezed == availability
-                    ? _value.availability
-                    : availability // ignore: cast_nullable_to_non_nullable
-                        as List<AvailabilitySlot>?,
-            otherLang:
-                freezed == otherLang
-                    ? _value.otherLang
-                    : otherLang // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      modalId: freezed == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      languageIds: freezed == languageIds
+          ? _value.languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      levelId: freezed == levelId
+          ? _value.levelId
+          : levelId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: freezed == availability
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>?,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -1134,37 +976,31 @@ class _$PreferenceUpdateRequestCopyWithImpl<
 abstract class _$$PreferenceUpdateRequestImplCopyWith<$Res>
     implements $PreferenceUpdateRequestCopyWith<$Res> {
   factory _$$PreferenceUpdateRequestImplCopyWith(
-    _$PreferenceUpdateRequestImpl value,
-    $Res Function(_$PreferenceUpdateRequestImpl) then,
-  ) = __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>;
+          _$PreferenceUpdateRequestImpl value,
+          $Res Function(_$PreferenceUpdateRequestImpl) then) =
+      __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? modalId,
-    String? gender,
-    List<String>? languageIds,
-    String? goal,
-    String? levelId,
-    List<AvailabilitySlot>? availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String? modalId,
+      String? gender,
+      List<String>? languageIds,
+      String? goal,
+      String? levelId,
+      List<AvailabilitySlot>? availability,
+      String? otherLang});
 }
 
 /// @nodoc
 class __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>
-    extends
-        _$PreferenceUpdateRequestCopyWithImpl<
-          $Res,
-          _$PreferenceUpdateRequestImpl
-        >
+    extends _$PreferenceUpdateRequestCopyWithImpl<$Res,
+        _$PreferenceUpdateRequestImpl>
     implements _$$PreferenceUpdateRequestImplCopyWith<$Res> {
   __$$PreferenceUpdateRequestImplCopyWithImpl(
-    _$PreferenceUpdateRequestImpl _value,
-    $Res Function(_$PreferenceUpdateRequestImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceUpdateRequestImpl _value,
+      $Res Function(_$PreferenceUpdateRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceUpdateRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1176,61 +1012,52 @@ class __$$PreferenceUpdateRequestImplCopyWithImpl<$Res>
     Object? availability = freezed,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _$PreferenceUpdateRequestImpl(
-        modalId:
-            freezed == modalId
-                ? _value.modalId
-                : modalId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        languageIds:
-            freezed == languageIds
-                ? _value._languageIds
-                : languageIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        levelId:
-            freezed == levelId
-                ? _value.levelId
-                : levelId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        availability:
-            freezed == availability
-                ? _value._availability
-                : availability // ignore: cast_nullable_to_non_nullable
-                    as List<AvailabilitySlot>?,
-        otherLang:
-            freezed == otherLang
-                ? _value.otherLang
-                : otherLang // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceUpdateRequestImpl(
+      modalId: freezed == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      languageIds: freezed == languageIds
+          ? _value._languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      levelId: freezed == levelId
+          ? _value.levelId
+          : levelId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: freezed == availability
+          ? _value._availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>?,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
-  const _$PreferenceUpdateRequestImpl({
-    this.modalId,
-    this.gender,
-    final List<String>? languageIds,
-    this.goal,
-    this.levelId,
-    final List<AvailabilitySlot>? availability,
-    this.otherLang,
-  }) : _languageIds = languageIds,
-       _availability = availability;
+  const _$PreferenceUpdateRequestImpl(
+      {this.modalId,
+      this.gender,
+      final List<String>? languageIds,
+      this.goal,
+      this.levelId,
+      final List<AvailabilitySlot>? availability,
+      this.otherLang})
+      : _languageIds = languageIds,
+        _availability = availability;
 
   factory _$PreferenceUpdateRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PreferenceUpdateRequestImplFromJson(json);
@@ -1278,59 +1105,52 @@ class _$PreferenceUpdateRequestImpl implements _PreferenceUpdateRequest {
             other is _$PreferenceUpdateRequestImpl &&
             (identical(other.modalId, modalId) || other.modalId == modalId) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            const DeepCollectionEquality().equals(
-              other._languageIds,
-              _languageIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languageIds, _languageIds) &&
             (identical(other.goal, goal) || other.goal == goal) &&
             (identical(other.levelId, levelId) || other.levelId == levelId) &&
-            const DeepCollectionEquality().equals(
-              other._availability,
-              _availability,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availability, _availability) &&
             (identical(other.otherLang, otherLang) ||
                 other.otherLang == otherLang));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    modalId,
-    gender,
-    const DeepCollectionEquality().hash(_languageIds),
-    goal,
-    levelId,
-    const DeepCollectionEquality().hash(_availability),
-    otherLang,
-  );
+      runtimeType,
+      modalId,
+      gender,
+      const DeepCollectionEquality().hash(_languageIds),
+      goal,
+      levelId,
+      const DeepCollectionEquality().hash(_availability),
+      otherLang);
 
-  /// Create a copy of PreferenceUpdateRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceUpdateRequestImplCopyWith<_$PreferenceUpdateRequestImpl>
-  get copyWith => __$$PreferenceUpdateRequestImplCopyWithImpl<
-    _$PreferenceUpdateRequestImpl
-  >(this, _$identity);
+      get copyWith => __$$PreferenceUpdateRequestImplCopyWithImpl<
+          _$PreferenceUpdateRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceUpdateRequestImplToJson(this);
+    return _$$PreferenceUpdateRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceUpdateRequest implements PreferenceUpdateRequest {
-  const factory _PreferenceUpdateRequest({
-    final String? modalId,
-    final String? gender,
-    final List<String>? languageIds,
-    final String? goal,
-    final String? levelId,
-    final List<AvailabilitySlot>? availability,
-    final String? otherLang,
-  }) = _$PreferenceUpdateRequestImpl;
+  const factory _PreferenceUpdateRequest(
+      {final String? modalId,
+      final String? gender,
+      final List<String>? languageIds,
+      final String? goal,
+      final String? levelId,
+      final List<AvailabilitySlot>? availability,
+      final String? otherLang}) = _$PreferenceUpdateRequestImpl;
 
   factory _PreferenceUpdateRequest.fromJson(Map<String, dynamic> json) =
       _$PreferenceUpdateRequestImpl.fromJson;
@@ -1349,17 +1169,14 @@ abstract class _PreferenceUpdateRequest implements PreferenceUpdateRequest {
   List<AvailabilitySlot>? get availability;
   @override
   String? get otherLang;
-
-  /// Create a copy of PreferenceUpdateRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceUpdateRequestImplCopyWith<_$PreferenceUpdateRequestImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PreferenceUpdateWithoutLevelRequest
-_$PreferenceUpdateWithoutLevelRequestFromJson(Map<String, dynamic> json) {
+    _$PreferenceUpdateWithoutLevelRequestFromJson(Map<String, dynamic> json) {
   return _PreferenceUpdateWithoutLevelRequest.fromJson(json);
 }
 
@@ -1373,44 +1190,33 @@ mixin _$PreferenceUpdateWithoutLevelRequest {
       throw _privateConstructorUsedError;
   String? get otherLang => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceUpdateWithoutLevelRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceUpdateWithoutLevelRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceUpdateWithoutLevelRequestCopyWith<
-    PreferenceUpdateWithoutLevelRequest
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          PreferenceUpdateWithoutLevelRequest>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
   factory $PreferenceUpdateWithoutLevelRequestCopyWith(
-    PreferenceUpdateWithoutLevelRequest value,
-    $Res Function(PreferenceUpdateWithoutLevelRequest) then,
-  ) =
-      _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
-        $Res,
-        PreferenceUpdateWithoutLevelRequest
-      >;
+          PreferenceUpdateWithoutLevelRequest value,
+          $Res Function(PreferenceUpdateWithoutLevelRequest) then) =
+      _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<$Res,
+          PreferenceUpdateWithoutLevelRequest>;
   @useResult
-  $Res call({
-    String? modalId,
-    String? gender,
-    List<String>? languageIds,
-    String? goal,
-    List<AvailabilitySlot>? availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String? modalId,
+      String? gender,
+      List<String>? languageIds,
+      String? goal,
+      List<AvailabilitySlot>? availability,
+      String? otherLang});
 }
 
 /// @nodoc
-class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
-  $Res,
-  $Val extends PreferenceUpdateWithoutLevelRequest
->
+class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<$Res,
+        $Val extends PreferenceUpdateWithoutLevelRequest>
     implements $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
   _$PreferenceUpdateWithoutLevelRequestCopyWithImpl(this._value, this._then);
 
@@ -1419,8 +1225,6 @@ class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceUpdateWithoutLevelRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1431,41 +1235,32 @@ class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
     Object? availability = freezed,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            modalId:
-                freezed == modalId
-                    ? _value.modalId
-                    : modalId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            languageIds:
-                freezed == languageIds
-                    ? _value.languageIds
-                    : languageIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            availability:
-                freezed == availability
-                    ? _value.availability
-                    : availability // ignore: cast_nullable_to_non_nullable
-                        as List<AvailabilitySlot>?,
-            otherLang:
-                freezed == otherLang
-                    ? _value.otherLang
-                    : otherLang // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      modalId: freezed == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      languageIds: freezed == languageIds
+          ? _value.languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: freezed == availability
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>?,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -1473,36 +1268,30 @@ class _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
 abstract class _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<$Res>
     implements $PreferenceUpdateWithoutLevelRequestCopyWith<$Res> {
   factory _$$PreferenceUpdateWithoutLevelRequestImplCopyWith(
-    _$PreferenceUpdateWithoutLevelRequestImpl value,
-    $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) then,
-  ) = __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>;
+          _$PreferenceUpdateWithoutLevelRequestImpl value,
+          $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) then) =
+      __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? modalId,
-    String? gender,
-    List<String>? languageIds,
-    String? goal,
-    List<AvailabilitySlot>? availability,
-    String? otherLang,
-  });
+  $Res call(
+      {String? modalId,
+      String? gender,
+      List<String>? languageIds,
+      String? goal,
+      List<AvailabilitySlot>? availability,
+      String? otherLang});
 }
 
 /// @nodoc
 class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
-    extends
-        _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<
-          $Res,
-          _$PreferenceUpdateWithoutLevelRequestImpl
-        >
+    extends _$PreferenceUpdateWithoutLevelRequestCopyWithImpl<$Res,
+        _$PreferenceUpdateWithoutLevelRequestImpl>
     implements _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<$Res> {
   __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl(
-    _$PreferenceUpdateWithoutLevelRequestImpl _value,
-    $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceUpdateWithoutLevelRequestImpl _value,
+      $Res Function(_$PreferenceUpdateWithoutLevelRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceUpdateWithoutLevelRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1513,40 +1302,32 @@ class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
     Object? availability = freezed,
     Object? otherLang = freezed,
   }) {
-    return _then(
-      _$PreferenceUpdateWithoutLevelRequestImpl(
-        modalId:
-            freezed == modalId
-                ? _value.modalId
-                : modalId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        languageIds:
-            freezed == languageIds
-                ? _value._languageIds
-                : languageIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        availability:
-            freezed == availability
-                ? _value._availability
-                : availability // ignore: cast_nullable_to_non_nullable
-                    as List<AvailabilitySlot>?,
-        otherLang:
-            freezed == otherLang
-                ? _value.otherLang
-                : otherLang // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceUpdateWithoutLevelRequestImpl(
+      modalId: freezed == modalId
+          ? _value.modalId
+          : modalId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      languageIds: freezed == languageIds
+          ? _value._languageIds
+          : languageIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      availability: freezed == availability
+          ? _value._availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<AvailabilitySlot>?,
+      otherLang: freezed == otherLang
+          ? _value.otherLang
+          : otherLang // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
@@ -1554,19 +1335,19 @@ class __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PreferenceUpdateWithoutLevelRequestImpl
     implements _PreferenceUpdateWithoutLevelRequest {
-  const _$PreferenceUpdateWithoutLevelRequestImpl({
-    this.modalId,
-    this.gender,
-    final List<String>? languageIds,
-    this.goal,
-    final List<AvailabilitySlot>? availability,
-    this.otherLang,
-  }) : _languageIds = languageIds,
-       _availability = availability;
+  const _$PreferenceUpdateWithoutLevelRequestImpl(
+      {this.modalId,
+      this.gender,
+      final List<String>? languageIds,
+      this.goal,
+      final List<AvailabilitySlot>? availability,
+      this.otherLang})
+      : _languageIds = languageIds,
+        _availability = availability;
 
   factory _$PreferenceUpdateWithoutLevelRequestImpl.fromJson(
-    Map<String, dynamic> json,
-  ) => _$$PreferenceUpdateWithoutLevelRequestImplFromJson(json);
+          Map<String, dynamic> json) =>
+      _$$PreferenceUpdateWithoutLevelRequestImplFromJson(json);
 
   @override
   final String? modalId;
@@ -1609,63 +1390,55 @@ class _$PreferenceUpdateWithoutLevelRequestImpl
             other is _$PreferenceUpdateWithoutLevelRequestImpl &&
             (identical(other.modalId, modalId) || other.modalId == modalId) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            const DeepCollectionEquality().equals(
-              other._languageIds,
-              _languageIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._languageIds, _languageIds) &&
             (identical(other.goal, goal) || other.goal == goal) &&
-            const DeepCollectionEquality().equals(
-              other._availability,
-              _availability,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availability, _availability) &&
             (identical(other.otherLang, otherLang) ||
                 other.otherLang == otherLang));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    modalId,
-    gender,
-    const DeepCollectionEquality().hash(_languageIds),
-    goal,
-    const DeepCollectionEquality().hash(_availability),
-    otherLang,
-  );
+      runtimeType,
+      modalId,
+      gender,
+      const DeepCollectionEquality().hash(_languageIds),
+      goal,
+      const DeepCollectionEquality().hash(_availability),
+      otherLang);
 
-  /// Create a copy of PreferenceUpdateWithoutLevelRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<
-    _$PreferenceUpdateWithoutLevelRequestImpl
-  >
-  get copyWith => __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<
-    _$PreferenceUpdateWithoutLevelRequestImpl
-  >(this, _$identity);
+          _$PreferenceUpdateWithoutLevelRequestImpl>
+      get copyWith => __$$PreferenceUpdateWithoutLevelRequestImplCopyWithImpl<
+          _$PreferenceUpdateWithoutLevelRequestImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceUpdateWithoutLevelRequestImplToJson(this);
+    return _$$PreferenceUpdateWithoutLevelRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceUpdateWithoutLevelRequest
     implements PreferenceUpdateWithoutLevelRequest {
-  const factory _PreferenceUpdateWithoutLevelRequest({
-    final String? modalId,
-    final String? gender,
-    final List<String>? languageIds,
-    final String? goal,
-    final List<AvailabilitySlot>? availability,
-    final String? otherLang,
-  }) = _$PreferenceUpdateWithoutLevelRequestImpl;
+  const factory _PreferenceUpdateWithoutLevelRequest(
+      {final String? modalId,
+      final String? gender,
+      final List<String>? languageIds,
+      final String? goal,
+      final List<AvailabilitySlot>? availability,
+      final String? otherLang}) = _$PreferenceUpdateWithoutLevelRequestImpl;
 
   factory _PreferenceUpdateWithoutLevelRequest.fromJson(
-    Map<String, dynamic> json,
-  ) = _$PreferenceUpdateWithoutLevelRequestImpl.fromJson;
+          Map<String, dynamic> json) =
+      _$PreferenceUpdateWithoutLevelRequestImpl.fromJson;
 
   @override
   String? get modalId;
@@ -1679,15 +1452,11 @@ abstract class _PreferenceUpdateWithoutLevelRequest
   List<AvailabilitySlot>? get availability;
   @override
   String? get otherLang;
-
-  /// Create a copy of PreferenceUpdateWithoutLevelRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceUpdateWithoutLevelRequestImplCopyWith<
-    _$PreferenceUpdateWithoutLevelRequestImpl
-  >
-  get copyWith => throw _privateConstructorUsedError;
+          _$PreferenceUpdateWithoutLevelRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PreferenceResponse _$PreferenceResponseFromJson(Map<String, dynamic> json) {
@@ -1703,12 +1472,8 @@ mixin _$PreferenceResponse {
   String? get path => throw _privateConstructorUsedError;
   String? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceResponseCopyWith<PreferenceResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1716,18 +1481,16 @@ mixin _$PreferenceResponse {
 /// @nodoc
 abstract class $PreferenceResponseCopyWith<$Res> {
   factory $PreferenceResponseCopyWith(
-    PreferenceResponse value,
-    $Res Function(PreferenceResponse) then,
-  ) = _$PreferenceResponseCopyWithImpl<$Res, PreferenceResponse>;
+          PreferenceResponse value, $Res Function(PreferenceResponse) then) =
+      _$PreferenceResponseCopyWithImpl<$Res, PreferenceResponse>;
   @useResult
-  $Res call({
-    PreferenceData data,
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {PreferenceData data,
+      String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 
   $PreferenceDataCopyWith<$Res> get data;
 }
@@ -1742,8 +1505,6 @@ class _$PreferenceResponseCopyWithImpl<$Res, $Val extends PreferenceResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1754,45 +1515,34 @@ class _$PreferenceResponseCopyWithImpl<$Res, $Val extends PreferenceResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as PreferenceData,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as PreferenceData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PreferenceDataCopyWith<$Res> get data {
@@ -1805,20 +1555,18 @@ class _$PreferenceResponseCopyWithImpl<$Res, $Val extends PreferenceResponse>
 /// @nodoc
 abstract class _$$PreferenceResponseImplCopyWith<$Res>
     implements $PreferenceResponseCopyWith<$Res> {
-  factory _$$PreferenceResponseImplCopyWith(
-    _$PreferenceResponseImpl value,
-    $Res Function(_$PreferenceResponseImpl) then,
-  ) = __$$PreferenceResponseImplCopyWithImpl<$Res>;
+  factory _$$PreferenceResponseImplCopyWith(_$PreferenceResponseImpl value,
+          $Res Function(_$PreferenceResponseImpl) then) =
+      __$$PreferenceResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    PreferenceData data,
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {PreferenceData data,
+      String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 
   @override
   $PreferenceDataCopyWith<$Res> get data;
@@ -1828,13 +1576,10 @@ abstract class _$$PreferenceResponseImplCopyWith<$Res>
 class __$$PreferenceResponseImplCopyWithImpl<$Res>
     extends _$PreferenceResponseCopyWithImpl<$Res, _$PreferenceResponseImpl>
     implements _$$PreferenceResponseImplCopyWith<$Res> {
-  __$$PreferenceResponseImplCopyWithImpl(
-    _$PreferenceResponseImpl _value,
-    $Res Function(_$PreferenceResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$PreferenceResponseImplCopyWithImpl(_$PreferenceResponseImpl _value,
+      $Res Function(_$PreferenceResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1845,54 +1590,45 @@ class __$$PreferenceResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$PreferenceResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as PreferenceData,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as PreferenceData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PreferenceResponseImpl implements _PreferenceResponse {
-  const _$PreferenceResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  });
+  const _$PreferenceResponseImpl(
+      {required this.data,
+      required this.message,
+      required this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp});
 
   factory _$PreferenceResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PreferenceResponseImplFromJson(json);
@@ -1930,44 +1666,34 @@ class _$PreferenceResponseImpl implements _PreferenceResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    data,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType, data, message, statusCode, method, path, timestamp);
 
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceResponseImplCopyWith<_$PreferenceResponseImpl> get copyWith =>
       __$$PreferenceResponseImplCopyWithImpl<_$PreferenceResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceResponseImplToJson(this);
+    return _$$PreferenceResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceResponse implements PreferenceResponse {
-  const factory _PreferenceResponse({
-    required final PreferenceData data,
-    required final String message,
-    required final int statusCode,
-    final String? method,
-    final String? path,
-    final String? timestamp,
-  }) = _$PreferenceResponseImpl;
+  const factory _PreferenceResponse(
+      {required final PreferenceData data,
+      required final String message,
+      required final int statusCode,
+      final String? method,
+      final String? path,
+      final String? timestamp}) = _$PreferenceResponseImpl;
 
   factory _PreferenceResponse.fromJson(Map<String, dynamic> json) =
       _$PreferenceResponseImpl.fromJson;
@@ -1984,61 +1710,49 @@ abstract class _PreferenceResponse implements PreferenceResponse {
   String? get path;
   @override
   String? get timestamp;
-
-  /// Create a copy of PreferenceResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceResponseImplCopyWith<_$PreferenceResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 PreferenceGroupResponse _$PreferenceGroupResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PreferenceGroupResponse.fromJson(json);
 }
 
 /// @nodoc
 mixin _$PreferenceGroupResponse {
-  // required PreferenceData data,
+// required PreferenceData data,
   String get message => throw _privateConstructorUsedError;
   int get statusCode => throw _privateConstructorUsedError;
   String? get method => throw _privateConstructorUsedError;
   String? get path => throw _privateConstructorUsedError;
   String? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceGroupResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceGroupResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceGroupResponseCopyWith<PreferenceGroupResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PreferenceGroupResponseCopyWith<$Res> {
-  factory $PreferenceGroupResponseCopyWith(
-    PreferenceGroupResponse value,
-    $Res Function(PreferenceGroupResponse) then,
-  ) = _$PreferenceGroupResponseCopyWithImpl<$Res, PreferenceGroupResponse>;
+  factory $PreferenceGroupResponseCopyWith(PreferenceGroupResponse value,
+          $Res Function(PreferenceGroupResponse) then) =
+      _$PreferenceGroupResponseCopyWithImpl<$Res, PreferenceGroupResponse>;
   @useResult
-  $Res call({
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 }
 
 /// @nodoc
-class _$PreferenceGroupResponseCopyWithImpl<
-  $Res,
-  $Val extends PreferenceGroupResponse
->
+class _$PreferenceGroupResponseCopyWithImpl<$Res,
+        $Val extends PreferenceGroupResponse>
     implements $PreferenceGroupResponseCopyWith<$Res> {
   _$PreferenceGroupResponseCopyWithImpl(this._value, this._then);
 
@@ -2047,8 +1761,6 @@ class _$PreferenceGroupResponseCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceGroupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2058,36 +1770,28 @@ class _$PreferenceGroupResponseCopyWithImpl<
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -2095,35 +1799,29 @@ class _$PreferenceGroupResponseCopyWithImpl<
 abstract class _$$PreferenceGroupResponseImplCopyWith<$Res>
     implements $PreferenceGroupResponseCopyWith<$Res> {
   factory _$$PreferenceGroupResponseImplCopyWith(
-    _$PreferenceGroupResponseImpl value,
-    $Res Function(_$PreferenceGroupResponseImpl) then,
-  ) = __$$PreferenceGroupResponseImplCopyWithImpl<$Res>;
+          _$PreferenceGroupResponseImpl value,
+          $Res Function(_$PreferenceGroupResponseImpl) then) =
+      __$$PreferenceGroupResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 }
 
 /// @nodoc
 class __$$PreferenceGroupResponseImplCopyWithImpl<$Res>
-    extends
-        _$PreferenceGroupResponseCopyWithImpl<
-          $Res,
-          _$PreferenceGroupResponseImpl
-        >
+    extends _$PreferenceGroupResponseCopyWithImpl<$Res,
+        _$PreferenceGroupResponseImpl>
     implements _$$PreferenceGroupResponseImplCopyWith<$Res> {
   __$$PreferenceGroupResponseImplCopyWithImpl(
-    _$PreferenceGroupResponseImpl _value,
-    $Res Function(_$PreferenceGroupResponseImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceGroupResponseImpl _value,
+      $Res Function(_$PreferenceGroupResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceGroupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2133,53 +1831,45 @@ class __$$PreferenceGroupResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$PreferenceGroupResponseImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceGroupResponseImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PreferenceGroupResponseImpl implements _PreferenceGroupResponse {
-  const _$PreferenceGroupResponseImpl({
-    required this.message,
-    required this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  });
+  const _$PreferenceGroupResponseImpl(
+      {required this.message,
+      required this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp});
 
   factory _$PreferenceGroupResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PreferenceGroupResponseImplFromJson(json);
 
-  // required PreferenceData data,
+// required PreferenceData data,
   @override
   final String message;
   @override
@@ -2210,41 +1900,38 @@ class _$PreferenceGroupResponseImpl implements _PreferenceGroupResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, message, statusCode, method, path, timestamp);
 
-  /// Create a copy of PreferenceGroupResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceGroupResponseImplCopyWith<_$PreferenceGroupResponseImpl>
-  get copyWith => __$$PreferenceGroupResponseImplCopyWithImpl<
-    _$PreferenceGroupResponseImpl
-  >(this, _$identity);
+      get copyWith => __$$PreferenceGroupResponseImplCopyWithImpl<
+          _$PreferenceGroupResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceGroupResponseImplToJson(this);
+    return _$$PreferenceGroupResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceGroupResponse implements PreferenceGroupResponse {
-  const factory _PreferenceGroupResponse({
-    required final String message,
-    required final int statusCode,
-    final String? method,
-    final String? path,
-    final String? timestamp,
-  }) = _$PreferenceGroupResponseImpl;
+  const factory _PreferenceGroupResponse(
+      {required final String message,
+      required final int statusCode,
+      final String? method,
+      final String? path,
+      final String? timestamp}) = _$PreferenceGroupResponseImpl;
 
   factory _PreferenceGroupResponse.fromJson(Map<String, dynamic> json) =
       _$PreferenceGroupResponseImpl.fromJson;
 
-  // required PreferenceData data,
-  @override
+  @override // required PreferenceData data,
   String get message;
   @override
   int get statusCode;
@@ -2254,13 +1941,10 @@ abstract class _PreferenceGroupResponse implements PreferenceGroupResponse {
   String? get path;
   @override
   String? get timestamp;
-
-  /// Create a copy of PreferenceGroupResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceGroupResponseImplCopyWith<_$PreferenceGroupResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PreferenceData _$PreferenceDataFromJson(Map<String, dynamic> json) {
@@ -2282,12 +1966,8 @@ mixin _$PreferenceData {
   String get createdAt => throw _privateConstructorUsedError;
   String? get deletedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this PreferenceData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PreferenceDataCopyWith<PreferenceData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2295,23 +1975,21 @@ mixin _$PreferenceData {
 /// @nodoc
 abstract class $PreferenceDataCopyWith<$Res> {
   factory $PreferenceDataCopyWith(
-    PreferenceData value,
-    $Res Function(PreferenceData) then,
-  ) = _$PreferenceDataCopyWithImpl<$Res, PreferenceData>;
+          PreferenceData value, $Res Function(PreferenceData) then) =
+      _$PreferenceDataCopyWithImpl<$Res, PreferenceData>;
   @useResult
-  $Res call({
-    String gender,
-    String? goal,
-    Client? client,
-    Modal? modal,
-    List<Language>? language,
-    Level? level,
-    List<Availability>? availability,
-    String? updatedAt,
-    String? id,
-    String createdAt,
-    String? deletedAt,
-  });
+  $Res call(
+      {String gender,
+      String? goal,
+      Client? client,
+      Modal? modal,
+      List<Language>? language,
+      Level? level,
+      List<Availability>? availability,
+      String? updatedAt,
+      String? id,
+      String createdAt,
+      String? deletedAt});
 
   $ClientCopyWith<$Res>? get client;
   $ModalCopyWith<$Res>? get modal;
@@ -2328,8 +2006,6 @@ class _$PreferenceDataCopyWithImpl<$Res, $Val extends PreferenceData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2345,70 +2021,54 @@ class _$PreferenceDataCopyWithImpl<$Res, $Val extends PreferenceData>
     Object? createdAt = null,
     Object? deletedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            gender:
-                null == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String,
-            goal:
-                freezed == goal
-                    ? _value.goal
-                    : goal // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            client:
-                freezed == client
-                    ? _value.client
-                    : client // ignore: cast_nullable_to_non_nullable
-                        as Client?,
-            modal:
-                freezed == modal
-                    ? _value.modal
-                    : modal // ignore: cast_nullable_to_non_nullable
-                        as Modal?,
-            language:
-                freezed == language
-                    ? _value.language
-                    : language // ignore: cast_nullable_to_non_nullable
-                        as List<Language>?,
-            level:
-                freezed == level
-                    ? _value.level
-                    : level // ignore: cast_nullable_to_non_nullable
-                        as Level?,
-            availability:
-                freezed == availability
-                    ? _value.availability
-                    : availability // ignore: cast_nullable_to_non_nullable
-                        as List<Availability>?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            id:
-                freezed == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as String,
-            deletedAt:
-                freezed == deletedAt
-                    ? _value.deletedAt
-                    : deletedAt // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as Client?,
+      modal: freezed == modal
+          ? _value.modal
+          : modal // ignore: cast_nullable_to_non_nullable
+              as Modal?,
+      language: freezed == language
+          ? _value.language
+          : language // ignore: cast_nullable_to_non_nullable
+              as List<Language>?,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as Level?,
+      availability: freezed == availability
+          ? _value.availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<Availability>?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ClientCopyWith<$Res>? get client {
@@ -2421,8 +2081,6 @@ class _$PreferenceDataCopyWithImpl<$Res, $Val extends PreferenceData>
     });
   }
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ModalCopyWith<$Res>? get modal {
@@ -2435,8 +2093,6 @@ class _$PreferenceDataCopyWithImpl<$Res, $Val extends PreferenceData>
     });
   }
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $LevelCopyWith<$Res>? get level {
@@ -2453,25 +2109,23 @@ class _$PreferenceDataCopyWithImpl<$Res, $Val extends PreferenceData>
 /// @nodoc
 abstract class _$$PreferenceDataImplCopyWith<$Res>
     implements $PreferenceDataCopyWith<$Res> {
-  factory _$$PreferenceDataImplCopyWith(
-    _$PreferenceDataImpl value,
-    $Res Function(_$PreferenceDataImpl) then,
-  ) = __$$PreferenceDataImplCopyWithImpl<$Res>;
+  factory _$$PreferenceDataImplCopyWith(_$PreferenceDataImpl value,
+          $Res Function(_$PreferenceDataImpl) then) =
+      __$$PreferenceDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String gender,
-    String? goal,
-    Client? client,
-    Modal? modal,
-    List<Language>? language,
-    Level? level,
-    List<Availability>? availability,
-    String? updatedAt,
-    String? id,
-    String createdAt,
-    String? deletedAt,
-  });
+  $Res call(
+      {String gender,
+      String? goal,
+      Client? client,
+      Modal? modal,
+      List<Language>? language,
+      Level? level,
+      List<Availability>? availability,
+      String? updatedAt,
+      String? id,
+      String createdAt,
+      String? deletedAt});
 
   @override
   $ClientCopyWith<$Res>? get client;
@@ -2486,12 +2140,9 @@ class __$$PreferenceDataImplCopyWithImpl<$Res>
     extends _$PreferenceDataCopyWithImpl<$Res, _$PreferenceDataImpl>
     implements _$$PreferenceDataImplCopyWith<$Res> {
   __$$PreferenceDataImplCopyWithImpl(
-    _$PreferenceDataImpl _value,
-    $Res Function(_$PreferenceDataImpl) _then,
-  ) : super(_value, _then);
+      _$PreferenceDataImpl _value, $Res Function(_$PreferenceDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2507,92 +2158,79 @@ class __$$PreferenceDataImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? deletedAt = freezed,
   }) {
-    return _then(
-      _$PreferenceDataImpl(
-        gender:
-            null == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String,
-        goal:
-            freezed == goal
-                ? _value.goal
-                : goal // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        client:
-            freezed == client
-                ? _value.client
-                : client // ignore: cast_nullable_to_non_nullable
-                    as Client?,
-        modal:
-            freezed == modal
-                ? _value.modal
-                : modal // ignore: cast_nullable_to_non_nullable
-                    as Modal?,
-        language:
-            freezed == language
-                ? _value._language
-                : language // ignore: cast_nullable_to_non_nullable
-                    as List<Language>?,
-        level:
-            freezed == level
-                ? _value.level
-                : level // ignore: cast_nullable_to_non_nullable
-                    as Level?,
-        availability:
-            freezed == availability
-                ? _value._availability
-                : availability // ignore: cast_nullable_to_non_nullable
-                    as List<Availability>?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        id:
-            freezed == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as String,
-        deletedAt:
-            freezed == deletedAt
-                ? _value.deletedAt
-                : deletedAt // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$PreferenceDataImpl(
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String,
+      goal: freezed == goal
+          ? _value.goal
+          : goal // ignore: cast_nullable_to_non_nullable
+              as String?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as Client?,
+      modal: freezed == modal
+          ? _value.modal
+          : modal // ignore: cast_nullable_to_non_nullable
+              as Modal?,
+      language: freezed == language
+          ? _value._language
+          : language // ignore: cast_nullable_to_non_nullable
+              as List<Language>?,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as Level?,
+      availability: freezed == availability
+          ? _value._availability
+          : availability // ignore: cast_nullable_to_non_nullable
+              as List<Availability>?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PreferenceDataImpl implements _PreferenceData {
-  const _$PreferenceDataImpl({
-    required this.gender,
-    this.goal,
-    this.client,
-    this.modal,
-    final List<Language>? language,
-    this.level,
-    final List<Availability>? availability,
-    this.updatedAt,
-    this.id,
-    required this.createdAt,
-    this.deletedAt,
-  }) : _language = language,
-       _availability = availability;
+  const _$PreferenceDataImpl(
+      {required this.gender,
+      this.goal,
+      this.client,
+      this.modal,
+      final List<Language>? language,
+      this.level,
+      final List<Availability>? availability,
+      this.updatedAt,
+      this.id,
+      required this.createdAt,
+      this.deletedAt})
+      : _language = language,
+        _availability = availability;
 
   factory _$PreferenceDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$PreferenceDataImplFromJson(json);
 
   @override
   final String gender;
-  // required String sessionFormat,
+// required String sessionFormat,
   @override
   final String? goal;
   @override
@@ -2646,10 +2284,8 @@ class _$PreferenceDataImpl implements _PreferenceData {
             (identical(other.modal, modal) || other.modal == modal) &&
             const DeepCollectionEquality().equals(other._language, _language) &&
             (identical(other.level, level) || other.level == level) &&
-            const DeepCollectionEquality().equals(
-              other._availability,
-              _availability,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._availability, _availability) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.id, id) || other.id == id) &&
@@ -2659,61 +2295,57 @@ class _$PreferenceDataImpl implements _PreferenceData {
                 other.deletedAt == deletedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    gender,
-    goal,
-    client,
-    modal,
-    const DeepCollectionEquality().hash(_language),
-    level,
-    const DeepCollectionEquality().hash(_availability),
-    updatedAt,
-    id,
-    createdAt,
-    deletedAt,
-  );
+      runtimeType,
+      gender,
+      goal,
+      client,
+      modal,
+      const DeepCollectionEquality().hash(_language),
+      level,
+      const DeepCollectionEquality().hash(_availability),
+      updatedAt,
+      id,
+      createdAt,
+      deletedAt);
 
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PreferenceDataImplCopyWith<_$PreferenceDataImpl> get copyWith =>
       __$$PreferenceDataImplCopyWithImpl<_$PreferenceDataImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PreferenceDataImplToJson(this);
+    return _$$PreferenceDataImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PreferenceData implements PreferenceData {
-  const factory _PreferenceData({
-    required final String gender,
-    final String? goal,
-    final Client? client,
-    final Modal? modal,
-    final List<Language>? language,
-    final Level? level,
-    final List<Availability>? availability,
-    final String? updatedAt,
-    final String? id,
-    required final String createdAt,
-    final String? deletedAt,
-  }) = _$PreferenceDataImpl;
+  const factory _PreferenceData(
+      {required final String gender,
+      final String? goal,
+      final Client? client,
+      final Modal? modal,
+      final List<Language>? language,
+      final Level? level,
+      final List<Availability>? availability,
+      final String? updatedAt,
+      final String? id,
+      required final String createdAt,
+      final String? deletedAt}) = _$PreferenceDataImpl;
 
   factory _PreferenceData.fromJson(Map<String, dynamic> json) =
       _$PreferenceDataImpl.fromJson;
 
   @override
-  String get gender; // required String sessionFormat,
-  @override
+  String get gender;
+  @override // required String sessionFormat,
   String? get goal;
   @override
   Client? get client;
@@ -2733,11 +2365,8 @@ abstract class _PreferenceData implements PreferenceData {
   String get createdAt;
   @override
   String? get deletedAt;
-
-  /// Create a copy of PreferenceData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PreferenceDataImplCopyWith<_$PreferenceDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2750,12 +2379,8 @@ Client _$ClientFromJson(Map<String, dynamic> json) {
 mixin _$Client {
   String get id => throw _privateConstructorUsedError;
 
-  /// Serializes this Client to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Client
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ClientCopyWith<Client> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2777,30 +2402,25 @@ class _$ClientCopyWithImpl<$Res, $Val extends Client>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Client
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ClientImplCopyWith<$Res> implements $ClientCopyWith<$Res> {
   factory _$$ClientImplCopyWith(
-    _$ClientImpl value,
-    $Res Function(_$ClientImpl) then,
-  ) = __$$ClientImplCopyWithImpl<$Res>;
+          _$ClientImpl value, $Res Function(_$ClientImpl) then) =
+      __$$ClientImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id});
@@ -2811,24 +2431,20 @@ class __$$ClientImplCopyWithImpl<$Res>
     extends _$ClientCopyWithImpl<$Res, _$ClientImpl>
     implements _$$ClientImplCopyWith<$Res> {
   __$$ClientImplCopyWithImpl(
-    _$ClientImpl _value,
-    $Res Function(_$ClientImpl) _then,
-  ) : super(_value, _then);
+      _$ClientImpl _value, $Res Function(_$ClientImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Client
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$ClientImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$ClientImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -2856,13 +2472,11 @@ class _$ClientImpl implements _Client {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of Client
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ClientImplCopyWith<_$ClientImpl> get copyWith =>
@@ -2870,7 +2484,9 @@ class _$ClientImpl implements _Client {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ClientImplToJson(this);
+    return _$$ClientImplToJson(
+      this,
+    );
   }
 }
 
@@ -2881,11 +2497,8 @@ abstract class _Client implements Client {
 
   @override
   String get id;
-
-  /// Create a copy of Client
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ClientImplCopyWith<_$ClientImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2898,12 +2511,8 @@ Modal _$ModalFromJson(Map<String, dynamic> json) {
 mixin _$Modal {
   String get id => throw _privateConstructorUsedError;
 
-  /// Serializes this Modal to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Modal
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ModalCopyWith<Modal> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2925,30 +2534,25 @@ class _$ModalCopyWithImpl<$Res, $Val extends Modal>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Modal
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ModalImplCopyWith<$Res> implements $ModalCopyWith<$Res> {
   factory _$$ModalImplCopyWith(
-    _$ModalImpl value,
-    $Res Function(_$ModalImpl) then,
-  ) = __$$ModalImplCopyWithImpl<$Res>;
+          _$ModalImpl value, $Res Function(_$ModalImpl) then) =
+      __$$ModalImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id});
@@ -2959,24 +2563,20 @@ class __$$ModalImplCopyWithImpl<$Res>
     extends _$ModalCopyWithImpl<$Res, _$ModalImpl>
     implements _$$ModalImplCopyWith<$Res> {
   __$$ModalImplCopyWithImpl(
-    _$ModalImpl _value,
-    $Res Function(_$ModalImpl) _then,
-  ) : super(_value, _then);
+      _$ModalImpl _value, $Res Function(_$ModalImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Modal
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$ModalImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$ModalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3004,13 +2604,11 @@ class _$ModalImpl implements _Modal {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of Modal
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ModalImplCopyWith<_$ModalImpl> get copyWith =>
@@ -3018,7 +2616,9 @@ class _$ModalImpl implements _Modal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModalImplToJson(this);
+    return _$$ModalImplToJson(
+      this,
+    );
   }
 }
 
@@ -3029,11 +2629,8 @@ abstract class _Modal implements Modal {
 
   @override
   String get id;
-
-  /// Create a copy of Modal
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ModalImplCopyWith<_$ModalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3046,12 +2643,8 @@ Language _$LanguageFromJson(Map<String, dynamic> json) {
 mixin _$Language {
   String get id => throw _privateConstructorUsedError;
 
-  /// Serializes this Language to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Language
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LanguageCopyWith<Language> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3074,21 +2667,17 @@ class _$LanguageCopyWithImpl<$Res, $Val extends Language>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Language
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -3096,9 +2685,8 @@ class _$LanguageCopyWithImpl<$Res, $Val extends Language>
 abstract class _$$LanguageImplCopyWith<$Res>
     implements $LanguageCopyWith<$Res> {
   factory _$$LanguageImplCopyWith(
-    _$LanguageImpl value,
-    $Res Function(_$LanguageImpl) then,
-  ) = __$$LanguageImplCopyWithImpl<$Res>;
+          _$LanguageImpl value, $Res Function(_$LanguageImpl) then) =
+      __$$LanguageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id});
@@ -3109,24 +2697,20 @@ class __$$LanguageImplCopyWithImpl<$Res>
     extends _$LanguageCopyWithImpl<$Res, _$LanguageImpl>
     implements _$$LanguageImplCopyWith<$Res> {
   __$$LanguageImplCopyWithImpl(
-    _$LanguageImpl _value,
-    $Res Function(_$LanguageImpl) _then,
-  ) : super(_value, _then);
+      _$LanguageImpl _value, $Res Function(_$LanguageImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Language
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$LanguageImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$LanguageImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3154,13 +2738,11 @@ class _$LanguageImpl implements _Language {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of Language
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LanguageImplCopyWith<_$LanguageImpl> get copyWith =>
@@ -3168,7 +2750,9 @@ class _$LanguageImpl implements _Language {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LanguageImplToJson(this);
+    return _$$LanguageImplToJson(
+      this,
+    );
   }
 }
 
@@ -3180,11 +2764,8 @@ abstract class _Language implements Language {
 
   @override
   String get id;
-
-  /// Create a copy of Language
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LanguageImplCopyWith<_$LanguageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3197,12 +2778,8 @@ Level _$LevelFromJson(Map<String, dynamic> json) {
 mixin _$Level {
   String get id => throw _privateConstructorUsedError;
 
-  /// Serializes this Level to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Level
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LevelCopyWith<Level> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -3224,30 +2801,25 @@ class _$LevelCopyWithImpl<$Res, $Val extends Level>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Level
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$LevelImplCopyWith<$Res> implements $LevelCopyWith<$Res> {
   factory _$$LevelImplCopyWith(
-    _$LevelImpl value,
-    $Res Function(_$LevelImpl) then,
-  ) = __$$LevelImplCopyWithImpl<$Res>;
+          _$LevelImpl value, $Res Function(_$LevelImpl) then) =
+      __$$LevelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id});
@@ -3258,24 +2830,20 @@ class __$$LevelImplCopyWithImpl<$Res>
     extends _$LevelCopyWithImpl<$Res, _$LevelImpl>
     implements _$$LevelImplCopyWith<$Res> {
   __$$LevelImplCopyWithImpl(
-    _$LevelImpl _value,
-    $Res Function(_$LevelImpl) _then,
-  ) : super(_value, _then);
+      _$LevelImpl _value, $Res Function(_$LevelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Level
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$LevelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$LevelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3303,13 +2871,11 @@ class _$LevelImpl implements _Level {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id);
 
-  /// Create a copy of Level
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LevelImplCopyWith<_$LevelImpl> get copyWith =>
@@ -3317,7 +2883,9 @@ class _$LevelImpl implements _Level {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LevelImplToJson(this);
+    return _$$LevelImplToJson(
+      this,
+    );
   }
 }
 
@@ -3328,11 +2896,8 @@ abstract class _Level implements Level {
 
   @override
   String get id;
-
-  /// Create a copy of Level
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LevelImplCopyWith<_$LevelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3346,18 +2911,14 @@ mixin _$Availability {
   String get day => throw _privateConstructorUsedError;
   String get day_period =>
       throw _privateConstructorUsedError; // required int duration,
-  // required String timezone,
+// required String timezone,
   String get updatedAt => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String? get deletedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this Availability to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Availability
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AvailabilityCopyWith<Availability> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3365,18 +2926,16 @@ mixin _$Availability {
 /// @nodoc
 abstract class $AvailabilityCopyWith<$Res> {
   factory $AvailabilityCopyWith(
-    Availability value,
-    $Res Function(Availability) then,
-  ) = _$AvailabilityCopyWithImpl<$Res, Availability>;
+          Availability value, $Res Function(Availability) then) =
+      _$AvailabilityCopyWithImpl<$Res, Availability>;
   @useResult
-  $Res call({
-    String day,
-    String day_period,
-    String updatedAt,
-    String id,
-    String createdAt,
-    String? deletedAt,
-  });
+  $Res call(
+      {String day,
+      String day_period,
+      String updatedAt,
+      String id,
+      String createdAt,
+      String? deletedAt});
 }
 
 /// @nodoc
@@ -3389,8 +2948,6 @@ class _$AvailabilityCopyWithImpl<$Res, $Val extends Availability>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Availability
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3401,41 +2958,32 @@ class _$AvailabilityCopyWithImpl<$Res, $Val extends Availability>
     Object? createdAt = null,
     Object? deletedAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            day:
-                null == day
-                    ? _value.day
-                    : day // ignore: cast_nullable_to_non_nullable
-                        as String,
-            day_period:
-                null == day_period
-                    ? _value.day_period
-                    : day_period // ignore: cast_nullable_to_non_nullable
-                        as String,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as String,
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as String,
-            deletedAt:
-                freezed == deletedAt
-                    ? _value.deletedAt
-                    : deletedAt // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      day_period: null == day_period
+          ? _value.day_period
+          : day_period // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -3443,19 +2991,17 @@ class _$AvailabilityCopyWithImpl<$Res, $Val extends Availability>
 abstract class _$$AvailabilityImplCopyWith<$Res>
     implements $AvailabilityCopyWith<$Res> {
   factory _$$AvailabilityImplCopyWith(
-    _$AvailabilityImpl value,
-    $Res Function(_$AvailabilityImpl) then,
-  ) = __$$AvailabilityImplCopyWithImpl<$Res>;
+          _$AvailabilityImpl value, $Res Function(_$AvailabilityImpl) then) =
+      __$$AvailabilityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String day,
-    String day_period,
-    String updatedAt,
-    String id,
-    String createdAt,
-    String? deletedAt,
-  });
+  $Res call(
+      {String day,
+      String day_period,
+      String updatedAt,
+      String id,
+      String createdAt,
+      String? deletedAt});
 }
 
 /// @nodoc
@@ -3463,12 +3009,9 @@ class __$$AvailabilityImplCopyWithImpl<$Res>
     extends _$AvailabilityCopyWithImpl<$Res, _$AvailabilityImpl>
     implements _$$AvailabilityImplCopyWith<$Res> {
   __$$AvailabilityImplCopyWithImpl(
-    _$AvailabilityImpl _value,
-    $Res Function(_$AvailabilityImpl) _then,
-  ) : super(_value, _then);
+      _$AvailabilityImpl _value, $Res Function(_$AvailabilityImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Availability
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3479,54 +3022,45 @@ class __$$AvailabilityImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? deletedAt = freezed,
   }) {
-    return _then(
-      _$AvailabilityImpl(
-        day:
-            null == day
-                ? _value.day
-                : day // ignore: cast_nullable_to_non_nullable
-                    as String,
-        day_period:
-            null == day_period
-                ? _value.day_period
-                : day_period // ignore: cast_nullable_to_non_nullable
-                    as String,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as String,
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as String,
-        deletedAt:
-            freezed == deletedAt
-                ? _value.deletedAt
-                : deletedAt // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$AvailabilityImpl(
+      day: null == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as String,
+      day_period: null == day_period
+          ? _value.day_period
+          : day_period // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AvailabilityImpl implements _Availability {
-  const _$AvailabilityImpl({
-    required this.day,
-    required this.day_period,
-    required this.updatedAt,
-    required this.id,
-    required this.createdAt,
-    this.deletedAt,
-  });
+  const _$AvailabilityImpl(
+      {required this.day,
+      required this.day_period,
+      required this.updatedAt,
+      required this.id,
+      required this.createdAt,
+      this.deletedAt});
 
   factory _$AvailabilityImpl.fromJson(Map<String, dynamic> json) =>
       _$$AvailabilityImplFromJson(json);
@@ -3535,8 +3069,8 @@ class _$AvailabilityImpl implements _Availability {
   final String day;
   @override
   final String day_period;
-  // required int duration,
-  // required String timezone,
+// required int duration,
+// required String timezone,
   @override
   final String updatedAt;
   @override
@@ -3568,21 +3102,12 @@ class _$AvailabilityImpl implements _Availability {
                 other.deletedAt == deletedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    day,
-    day_period,
-    updatedAt,
-    id,
-    createdAt,
-    deletedAt,
-  );
+      runtimeType, day, day_period, updatedAt, id, createdAt, deletedAt);
 
-  /// Create a copy of Availability
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AvailabilityImplCopyWith<_$AvailabilityImpl> get copyWith =>
@@ -3590,19 +3115,20 @@ class _$AvailabilityImpl implements _Availability {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AvailabilityImplToJson(this);
+    return _$$AvailabilityImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Availability implements Availability {
-  const factory _Availability({
-    required final String day,
-    required final String day_period,
-    required final String updatedAt,
-    required final String id,
-    required final String createdAt,
-    final String? deletedAt,
-  }) = _$AvailabilityImpl;
+  const factory _Availability(
+      {required final String day,
+      required final String day_period,
+      required final String updatedAt,
+      required final String id,
+      required final String createdAt,
+      final String? deletedAt}) = _$AvailabilityImpl;
 
   factory _Availability.fromJson(Map<String, dynamic> json) =
       _$AvailabilityImpl.fromJson;
@@ -3610,9 +3136,9 @@ abstract class _Availability implements Availability {
   @override
   String get day;
   @override
-  String get day_period; // required int duration,
-  // required String timezone,
-  @override
+  String get day_period;
+  @override // required int duration,
+// required String timezone,
   String get updatedAt;
   @override
   String get id;
@@ -3620,11 +3146,8 @@ abstract class _Availability implements Availability {
   String get createdAt;
   @override
   String? get deletedAt;
-
-  /// Create a copy of Availability
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AvailabilityImplCopyWith<_$AvailabilityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3637,12 +3160,8 @@ MatchRequest _$MatchRequestFromJson(Map<String, dynamic> json) {
 mixin _$MatchRequest {
   String get preferenceId => throw _privateConstructorUsedError;
 
-  /// Serializes this MatchRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MatchRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MatchRequestCopyWith<MatchRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3650,9 +3169,8 @@ mixin _$MatchRequest {
 /// @nodoc
 abstract class $MatchRequestCopyWith<$Res> {
   factory $MatchRequestCopyWith(
-    MatchRequest value,
-    $Res Function(MatchRequest) then,
-  ) = _$MatchRequestCopyWithImpl<$Res, MatchRequest>;
+          MatchRequest value, $Res Function(MatchRequest) then) =
+      _$MatchRequestCopyWithImpl<$Res, MatchRequest>;
   @useResult
   $Res call({String preferenceId});
 }
@@ -3667,21 +3185,17 @@ class _$MatchRequestCopyWithImpl<$Res, $Val extends MatchRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MatchRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? preferenceId = null}) {
-    return _then(
-      _value.copyWith(
-            preferenceId:
-                null == preferenceId
-                    ? _value.preferenceId
-                    : preferenceId // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? preferenceId = null,
+  }) {
+    return _then(_value.copyWith(
+      preferenceId: null == preferenceId
+          ? _value.preferenceId
+          : preferenceId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -3689,9 +3203,8 @@ class _$MatchRequestCopyWithImpl<$Res, $Val extends MatchRequest>
 abstract class _$$MatchRequestImplCopyWith<$Res>
     implements $MatchRequestCopyWith<$Res> {
   factory _$$MatchRequestImplCopyWith(
-    _$MatchRequestImpl value,
-    $Res Function(_$MatchRequestImpl) then,
-  ) = __$$MatchRequestImplCopyWithImpl<$Res>;
+          _$MatchRequestImpl value, $Res Function(_$MatchRequestImpl) then) =
+      __$$MatchRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String preferenceId});
@@ -3702,24 +3215,20 @@ class __$$MatchRequestImplCopyWithImpl<$Res>
     extends _$MatchRequestCopyWithImpl<$Res, _$MatchRequestImpl>
     implements _$$MatchRequestImplCopyWith<$Res> {
   __$$MatchRequestImplCopyWithImpl(
-    _$MatchRequestImpl _value,
-    $Res Function(_$MatchRequestImpl) _then,
-  ) : super(_value, _then);
+      _$MatchRequestImpl _value, $Res Function(_$MatchRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? preferenceId = null}) {
-    return _then(
-      _$MatchRequestImpl(
-        preferenceId:
-            null == preferenceId
-                ? _value.preferenceId
-                : preferenceId // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? preferenceId = null,
+  }) {
+    return _then(_$MatchRequestImpl(
+      preferenceId: null == preferenceId
+          ? _value.preferenceId
+          : preferenceId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3748,13 +3257,11 @@ class _$MatchRequestImpl implements _MatchRequest {
                 other.preferenceId == preferenceId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, preferenceId);
 
-  /// Create a copy of MatchRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchRequestImplCopyWith<_$MatchRequestImpl> get copyWith =>
@@ -3762,7 +3269,9 @@ class _$MatchRequestImpl implements _MatchRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MatchRequestImplToJson(this);
+    return _$$MatchRequestImplToJson(
+      this,
+    );
   }
 }
 
@@ -3775,11 +3284,8 @@ abstract class _MatchRequest implements MatchRequest {
 
   @override
   String get preferenceId;
-
-  /// Create a copy of MatchRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchRequestImplCopyWith<_$MatchRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3797,12 +3303,8 @@ mixin _$MatchResponse {
   String? get path => throw _privateConstructorUsedError;
   String? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this MatchResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MatchResponseCopyWith<MatchResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -3810,18 +3312,16 @@ mixin _$MatchResponse {
 /// @nodoc
 abstract class $MatchResponseCopyWith<$Res> {
   factory $MatchResponseCopyWith(
-    MatchResponse value,
-    $Res Function(MatchResponse) then,
-  ) = _$MatchResponseCopyWithImpl<$Res, MatchResponse>;
+          MatchResponse value, $Res Function(MatchResponse) then) =
+      _$MatchResponseCopyWithImpl<$Res, MatchResponse>;
   @useResult
-  $Res call({
-    MatchData data,
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {MatchData data,
+      String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 
   $MatchDataCopyWith<$Res> get data;
 }
@@ -3836,8 +3336,6 @@ class _$MatchResponseCopyWithImpl<$Res, $Val extends MatchResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3848,45 +3346,34 @@ class _$MatchResponseCopyWithImpl<$Res, $Val extends MatchResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as MatchData,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as MatchData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MatchDataCopyWith<$Res> get data {
@@ -3900,19 +3387,17 @@ class _$MatchResponseCopyWithImpl<$Res, $Val extends MatchResponse>
 abstract class _$$MatchResponseImplCopyWith<$Res>
     implements $MatchResponseCopyWith<$Res> {
   factory _$$MatchResponseImplCopyWith(
-    _$MatchResponseImpl value,
-    $Res Function(_$MatchResponseImpl) then,
-  ) = __$$MatchResponseImplCopyWithImpl<$Res>;
+          _$MatchResponseImpl value, $Res Function(_$MatchResponseImpl) then) =
+      __$$MatchResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    MatchData data,
-    String message,
-    int statusCode,
-    String? method,
-    String? path,
-    String? timestamp,
-  });
+  $Res call(
+      {MatchData data,
+      String message,
+      int statusCode,
+      String? method,
+      String? path,
+      String? timestamp});
 
   @override
   $MatchDataCopyWith<$Res> get data;
@@ -3923,12 +3408,9 @@ class __$$MatchResponseImplCopyWithImpl<$Res>
     extends _$MatchResponseCopyWithImpl<$Res, _$MatchResponseImpl>
     implements _$$MatchResponseImplCopyWith<$Res> {
   __$$MatchResponseImplCopyWithImpl(
-    _$MatchResponseImpl _value,
-    $Res Function(_$MatchResponseImpl) _then,
-  ) : super(_value, _then);
+      _$MatchResponseImpl _value, $Res Function(_$MatchResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -3939,54 +3421,45 @@ class __$$MatchResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$MatchResponseImpl(
-        data:
-            null == data
-                ? _value.data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as MatchData,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$MatchResponseImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as MatchData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MatchResponseImpl implements _MatchResponse {
-  const _$MatchResponseImpl({
-    required this.data,
-    required this.message,
-    required this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  });
+  const _$MatchResponseImpl(
+      {required this.data,
+      required this.message,
+      required this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp});
 
   factory _$MatchResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$MatchResponseImplFromJson(json);
@@ -4024,21 +3497,12 @@ class _$MatchResponseImpl implements _MatchResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    data,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType, data, message, statusCode, method, path, timestamp);
 
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchResponseImplCopyWith<_$MatchResponseImpl> get copyWith =>
@@ -4046,19 +3510,20 @@ class _$MatchResponseImpl implements _MatchResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MatchResponseImplToJson(this);
+    return _$$MatchResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MatchResponse implements MatchResponse {
-  const factory _MatchResponse({
-    required final MatchData data,
-    required final String message,
-    required final int statusCode,
-    final String? method,
-    final String? path,
-    final String? timestamp,
-  }) = _$MatchResponseImpl;
+  const factory _MatchResponse(
+      {required final MatchData data,
+      required final String message,
+      required final int statusCode,
+      final String? method,
+      final String? path,
+      final String? timestamp}) = _$MatchResponseImpl;
 
   factory _MatchResponse.fromJson(Map<String, dynamic> json) =
       _$MatchResponseImpl.fromJson;
@@ -4075,11 +3540,8 @@ abstract class _MatchResponse implements MatchResponse {
   String? get path;
   @override
   String? get timestamp;
-
-  /// Create a copy of MatchResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchResponseImplCopyWith<_$MatchResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4092,12 +3554,8 @@ MatchData _$MatchDataFromJson(Map<String, dynamic> json) {
 mixin _$MatchData {
   String get message => throw _privateConstructorUsedError;
 
-  /// Serializes this MatchData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MatchData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MatchDataCopyWith<MatchData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -4120,21 +3578,17 @@ class _$MatchDataCopyWithImpl<$Res, $Val extends MatchData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MatchData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _value.copyWith(
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
   }
 }
 
@@ -4142,9 +3596,8 @@ class _$MatchDataCopyWithImpl<$Res, $Val extends MatchData>
 abstract class _$$MatchDataImplCopyWith<$Res>
     implements $MatchDataCopyWith<$Res> {
   factory _$$MatchDataImplCopyWith(
-    _$MatchDataImpl value,
-    $Res Function(_$MatchDataImpl) then,
-  ) = __$$MatchDataImplCopyWithImpl<$Res>;
+          _$MatchDataImpl value, $Res Function(_$MatchDataImpl) then) =
+      __$$MatchDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -4155,24 +3608,20 @@ class __$$MatchDataImplCopyWithImpl<$Res>
     extends _$MatchDataCopyWithImpl<$Res, _$MatchDataImpl>
     implements _$$MatchDataImplCopyWith<$Res> {
   __$$MatchDataImplCopyWithImpl(
-    _$MatchDataImpl _value,
-    $Res Function(_$MatchDataImpl) _then,
-  ) : super(_value, _then);
+      _$MatchDataImpl _value, $Res Function(_$MatchDataImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$MatchDataImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$MatchDataImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -4200,13 +3649,11 @@ class _$MatchDataImpl implements _MatchData {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of MatchData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchDataImplCopyWith<_$MatchDataImpl> get copyWith =>
@@ -4214,7 +3661,9 @@ class _$MatchDataImpl implements _MatchData {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MatchDataImplToJson(this);
+    return _$$MatchDataImplToJson(
+      this,
+    );
   }
 }
 
@@ -4226,11 +3675,8 @@ abstract class _MatchData implements MatchData {
 
   @override
   String get message;
-
-  /// Create a copy of MatchData
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchDataImplCopyWith<_$MatchDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

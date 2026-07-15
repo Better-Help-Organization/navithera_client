@@ -31,7 +31,8 @@ import 'package:navithera_client/feature/home/presentation/providers/live_sessio
 import 'package:navithera_client/feature/home/presentation/providers/upcoming_session_provider.dart';
 import 'package:navithera_client/main.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Import to access navigatorKey
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:uuid/uuid.dart';
 
 class PendingRoute {
@@ -202,9 +203,9 @@ class FCMService {
     // Suppress system notifications when app is in foreground (iOS)
     // This prevents duplicate notifications - we show custom overlay instead
     await _fcm.setForegroundNotificationPresentationOptions(
-      alert: false, // Don't show system alert in foreground
+      alert: true, // show system alert in foreground
       badge: true, // Still update badge
-      sound: false, // Don't play system sound in foreground
+      sound: true, // play system sound in foreground
     );
 
     FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
@@ -347,9 +348,7 @@ class FCMService {
       "26",
       "27",
       "28",
-      "29",
       "18",
-      '11',
     ];
 
     try {
@@ -655,9 +654,7 @@ class FCMService {
       "26",
       "27",
       "28",
-      "29",
       "18",
-      '11',
     ];
 
     // try {
@@ -1175,8 +1172,8 @@ class FCMService {
               user: therapist,
               avatar: senderAvatar,
             );
-            if (currentLocation != '/chat/$chatId') {
-              GoRouter.of(context).push('/chat/$chatId', extra: chat);
+            if (currentLocation != targetRoute) {
+              GoRouter.of(context).push(targetRoute, extra: chat);
             }
           },
         );
@@ -1460,8 +1457,12 @@ class FCMService {
   Future<void> rejectCall(String chatId) async {
     final Dio _dio = Dio();
     try {
-      final sharedPreferences = await SharedPreferences.getInstance();
-      final accessToken = sharedPreferences.getString('access_token');
+      final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
+        aOptions: AndroidOptions(encryptedSharedPreferences: true),
+        iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
+      );
+      // final sharedPreferences = await SharedPreferences.getInstance();
+      final accessToken = await _secureStorage.read(key: 'access_token');
 
       _dio.options.headers['Authorization'] = 'Bearer $accessToken';
 

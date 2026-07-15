@@ -10,10 +10,9 @@ _$UserAnswerImpl _$$UserAnswerImplFromJson(Map<String, dynamic> json) =>
     _$UserAnswerImpl(
       questionId: json['questionId'] as String,
       selectedOptionId: json['selectedOptionId'] as String?,
-      selectedOptionIds:
-          (json['selectedOptionIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
+      selectedOptionIds: (json['selectedOptionIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       text: json['text'] as String?,
     );
 

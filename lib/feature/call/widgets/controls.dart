@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_background/flutter_background.dart';
 import 'package:livekit_client/livekit_client.dart';
 // ignore: depend_on_referenced_packages
-import 'package:flutter_webrtc/flutter_webrtc.dart';
+// import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 import '../exts.dart';
 
@@ -105,71 +105,71 @@ class _ControlsWidgetState extends State<ControlsWidget> {
     }
   }
 
-  void _enableScreenShare() async {
-    if (lkPlatformIsDesktop()) {
-      try {
-        final source = await showDialog<DesktopCapturerSource>(
-          context: context,
-          builder: (context) => ScreenSelectDialog(),
-        );
-        if (source == null) {
-          print('cancelled screenshare');
-          return;
-        }
-        print('DesktopCapturerSource: ${source.id}');
-        final track = await LocalVideoTrack.createScreenShareTrack(
-          ScreenShareCaptureOptions(
-            sourceId: source.id,
-            maxFrameRate: 15.0,
-          ),
-        );
-        await participant.publishVideoTrack(track);
-      } catch (e) {
-        print('could not publish video: $e');
-      }
-      return;
-    }
-    if (lkPlatformIs(PlatformType.android)) {
-      // Android specific
-      final hasCapturePermission = await Helper.requestCapturePermission();
-      if (!hasCapturePermission) {
-        return;
-      }
+  // void _enableScreenShare() async {
+  //   if (lkPlatformIsDesktop()) {
+  //     try {
+  //       final source = await showDialog<DesktopCapturerSource>(
+  //         context: context,
+  //         builder: (context) => ScreenSelectDialog(),
+  //       );
+  //       if (source == null) {
+  //         print('cancelled screenshare');
+  //         return;
+  //       }
+  //       print('DesktopCapturerSource: ${source.id}');
+  //       final track = await LocalVideoTrack.createScreenShareTrack(
+  //         ScreenShareCaptureOptions(
+  //           sourceId: source.id,
+  //           maxFrameRate: 15.0,
+  //         ),
+  //       );
+  //       await participant.publishVideoTrack(track);
+  //     } catch (e) {
+  //       print('could not publish video: $e');
+  //     }
+  //     return;
+  //   }
+  //   if (lkPlatformIs(PlatformType.android)) {
+  //     // Android specific
+  //     final hasCapturePermission = await Helper.requestCapturePermission();
+  //     if (!hasCapturePermission) {
+  //       return;
+  //     }
 
-      requestBackgroundPermission([bool isRetry = false]) async {
-        // Required for android screenshare.
-        try {
-          bool hasPermissions = await FlutterBackground.hasPermissions;
-          if (!isRetry) {
-            const androidConfig = FlutterBackgroundAndroidConfig(
-              notificationTitle: 'Screen Sharing',
-              notificationText: 'LiveKit Example is sharing the screen.',
-              notificationImportance: AndroidNotificationImportance.normal,
-              notificationIcon: AndroidResource(name: 'livekit_ic_launcher', defType: 'mipmap'),
-            );
-            hasPermissions = await FlutterBackground.initialize(androidConfig: androidConfig);
-          }
-          if (hasPermissions && !FlutterBackground.isBackgroundExecutionEnabled) {
-            await FlutterBackground.enableBackgroundExecution();
-          }
-        } catch (e) {
-          if (!isRetry) {
-            return await Future<void>.delayed(const Duration(seconds: 1), () => requestBackgroundPermission(true));
-          }
-          print('could not publish video: $e');
-        }
-      }
+  //     requestBackgroundPermission([bool isRetry = false]) async {
+  //       // Required for android screenshare.
+  //       try {
+  //         bool hasPermissions = await FlutterBackground.hasPermissions;
+  //         if (!isRetry) {
+  //           const androidConfig = FlutterBackgroundAndroidConfig(
+  //             notificationTitle: 'Screen Sharing',
+  //             notificationText: 'LiveKit Example is sharing the screen.',
+  //             notificationImportance: AndroidNotificationImportance.normal,
+  //             notificationIcon: AndroidResource(name: 'livekit_ic_launcher', defType: 'mipmap'),
+  //           );
+  //           hasPermissions = await FlutterBackground.initialize(androidConfig: androidConfig);
+  //         }
+  //         if (hasPermissions && !FlutterBackground.isBackgroundExecutionEnabled) {
+  //           await FlutterBackground.enableBackgroundExecution();
+  //         }
+  //       } catch (e) {
+  //         if (!isRetry) {
+  //           return await Future<void>.delayed(const Duration(seconds: 1), () => requestBackgroundPermission(true));
+  //         }
+  //         print('could not publish video: $e');
+  //       }
+  //     }
 
-      await requestBackgroundPermission();
-    }
+  //     await requestBackgroundPermission();
+  //   }
 
-    if (lkPlatformIsWebMobile()) {
-      if (!mounted) return;
-      await context.showErrorDialog('Screen share is not supported on mobile web');
-      return;
-    }
-    await participant.setScreenShareEnabled(true, captureScreenAudio: true);
-  }
+  //   if (lkPlatformIsWebMobile()) {
+  //     if (!mounted) return;
+  //     await context.showErrorDialog('Screen share is not supported on mobile web');
+  //     return;
+  //   }
+  //   await participant.setScreenShareEnabled(true, captureScreenAudio: true);
+  // }
 
   void _disableScreenShare() async {
     await participant.setScreenShareEnabled(false);

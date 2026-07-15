@@ -37,8 +37,9 @@ class UpcomingSessionRepositoryImpl implements UpcomingSessionRepository {
             'schedule>$now,hasTherapistAttended=0,approvalStatus=confirmed',
         // Add fields to include therapist data
         fields:
-            'schedule,approvalStatus,hasTherapistAttended,hasclientAttended,'
-            'duration,type,note,therapist.*,client.*,group.*',
+            'id,schedule,approvalStatus,hasTherapistAttended,hasclientAttended,'
+            'duration,type,note,'
+            'therapist.*',
       );
       return Right(res);
     } on DioException catch (e) {

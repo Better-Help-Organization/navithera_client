@@ -24,7 +24,7 @@ final exchangeRateProvider = StateProvider<double?>((ref) => null);
 
 const _secureStorage = FlutterSecureStorage(
   aOptions: AndroidOptions(encryptedSharedPreferences: true),
-  iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock)
+  iOptions: IOSOptions(accessibility: KeychainAccessibility.first_unlock),
 );
 // Keep as FutureProvider but use ref.refresh for force reload
 final userPreferencesProvider = FutureProvider<Map<String, dynamic>?>((
@@ -34,7 +34,7 @@ final userPreferencesProvider = FutureProvider<Map<String, dynamic>?>((
   if (token == null) throw Exception('No token found');
 
   final uri = Uri.parse(
-    '$base_url_dev/client/me/preferences?fields=level.*,modal.*&sort=createdAt=desc',
+    '$base_url_dev/client/me/preferences?fields=level.type,level.price,modal.name,modal.description,modal.subscription.type,modal.id,level.id&sort=createdAt=desc',
   );
   final response = await http.get(
     uri,
@@ -79,6 +79,7 @@ class Subscription {
   final String id;
   final int type; // 0=free,1=monthly,3=quarterly,6=semi-annual,12=yearly
   final int price;
+  final int? oldPrice;
   final String? level;
   final String? levelId;
   final Map<String, dynamic>? modal;
@@ -90,6 +91,7 @@ class Subscription {
     this.level,
     this.levelId,
     this.modal,
+    this.oldPrice,
   });
 
   factory Subscription.fromJson(Map<String, dynamic> json) {
@@ -103,6 +105,10 @@ class Subscription {
       level: levelMap?['type'] as String?,
       levelId: levelMap?['id'] as String?,
       modal: modalMap,
+      oldPrice:
+          json['old_price'] != null
+              ? int.tryParse(json['old_price'].toString())
+              : null,
     );
   }
 }
@@ -118,7 +124,7 @@ class SubscriptionService {
 
     // Build query parameters
     final params = <String, String>{
-      'fields': 'price,type,level.*,modal.*',
+      'fields': 'price,type,old_price,level.type,modal.description',
       'take': '0', // Get all records
     };
 
@@ -246,7 +252,7 @@ class SubscriptionPage extends ConsumerStatefulWidget {
 
 class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     with WidgetsBindingObserver {
-  late Future<List<Subscription>> _future;
+  Future<List<Subscription>> _future = Future.value([]);
   bool _isRefreshing = false;
   bool _hasInitialLoad = false;
 
@@ -254,6 +260,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _future = Future.value([]);
     _initializeData();
   }
 
@@ -339,14 +346,20 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
   Future<void> _loadSubscriptions() async {
     final selectedLevel = ref.read(selectedLevelProvider);
     final selectedModal = ref.read(selectedModalProvider);
+    final selectedModalName = ref.read(selectedModalNameProvider);
 
     print(
       "Loading subscriptions with level: $selectedLevel, modal: $selectedModal",
     );
 
+    final isGroupOrCouple =
+        selectedModalName != null &&
+        (selectedModalName.toLowerCase().contains('group') ||
+         selectedModalName.toLowerCase().contains('couple'));
+
     setState(() {
       _future = SubscriptionService.fetchFilteredSubscriptions(
-        levelId: selectedLevel,
+        levelId: isGroupOrCouple ? null: selectedLevel,
         modalId: selectedModal,
       );
     });
@@ -1062,7 +1075,7 @@ class SubscriptionCard extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        contentPadding: const EdgeInsets.all(16),
+        contentPadding: const EdgeInsets.all(13),
         leading: CircleAvatar(
           backgroundColor: secondary,
           child: const Icon(Icons.star, color: Colors.white),
@@ -1087,19 +1100,32 @@ class SubscriptionCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            if (subscription.oldPrice != null &&
+                subscription.oldPrice! > subscription.price)
+              Text(
+                '${subscription.oldPrice} ETB',
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                  decoration: TextDecoration.lineThrough,
+                  decorationColor: Colors.grey,
+                ),
+              ),
             Text(
               priceText,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: secondary,
               ),
             ),
-            if (subscription.type != 0)
-              const Text(
-                'total',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
+            if (subscription.oldPrice != null &&
+                subscription.oldPrice! > subscription.price)
+              if (subscription.type != 0)
+                const Text(
+                  'total',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
           ],
         ),
         onTap: onTap,

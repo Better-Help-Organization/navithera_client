@@ -197,7 +197,7 @@ class _CategorySelectionScreenState
                                       'Bearer $accessToken';
 
                                   final response = await dio.get(
-                                    '${base_url_dev}/client/me/preferences?fields=modal.*&filters=modal.id=${category.id}',
+                                    '${base_url_dev}/client/me/preferences?fields=modal.name,modal.description&filters=modal.id=${category.id}',
                                   );
 
                                   // print("responsexoxo: ${response.data}");

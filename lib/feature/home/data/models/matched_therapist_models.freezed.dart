@@ -12,8 +12,7 @@ part of 'matched_therapist_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MatchListResponse _$MatchListResponseFromJson(Map<String, dynamic> json) {
   return _MatchListResponse.fromJson(json);
@@ -29,12 +28,8 @@ mixin _$MatchListResponse {
   String? get path => throw _privateConstructorUsedError;
   DateTime? get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this MatchListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MatchListResponseCopyWith<MatchListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,19 +37,17 @@ mixin _$MatchListResponse {
 /// @nodoc
 abstract class $MatchListResponseCopyWith<$Res> {
   factory $MatchListResponseCopyWith(
-    MatchListResponse value,
-    $Res Function(MatchListResponse) then,
-  ) = _$MatchListResponseCopyWithImpl<$Res, MatchListResponse>;
+          MatchListResponse value, $Res Function(MatchListResponse) then) =
+      _$MatchListResponseCopyWithImpl<$Res, MatchListResponse>;
   @useResult
-  $Res call({
-    List<MatchItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<MatchItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   $PaginationCopyWith<$Res>? get pagination;
 }
@@ -69,8 +62,6 @@ class _$MatchListResponseCopyWithImpl<$Res, $Val extends MatchListResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,50 +73,38 @@ class _$MatchListResponseCopyWithImpl<$Res, $Val extends MatchListResponse>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<MatchItem>,
-            pagination:
-                freezed == pagination
-                    ? _value.pagination
-                    : pagination // ignore: cast_nullable_to_non_nullable
-                        as Pagination?,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            statusCode:
-                freezed == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            method:
-                freezed == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            path:
-                freezed == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            timestamp:
-                freezed == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<MatchItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res>? get pagination {
@@ -142,21 +121,19 @@ class _$MatchListResponseCopyWithImpl<$Res, $Val extends MatchListResponse>
 /// @nodoc
 abstract class _$$MatchListResponseImplCopyWith<$Res>
     implements $MatchListResponseCopyWith<$Res> {
-  factory _$$MatchListResponseImplCopyWith(
-    _$MatchListResponseImpl value,
-    $Res Function(_$MatchListResponseImpl) then,
-  ) = __$$MatchListResponseImplCopyWithImpl<$Res>;
+  factory _$$MatchListResponseImplCopyWith(_$MatchListResponseImpl value,
+          $Res Function(_$MatchListResponseImpl) then) =
+      __$$MatchListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<MatchItem> data,
-    Pagination? pagination,
-    String? message,
-    int? statusCode,
-    String? method,
-    String? path,
-    DateTime? timestamp,
-  });
+  $Res call(
+      {List<MatchItem> data,
+      Pagination? pagination,
+      String? message,
+      int? statusCode,
+      String? method,
+      String? path,
+      DateTime? timestamp});
 
   @override
   $PaginationCopyWith<$Res>? get pagination;
@@ -166,13 +143,10 @@ abstract class _$$MatchListResponseImplCopyWith<$Res>
 class __$$MatchListResponseImplCopyWithImpl<$Res>
     extends _$MatchListResponseCopyWithImpl<$Res, _$MatchListResponseImpl>
     implements _$$MatchListResponseImplCopyWith<$Res> {
-  __$$MatchListResponseImplCopyWithImpl(
-    _$MatchListResponseImpl _value,
-    $Res Function(_$MatchListResponseImpl) _then,
-  ) : super(_value, _then);
+  __$$MatchListResponseImplCopyWithImpl(_$MatchListResponseImpl _value,
+      $Res Function(_$MatchListResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -184,60 +158,51 @@ class __$$MatchListResponseImplCopyWithImpl<$Res>
     Object? path = freezed,
     Object? timestamp = freezed,
   }) {
-    return _then(
-      _$MatchListResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<MatchItem>,
-        pagination:
-            freezed == pagination
-                ? _value.pagination
-                : pagination // ignore: cast_nullable_to_non_nullable
-                    as Pagination?,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        statusCode:
-            freezed == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        method:
-            freezed == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        path:
-            freezed == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        timestamp:
-            freezed == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$MatchListResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<MatchItem>,
+      pagination: freezed == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusCode: freezed == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      method: freezed == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String?,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MatchListResponseImpl implements _MatchListResponse {
-  const _$MatchListResponseImpl({
-    required final List<MatchItem> data,
-    this.pagination,
-    this.message,
-    this.statusCode,
-    this.method,
-    this.path,
-    this.timestamp,
-  }) : _data = data;
+  const _$MatchListResponseImpl(
+      {required final List<MatchItem> data,
+      this.pagination,
+      this.message,
+      this.statusCode,
+      this.method,
+      this.path,
+      this.timestamp})
+      : _data = data;
 
   factory _$MatchListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$MatchListResponseImplFromJson(json);
@@ -285,46 +250,42 @@ class _$MatchListResponseImpl implements _MatchListResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    pagination,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      pagination,
+      message,
+      statusCode,
+      method,
+      path,
+      timestamp);
 
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchListResponseImplCopyWith<_$MatchListResponseImpl> get copyWith =>
       __$$MatchListResponseImplCopyWithImpl<_$MatchListResponseImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MatchListResponseImplToJson(this);
+    return _$$MatchListResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MatchListResponse implements MatchListResponse {
-  const factory _MatchListResponse({
-    required final List<MatchItem> data,
-    final Pagination? pagination,
-    final String? message,
-    final int? statusCode,
-    final String? method,
-    final String? path,
-    final DateTime? timestamp,
-  }) = _$MatchListResponseImpl;
+  const factory _MatchListResponse(
+      {required final List<MatchItem> data,
+      final Pagination? pagination,
+      final String? message,
+      final int? statusCode,
+      final String? method,
+      final String? path,
+      final DateTime? timestamp}) = _$MatchListResponseImpl;
 
   factory _MatchListResponse.fromJson(Map<String, dynamic> json) =
       _$MatchListResponseImpl.fromJson;
@@ -343,11 +304,8 @@ abstract class _MatchListResponse implements MatchListResponse {
   String? get path;
   @override
   DateTime? get timestamp;
-
-  /// Create a copy of MatchListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchListResponseImplCopyWith<_$MatchListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -363,12 +321,8 @@ mixin _$MatchItem {
   dynamic get client => throw _privateConstructorUsedError; // keep flexible
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
-  /// Serializes this MatchItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MatchItemCopyWith<MatchItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -378,12 +332,8 @@ abstract class $MatchItemCopyWith<$Res> {
   factory $MatchItemCopyWith(MatchItem value, $Res Function(MatchItem) then) =
       _$MatchItemCopyWithImpl<$Res, MatchItem>;
   @useResult
-  $Res call({
-    String id,
-    UserModel? accepted,
-    dynamic client,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id, UserModel? accepted, dynamic client, DateTime? createdAt});
 
   $UserModelCopyWith<$Res>? get accepted;
 }
@@ -398,8 +348,6 @@ class _$MatchItemCopyWithImpl<$Res, $Val extends MatchItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -408,35 +356,26 @@ class _$MatchItemCopyWithImpl<$Res, $Val extends MatchItem>
     Object? client = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            accepted:
-                freezed == accepted
-                    ? _value.accepted
-                    : accepted // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-            client:
-                freezed == client
-                    ? _value.client
-                    : client // ignore: cast_nullable_to_non_nullable
-                        as dynamic,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      accepted: freezed == accepted
+          ? _value.accepted
+          : accepted // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ) as $Val);
   }
 
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get accepted {
@@ -454,17 +393,12 @@ class _$MatchItemCopyWithImpl<$Res, $Val extends MatchItem>
 abstract class _$$MatchItemImplCopyWith<$Res>
     implements $MatchItemCopyWith<$Res> {
   factory _$$MatchItemImplCopyWith(
-    _$MatchItemImpl value,
-    $Res Function(_$MatchItemImpl) then,
-  ) = __$$MatchItemImplCopyWithImpl<$Res>;
+          _$MatchItemImpl value, $Res Function(_$MatchItemImpl) then) =
+      __$$MatchItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    UserModel? accepted,
-    dynamic client,
-    DateTime? createdAt,
-  });
+  $Res call(
+      {String id, UserModel? accepted, dynamic client, DateTime? createdAt});
 
   @override
   $UserModelCopyWith<$Res>? get accepted;
@@ -475,12 +409,9 @@ class __$$MatchItemImplCopyWithImpl<$Res>
     extends _$MatchItemCopyWithImpl<$Res, _$MatchItemImpl>
     implements _$$MatchItemImplCopyWith<$Res> {
   __$$MatchItemImplCopyWithImpl(
-    _$MatchItemImpl _value,
-    $Res Function(_$MatchItemImpl) _then,
-  ) : super(_value, _then);
+      _$MatchItemImpl _value, $Res Function(_$MatchItemImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -489,42 +420,32 @@ class __$$MatchItemImplCopyWithImpl<$Res>
     Object? client = freezed,
     Object? createdAt = freezed,
   }) {
-    return _then(
-      _$MatchItemImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        accepted:
-            freezed == accepted
-                ? _value.accepted
-                : accepted // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-        client:
-            freezed == client
-                ? _value.client
-                : client // ignore: cast_nullable_to_non_nullable
-                    as dynamic,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-      ),
-    );
+    return _then(_$MatchItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      accepted: freezed == accepted
+          ? _value.accepted
+          : accepted // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$MatchItemImpl implements _MatchItem {
-  const _$MatchItemImpl({
-    required this.id,
-    this.accepted,
-    this.client = null,
-    this.createdAt,
-  });
+  const _$MatchItemImpl(
+      {required this.id, this.accepted, this.client = null, this.createdAt});
 
   factory _$MatchItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$MatchItemImplFromJson(json);
@@ -536,7 +457,7 @@ class _$MatchItemImpl implements _MatchItem {
   @override
   @JsonKey()
   final dynamic client;
-  // keep flexible
+// keep flexible
   @override
   final DateTime? createdAt;
 
@@ -558,19 +479,12 @@ class _$MatchItemImpl implements _MatchItem {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    accepted,
-    const DeepCollectionEquality().hash(client),
-    createdAt,
-  );
+  int get hashCode => Object.hash(runtimeType, id, accepted,
+      const DeepCollectionEquality().hash(client), createdAt);
 
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchItemImplCopyWith<_$MatchItemImpl> get copyWith =>
@@ -578,17 +492,18 @@ class _$MatchItemImpl implements _MatchItem {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MatchItemImplToJson(this);
+    return _$$MatchItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _MatchItem implements MatchItem {
-  const factory _MatchItem({
-    required final String id,
-    final UserModel? accepted,
-    final dynamic client,
-    final DateTime? createdAt,
-  }) = _$MatchItemImpl;
+  const factory _MatchItem(
+      {required final String id,
+      final UserModel? accepted,
+      final dynamic client,
+      final DateTime? createdAt}) = _$MatchItemImpl;
 
   factory _MatchItem.fromJson(Map<String, dynamic> json) =
       _$MatchItemImpl.fromJson;
@@ -598,14 +513,11 @@ abstract class _MatchItem implements MatchItem {
   @override
   UserModel? get accepted;
   @override
-  dynamic get client; // keep flexible
-  @override
+  dynamic get client;
+  @override // keep flexible
   DateTime? get createdAt;
-
-  /// Create a copy of MatchItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchItemImplCopyWith<_$MatchItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -7,14 +7,15 @@ part of 'languages_response.dart';
 // **************************************************************************
 
 _$LanguagesResponseImpl _$$LanguagesResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$LanguagesResponseImpl(
-  data:
-      (json['data'] as List<dynamic>)
+        Map<String, dynamic> json) =>
+    _$LanguagesResponseImpl(
+      data: (json['data'] as List<dynamic>)
           .map((e) => LanguageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-);
+    );
 
 Map<String, dynamic> _$$LanguagesResponseImplToJson(
-  _$LanguagesResponseImpl instance,
-) => <String, dynamic>{'data': instance.data};
+        _$LanguagesResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };

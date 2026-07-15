@@ -10,10 +10,9 @@ _$AnswerRequestImpl _$$AnswerRequestImplFromJson(Map<String, dynamic> json) =>
     _$AnswerRequestImpl(
       questionId: json['questionId'] as String,
       singleOptionId: json['singleOptionId'] as String?,
-      multiOptionIds:
-          (json['multiOptionIds'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
+      multiOptionIds: (json['multiOptionIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       text: json['text'] as String?,
     );
 

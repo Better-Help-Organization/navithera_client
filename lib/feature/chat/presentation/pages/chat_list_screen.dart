@@ -162,7 +162,6 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         surfaceTintColor: Colors.transparent,
         backgroundColor: Colors.white,
         title: Text(AppLocalizations.of(context)!.myCounslor),

@@ -8,12 +8,13 @@ part of 'modals_response.dart';
 
 _$ModalsResponseImpl _$$ModalsResponseImplFromJson(Map<String, dynamic> json) =>
     _$ModalsResponseImpl(
-      data:
-          (json['data'] as List<dynamic>)
-              .map((e) => TherapyModal.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      data: (json['data'] as List<dynamic>)
+          .map((e) => TherapyModal.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ModalsResponseImplToJson(
-  _$ModalsResponseImpl instance,
-) => <String, dynamic>{'data': instance.data};
+        _$ModalsResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+    };

@@ -7,25 +7,25 @@ part of 'users_list_model.dart';
 // **************************************************************************
 
 _$UsersListResponseImpl _$$UsersListResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$UsersListResponseImpl(
-  data:
-      (json['data'] as List<dynamic>)
+        Map<String, dynamic> json) =>
+    _$UsersListResponseImpl(
+      data: (json['data'] as List<dynamic>)
           .map((e) => UserModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-  pagination: Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
-  message: json['message'] as String,
-  statusCode: (json['statusCode'] as num).toInt(),
-);
+      pagination:
+          Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      statusCode: (json['statusCode'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$UsersListResponseImplToJson(
-  _$UsersListResponseImpl instance,
-) => <String, dynamic>{
-  'data': instance.data,
-  'pagination': instance.pagination,
-  'message': instance.message,
-  'statusCode': instance.statusCode,
-};
+        _$UsersListResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'pagination': instance.pagination,
+      'message': instance.message,
+      'statusCode': instance.statusCode,
+    };
 
 _$PaginationImpl _$$PaginationImplFromJson(Map<String, dynamic> json) =>
     _$PaginationImpl(
