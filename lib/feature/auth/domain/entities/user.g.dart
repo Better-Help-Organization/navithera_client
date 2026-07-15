@@ -7,63 +7,52 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-  id: json['id'] as String,
-  email: json['email'] as String,
-  firstName: json['firstName'] as String,
-  lastName: json['lastName'] as String,
-  createdAt:
-      json['createdAt'] == null
+      id: json['id'] as String,
+      email: json['email'] as String,
+      firstName: json['firstName'] as String,
+      lastName: json['lastName'] as String,
+      createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-  isEmailAuthenticated: json['isEmailAuthenticated'] as bool?,
-  status: json['status'] as String?,
-  gender: json['gender'] as String?,
-  dob: json['dob'] == null ? null : DateTime.parse(json['dob'] as String),
-  username: json['username'] as String?,
-  phoneNumber: json['phoneNumber'] as String?,
-  isVisible: json['isVisible'] as bool?,
-  updatedAt:
-      json['updatedAt'] == null
+      isEmailAuthenticated: json['isEmailAuthenticated'] as bool?,
+      status: json['status'] as String?,
+      gender: json['gender'] as String?,
+      dob: json['dob'] == null ? null : DateTime.parse(json['dob'] as String),
+      username: json['username'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      isVisible: json['isVisible'] as bool?,
+      updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
-  emergencyContact: json['emergencyContact'],
-  deletedAt:
-      json['deletedAt'] == null
+      emergencyContact: json['emergencyContact'],
+      deletedAt: json['deletedAt'] == null
           ? null
           : DateTime.parse(json['deletedAt'] as String),
-  isLinked: json['isLinked'] as bool?,
-  isPhoneNumberAuthenticated: json['isPhoneNumberAuthenticated'] as bool?,
-  preferences:
-      (json['preference'] as List<dynamic>?)
+      isLinked: json['isLinked'] as bool?,
+      isPhoneNumberAuthenticated: json['isPhoneNumberAuthenticated'] as bool?,
+      preferences: (json['preference'] as List<dynamic>?)
           ?.map((e) => PrefData.fromJson(e as Map<String, dynamic>))
           .toList(),
-  answers:
-      (json['answer'] as List<dynamic>?)
+      answers: (json['answer'] as List<dynamic>?)
           ?.map((e) => AnsData.fromJson(e as Map<String, dynamic>))
           .toList(),
-  subscriptions:
-      (json['subscription'] as List<dynamic>?)
+      subscriptions: (json['subscription'] as List<dynamic>?)
           ?.map((e) => SubscriptionData.fromJson(e as Map<String, dynamic>))
           .toList(),
-  activeSubscription:
-      json['activeSubscription'] == null
+      activeSubscription: json['activeSubscription'] == null
           ? null
           : SubscriptionData.fromJson(
-            json['activeSubscription'] as Map<String, dynamic>,
-          ),
-  expertise:
-      (json['expertise'] as List<dynamic>?)
+              json['activeSubscription'] as Map<String, dynamic>),
+      expertise: (json['expertise'] as List<dynamic>?)
           ?.map((e) => ExpertiseData.fromJson(e as Map<String, dynamic>))
           .toList(),
-  avatar: (json['avatar'] as num?)?.toInt(),
-  profile: json['profile'] as String?,
-  hasNotification:
-      json['hasNotification'] == null
+      avatar: (json['avatar'] as num?)?.toInt(),
+      profile: json['profile'] as String?,
+      hasNotification: json['hasNotification'] == null
           ? null
           : NotificationItem.fromJson(
-            json['hasNotification'] as Map<String, dynamic>,
-          ),
-);
+              json['hasNotification'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{

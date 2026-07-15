@@ -12,12 +12,10 @@ part of 'notification_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 NotificationListResponse _$NotificationListResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _NotificationListResponse.fromJson(json);
 }
 
@@ -31,41 +29,33 @@ mixin _$NotificationListResponse {
   String get path => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
-  /// Serializes this NotificationListResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $NotificationListResponseCopyWith<NotificationListResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NotificationListResponseCopyWith<$Res> {
-  factory $NotificationListResponseCopyWith(
-    NotificationListResponse value,
-    $Res Function(NotificationListResponse) then,
-  ) = _$NotificationListResponseCopyWithImpl<$Res, NotificationListResponse>;
+  factory $NotificationListResponseCopyWith(NotificationListResponse value,
+          $Res Function(NotificationListResponse) then) =
+      _$NotificationListResponseCopyWithImpl<$Res, NotificationListResponse>;
   @useResult
-  $Res call({
-    List<NotificationItem> data,
-    Pagination pagination,
-    String message,
-    int statusCode,
-    String method,
-    String path,
-    DateTime timestamp,
-  });
+  $Res call(
+      {List<NotificationItem> data,
+      Pagination pagination,
+      String message,
+      int statusCode,
+      String method,
+      String path,
+      DateTime timestamp});
 
   $PaginationCopyWith<$Res> get pagination;
 }
 
 /// @nodoc
-class _$NotificationListResponseCopyWithImpl<
-  $Res,
-  $Val extends NotificationListResponse
->
+class _$NotificationListResponseCopyWithImpl<$Res,
+        $Val extends NotificationListResponse>
     implements $NotificationListResponseCopyWith<$Res> {
   _$NotificationListResponseCopyWithImpl(this._value, this._then);
 
@@ -74,8 +64,6 @@ class _$NotificationListResponseCopyWithImpl<
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,50 +75,38 @@ class _$NotificationListResponseCopyWithImpl<
     Object? path = null,
     Object? timestamp = null,
   }) {
-    return _then(
-      _value.copyWith(
-            data:
-                null == data
-                    ? _value.data
-                    : data // ignore: cast_nullable_to_non_nullable
-                        as List<NotificationItem>,
-            pagination:
-                null == pagination
-                    ? _value.pagination
-                    : pagination // ignore: cast_nullable_to_non_nullable
-                        as Pagination,
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            statusCode:
-                null == statusCode
-                    ? _value.statusCode
-                    : statusCode // ignore: cast_nullable_to_non_nullable
-                        as int,
-            method:
-                null == method
-                    ? _value.method
-                    : method // ignore: cast_nullable_to_non_nullable
-                        as String,
-            path:
-                null == path
-                    ? _value.path
-                    : path // ignore: cast_nullable_to_non_nullable
-                        as String,
-            timestamp:
-                null == timestamp
-                    ? _value.timestamp
-                    : timestamp // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationItem>,
+      pagination: null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: null == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PaginationCopyWith<$Res> get pagination {
@@ -144,20 +120,19 @@ class _$NotificationListResponseCopyWithImpl<
 abstract class _$$NotificationListResponseImplCopyWith<$Res>
     implements $NotificationListResponseCopyWith<$Res> {
   factory _$$NotificationListResponseImplCopyWith(
-    _$NotificationListResponseImpl value,
-    $Res Function(_$NotificationListResponseImpl) then,
-  ) = __$$NotificationListResponseImplCopyWithImpl<$Res>;
+          _$NotificationListResponseImpl value,
+          $Res Function(_$NotificationListResponseImpl) then) =
+      __$$NotificationListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    List<NotificationItem> data,
-    Pagination pagination,
-    String message,
-    int statusCode,
-    String method,
-    String path,
-    DateTime timestamp,
-  });
+  $Res call(
+      {List<NotificationItem> data,
+      Pagination pagination,
+      String message,
+      int statusCode,
+      String method,
+      String path,
+      DateTime timestamp});
 
   @override
   $PaginationCopyWith<$Res> get pagination;
@@ -165,19 +140,14 @@ abstract class _$$NotificationListResponseImplCopyWith<$Res>
 
 /// @nodoc
 class __$$NotificationListResponseImplCopyWithImpl<$Res>
-    extends
-        _$NotificationListResponseCopyWithImpl<
-          $Res,
-          _$NotificationListResponseImpl
-        >
+    extends _$NotificationListResponseCopyWithImpl<$Res,
+        _$NotificationListResponseImpl>
     implements _$$NotificationListResponseImplCopyWith<$Res> {
   __$$NotificationListResponseImplCopyWithImpl(
-    _$NotificationListResponseImpl _value,
-    $Res Function(_$NotificationListResponseImpl) _then,
-  ) : super(_value, _then);
+      _$NotificationListResponseImpl _value,
+      $Res Function(_$NotificationListResponseImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -189,60 +159,51 @@ class __$$NotificationListResponseImplCopyWithImpl<$Res>
     Object? path = null,
     Object? timestamp = null,
   }) {
-    return _then(
-      _$NotificationListResponseImpl(
-        data:
-            null == data
-                ? _value._data
-                : data // ignore: cast_nullable_to_non_nullable
-                    as List<NotificationItem>,
-        pagination:
-            null == pagination
-                ? _value.pagination
-                : pagination // ignore: cast_nullable_to_non_nullable
-                    as Pagination,
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        statusCode:
-            null == statusCode
-                ? _value.statusCode
-                : statusCode // ignore: cast_nullable_to_non_nullable
-                    as int,
-        method:
-            null == method
-                ? _value.method
-                : method // ignore: cast_nullable_to_non_nullable
-                    as String,
-        path:
-            null == path
-                ? _value.path
-                : path // ignore: cast_nullable_to_non_nullable
-                    as String,
-        timestamp:
-            null == timestamp
-                ? _value.timestamp
-                : timestamp // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$NotificationListResponseImpl(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NotificationItem>,
+      pagination: null == pagination
+          ? _value.pagination
+          : pagination // ignore: cast_nullable_to_non_nullable
+              as Pagination,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      statusCode: null == statusCode
+          ? _value.statusCode
+          : statusCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      method: null == method
+          ? _value.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: null == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NotificationListResponseImpl implements _NotificationListResponse {
-  const _$NotificationListResponseImpl({
-    required final List<NotificationItem> data,
-    required this.pagination,
-    required this.message,
-    required this.statusCode,
-    required this.method,
-    required this.path,
-    required this.timestamp,
-  }) : _data = data;
+  const _$NotificationListResponseImpl(
+      {required final List<NotificationItem> data,
+      required this.pagination,
+      required this.message,
+      required this.statusCode,
+      required this.method,
+      required this.path,
+      required this.timestamp})
+      : _data = data;
 
   factory _$NotificationListResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationListResponseImplFromJson(json);
@@ -290,45 +251,42 @@ class _$NotificationListResponseImpl implements _NotificationListResponse {
                 other.timestamp == timestamp));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_data),
-    pagination,
-    message,
-    statusCode,
-    method,
-    path,
-    timestamp,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      pagination,
+      message,
+      statusCode,
+      method,
+      path,
+      timestamp);
 
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationListResponseImplCopyWith<_$NotificationListResponseImpl>
-  get copyWith => __$$NotificationListResponseImplCopyWithImpl<
-    _$NotificationListResponseImpl
-  >(this, _$identity);
+      get copyWith => __$$NotificationListResponseImplCopyWithImpl<
+          _$NotificationListResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationListResponseImplToJson(this);
+    return _$$NotificationListResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _NotificationListResponse implements NotificationListResponse {
-  const factory _NotificationListResponse({
-    required final List<NotificationItem> data,
-    required final Pagination pagination,
-    required final String message,
-    required final int statusCode,
-    required final String method,
-    required final String path,
-    required final DateTime timestamp,
-  }) = _$NotificationListResponseImpl;
+  const factory _NotificationListResponse(
+      {required final List<NotificationItem> data,
+      required final Pagination pagination,
+      required final String message,
+      required final int statusCode,
+      required final String method,
+      required final String path,
+      required final DateTime timestamp}) = _$NotificationListResponseImpl;
 
   factory _NotificationListResponse.fromJson(Map<String, dynamic> json) =
       _$NotificationListResponseImpl.fromJson;
@@ -347,13 +305,10 @@ abstract class _NotificationListResponse implements NotificationListResponse {
   String get path;
   @override
   DateTime get timestamp;
-
-  /// Create a copy of NotificationListResponse
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$NotificationListResponseImplCopyWith<_$NotificationListResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 NotificationItem _$NotificationItemFromJson(Map<String, dynamic> json) {
@@ -376,12 +331,8 @@ mixin _$NotificationItem {
   @JsonKey(ignore: true)
   bool get isExpanded => throw _privateConstructorUsedError;
 
-  /// Serializes this NotificationItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $NotificationItemCopyWith<NotificationItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -389,23 +340,21 @@ mixin _$NotificationItem {
 /// @nodoc
 abstract class $NotificationItemCopyWith<$Res> {
   factory $NotificationItemCopyWith(
-    NotificationItem value,
-    $Res Function(NotificationItem) then,
-  ) = _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
+          NotificationItem value, $Res Function(NotificationItem) then) =
+      _$NotificationItemCopyWithImpl<$Res, NotificationItem>;
   @useResult
-  $Res call({
-    String id,
-    DateTime updatedAt,
-    DateTime createdAt,
-    String title,
-    String body,
-    String? message,
-    String code,
-    UserModel? client,
-    String? profile,
-    @JsonKey(ignore: true) bool isRead,
-    @JsonKey(ignore: true) bool isExpanded,
-  });
+  $Res call(
+      {String id,
+      DateTime updatedAt,
+      DateTime createdAt,
+      String title,
+      String body,
+      String? message,
+      String code,
+      UserModel? client,
+      String? profile,
+      @JsonKey(ignore: true) bool isRead,
+      @JsonKey(ignore: true) bool isExpanded});
 
   $UserModelCopyWith<$Res>? get client;
 }
@@ -420,8 +369,6 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -437,70 +384,54 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
     Object? isRead = null,
     Object? isExpanded = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            updatedAt:
-                null == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as String,
-            body:
-                null == body
-                    ? _value.body
-                    : body // ignore: cast_nullable_to_non_nullable
-                        as String,
-            message:
-                freezed == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            code:
-                null == code
-                    ? _value.code
-                    : code // ignore: cast_nullable_to_non_nullable
-                        as String,
-            client:
-                freezed == client
-                    ? _value.client
-                    : client // ignore: cast_nullable_to_non_nullable
-                        as UserModel?,
-            profile:
-                freezed == profile
-                    ? _value.profile
-                    : profile // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isRead:
-                null == isRead
-                    ? _value.isRead
-                    : isRead // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            isExpanded:
-                null == isExpanded
-                    ? _value.isExpanded
-                    : isExpanded // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRead: null == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get client {
@@ -517,25 +448,23 @@ class _$NotificationItemCopyWithImpl<$Res, $Val extends NotificationItem>
 /// @nodoc
 abstract class _$$NotificationItemImplCopyWith<$Res>
     implements $NotificationItemCopyWith<$Res> {
-  factory _$$NotificationItemImplCopyWith(
-    _$NotificationItemImpl value,
-    $Res Function(_$NotificationItemImpl) then,
-  ) = __$$NotificationItemImplCopyWithImpl<$Res>;
+  factory _$$NotificationItemImplCopyWith(_$NotificationItemImpl value,
+          $Res Function(_$NotificationItemImpl) then) =
+      __$$NotificationItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    DateTime updatedAt,
-    DateTime createdAt,
-    String title,
-    String body,
-    String? message,
-    String code,
-    UserModel? client,
-    String? profile,
-    @JsonKey(ignore: true) bool isRead,
-    @JsonKey(ignore: true) bool isExpanded,
-  });
+  $Res call(
+      {String id,
+      DateTime updatedAt,
+      DateTime createdAt,
+      String title,
+      String body,
+      String? message,
+      String code,
+      UserModel? client,
+      String? profile,
+      @JsonKey(ignore: true) bool isRead,
+      @JsonKey(ignore: true) bool isExpanded});
 
   @override
   $UserModelCopyWith<$Res>? get client;
@@ -545,13 +474,10 @@ abstract class _$$NotificationItemImplCopyWith<$Res>
 class __$$NotificationItemImplCopyWithImpl<$Res>
     extends _$NotificationItemCopyWithImpl<$Res, _$NotificationItemImpl>
     implements _$$NotificationItemImplCopyWith<$Res> {
-  __$$NotificationItemImplCopyWithImpl(
-    _$NotificationItemImpl _value,
-    $Res Function(_$NotificationItemImpl) _then,
-  ) : super(_value, _then);
+  __$$NotificationItemImplCopyWithImpl(_$NotificationItemImpl _value,
+      $Res Function(_$NotificationItemImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -567,84 +493,70 @@ class __$$NotificationItemImplCopyWithImpl<$Res>
     Object? isRead = null,
     Object? isExpanded = null,
   }) {
-    return _then(
-      _$NotificationItemImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        updatedAt:
-            null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as String,
-        body:
-            null == body
-                ? _value.body
-                : body // ignore: cast_nullable_to_non_nullable
-                    as String,
-        message:
-            freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        code:
-            null == code
-                ? _value.code
-                : code // ignore: cast_nullable_to_non_nullable
-                    as String,
-        client:
-            freezed == client
-                ? _value.client
-                : client // ignore: cast_nullable_to_non_nullable
-                    as UserModel?,
-        profile:
-            freezed == profile
-                ? _value.profile
-                : profile // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isRead:
-            null == isRead
-                ? _value.isRead
-                : isRead // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        isExpanded:
-            null == isExpanded
-                ? _value.isExpanded
-                : isExpanded // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$NotificationItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      client: freezed == client
+          ? _value.client
+          : client // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRead: null == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isExpanded: null == isExpanded
+          ? _value.isExpanded
+          : isExpanded // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$NotificationItemImpl implements _NotificationItem {
-  const _$NotificationItemImpl({
-    required this.id,
-    required this.updatedAt,
-    required this.createdAt,
-    required this.title,
-    required this.body,
-    required this.message,
-    required this.code,
-    this.client,
-    this.profile,
-    @JsonKey(ignore: true) this.isRead = false,
-    @JsonKey(ignore: true) this.isExpanded = false,
-  });
+  const _$NotificationItemImpl(
+      {required this.id,
+      required this.updatedAt,
+      required this.createdAt,
+      required this.title,
+      required this.body,
+      required this.message,
+      required this.code,
+      this.client,
+      this.profile,
+      @JsonKey(ignore: true) this.isRead = false,
+      @JsonKey(ignore: true) this.isExpanded = false});
 
   factory _$NotificationItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationItemImplFromJson(json);
@@ -700,54 +612,39 @@ class _$NotificationItemImpl implements _NotificationItem {
                 other.isExpanded == isExpanded));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    updatedAt,
-    createdAt,
-    title,
-    body,
-    message,
-    code,
-    client,
-    profile,
-    isRead,
-    isExpanded,
-  );
+  int get hashCode => Object.hash(runtimeType, id, updatedAt, createdAt, title,
+      body, message, code, client, profile, isRead, isExpanded);
 
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationItemImplCopyWith<_$NotificationItemImpl> get copyWith =>
       __$$NotificationItemImplCopyWithImpl<_$NotificationItemImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$NotificationItemImplToJson(this);
+    return _$$NotificationItemImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _NotificationItem implements NotificationItem {
-  const factory _NotificationItem({
-    required final String id,
-    required final DateTime updatedAt,
-    required final DateTime createdAt,
-    required final String title,
-    required final String body,
-    required final String? message,
-    required final String code,
-    final UserModel? client,
-    final String? profile,
-    @JsonKey(ignore: true) final bool isRead,
-    @JsonKey(ignore: true) final bool isExpanded,
-  }) = _$NotificationItemImpl;
+  const factory _NotificationItem(
+      {required final String id,
+      required final DateTime updatedAt,
+      required final DateTime createdAt,
+      required final String title,
+      required final String body,
+      required final String? message,
+      required final String code,
+      final UserModel? client,
+      final String? profile,
+      @JsonKey(ignore: true) final bool isRead,
+      @JsonKey(ignore: true) final bool isExpanded}) = _$NotificationItemImpl;
 
   factory _NotificationItem.fromJson(Map<String, dynamic> json) =
       _$NotificationItemImpl.fromJson;
@@ -776,11 +673,8 @@ abstract class _NotificationItem implements NotificationItem {
   @override
   @JsonKey(ignore: true)
   bool get isExpanded;
-
-  /// Create a copy of NotificationItem
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$NotificationItemImplCopyWith<_$NotificationItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

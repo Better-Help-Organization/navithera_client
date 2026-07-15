@@ -34,7 +34,7 @@ class SessionNotifier extends StateNotifier<List<Session>> {
     try {
       await _attachAuthHeader();
       final response = await _dio.get(
-        '${base_url_dev}/client/me/sessions?fields=therapist.*,schedule,duration,hasTherapistAttended,approvalStatus,groupAttendance.*&take=0',
+        '${base_url_dev}/client/me/sessions?fields=therapist.firstName,therapist.lastName,schedule,duration,hasTherapistAttended,approvalStatus,groupAttendance.*&take=0',
       );
 
       final sessionsData = (response.data['data'] as List);
@@ -471,7 +471,7 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Session Details',
+                      'details',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -493,9 +493,9 @@ class _SessionCalendarScreenState extends State<SessionCalendarScreen>
                             _updateGroupSessionAttendance(session.id, true);
                           } else {
                             _updateSessionAttendance(session.id, true);
-                          }
-                        },
-                      ),
+                        }
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),

@@ -12,8 +12,7 @@ part of 'language_reponse.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LanguageModel _$LanguageModelFromJson(Map<String, dynamic> json) {
   return _LanguageModel.fromJson(json);
@@ -26,12 +25,8 @@ mixin _$LanguageModel {
   String get code => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
-  /// Serializes this LanguageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LanguageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LanguageModelCopyWith<LanguageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,9 +34,8 @@ mixin _$LanguageModel {
 /// @nodoc
 abstract class $LanguageModelCopyWith<$Res> {
   factory $LanguageModelCopyWith(
-    LanguageModel value,
-    $Res Function(LanguageModel) then,
-  ) = _$LanguageModelCopyWithImpl<$Res, LanguageModel>;
+          LanguageModel value, $Res Function(LanguageModel) then) =
+      _$LanguageModelCopyWithImpl<$Res, LanguageModel>;
   @useResult
   $Res call({String id, String name, String code, DateTime createdAt});
 }
@@ -56,8 +50,6 @@ class _$LanguageModelCopyWithImpl<$Res, $Val extends LanguageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LanguageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,31 +58,24 @@ class _$LanguageModelCopyWithImpl<$Res, $Val extends LanguageModel>
     Object? code = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            code:
-                null == code
-                    ? _value.code
-                    : code // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
@@ -98,9 +83,8 @@ class _$LanguageModelCopyWithImpl<$Res, $Val extends LanguageModel>
 abstract class _$$LanguageModelImplCopyWith<$Res>
     implements $LanguageModelCopyWith<$Res> {
   factory _$$LanguageModelImplCopyWith(
-    _$LanguageModelImpl value,
-    $Res Function(_$LanguageModelImpl) then,
-  ) = __$$LanguageModelImplCopyWithImpl<$Res>;
+          _$LanguageModelImpl value, $Res Function(_$LanguageModelImpl) then) =
+      __$$LanguageModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String code, DateTime createdAt});
@@ -111,12 +95,9 @@ class __$$LanguageModelImplCopyWithImpl<$Res>
     extends _$LanguageModelCopyWithImpl<$Res, _$LanguageModelImpl>
     implements _$$LanguageModelImplCopyWith<$Res> {
   __$$LanguageModelImplCopyWithImpl(
-    _$LanguageModelImpl _value,
-    $Res Function(_$LanguageModelImpl) _then,
-  ) : super(_value, _then);
+      _$LanguageModelImpl _value, $Res Function(_$LanguageModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LanguageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,42 +106,35 @@ class __$$LanguageModelImplCopyWithImpl<$Res>
     Object? code = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _$LanguageModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        code:
-            null == code
-                ? _value.code
-                : code // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$LanguageModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LanguageModelImpl implements _LanguageModel {
-  const _$LanguageModelImpl({
-    required this.id,
-    required this.name,
-    required this.code,
-    required this.createdAt,
-  });
+  const _$LanguageModelImpl(
+      {required this.id,
+      required this.name,
+      required this.code,
+      required this.createdAt});
 
   factory _$LanguageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LanguageModelImplFromJson(json);
@@ -191,13 +165,11 @@ class _$LanguageModelImpl implements _LanguageModel {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, code, createdAt);
 
-  /// Create a copy of LanguageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LanguageModelImplCopyWith<_$LanguageModelImpl> get copyWith =>
@@ -205,17 +177,18 @@ class _$LanguageModelImpl implements _LanguageModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LanguageModelImplToJson(this);
+    return _$$LanguageModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LanguageModel implements LanguageModel {
-  const factory _LanguageModel({
-    required final String id,
-    required final String name,
-    required final String code,
-    required final DateTime createdAt,
-  }) = _$LanguageModelImpl;
+  const factory _LanguageModel(
+      {required final String id,
+      required final String name,
+      required final String code,
+      required final DateTime createdAt}) = _$LanguageModelImpl;
 
   factory _LanguageModel.fromJson(Map<String, dynamic> json) =
       _$LanguageModelImpl.fromJson;
@@ -228,11 +201,8 @@ abstract class _LanguageModel implements LanguageModel {
   String get code;
   @override
   DateTime get createdAt;
-
-  /// Create a copy of LanguageModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LanguageModelImplCopyWith<_$LanguageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -51,20 +51,20 @@ Map<String, dynamic> _$$LoginRequestImplToJson(_$LoginRequestImpl instance) =>
     };
 
 _$ProfileApiResponseImpl _$$ProfileApiResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$ProfileApiResponseImpl(
-  data: UserModel.fromJson(json['data'] as Map<String, dynamic>),
-  message: json['message'] as String,
-  statusCode: (json['statusCode'] as num).toInt(),
-);
+        Map<String, dynamic> json) =>
+    _$ProfileApiResponseImpl(
+      data: UserModel.fromJson(json['data'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      statusCode: (json['statusCode'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$ProfileApiResponseImplToJson(
-  _$ProfileApiResponseImpl instance,
-) => <String, dynamic>{
-  'data': instance.data,
-  'message': instance.message,
-  'statusCode': instance.statusCode,
-};
+        _$ProfileApiResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'message': instance.message,
+      'statusCode': instance.statusCode,
+    };
 
 _$SignupRequestImpl _$$SignupRequestImplFromJson(Map<String, dynamic> json) =>
     _$SignupRequestImpl(
@@ -95,14 +95,12 @@ Map<String, dynamic> _$$SignupRequestImplToJson(_$SignupRequestImpl instance) =>
 _$ExpertiseDataImpl _$$ExpertiseDataImplFromJson(Map<String, dynamic> json) =>
     _$ExpertiseDataImpl(
       id: json['id'] as String,
-      updatedAt:
-          json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
-      createdAt:
-          json['createdAt'] == null
-              ? null
-              : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       expertise: json['expertise'] as String?,
     );
 
@@ -127,46 +125,37 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       username: json['username'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       isVisible: json['isVisible'] as bool?,
-      updatedAt:
-          json['updatedAt'] == null
-              ? null
-              : DateTime.parse(json['updatedAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
       emergencyContact: json['emergencyContact'],
-      deletedAt:
-          json['deletedAt'] == null
-              ? null
-              : DateTime.parse(json['deletedAt'] as String),
+      deletedAt: json['deletedAt'] == null
+          ? null
+          : DateTime.parse(json['deletedAt'] as String),
       isLinked: json['isLinked'] as bool?,
       isEmailAuthenticated: json['isEmailAuthenticated'] as bool?,
       isPhoneNumberAuthenticated: json['isPhoneNumberAuthenticated'] as bool?,
-      preferences:
-          (json['preference'] as List<dynamic>?)
-              ?.map((e) => PrefData.fromJson(e as Map<String, dynamic>))
-              .toList(),
-      answers:
-          (json['answer'] as List<dynamic>?)
-              ?.map((e) => AnsData.fromJson(e as Map<String, dynamic>))
-              .toList(),
-      activeSubscription:
-          json['activeSubscription'] == null
-              ? null
-              : SubscriptionData.fromJson(
-                json['activeSubscription'] as Map<String, dynamic>,
-              ),
-      expertise:
-          (json['expertise'] as List<dynamic>?)
-              ?.map((e) => ExpertiseData.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      preferences: (json['preference'] as List<dynamic>?)
+          ?.map((e) => PrefData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      answers: (json['answer'] as List<dynamic>?)
+          ?.map((e) => AnsData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      activeSubscription: json['activeSubscription'] == null
+          ? null
+          : SubscriptionData.fromJson(
+              json['activeSubscription'] as Map<String, dynamic>),
+      expertise: (json['expertise'] as List<dynamic>?)
+          ?.map((e) => ExpertiseData.fromJson(e as Map<String, dynamic>))
+          .toList(),
       avatar: (json['avatar'] as num?)?.toInt(),
       profile: json['profile'] as String?,
       isOnline: json['isOnline'] as bool?,
       bio: json['bio'] as String?,
-      hasNotification:
-          json['hasNotification'] == null
-              ? null
-              : NotificationItem.fromJson(
-                json['hasNotification'] as Map<String, dynamic>,
-              ),
+      hasNotification: json['hasNotification'] == null
+          ? null
+          : NotificationItem.fromJson(
+              json['hasNotification'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
@@ -214,131 +203,149 @@ Map<String, dynamic> _$$PrefDataImplToJson(_$PrefDataImpl instance) =>
     };
 
 _$AnsDataImpl _$$AnsDataImplFromJson(Map<String, dynamic> json) =>
-    _$AnsDataImpl(id: json['id'] as String?, text: json['text'] as String?);
+    _$AnsDataImpl(
+      id: json['id'] as String?,
+      text: json['text'] as String?,
+    );
 
 Map<String, dynamic> _$$AnsDataImplToJson(_$AnsDataImpl instance) =>
-    <String, dynamic>{'id': instance.id, 'text': instance.text};
+    <String, dynamic>{
+      'id': instance.id,
+      'text': instance.text,
+    };
 
 _$UpdateProfileRequestImpl _$$UpdateProfileRequestImplFromJson(
-  Map<String, dynamic> json,
-) => _$UpdateProfileRequestImpl(
-  firstName: json['firstName'] as String?,
-  lastName: json['lastName'] as String?,
-  email: json['email'] as String?,
-  gender: json['gender'] as String?,
-  username: json['username'] as String?,
-  phoneNumber: json['phoneNumber'] as String?,
-);
+        Map<String, dynamic> json) =>
+    _$UpdateProfileRequestImpl(
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      email: json['email'] as String?,
+      gender: json['gender'] as String?,
+      username: json['username'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+    );
 
 Map<String, dynamic> _$$UpdateProfileRequestImplToJson(
-  _$UpdateProfileRequestImpl instance,
-) => <String, dynamic>{
-  'firstName': instance.firstName,
-  'lastName': instance.lastName,
-  'email': instance.email,
-  'gender': instance.gender,
-  'username': instance.username,
-  'phoneNumber': instance.phoneNumber,
-};
+        _$UpdateProfileRequestImpl instance) =>
+    <String, dynamic>{
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
+      'gender': instance.gender,
+      'username': instance.username,
+      'phoneNumber': instance.phoneNumber,
+    };
 
 _$UpdateProfilePicRequestImpl _$$UpdateProfilePicRequestImplFromJson(
-  Map<String, dynamic> json,
-) => _$UpdateProfilePicRequestImpl(avatar: (json['avatar'] as num?)?.toInt());
+        Map<String, dynamic> json) =>
+    _$UpdateProfilePicRequestImpl(
+      avatar: (json['avatar'] as num?)?.toInt(),
+    );
 
 Map<String, dynamic> _$$UpdateProfilePicRequestImplToJson(
-  _$UpdateProfilePicRequestImpl instance,
-) => <String, dynamic>{'avatar': instance.avatar};
+        _$UpdateProfilePicRequestImpl instance) =>
+    <String, dynamic>{
+      'avatar': instance.avatar,
+    };
 
 _$ForgotPasswordRequestImpl _$$ForgotPasswordRequestImplFromJson(
-  Map<String, dynamic> json,
-) => _$ForgotPasswordRequestImpl(email: json['email'] as String);
+        Map<String, dynamic> json) =>
+    _$ForgotPasswordRequestImpl(
+      email: json['email'] as String,
+    );
 
 Map<String, dynamic> _$$ForgotPasswordRequestImplToJson(
-  _$ForgotPasswordRequestImpl instance,
-) => <String, dynamic>{'email': instance.email};
+        _$ForgotPasswordRequestImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+    };
 
 _$ResetPasswordRequestImpl _$$ResetPasswordRequestImplFromJson(
-  Map<String, dynamic> json,
-) => _$ResetPasswordRequestImpl(
-  email: json['email'] as String,
-  password: json['password'] as String,
-  passwordConfirm: json['passwordConfirm'] as String,
-  otp: json['otp'] as String,
-);
+        Map<String, dynamic> json) =>
+    _$ResetPasswordRequestImpl(
+      email: json['email'] as String,
+      password: json['password'] as String,
+      passwordConfirm: json['passwordConfirm'] as String,
+      otp: json['otp'] as String,
+    );
 
 Map<String, dynamic> _$$ResetPasswordRequestImplToJson(
-  _$ResetPasswordRequestImpl instance,
-) => <String, dynamic>{
-  'email': instance.email,
-  'password': instance.password,
-  'passwordConfirm': instance.passwordConfirm,
-  'otp': instance.otp,
-};
+        _$ResetPasswordRequestImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'password': instance.password,
+      'passwordConfirm': instance.passwordConfirm,
+      'otp': instance.otp,
+    };
 
 _$ForgotPasswordResponseImpl _$$ForgotPasswordResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$ForgotPasswordResponseImpl(
-  data: json['data'] as String,
-  message: json['message'] as String,
-  statusCode: (json['statusCode'] as num).toInt(),
-);
+        Map<String, dynamic> json) =>
+    _$ForgotPasswordResponseImpl(
+      data: json['data'] as String,
+      message: json['message'] as String,
+      statusCode: (json['statusCode'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$ForgotPasswordResponseImplToJson(
-  _$ForgotPasswordResponseImpl instance,
-) => <String, dynamic>{
-  'data': instance.data,
-  'message': instance.message,
-  'statusCode': instance.statusCode,
-};
+        _$ForgotPasswordResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'message': instance.message,
+      'statusCode': instance.statusCode,
+    };
 
 _$ResetPasswordResponseImpl _$$ResetPasswordResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$ResetPasswordResponseImpl(
-  data: ResetPasswordData.fromJson(json['data'] as Map<String, dynamic>),
-  message: json['message'] as String,
-  statusCode: (json['statusCode'] as num).toInt(),
-);
+        Map<String, dynamic> json) =>
+    _$ResetPasswordResponseImpl(
+      data: ResetPasswordData.fromJson(json['data'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      statusCode: (json['statusCode'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$$ResetPasswordResponseImplToJson(
-  _$ResetPasswordResponseImpl instance,
-) => <String, dynamic>{
-  'data': instance.data,
-  'message': instance.message,
-  'statusCode': instance.statusCode,
-};
+        _$ResetPasswordResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'message': instance.message,
+      'statusCode': instance.statusCode,
+    };
 
 _$ResetPasswordDataImpl _$$ResetPasswordDataImplFromJson(
-  Map<String, dynamic> json,
-) => _$ResetPasswordDataImpl(message: json['message'] as String);
+        Map<String, dynamic> json) =>
+    _$ResetPasswordDataImpl(
+      message: json['message'] as String,
+    );
 
 Map<String, dynamic> _$$ResetPasswordDataImplToJson(
-  _$ResetPasswordDataImpl instance,
-) => <String, dynamic>{'message': instance.message};
+        _$ResetPasswordDataImpl instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };
 
 _$SubscriptionDataImpl _$$SubscriptionDataImplFromJson(
-  Map<String, dynamic> json,
-) => _$SubscriptionDataImpl(
-  id: json['id'] as String,
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  type: (json['type'] as num?)?.toInt(),
-  status: json['status'] as String?,
-  start_date: json['start_date'] as String?,
-  end_date: json['end_date'] as String?,
-  old_price: (json['old_price'] as num?)?.toInt(),
-  price: (json['price'] as num?)?.toInt(),
-);
+        Map<String, dynamic> json) =>
+    _$SubscriptionDataImpl(
+      id: json['id'] as String,
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      type: (json['type'] as num?)?.toInt(),
+      status: json['status'] as String?,
+      start_date: json['start_date'] as String?,
+      end_date: json['end_date'] as String?,
+      old_price: (json['old_price'] as num?)?.toInt(),
+      price: (json['price'] as num?)?.toInt(),
+    );
 
 Map<String, dynamic> _$$SubscriptionDataImplToJson(
-  _$SubscriptionDataImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'updatedAt': instance.updatedAt.toIso8601String(),
-  'createdAt': instance.createdAt.toIso8601String(),
-  'type': instance.type,
-  'status': instance.status,
-  'start_date': instance.start_date,
-  'end_date': instance.end_date,
-  'old_price': instance.old_price,
-  'price': instance.price,
-};
+        _$SubscriptionDataImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'type': instance.type,
+      'status': instance.status,
+      'start_date': instance.start_date,
+      'end_date': instance.end_date,
+      'old_price': instance.old_price,
+      'price': instance.price,
+    };

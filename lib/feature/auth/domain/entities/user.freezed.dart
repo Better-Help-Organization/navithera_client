@@ -12,8 +12,7 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
@@ -39,7 +38,8 @@ mixin _$User {
   bool? get isLinked => throw _privateConstructorUsedError;
   bool? get isPhoneNumberAuthenticated => throw _privateConstructorUsedError;
   @JsonKey(name: 'preference')
-  List<PrefData>? get preferences => throw _privateConstructorUsedError; // Map 'preference' to 'preferences'
+  List<PrefData>? get preferences =>
+      throw _privateConstructorUsedError; // Map 'preference' to 'preferences'
   @JsonKey(name: 'answer')
   List<AnsData>? get answers => throw _privateConstructorUsedError;
   @JsonKey(name: 'subscription')
@@ -54,12 +54,8 @@ mixin _$User {
   String? get profile => throw _privateConstructorUsedError;
   NotificationItem? get hasNotification => throw _privateConstructorUsedError;
 
-  /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -68,33 +64,32 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({
-    String id,
-    String email,
-    String firstName,
-    String lastName,
-    DateTime? createdAt,
-    bool? isEmailAuthenticated,
-    String? status,
-    String? gender,
-    DateTime? dob,
-    String? username,
-    String? phoneNumber,
-    bool? isVisible,
-    DateTime? updatedAt,
-    dynamic emergencyContact,
-    DateTime? deletedAt,
-    bool? isLinked,
-    bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') List<PrefData>? preferences,
-    @JsonKey(name: 'answer') List<AnsData>? answers,
-    @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
-    @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
-    int? avatar,
-    String? profile,
-    NotificationItem? hasNotification,
-  });
+  $Res call(
+      {String id,
+      String email,
+      String firstName,
+      String lastName,
+      DateTime? createdAt,
+      bool? isEmailAuthenticated,
+      String? status,
+      String? gender,
+      DateTime? dob,
+      String? username,
+      String? phoneNumber,
+      bool? isVisible,
+      DateTime? updatedAt,
+      dynamic emergencyContact,
+      DateTime? deletedAt,
+      bool? isLinked,
+      bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') List<PrefData>? preferences,
+      @JsonKey(name: 'answer') List<AnsData>? answers,
+      @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+      @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
+      int? avatar,
+      String? profile,
+      NotificationItem? hasNotification});
 
   $SubscriptionDataCopyWith<$Res>? get activeSubscription;
   $NotificationItemCopyWith<$Res>? get hasNotification;
@@ -110,8 +105,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,140 +134,110 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? profile = freezed,
     Object? hasNotification = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            firstName:
-                null == firstName
-                    ? _value.firstName
-                    : firstName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            lastName:
-                null == lastName
-                    ? _value.lastName
-                    : lastName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                freezed == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            isEmailAuthenticated:
-                freezed == isEmailAuthenticated
-                    ? _value.isEmailAuthenticated
-                    : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            status:
-                freezed == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            gender:
-                freezed == gender
-                    ? _value.gender
-                    : gender // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            dob:
-                freezed == dob
-                    ? _value.dob
-                    : dob // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            username:
-                freezed == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            phoneNumber:
-                freezed == phoneNumber
-                    ? _value.phoneNumber
-                    : phoneNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isVisible:
-                freezed == isVisible
-                    ? _value.isVisible
-                    : isVisible // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            updatedAt:
-                freezed == updatedAt
-                    ? _value.updatedAt
-                    : updatedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            emergencyContact:
-                freezed == emergencyContact
-                    ? _value.emergencyContact
-                    : emergencyContact // ignore: cast_nullable_to_non_nullable
-                        as dynamic,
-            deletedAt:
-                freezed == deletedAt
-                    ? _value.deletedAt
-                    : deletedAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime?,
-            isLinked:
-                freezed == isLinked
-                    ? _value.isLinked
-                    : isLinked // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            isPhoneNumberAuthenticated:
-                freezed == isPhoneNumberAuthenticated
-                    ? _value.isPhoneNumberAuthenticated
-                    : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-            preferences:
-                freezed == preferences
-                    ? _value.preferences
-                    : preferences // ignore: cast_nullable_to_non_nullable
-                        as List<PrefData>?,
-            answers:
-                freezed == answers
-                    ? _value.answers
-                    : answers // ignore: cast_nullable_to_non_nullable
-                        as List<AnsData>?,
-            subscriptions:
-                freezed == subscriptions
-                    ? _value.subscriptions
-                    : subscriptions // ignore: cast_nullable_to_non_nullable
-                        as List<SubscriptionData>?,
-            activeSubscription:
-                freezed == activeSubscription
-                    ? _value.activeSubscription
-                    : activeSubscription // ignore: cast_nullable_to_non_nullable
-                        as SubscriptionData?,
-            expertise:
-                freezed == expertise
-                    ? _value.expertise
-                    : expertise // ignore: cast_nullable_to_non_nullable
-                        as List<ExpertiseData>?,
-            avatar:
-                freezed == avatar
-                    ? _value.avatar
-                    : avatar // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            profile:
-                freezed == profile
-                    ? _value.profile
-                    : profile // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            hasNotification:
-                freezed == hasNotification
-                    ? _value.hasNotification
-                    : hasNotification // ignore: cast_nullable_to_non_nullable
-                        as NotificationItem?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isEmailAuthenticated: freezed == isEmailAuthenticated
+          ? _value.isEmailAuthenticated
+          : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      emergencyContact: freezed == emergencyContact
+          ? _value.emergencyContact
+          : emergencyContact // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isLinked: freezed == isLinked
+          ? _value.isLinked
+          : isLinked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isPhoneNumberAuthenticated: freezed == isPhoneNumberAuthenticated
+          ? _value.isPhoneNumberAuthenticated
+          : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as List<PrefData>?,
+      answers: freezed == answers
+          ? _value.answers
+          : answers // ignore: cast_nullable_to_non_nullable
+              as List<AnsData>?,
+      subscriptions: freezed == subscriptions
+          ? _value.subscriptions
+          : subscriptions // ignore: cast_nullable_to_non_nullable
+              as List<SubscriptionData>?,
+      activeSubscription: freezed == activeSubscription
+          ? _value.activeSubscription
+          : activeSubscription // ignore: cast_nullable_to_non_nullable
+              as SubscriptionData?,
+      expertise: freezed == expertise
+          ? _value.expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as List<ExpertiseData>?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasNotification: freezed == hasNotification
+          ? _value.hasNotification
+          : hasNotification // ignore: cast_nullable_to_non_nullable
+              as NotificationItem?,
+    ) as $Val);
   }
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SubscriptionDataCopyWith<$Res>? get activeSubscription {
@@ -287,8 +250,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     });
   }
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $NotificationItemCopyWith<$Res>? get hasNotification {
@@ -305,38 +266,36 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 /// @nodoc
 abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$$UserImplCopyWith(
-    _$UserImpl value,
-    $Res Function(_$UserImpl) then,
-  ) = __$$UserImplCopyWithImpl<$Res>;
+          _$UserImpl value, $Res Function(_$UserImpl) then) =
+      __$$UserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String email,
-    String firstName,
-    String lastName,
-    DateTime? createdAt,
-    bool? isEmailAuthenticated,
-    String? status,
-    String? gender,
-    DateTime? dob,
-    String? username,
-    String? phoneNumber,
-    bool? isVisible,
-    DateTime? updatedAt,
-    dynamic emergencyContact,
-    DateTime? deletedAt,
-    bool? isLinked,
-    bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') List<PrefData>? preferences,
-    @JsonKey(name: 'answer') List<AnsData>? answers,
-    @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
-    @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
-    int? avatar,
-    String? profile,
-    NotificationItem? hasNotification,
-  });
+  $Res call(
+      {String id,
+      String email,
+      String firstName,
+      String lastName,
+      DateTime? createdAt,
+      bool? isEmailAuthenticated,
+      String? status,
+      String? gender,
+      DateTime? dob,
+      String? username,
+      String? phoneNumber,
+      bool? isVisible,
+      DateTime? updatedAt,
+      dynamic emergencyContact,
+      DateTime? deletedAt,
+      bool? isLinked,
+      bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') List<PrefData>? preferences,
+      @JsonKey(name: 'answer') List<AnsData>? answers,
+      @JsonKey(name: 'subscription') List<SubscriptionData>? subscriptions,
+      @JsonKey(name: 'activeSubscription') SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') List<ExpertiseData>? expertise,
+      int? avatar,
+      String? profile,
+      NotificationItem? hasNotification});
 
   @override
   $SubscriptionDataCopyWith<$Res>? get activeSubscription;
@@ -349,10 +308,8 @@ class __$$UserImplCopyWithImpl<$Res>
     extends _$UserCopyWithImpl<$Res, _$UserImpl>
     implements _$$UserImplCopyWith<$Res> {
   __$$UserImplCopyWithImpl(_$UserImpl _value, $Res Function(_$UserImpl) _then)
-    : super(_value, _then);
+      : super(_value, _then);
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -382,171 +339,145 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? profile = freezed,
     Object? hasNotification = freezed,
   }) {
-    return _then(
-      _$UserImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        firstName:
-            null == firstName
-                ? _value.firstName
-                : firstName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        lastName:
-            null == lastName
-                ? _value.lastName
-                : lastName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            freezed == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        isEmailAuthenticated:
-            freezed == isEmailAuthenticated
-                ? _value.isEmailAuthenticated
-                : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        status:
-            freezed == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        gender:
-            freezed == gender
-                ? _value.gender
-                : gender // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        dob:
-            freezed == dob
-                ? _value.dob
-                : dob // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        username:
-            freezed == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        phoneNumber:
-            freezed == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isVisible:
-            freezed == isVisible
-                ? _value.isVisible
-                : isVisible // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        updatedAt:
-            freezed == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        emergencyContact:
-            freezed == emergencyContact
-                ? _value.emergencyContact
-                : emergencyContact // ignore: cast_nullable_to_non_nullable
-                    as dynamic,
-        deletedAt:
-            freezed == deletedAt
-                ? _value.deletedAt
-                : deletedAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime?,
-        isLinked:
-            freezed == isLinked
-                ? _value.isLinked
-                : isLinked // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        isPhoneNumberAuthenticated:
-            freezed == isPhoneNumberAuthenticated
-                ? _value.isPhoneNumberAuthenticated
-                : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-        preferences:
-            freezed == preferences
-                ? _value._preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                    as List<PrefData>?,
-        answers:
-            freezed == answers
-                ? _value._answers
-                : answers // ignore: cast_nullable_to_non_nullable
-                    as List<AnsData>?,
-        subscriptions:
-            freezed == subscriptions
-                ? _value._subscriptions
-                : subscriptions // ignore: cast_nullable_to_non_nullable
-                    as List<SubscriptionData>?,
-        activeSubscription:
-            freezed == activeSubscription
-                ? _value.activeSubscription
-                : activeSubscription // ignore: cast_nullable_to_non_nullable
-                    as SubscriptionData?,
-        expertise:
-            freezed == expertise
-                ? _value._expertise
-                : expertise // ignore: cast_nullable_to_non_nullable
-                    as List<ExpertiseData>?,
-        avatar:
-            freezed == avatar
-                ? _value.avatar
-                : avatar // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        profile:
-            freezed == profile
-                ? _value.profile
-                : profile // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        hasNotification:
-            freezed == hasNotification
-                ? _value.hasNotification
-                : hasNotification // ignore: cast_nullable_to_non_nullable
-                    as NotificationItem?,
-      ),
-    );
+    return _then(_$UserImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isEmailAuthenticated: freezed == isEmailAuthenticated
+          ? _value.isEmailAuthenticated
+          : isEmailAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dob: freezed == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      emergencyContact: freezed == emergencyContact
+          ? _value.emergencyContact
+          : emergencyContact // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      isLinked: freezed == isLinked
+          ? _value.isLinked
+          : isLinked // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isPhoneNumberAuthenticated: freezed == isPhoneNumberAuthenticated
+          ? _value.isPhoneNumberAuthenticated
+          : isPhoneNumberAuthenticated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      preferences: freezed == preferences
+          ? _value._preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as List<PrefData>?,
+      answers: freezed == answers
+          ? _value._answers
+          : answers // ignore: cast_nullable_to_non_nullable
+              as List<AnsData>?,
+      subscriptions: freezed == subscriptions
+          ? _value._subscriptions
+          : subscriptions // ignore: cast_nullable_to_non_nullable
+              as List<SubscriptionData>?,
+      activeSubscription: freezed == activeSubscription
+          ? _value.activeSubscription
+          : activeSubscription // ignore: cast_nullable_to_non_nullable
+              as SubscriptionData?,
+      expertise: freezed == expertise
+          ? _value._expertise
+          : expertise // ignore: cast_nullable_to_non_nullable
+              as List<ExpertiseData>?,
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      hasNotification: freezed == hasNotification
+          ? _value.hasNotification
+          : hasNotification // ignore: cast_nullable_to_non_nullable
+              as NotificationItem?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserImpl implements _User {
-  const _$UserImpl({
-    required this.id,
-    required this.email,
-    required this.firstName,
-    required this.lastName,
-    required this.createdAt,
-    this.isEmailAuthenticated,
-    this.status,
-    this.gender,
-    this.dob,
-    this.username,
-    this.phoneNumber,
-    this.isVisible,
-    this.updatedAt,
-    this.emergencyContact,
-    this.deletedAt,
-    this.isLinked,
-    this.isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') final List<PrefData>? preferences,
-    @JsonKey(name: 'answer') final List<AnsData>? answers,
-    @JsonKey(name: 'subscription') final List<SubscriptionData>? subscriptions,
-    @JsonKey(name: 'activeSubscription') this.activeSubscription,
-    @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
-    this.avatar,
-    this.profile,
-    this.hasNotification,
-  }) : _preferences = preferences,
-       _answers = answers,
-       _subscriptions = subscriptions,
-       _expertise = expertise;
+  const _$UserImpl(
+      {required this.id,
+      required this.email,
+      required this.firstName,
+      required this.lastName,
+      required this.createdAt,
+      this.isEmailAuthenticated,
+      this.status,
+      this.gender,
+      this.dob,
+      this.username,
+      this.phoneNumber,
+      this.isVisible,
+      this.updatedAt,
+      this.emergencyContact,
+      this.deletedAt,
+      this.isLinked,
+      this.isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') final List<PrefData>? preferences,
+      @JsonKey(name: 'answer') final List<AnsData>? answers,
+      @JsonKey(name: 'subscription')
+      final List<SubscriptionData>? subscriptions,
+      @JsonKey(name: 'activeSubscription') this.activeSubscription,
+      @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
+      this.avatar,
+      this.profile,
+      this.hasNotification})
+      : _preferences = preferences,
+        _answers = answers,
+        _subscriptions = subscriptions,
+        _expertise = expertise;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -596,9 +527,9 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(value);
   }
 
-  // Map 'preference' to 'preferences'
+// Map 'preference' to 'preferences'
   final List<AnsData>? _answers;
-  // Map 'preference' to 'preferences'
+// Map 'preference' to 'preferences'
   @override
   @JsonKey(name: 'answer')
   List<AnsData>? get answers {
@@ -672,75 +603,63 @@ class _$UserImpl implements _User {
                 other.isVisible == isVisible) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(
-              other.emergencyContact,
-              emergencyContact,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other.emergencyContact, emergencyContact) &&
             (identical(other.deletedAt, deletedAt) ||
                 other.deletedAt == deletedAt) &&
             (identical(other.isLinked, isLinked) ||
                 other.isLinked == isLinked) &&
-            (identical(
-                  other.isPhoneNumberAuthenticated,
-                  isPhoneNumberAuthenticated,
-                ) ||
+            (identical(other.isPhoneNumberAuthenticated,
+                    isPhoneNumberAuthenticated) ||
                 other.isPhoneNumberAuthenticated ==
                     isPhoneNumberAuthenticated) &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._preferences, _preferences) &&
             const DeepCollectionEquality().equals(other._answers, _answers) &&
-            const DeepCollectionEquality().equals(
-              other._subscriptions,
-              _subscriptions,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._subscriptions, _subscriptions) &&
             (identical(other.activeSubscription, activeSubscription) ||
                 other.activeSubscription == activeSubscription) &&
-            const DeepCollectionEquality().equals(
-              other._expertise,
-              _expertise,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._expertise, _expertise) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.hasNotification, hasNotification) ||
                 other.hasNotification == hasNotification));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
-    runtimeType,
-    id,
-    email,
-    firstName,
-    lastName,
-    createdAt,
-    isEmailAuthenticated,
-    status,
-    gender,
-    dob,
-    username,
-    phoneNumber,
-    isVisible,
-    updatedAt,
-    const DeepCollectionEquality().hash(emergencyContact),
-    deletedAt,
-    isLinked,
-    isPhoneNumberAuthenticated,
-    const DeepCollectionEquality().hash(_preferences),
-    const DeepCollectionEquality().hash(_answers),
-    const DeepCollectionEquality().hash(_subscriptions),
-    activeSubscription,
-    const DeepCollectionEquality().hash(_expertise),
-    avatar,
-    profile,
-    hasNotification,
-  ]);
+        runtimeType,
+        id,
+        email,
+        firstName,
+        lastName,
+        createdAt,
+        isEmailAuthenticated,
+        status,
+        gender,
+        dob,
+        username,
+        phoneNumber,
+        isVisible,
+        updatedAt,
+        const DeepCollectionEquality().hash(emergencyContact),
+        deletedAt,
+        isLinked,
+        isPhoneNumberAuthenticated,
+        const DeepCollectionEquality().hash(_preferences),
+        const DeepCollectionEquality().hash(_answers),
+        const DeepCollectionEquality().hash(_subscriptions),
+        activeSubscription,
+        const DeepCollectionEquality().hash(_expertise),
+        avatar,
+        profile,
+        hasNotification
+      ]);
 
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
@@ -748,39 +667,41 @@ class _$UserImpl implements _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserImplToJson(this);
+    return _$$UserImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _User implements User {
-  const factory _User({
-    required final String id,
-    required final String email,
-    required final String firstName,
-    required final String lastName,
-    required final DateTime? createdAt,
-    final bool? isEmailAuthenticated,
-    final String? status,
-    final String? gender,
-    final DateTime? dob,
-    final String? username,
-    final String? phoneNumber,
-    final bool? isVisible,
-    final DateTime? updatedAt,
-    final dynamic emergencyContact,
-    final DateTime? deletedAt,
-    final bool? isLinked,
-    final bool? isPhoneNumberAuthenticated,
-    @JsonKey(name: 'preference') final List<PrefData>? preferences,
-    @JsonKey(name: 'answer') final List<AnsData>? answers,
-    @JsonKey(name: 'subscription') final List<SubscriptionData>? subscriptions,
-    @JsonKey(name: 'activeSubscription')
-    final SubscriptionData? activeSubscription,
-    @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
-    final int? avatar,
-    final String? profile,
-    final NotificationItem? hasNotification,
-  }) = _$UserImpl;
+  const factory _User(
+      {required final String id,
+      required final String email,
+      required final String firstName,
+      required final String lastName,
+      required final DateTime? createdAt,
+      final bool? isEmailAuthenticated,
+      final String? status,
+      final String? gender,
+      final DateTime? dob,
+      final String? username,
+      final String? phoneNumber,
+      final bool? isVisible,
+      final DateTime? updatedAt,
+      final dynamic emergencyContact,
+      final DateTime? deletedAt,
+      final bool? isLinked,
+      final bool? isPhoneNumberAuthenticated,
+      @JsonKey(name: 'preference') final List<PrefData>? preferences,
+      @JsonKey(name: 'answer') final List<AnsData>? answers,
+      @JsonKey(name: 'subscription')
+      final List<SubscriptionData>? subscriptions,
+      @JsonKey(name: 'activeSubscription')
+      final SubscriptionData? activeSubscription,
+      @JsonKey(name: 'expertise') final List<ExpertiseData>? expertise,
+      final int? avatar,
+      final String? profile,
+      final NotificationItem? hasNotification}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -820,8 +741,8 @@ abstract class _User implements User {
   bool? get isPhoneNumberAuthenticated;
   @override
   @JsonKey(name: 'preference')
-  List<PrefData>? get preferences; // Map 'preference' to 'preferences'
-  @override
+  List<PrefData>? get preferences;
+  @override // Map 'preference' to 'preferences'
   @JsonKey(name: 'answer')
   List<AnsData>? get answers;
   @override
@@ -839,11 +760,8 @@ abstract class _User implements User {
   String? get profile;
   @override
   NotificationItem? get hasNotification;
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

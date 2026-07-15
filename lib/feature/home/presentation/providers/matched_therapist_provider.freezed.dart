@@ -12,8 +12,7 @@ part of 'matched_therapist_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MatchedTherapistState {
@@ -23,14 +22,16 @@ mixin _$MatchedTherapistState {
     required TResult Function() loading,
     required TResult Function(UserModel? therapist) loaded,
     required TResult Function(Failure failure) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(UserModel? therapist)? loaded,
     TResult? Function(Failure failure)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -38,21 +39,24 @@ mixin _$MatchedTherapistState {
     TResult Function(UserModel? therapist)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(MatchedTherapistInitial value) initial,
     required TResult Function(MatchedTherapistLoading value) loading,
     required TResult Function(MatchedTherapistLoaded value) loaded,
     required TResult Function(MatchedTherapistError value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MatchedTherapistInitial value)? initial,
     TResult? Function(MatchedTherapistLoading value)? loading,
     TResult? Function(MatchedTherapistLoaded value)? loaded,
     TResult? Function(MatchedTherapistError value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MatchedTherapistInitial value)? initial,
@@ -60,22 +64,20 @@ mixin _$MatchedTherapistState {
     TResult Function(MatchedTherapistLoaded value)? loaded,
     TResult Function(MatchedTherapistError value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $MatchedTherapistStateCopyWith<$Res> {
-  factory $MatchedTherapistStateCopyWith(
-    MatchedTherapistState value,
-    $Res Function(MatchedTherapistState) then,
-  ) = _$MatchedTherapistStateCopyWithImpl<$Res, MatchedTherapistState>;
+  factory $MatchedTherapistStateCopyWith(MatchedTherapistState value,
+          $Res Function(MatchedTherapistState) then) =
+      _$MatchedTherapistStateCopyWithImpl<$Res, MatchedTherapistState>;
 }
 
 /// @nodoc
-class _$MatchedTherapistStateCopyWithImpl<
-  $Res,
-  $Val extends MatchedTherapistState
->
+class _$MatchedTherapistStateCopyWithImpl<$Res,
+        $Val extends MatchedTherapistState>
     implements $MatchedTherapistStateCopyWith<$Res> {
   _$MatchedTherapistStateCopyWithImpl(this._value, this._then);
 
@@ -83,31 +85,25 @@ class _$MatchedTherapistStateCopyWithImpl<
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$MatchedTherapistInitialImplCopyWith<$Res> {
   factory _$$MatchedTherapistInitialImplCopyWith(
-    _$MatchedTherapistInitialImpl value,
-    $Res Function(_$MatchedTherapistInitialImpl) then,
-  ) = __$$MatchedTherapistInitialImplCopyWithImpl<$Res>;
+          _$MatchedTherapistInitialImpl value,
+          $Res Function(_$MatchedTherapistInitialImpl) then) =
+      __$$MatchedTherapistInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$MatchedTherapistInitialImplCopyWithImpl<$Res>
-    extends
-        _$MatchedTherapistStateCopyWithImpl<$Res, _$MatchedTherapistInitialImpl>
+    extends _$MatchedTherapistStateCopyWithImpl<$Res,
+        _$MatchedTherapistInitialImpl>
     implements _$$MatchedTherapistInitialImplCopyWith<$Res> {
   __$$MatchedTherapistInitialImplCopyWithImpl(
-    _$MatchedTherapistInitialImpl _value,
-    $Res Function(_$MatchedTherapistInitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
+      _$MatchedTherapistInitialImpl _value,
+      $Res Function(_$MatchedTherapistInitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -212,23 +208,20 @@ abstract class MatchedTherapistInitial implements MatchedTherapistState {
 /// @nodoc
 abstract class _$$MatchedTherapistLoadingImplCopyWith<$Res> {
   factory _$$MatchedTherapistLoadingImplCopyWith(
-    _$MatchedTherapistLoadingImpl value,
-    $Res Function(_$MatchedTherapistLoadingImpl) then,
-  ) = __$$MatchedTherapistLoadingImplCopyWithImpl<$Res>;
+          _$MatchedTherapistLoadingImpl value,
+          $Res Function(_$MatchedTherapistLoadingImpl) then) =
+      __$$MatchedTherapistLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$MatchedTherapistLoadingImplCopyWithImpl<$Res>
-    extends
-        _$MatchedTherapistStateCopyWithImpl<$Res, _$MatchedTherapistLoadingImpl>
+    extends _$MatchedTherapistStateCopyWithImpl<$Res,
+        _$MatchedTherapistLoadingImpl>
     implements _$$MatchedTherapistLoadingImplCopyWith<$Res> {
   __$$MatchedTherapistLoadingImplCopyWithImpl(
-    _$MatchedTherapistLoadingImpl _value,
-    $Res Function(_$MatchedTherapistLoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
+      _$MatchedTherapistLoadingImpl _value,
+      $Res Function(_$MatchedTherapistLoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -333,9 +326,9 @@ abstract class MatchedTherapistLoading implements MatchedTherapistState {
 /// @nodoc
 abstract class _$$MatchedTherapistLoadedImplCopyWith<$Res> {
   factory _$$MatchedTherapistLoadedImplCopyWith(
-    _$MatchedTherapistLoadedImpl value,
-    $Res Function(_$MatchedTherapistLoadedImpl) then,
-  ) = __$$MatchedTherapistLoadedImplCopyWithImpl<$Res>;
+          _$MatchedTherapistLoadedImpl value,
+          $Res Function(_$MatchedTherapistLoadedImpl) then) =
+      __$$MatchedTherapistLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({UserModel? therapist});
 
@@ -344,31 +337,27 @@ abstract class _$$MatchedTherapistLoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$MatchedTherapistLoadedImplCopyWithImpl<$Res>
-    extends
-        _$MatchedTherapistStateCopyWithImpl<$Res, _$MatchedTherapistLoadedImpl>
+    extends _$MatchedTherapistStateCopyWithImpl<$Res,
+        _$MatchedTherapistLoadedImpl>
     implements _$$MatchedTherapistLoadedImplCopyWith<$Res> {
   __$$MatchedTherapistLoadedImplCopyWithImpl(
-    _$MatchedTherapistLoadedImpl _value,
-    $Res Function(_$MatchedTherapistLoadedImpl) _then,
-  ) : super(_value, _then);
+      _$MatchedTherapistLoadedImpl _value,
+      $Res Function(_$MatchedTherapistLoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? therapist = freezed}) {
-    return _then(
-      _$MatchedTherapistLoadedImpl(
-        freezed == therapist
-            ? _value.therapist
-            : therapist // ignore: cast_nullable_to_non_nullable
-                as UserModel?,
-      ),
-    );
+  $Res call({
+    Object? therapist = freezed,
+  }) {
+    return _then(_$MatchedTherapistLoadedImpl(
+      freezed == therapist
+          ? _value.therapist
+          : therapist // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
+    ));
   }
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserModelCopyWith<$Res>? get therapist {
@@ -407,17 +396,12 @@ class _$MatchedTherapistLoadedImpl implements MatchedTherapistLoaded {
   @override
   int get hashCode => Object.hash(runtimeType, therapist);
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchedTherapistLoadedImplCopyWith<_$MatchedTherapistLoadedImpl>
-  get copyWith =>
-      __$$MatchedTherapistLoadedImplCopyWithImpl<_$MatchedTherapistLoadedImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$MatchedTherapistLoadedImplCopyWithImpl<
+          _$MatchedTherapistLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -499,20 +483,17 @@ abstract class MatchedTherapistLoaded implements MatchedTherapistState {
       _$MatchedTherapistLoadedImpl;
 
   UserModel? get therapist;
-
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchedTherapistLoadedImplCopyWith<_$MatchedTherapistLoadedImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$MatchedTherapistErrorImplCopyWith<$Res> {
   factory _$$MatchedTherapistErrorImplCopyWith(
-    _$MatchedTherapistErrorImpl value,
-    $Res Function(_$MatchedTherapistErrorImpl) then,
-  ) = __$$MatchedTherapistErrorImplCopyWithImpl<$Res>;
+          _$MatchedTherapistErrorImpl value,
+          $Res Function(_$MatchedTherapistErrorImpl) then) =
+      __$$MatchedTherapistErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -521,31 +502,26 @@ abstract class _$$MatchedTherapistErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$MatchedTherapistErrorImplCopyWithImpl<$Res>
-    extends
-        _$MatchedTherapistStateCopyWithImpl<$Res, _$MatchedTherapistErrorImpl>
+    extends _$MatchedTherapistStateCopyWithImpl<$Res,
+        _$MatchedTherapistErrorImpl>
     implements _$$MatchedTherapistErrorImplCopyWith<$Res> {
-  __$$MatchedTherapistErrorImplCopyWithImpl(
-    _$MatchedTherapistErrorImpl _value,
-    $Res Function(_$MatchedTherapistErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$MatchedTherapistErrorImplCopyWithImpl(_$MatchedTherapistErrorImpl _value,
+      $Res Function(_$MatchedTherapistErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$MatchedTherapistErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$MatchedTherapistErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -579,17 +555,12 @@ class _$MatchedTherapistErrorImpl implements MatchedTherapistError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MatchedTherapistErrorImplCopyWith<_$MatchedTherapistErrorImpl>
-  get copyWith =>
-      __$$MatchedTherapistErrorImplCopyWithImpl<_$MatchedTherapistErrorImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$MatchedTherapistErrorImplCopyWithImpl<
+          _$MatchedTherapistErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -671,10 +642,7 @@ abstract class MatchedTherapistError implements MatchedTherapistState {
       _$MatchedTherapistErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of MatchedTherapistState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MatchedTherapistErrorImplCopyWith<_$MatchedTherapistErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

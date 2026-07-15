@@ -12,8 +12,7 @@ part of 'question_option.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 QuestionOption _$QuestionOptionFromJson(Map<String, dynamic> json) {
   return _QuestionOption.fromJson(json);
@@ -26,12 +25,8 @@ mixin _$QuestionOption {
   DateTime get createdAt => throw _privateConstructorUsedError;
   int? get order => throw _privateConstructorUsedError;
 
-  /// Serializes this QuestionOption to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of QuestionOption
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $QuestionOptionCopyWith<QuestionOption> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,9 +34,8 @@ mixin _$QuestionOption {
 /// @nodoc
 abstract class $QuestionOptionCopyWith<$Res> {
   factory $QuestionOptionCopyWith(
-    QuestionOption value,
-    $Res Function(QuestionOption) then,
-  ) = _$QuestionOptionCopyWithImpl<$Res, QuestionOption>;
+          QuestionOption value, $Res Function(QuestionOption) then) =
+      _$QuestionOptionCopyWithImpl<$Res, QuestionOption>;
   @useResult
   $Res call({String id, String text, DateTime createdAt, int? order});
 }
@@ -56,8 +50,6 @@ class _$QuestionOptionCopyWithImpl<$Res, $Val extends QuestionOption>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of QuestionOption
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,41 +58,33 @@ class _$QuestionOptionCopyWithImpl<$Res, $Val extends QuestionOption>
     Object? createdAt = null,
     Object? order = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            order:
-                freezed == order
-                    ? _value.order
-                    : order // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$QuestionOptionImplCopyWith<$Res>
     implements $QuestionOptionCopyWith<$Res> {
-  factory _$$QuestionOptionImplCopyWith(
-    _$QuestionOptionImpl value,
-    $Res Function(_$QuestionOptionImpl) then,
-  ) = __$$QuestionOptionImplCopyWithImpl<$Res>;
+  factory _$$QuestionOptionImplCopyWith(_$QuestionOptionImpl value,
+          $Res Function(_$QuestionOptionImpl) then) =
+      __$$QuestionOptionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String text, DateTime createdAt, int? order});
@@ -111,12 +95,9 @@ class __$$QuestionOptionImplCopyWithImpl<$Res>
     extends _$QuestionOptionCopyWithImpl<$Res, _$QuestionOptionImpl>
     implements _$$QuestionOptionImplCopyWith<$Res> {
   __$$QuestionOptionImplCopyWithImpl(
-    _$QuestionOptionImpl _value,
-    $Res Function(_$QuestionOptionImpl) _then,
-  ) : super(_value, _then);
+      _$QuestionOptionImpl _value, $Res Function(_$QuestionOptionImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of QuestionOption
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,42 +106,35 @@ class __$$QuestionOptionImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? order = freezed,
   }) {
-    return _then(
-      _$QuestionOptionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        order:
-            freezed == order
-                ? _value.order
-                : order // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$QuestionOptionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QuestionOptionImpl implements _QuestionOption {
-  const _$QuestionOptionImpl({
-    required this.id,
-    required this.text,
-    required this.createdAt,
-    required this.order,
-  });
+  const _$QuestionOptionImpl(
+      {required this.id,
+      required this.text,
+      required this.createdAt,
+      required this.order});
 
   factory _$QuestionOptionImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuestionOptionImplFromJson(json);
@@ -191,34 +165,31 @@ class _$QuestionOptionImpl implements _QuestionOption {
             (identical(other.order, order) || other.order == order));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, text, createdAt, order);
 
-  /// Create a copy of QuestionOption
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$QuestionOptionImplCopyWith<_$QuestionOptionImpl> get copyWith =>
       __$$QuestionOptionImplCopyWithImpl<_$QuestionOptionImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuestionOptionImplToJson(this);
+    return _$$QuestionOptionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _QuestionOption implements QuestionOption {
-  const factory _QuestionOption({
-    required final String id,
-    required final String text,
-    required final DateTime createdAt,
-    required final int? order,
-  }) = _$QuestionOptionImpl;
+  const factory _QuestionOption(
+      {required final String id,
+      required final String text,
+      required final DateTime createdAt,
+      required final int? order}) = _$QuestionOptionImpl;
 
   factory _QuestionOption.fromJson(Map<String, dynamic> json) =
       _$QuestionOptionImpl.fromJson;
@@ -231,11 +202,8 @@ abstract class _QuestionOption implements QuestionOption {
   DateTime get createdAt;
   @override
   int? get order;
-
-  /// Create a copy of QuestionOption
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$QuestionOptionImplCopyWith<_$QuestionOptionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

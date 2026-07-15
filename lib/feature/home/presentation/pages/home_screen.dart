@@ -419,7 +419,7 @@ class RatingService {
 
       final response = await _dio.post(
         '${base_url_dev}/ratings',
-        data: {'therapistId': therapistId, 'value': value, 'comment': comment},
+        data: {'therapistId': therapistId,'value': value, 'comment': comment},
       );
 
       return response.statusCode ?? 500;
@@ -610,7 +610,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Check mounted before using ref to prevent iOS disposal errors
       if (!mounted) return;
 
-      if (kDebugMode) debugPrint('message here');
       if (kDebugMode) debugPrint('message here');
 
       if (message.notification?.title == 'Match accepted') {

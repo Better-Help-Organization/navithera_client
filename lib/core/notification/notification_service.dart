@@ -348,9 +348,7 @@ class FCMService {
       "26",
       "27",
       "28",
-      "29",
       "18",
-      '11',
     ];
 
     try {
@@ -656,9 +654,7 @@ class FCMService {
       "26",
       "27",
       "28",
-      "29",
       "18",
-      '11',
     ];
 
     // try {
@@ -1176,8 +1172,8 @@ class FCMService {
               user: therapist,
               avatar: senderAvatar,
             );
-            if (currentLocation != '/chat/$chatId') {
-              GoRouter.of(context).push('/chat/$chatId', extra: chat);
+            if (currentLocation != targetRoute) {
+              GoRouter.of(context).push(targetRoute, extra: chat);
             }
           },
         );

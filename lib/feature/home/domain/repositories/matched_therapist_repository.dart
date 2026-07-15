@@ -19,7 +19,7 @@ class MatchedTherapistRepositoryImpl implements MatchedTherapistRepository {
   Future<Either<Failure, UserModel?>> getLatestAcceptedTherapist() async {
     try {
       final res = await remote.getMatches(
-        fields: 'accepted.*,createdAt',
+        fields: 'accepted.id,accepted.firstName,accepted.lastName,accepted.avatar,accepted.bio,createdAt',
         sort: 'createdAt=desc',
         take: 10,
         page: 1,

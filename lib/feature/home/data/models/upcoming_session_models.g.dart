@@ -7,37 +7,34 @@ part of 'upcoming_session_models.dart';
 // **************************************************************************
 
 _$SessionListResponseImpl _$$SessionListResponseImplFromJson(
-  Map<String, dynamic> json,
-) => _$SessionListResponseImpl(
-  data:
-      (json['data'] as List<dynamic>)
+        Map<String, dynamic> json) =>
+    _$SessionListResponseImpl(
+      data: (json['data'] as List<dynamic>)
           .map((e) => SessionItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-  pagination:
-      json['pagination'] == null
+      pagination: json['pagination'] == null
           ? null
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
-  message: json['message'] as String?,
-  statusCode: (json['statusCode'] as num?)?.toInt(),
-  method: json['method'] as String?,
-  path: json['path'] as String?,
-  timestamp:
-      json['timestamp'] == null
+      message: json['message'] as String?,
+      statusCode: (json['statusCode'] as num?)?.toInt(),
+      method: json['method'] as String?,
+      path: json['path'] as String?,
+      timestamp: json['timestamp'] == null
           ? null
           : DateTime.parse(json['timestamp'] as String),
-);
+    );
 
 Map<String, dynamic> _$$SessionListResponseImplToJson(
-  _$SessionListResponseImpl instance,
-) => <String, dynamic>{
-  'data': instance.data,
-  'pagination': instance.pagination,
-  'message': instance.message,
-  'statusCode': instance.statusCode,
-  'method': instance.method,
-  'path': instance.path,
-  'timestamp': instance.timestamp?.toIso8601String(),
-};
+        _$SessionListResponseImpl instance) =>
+    <String, dynamic>{
+      'data': instance.data,
+      'pagination': instance.pagination,
+      'message': instance.message,
+      'statusCode': instance.statusCode,
+      'method': instance.method,
+      'path': instance.path,
+      'timestamp': instance.timestamp?.toIso8601String(),
+    };
 
 _$SessionItemImpl _$$SessionItemImplFromJson(Map<String, dynamic> json) =>
     _$SessionItemImpl(

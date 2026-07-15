@@ -42,6 +42,7 @@ class SessionSelectionService {
 
       final response = await _dio.get(
         '${base_url_dev}/client/me/sessions/$sessionId',
+        queryParameters: {'fileds':'id,schedule'}
       );
 
       if (response.statusCode == 200) {

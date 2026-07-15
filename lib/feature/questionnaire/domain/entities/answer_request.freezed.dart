@@ -12,8 +12,7 @@ part of 'answer_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AnswerRequest _$AnswerRequestFromJson(Map<String, dynamic> json) {
   return _AnswerRequest.fromJson(json);
@@ -28,12 +27,8 @@ mixin _$AnswerRequest {
       throw _privateConstructorUsedError; // For multiple choice
   String? get text => throw _privateConstructorUsedError;
 
-  /// Serializes this AnswerRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of AnswerRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AnswerRequestCopyWith<AnswerRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -41,16 +36,14 @@ mixin _$AnswerRequest {
 /// @nodoc
 abstract class $AnswerRequestCopyWith<$Res> {
   factory $AnswerRequestCopyWith(
-    AnswerRequest value,
-    $Res Function(AnswerRequest) then,
-  ) = _$AnswerRequestCopyWithImpl<$Res, AnswerRequest>;
+          AnswerRequest value, $Res Function(AnswerRequest) then) =
+      _$AnswerRequestCopyWithImpl<$Res, AnswerRequest>;
   @useResult
-  $Res call({
-    String questionId,
-    String? singleOptionId,
-    List<String>? multiOptionIds,
-    String? text,
-  });
+  $Res call(
+      {String questionId,
+      String? singleOptionId,
+      List<String>? multiOptionIds,
+      String? text});
 }
 
 /// @nodoc
@@ -63,8 +56,6 @@ class _$AnswerRequestCopyWithImpl<$Res, $Val extends AnswerRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AnswerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,31 +64,24 @@ class _$AnswerRequestCopyWithImpl<$Res, $Val extends AnswerRequest>
     Object? multiOptionIds = freezed,
     Object? text = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            questionId:
-                null == questionId
-                    ? _value.questionId
-                    : questionId // ignore: cast_nullable_to_non_nullable
-                        as String,
-            singleOptionId:
-                freezed == singleOptionId
-                    ? _value.singleOptionId
-                    : singleOptionId // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            multiOptionIds:
-                freezed == multiOptionIds
-                    ? _value.multiOptionIds
-                    : multiOptionIds // ignore: cast_nullable_to_non_nullable
-                        as List<String>?,
-            text:
-                freezed == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      singleOptionId: freezed == singleOptionId
+          ? _value.singleOptionId
+          : singleOptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      multiOptionIds: freezed == multiOptionIds
+          ? _value.multiOptionIds
+          : multiOptionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
@@ -105,17 +89,15 @@ class _$AnswerRequestCopyWithImpl<$Res, $Val extends AnswerRequest>
 abstract class _$$AnswerRequestImplCopyWith<$Res>
     implements $AnswerRequestCopyWith<$Res> {
   factory _$$AnswerRequestImplCopyWith(
-    _$AnswerRequestImpl value,
-    $Res Function(_$AnswerRequestImpl) then,
-  ) = __$$AnswerRequestImplCopyWithImpl<$Res>;
+          _$AnswerRequestImpl value, $Res Function(_$AnswerRequestImpl) then) =
+      __$$AnswerRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String questionId,
-    String? singleOptionId,
-    List<String>? multiOptionIds,
-    String? text,
-  });
+  $Res call(
+      {String questionId,
+      String? singleOptionId,
+      List<String>? multiOptionIds,
+      String? text});
 }
 
 /// @nodoc
@@ -123,12 +105,9 @@ class __$$AnswerRequestImplCopyWithImpl<$Res>
     extends _$AnswerRequestCopyWithImpl<$Res, _$AnswerRequestImpl>
     implements _$$AnswerRequestImplCopyWith<$Res> {
   __$$AnswerRequestImplCopyWithImpl(
-    _$AnswerRequestImpl _value,
-    $Res Function(_$AnswerRequestImpl) _then,
-  ) : super(_value, _then);
+      _$AnswerRequestImpl _value, $Res Function(_$AnswerRequestImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of AnswerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -137,42 +116,36 @@ class __$$AnswerRequestImplCopyWithImpl<$Res>
     Object? multiOptionIds = freezed,
     Object? text = freezed,
   }) {
-    return _then(
-      _$AnswerRequestImpl(
-        questionId:
-            null == questionId
-                ? _value.questionId
-                : questionId // ignore: cast_nullable_to_non_nullable
-                    as String,
-        singleOptionId:
-            freezed == singleOptionId
-                ? _value.singleOptionId
-                : singleOptionId // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        multiOptionIds:
-            freezed == multiOptionIds
-                ? _value._multiOptionIds
-                : multiOptionIds // ignore: cast_nullable_to_non_nullable
-                    as List<String>?,
-        text:
-            freezed == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String?,
-      ),
-    );
+    return _then(_$AnswerRequestImpl(
+      questionId: null == questionId
+          ? _value.questionId
+          : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      singleOptionId: freezed == singleOptionId
+          ? _value.singleOptionId
+          : singleOptionId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      multiOptionIds: freezed == multiOptionIds
+          ? _value._multiOptionIds
+          : multiOptionIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AnswerRequestImpl implements _AnswerRequest {
-  const _$AnswerRequestImpl({
-    required this.questionId,
-    this.singleOptionId,
-    final List<String>? multiOptionIds,
-    this.text,
-  }) : _multiOptionIds = multiOptionIds;
+  const _$AnswerRequestImpl(
+      {required this.questionId,
+      this.singleOptionId,
+      final List<String>? multiOptionIds,
+      this.text})
+      : _multiOptionIds = multiOptionIds;
 
   factory _$AnswerRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$AnswerRequestImplFromJson(json);
@@ -181,9 +154,9 @@ class _$AnswerRequestImpl implements _AnswerRequest {
   final String questionId;
   @override
   final String? singleOptionId;
-  // For single choice
+// For single choice
   final List<String>? _multiOptionIds;
-  // For single choice
+// For single choice
   @override
   List<String>? get multiOptionIds {
     final value = _multiOptionIds;
@@ -193,7 +166,7 @@ class _$AnswerRequestImpl implements _AnswerRequest {
     return EqualUnmodifiableListView(value);
   }
 
-  // For multiple choice
+// For multiple choice
   @override
   final String? text;
 
@@ -211,26 +184,17 @@ class _$AnswerRequestImpl implements _AnswerRequest {
                 other.questionId == questionId) &&
             (identical(other.singleOptionId, singleOptionId) ||
                 other.singleOptionId == singleOptionId) &&
-            const DeepCollectionEquality().equals(
-              other._multiOptionIds,
-              _multiOptionIds,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._multiOptionIds, _multiOptionIds) &&
             (identical(other.text, text) || other.text == text));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    questionId,
-    singleOptionId,
-    const DeepCollectionEquality().hash(_multiOptionIds),
-    text,
-  );
+  int get hashCode => Object.hash(runtimeType, questionId, singleOptionId,
+      const DeepCollectionEquality().hash(_multiOptionIds), text);
 
-  /// Create a copy of AnswerRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AnswerRequestImplCopyWith<_$AnswerRequestImpl> get copyWith =>
@@ -238,17 +202,18 @@ class _$AnswerRequestImpl implements _AnswerRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AnswerRequestImplToJson(this);
+    return _$$AnswerRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _AnswerRequest implements AnswerRequest {
-  const factory _AnswerRequest({
-    required final String questionId,
-    final String? singleOptionId,
-    final List<String>? multiOptionIds,
-    final String? text,
-  }) = _$AnswerRequestImpl;
+  const factory _AnswerRequest(
+      {required final String questionId,
+      final String? singleOptionId,
+      final List<String>? multiOptionIds,
+      final String? text}) = _$AnswerRequestImpl;
 
   factory _AnswerRequest.fromJson(Map<String, dynamic> json) =
       _$AnswerRequestImpl.fromJson;
@@ -256,16 +221,13 @@ abstract class _AnswerRequest implements AnswerRequest {
   @override
   String get questionId;
   @override
-  String? get singleOptionId; // For single choice
-  @override
-  List<String>? get multiOptionIds; // For multiple choice
-  @override
+  String? get singleOptionId;
+  @override // For single choice
+  List<String>? get multiOptionIds;
+  @override // For multiple choice
   String? get text;
-
-  /// Create a copy of AnswerRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AnswerRequestImplCopyWith<_$AnswerRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

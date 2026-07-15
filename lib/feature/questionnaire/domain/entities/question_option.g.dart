@@ -15,10 +15,10 @@ _$QuestionOptionImpl _$$QuestionOptionImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$QuestionOptionImplToJson(
-  _$QuestionOptionImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'text': instance.text,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'order': instance.order,
-};
+        _$QuestionOptionImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'text': instance.text,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'order': instance.order,
+    };

@@ -83,7 +83,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
       final queries = {
         'fields':
-            'preference.*,answer.*,createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,username,emergencyContact,isVisible,avatar',
+            'preference.language,createdAt,firstName,lastName,email,phoneNumber,status,gender,dob,isLinked,username,emergencyContact,isVisible,avatar',
       };
 
       final response = await remoteDataSource.getCurrentProfile(queries);

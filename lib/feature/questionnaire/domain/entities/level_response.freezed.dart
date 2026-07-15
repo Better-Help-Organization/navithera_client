@@ -12,8 +12,7 @@ part of 'level_response.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LevelModel _$LevelModelFromJson(Map<String, dynamic> json) {
   return _LevelModel.fromJson(json);
@@ -28,12 +27,8 @@ mixin _$LevelModel {
   int? get maxXP => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
 
-  /// Serializes this LevelModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of LevelModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $LevelModelCopyWith<LevelModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -41,18 +36,16 @@ mixin _$LevelModel {
 /// @nodoc
 abstract class $LevelModelCopyWith<$Res> {
   factory $LevelModelCopyWith(
-    LevelModel value,
-    $Res Function(LevelModel) then,
-  ) = _$LevelModelCopyWithImpl<$Res, LevelModel>;
+          LevelModel value, $Res Function(LevelModel) then) =
+      _$LevelModelCopyWithImpl<$Res, LevelModel>;
   @useResult
-  $Res call({
-    String id,
-    DateTime createdAt,
-    String type,
-    int? minXP,
-    int? maxXP,
-    int? price,
-  });
+  $Res call(
+      {String id,
+      DateTime createdAt,
+      String type,
+      int? minXP,
+      int? maxXP,
+      int? price});
 }
 
 /// @nodoc
@@ -65,8 +58,6 @@ class _$LevelModelCopyWithImpl<$Res, $Val extends LevelModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LevelModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,41 +68,32 @@ class _$LevelModelCopyWithImpl<$Res, $Val extends LevelModel>
     Object? maxXP = freezed,
     Object? price = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String,
-            minXP:
-                freezed == minXP
-                    ? _value.minXP
-                    : minXP // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            maxXP:
-                freezed == maxXP
-                    ? _value.maxXP
-                    : maxXP // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            price:
-                freezed == price
-                    ? _value.price
-                    : price // ignore: cast_nullable_to_non_nullable
-                        as int?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      minXP: freezed == minXP
+          ? _value.minXP
+          : minXP // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxXP: freezed == maxXP
+          ? _value.maxXP
+          : maxXP // ignore: cast_nullable_to_non_nullable
+              as int?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
   }
 }
 
@@ -119,19 +101,17 @@ class _$LevelModelCopyWithImpl<$Res, $Val extends LevelModel>
 abstract class _$$LevelModelImplCopyWith<$Res>
     implements $LevelModelCopyWith<$Res> {
   factory _$$LevelModelImplCopyWith(
-    _$LevelModelImpl value,
-    $Res Function(_$LevelModelImpl) then,
-  ) = __$$LevelModelImplCopyWithImpl<$Res>;
+          _$LevelModelImpl value, $Res Function(_$LevelModelImpl) then) =
+      __$$LevelModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    DateTime createdAt,
-    String type,
-    int? minXP,
-    int? maxXP,
-    int? price,
-  });
+  $Res call(
+      {String id,
+      DateTime createdAt,
+      String type,
+      int? minXP,
+      int? maxXP,
+      int? price});
 }
 
 /// @nodoc
@@ -139,12 +119,9 @@ class __$$LevelModelImplCopyWithImpl<$Res>
     extends _$LevelModelCopyWithImpl<$Res, _$LevelModelImpl>
     implements _$$LevelModelImplCopyWith<$Res> {
   __$$LevelModelImplCopyWithImpl(
-    _$LevelModelImpl _value,
-    $Res Function(_$LevelModelImpl) _then,
-  ) : super(_value, _then);
+      _$LevelModelImpl _value, $Res Function(_$LevelModelImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of LevelModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,54 +132,45 @@ class __$$LevelModelImplCopyWithImpl<$Res>
     Object? maxXP = freezed,
     Object? price = freezed,
   }) {
-    return _then(
-      _$LevelModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String,
-        minXP:
-            freezed == minXP
-                ? _value.minXP
-                : minXP // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        maxXP:
-            freezed == maxXP
-                ? _value.maxXP
-                : maxXP // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        price:
-            freezed == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+    return _then(_$LevelModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      minXP: freezed == minXP
+          ? _value.minXP
+          : minXP // ignore: cast_nullable_to_non_nullable
+              as int?,
+      maxXP: freezed == maxXP
+          ? _value.maxXP
+          : maxXP // ignore: cast_nullable_to_non_nullable
+              as int?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$LevelModelImpl implements _LevelModel {
-  const _$LevelModelImpl({
-    required this.id,
-    required this.createdAt,
-    required this.type,
-    required this.minXP,
-    required this.maxXP,
-    required this.price,
-  });
+  const _$LevelModelImpl(
+      {required this.id,
+      required this.createdAt,
+      required this.type,
+      required this.minXP,
+      required this.maxXP,
+      required this.price});
 
   factory _$LevelModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LevelModelImplFromJson(json);
@@ -239,14 +207,12 @@ class _$LevelModelImpl implements _LevelModel {
             (identical(other.price, price) || other.price == price));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, createdAt, type, minXP, maxXP, price);
 
-  /// Create a copy of LevelModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$LevelModelImplCopyWith<_$LevelModelImpl> get copyWith =>
@@ -254,19 +220,20 @@ class _$LevelModelImpl implements _LevelModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LevelModelImplToJson(this);
+    return _$$LevelModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _LevelModel implements LevelModel {
-  const factory _LevelModel({
-    required final String id,
-    required final DateTime createdAt,
-    required final String type,
-    required final int? minXP,
-    required final int? maxXP,
-    required final int? price,
-  }) = _$LevelModelImpl;
+  const factory _LevelModel(
+      {required final String id,
+      required final DateTime createdAt,
+      required final String type,
+      required final int? minXP,
+      required final int? maxXP,
+      required final int? price}) = _$LevelModelImpl;
 
   factory _LevelModel.fromJson(Map<String, dynamic> json) =
       _$LevelModelImpl.fromJson;
@@ -283,11 +250,8 @@ abstract class _LevelModel implements LevelModel {
   int? get maxXP;
   @override
   int? get price;
-
-  /// Create a copy of LevelModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$LevelModelImplCopyWith<_$LevelModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

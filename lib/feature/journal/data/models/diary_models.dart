@@ -71,7 +71,7 @@ class DiaryUpdateResponse with _$DiaryUpdateResponse {
 @freezed
 class DiaryEditResponse with _$DiaryEditResponse {
   const factory DiaryEditResponse({
-    required String data, // Changed from String to DiaryEntry
+    required DiaryEntry data, // Changed from String to DiaryEntry
     required String message,
     required int statusCode,
     required String method,

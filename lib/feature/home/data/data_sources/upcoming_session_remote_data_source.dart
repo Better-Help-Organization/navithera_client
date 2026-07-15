@@ -16,14 +16,18 @@ abstract class UpcomingSessionRemoteDataSource {
   Future<SessionListResponse> getUpcomingSessions({
     @Query('filters') String? filters,
     @Query('sort') String? sort,
-    @Query('take') int? take,
+    @Query('take') int? take = 20,
     @Query('page') int? page,
-    @Query('fields') String? fields,
+    @Query('fields')
+    String? fields =
+        'id,schedule,approvalStatus,hasTherapistAttended,hasclientAttended,'
+            'duration,type,note,'
+            'therapist.id,therapist.firstName,therapist.lastName,therapist.avatar',
   });
 }
 
 final upcomingSessionRemoteDataSourceProvider =
     Provider<UpcomingSessionRemoteDataSource>((ref) {
-  final dio = ref.read(dioProvider);
-  return UpcomingSessionRemoteDataSource(dio);
-});
+      final dio = ref.read(dioProvider);
+      return UpcomingSessionRemoteDataSource(dio);
+    });

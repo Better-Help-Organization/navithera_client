@@ -11,7 +11,7 @@ abstract class QuestionsRemoteDataSource {
 
   @GET('/question')
   Future<QuestionsResponse> getQuestions({
-    @Query('fields') String fields = 'option.*,text,type,createdAt,modal.id',
+    @Query('fields') String fields = 'text,type,createdAt,modal.id,option.*',
     @Query('take') int take = 0,
     @Query('filters') String? filters, // Add filters parameter
     @Query('sort') String sort = 'order=asc',

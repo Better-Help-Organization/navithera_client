@@ -13,10 +13,9 @@ _$QuestionImpl _$$QuestionImplFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String,
       type: json['type'] as String,
       order: (json['order'] as num?)?.toInt(),
-      option:
-          (json['option'] as List<dynamic>)
-              .map((e) => QuestionOption.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      option: (json['option'] as List<dynamic>)
+          .map((e) => QuestionOption.fromJson(e as Map<String, dynamic>))
+          .toList(),
       modal: json['modal'] as Map<String, dynamic>?,
     );
 

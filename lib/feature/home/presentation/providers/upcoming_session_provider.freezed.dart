@@ -12,8 +12,7 @@ part of 'upcoming_session_provider.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UpcomingSessionState {
@@ -23,14 +22,16 @@ mixin _$UpcomingSessionState {
     required TResult Function() loading,
     required TResult Function(SessionItem? nextSession) loaded,
     required TResult Function(Failure failure) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(SessionItem? nextSession)? loaded,
     TResult? Function(Failure failure)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -38,21 +39,24 @@ mixin _$UpcomingSessionState {
     TResult Function(SessionItem? nextSession)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(UpcomingSessionInitial value) initial,
     required TResult Function(UpcomingSessionLoading value) loading,
     required TResult Function(UpcomingSessionLoaded value) loaded,
     required TResult Function(UpcomingSessionError value) error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(UpcomingSessionInitial value)? initial,
     TResult? Function(UpcomingSessionLoading value)? loading,
     TResult? Function(UpcomingSessionLoaded value)? loaded,
     TResult? Function(UpcomingSessionError value)? error,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UpcomingSessionInitial value)? initial,
@@ -60,22 +64,20 @@ mixin _$UpcomingSessionState {
     TResult Function(UpcomingSessionLoaded value)? loaded,
     TResult Function(UpcomingSessionError value)? error,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $UpcomingSessionStateCopyWith<$Res> {
-  factory $UpcomingSessionStateCopyWith(
-    UpcomingSessionState value,
-    $Res Function(UpcomingSessionState) then,
-  ) = _$UpcomingSessionStateCopyWithImpl<$Res, UpcomingSessionState>;
+  factory $UpcomingSessionStateCopyWith(UpcomingSessionState value,
+          $Res Function(UpcomingSessionState) then) =
+      _$UpcomingSessionStateCopyWithImpl<$Res, UpcomingSessionState>;
 }
 
 /// @nodoc
-class _$UpcomingSessionStateCopyWithImpl<
-  $Res,
-  $Val extends UpcomingSessionState
->
+class _$UpcomingSessionStateCopyWithImpl<$Res,
+        $Val extends UpcomingSessionState>
     implements $UpcomingSessionStateCopyWith<$Res> {
   _$UpcomingSessionStateCopyWithImpl(this._value, this._then);
 
@@ -83,31 +85,25 @@ class _$UpcomingSessionStateCopyWithImpl<
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 abstract class _$$UpcomingSessionInitialImplCopyWith<$Res> {
   factory _$$UpcomingSessionInitialImplCopyWith(
-    _$UpcomingSessionInitialImpl value,
-    $Res Function(_$UpcomingSessionInitialImpl) then,
-  ) = __$$UpcomingSessionInitialImplCopyWithImpl<$Res>;
+          _$UpcomingSessionInitialImpl value,
+          $Res Function(_$UpcomingSessionInitialImpl) then) =
+      __$$UpcomingSessionInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$UpcomingSessionInitialImplCopyWithImpl<$Res>
-    extends
-        _$UpcomingSessionStateCopyWithImpl<$Res, _$UpcomingSessionInitialImpl>
+    extends _$UpcomingSessionStateCopyWithImpl<$Res,
+        _$UpcomingSessionInitialImpl>
     implements _$$UpcomingSessionInitialImplCopyWith<$Res> {
   __$$UpcomingSessionInitialImplCopyWithImpl(
-    _$UpcomingSessionInitialImpl _value,
-    $Res Function(_$UpcomingSessionInitialImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
+      _$UpcomingSessionInitialImpl _value,
+      $Res Function(_$UpcomingSessionInitialImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -212,23 +208,20 @@ abstract class UpcomingSessionInitial implements UpcomingSessionState {
 /// @nodoc
 abstract class _$$UpcomingSessionLoadingImplCopyWith<$Res> {
   factory _$$UpcomingSessionLoadingImplCopyWith(
-    _$UpcomingSessionLoadingImpl value,
-    $Res Function(_$UpcomingSessionLoadingImpl) then,
-  ) = __$$UpcomingSessionLoadingImplCopyWithImpl<$Res>;
+          _$UpcomingSessionLoadingImpl value,
+          $Res Function(_$UpcomingSessionLoadingImpl) then) =
+      __$$UpcomingSessionLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$UpcomingSessionLoadingImplCopyWithImpl<$Res>
-    extends
-        _$UpcomingSessionStateCopyWithImpl<$Res, _$UpcomingSessionLoadingImpl>
+    extends _$UpcomingSessionStateCopyWithImpl<$Res,
+        _$UpcomingSessionLoadingImpl>
     implements _$$UpcomingSessionLoadingImplCopyWith<$Res> {
   __$$UpcomingSessionLoadingImplCopyWithImpl(
-    _$UpcomingSessionLoadingImpl _value,
-    $Res Function(_$UpcomingSessionLoadingImpl) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
+      _$UpcomingSessionLoadingImpl _value,
+      $Res Function(_$UpcomingSessionLoadingImpl) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -333,9 +326,9 @@ abstract class UpcomingSessionLoading implements UpcomingSessionState {
 /// @nodoc
 abstract class _$$UpcomingSessionLoadedImplCopyWith<$Res> {
   factory _$$UpcomingSessionLoadedImplCopyWith(
-    _$UpcomingSessionLoadedImpl value,
-    $Res Function(_$UpcomingSessionLoadedImpl) then,
-  ) = __$$UpcomingSessionLoadedImplCopyWithImpl<$Res>;
+          _$UpcomingSessionLoadedImpl value,
+          $Res Function(_$UpcomingSessionLoadedImpl) then) =
+      __$$UpcomingSessionLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({SessionItem? nextSession});
 
@@ -344,31 +337,26 @@ abstract class _$$UpcomingSessionLoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$UpcomingSessionLoadedImplCopyWithImpl<$Res>
-    extends
-        _$UpcomingSessionStateCopyWithImpl<$Res, _$UpcomingSessionLoadedImpl>
+    extends _$UpcomingSessionStateCopyWithImpl<$Res,
+        _$UpcomingSessionLoadedImpl>
     implements _$$UpcomingSessionLoadedImplCopyWith<$Res> {
-  __$$UpcomingSessionLoadedImplCopyWithImpl(
-    _$UpcomingSessionLoadedImpl _value,
-    $Res Function(_$UpcomingSessionLoadedImpl) _then,
-  ) : super(_value, _then);
+  __$$UpcomingSessionLoadedImplCopyWithImpl(_$UpcomingSessionLoadedImpl _value,
+      $Res Function(_$UpcomingSessionLoadedImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? nextSession = freezed}) {
-    return _then(
-      _$UpcomingSessionLoadedImpl(
-        freezed == nextSession
-            ? _value.nextSession
-            : nextSession // ignore: cast_nullable_to_non_nullable
-                as SessionItem?,
-      ),
-    );
+  $Res call({
+    Object? nextSession = freezed,
+  }) {
+    return _then(_$UpcomingSessionLoadedImpl(
+      freezed == nextSession
+          ? _value.nextSession
+          : nextSession // ignore: cast_nullable_to_non_nullable
+              as SessionItem?,
+    ));
   }
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SessionItemCopyWith<$Res>? get nextSession {
@@ -407,17 +395,12 @@ class _$UpcomingSessionLoadedImpl implements UpcomingSessionLoaded {
   @override
   int get hashCode => Object.hash(runtimeType, nextSession);
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpcomingSessionLoadedImplCopyWith<_$UpcomingSessionLoadedImpl>
-  get copyWith =>
-      __$$UpcomingSessionLoadedImplCopyWithImpl<_$UpcomingSessionLoadedImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith => __$$UpcomingSessionLoadedImplCopyWithImpl<
+          _$UpcomingSessionLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -499,20 +482,16 @@ abstract class UpcomingSessionLoaded implements UpcomingSessionState {
       _$UpcomingSessionLoadedImpl;
 
   SessionItem? get nextSession;
-
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpcomingSessionLoadedImplCopyWith<_$UpcomingSessionLoadedImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$$UpcomingSessionErrorImplCopyWith<$Res> {
-  factory _$$UpcomingSessionErrorImplCopyWith(
-    _$UpcomingSessionErrorImpl value,
-    $Res Function(_$UpcomingSessionErrorImpl) then,
-  ) = __$$UpcomingSessionErrorImplCopyWithImpl<$Res>;
+  factory _$$UpcomingSessionErrorImplCopyWith(_$UpcomingSessionErrorImpl value,
+          $Res Function(_$UpcomingSessionErrorImpl) then) =
+      __$$UpcomingSessionErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Failure failure});
 
@@ -523,28 +502,23 @@ abstract class _$$UpcomingSessionErrorImplCopyWith<$Res> {
 class __$$UpcomingSessionErrorImplCopyWithImpl<$Res>
     extends _$UpcomingSessionStateCopyWithImpl<$Res, _$UpcomingSessionErrorImpl>
     implements _$$UpcomingSessionErrorImplCopyWith<$Res> {
-  __$$UpcomingSessionErrorImplCopyWithImpl(
-    _$UpcomingSessionErrorImpl _value,
-    $Res Function(_$UpcomingSessionErrorImpl) _then,
-  ) : super(_value, _then);
+  __$$UpcomingSessionErrorImplCopyWithImpl(_$UpcomingSessionErrorImpl _value,
+      $Res Function(_$UpcomingSessionErrorImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? failure = null}) {
-    return _then(
-      _$UpcomingSessionErrorImpl(
-        null == failure
-            ? _value.failure
-            : failure // ignore: cast_nullable_to_non_nullable
-                as Failure,
-      ),
-    );
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$UpcomingSessionErrorImpl(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure,
+    ));
   }
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FailureCopyWith<$Res> get failure {
@@ -578,17 +552,13 @@ class _$UpcomingSessionErrorImpl implements UpcomingSessionError {
   @override
   int get hashCode => Object.hash(runtimeType, failure);
 
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UpcomingSessionErrorImplCopyWith<_$UpcomingSessionErrorImpl>
-  get copyWith =>
-      __$$UpcomingSessionErrorImplCopyWithImpl<_$UpcomingSessionErrorImpl>(
-        this,
-        _$identity,
-      );
+      get copyWith =>
+          __$$UpcomingSessionErrorImplCopyWithImpl<_$UpcomingSessionErrorImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -670,10 +640,7 @@ abstract class UpcomingSessionError implements UpcomingSessionState {
       _$UpcomingSessionErrorImpl;
 
   Failure get failure;
-
-  /// Create a copy of UpcomingSessionState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UpcomingSessionErrorImplCopyWith<_$UpcomingSessionErrorImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }

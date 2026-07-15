@@ -16,6 +16,10 @@ abstract class NotificationRemoteDataSource {
     @Query('page') int? page,
     @Query('take') int? take,
     @Query('sort') String? sort,
+    @Query('fields')
+    String? fields =
+        'id,createdAt,updatedAt,title,body,message,code,profile'
+            // 'client.id,client.firstName,client.lastName,client.avatar',
   });
 
   @PATCH('/notifications/{id}/read')

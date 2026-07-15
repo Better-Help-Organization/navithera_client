@@ -15,6 +15,9 @@ abstract class UsersRemoteDataSource {
   Future<UsersListResponse> getUsers({
     @Query('page') int? page,
     @Query('limit') int? limit,
+    @Query('fields')
+    String? fields =
+        'id,email,firstName,lastName,createdAt,avatar,status,isOnline',
   });
 }
 

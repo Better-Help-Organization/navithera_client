@@ -14,9 +14,12 @@ abstract class MatchedTherapistRemoteDataSource {
 
   @GET('/client/me/matches')
   Future<MatchListResponse> getMatches({
-    @Query('fields') String? fields,
+    @Query('fields')
+    String? fields =
+        'id,createdAt,'
+            'accepted.id,accepted.firstName,accepted.lastName,accepted.avatar,accepted.bio',
     @Query('sort') String? sort,
-    @Query('take') int? take,
+    @Query('take') int? take = 20,
     @Query('page') int? page,
     @Query('filters') String? filters,
   });
@@ -24,6 +27,6 @@ abstract class MatchedTherapistRemoteDataSource {
 
 final matchedTherapistRemoteDataSourceProvider =
     Provider<MatchedTherapistRemoteDataSource>((ref) {
-  final dio = ref.read(dioProvider);
-  return MatchedTherapistRemoteDataSource(dio);
-});
+      final dio = ref.read(dioProvider);
+      return MatchedTherapistRemoteDataSource(dio);
+    });

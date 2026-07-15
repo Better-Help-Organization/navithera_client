@@ -184,7 +184,7 @@ class _MeditationGrid extends StatelessWidget {
                           : _MeditationCard(
                             meditation: itemB,
                             onTap: () => onItemTap(itemB),
-                          ),
+                  ),
                 ),
               ],
             ),

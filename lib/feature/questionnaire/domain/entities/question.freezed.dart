@@ -12,8 +12,7 @@ part of 'question.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Question _$QuestionFromJson(Map<String, dynamic> json) {
   return _Question.fromJson(json);
@@ -30,12 +29,8 @@ mixin _$Question {
       throw _privateConstructorUsedError; // Changed from 'option' to 'options'
   Map<String, dynamic>? get modal => throw _privateConstructorUsedError;
 
-  /// Serializes this Question to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Question
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $QuestionCopyWith<Question> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,15 +40,14 @@ abstract class $QuestionCopyWith<$Res> {
   factory $QuestionCopyWith(Question value, $Res Function(Question) then) =
       _$QuestionCopyWithImpl<$Res, Question>;
   @useResult
-  $Res call({
-    String id,
-    DateTime createdAt,
-    String text,
-    String type,
-    int? order,
-    List<QuestionOption> option,
-    Map<String, dynamic>? modal,
-  });
+  $Res call(
+      {String id,
+      DateTime createdAt,
+      String text,
+      String type,
+      int? order,
+      List<QuestionOption> option,
+      Map<String, dynamic>? modal});
 }
 
 /// @nodoc
@@ -66,8 +60,6 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Question
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,46 +71,36 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
     Object? option = null,
     Object? modal = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            text:
-                null == text
-                    ? _value.text
-                    : text // ignore: cast_nullable_to_non_nullable
-                        as String,
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
-                        as String,
-            order:
-                freezed == order
-                    ? _value.order
-                    : order // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            option:
-                null == option
-                    ? _value.option
-                    : option // ignore: cast_nullable_to_non_nullable
-                        as List<QuestionOption>,
-            modal:
-                freezed == modal
-                    ? _value.modal
-                    : modal // ignore: cast_nullable_to_non_nullable
-                        as Map<String, dynamic>?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+      option: null == option
+          ? _value.option
+          : option // ignore: cast_nullable_to_non_nullable
+              as List<QuestionOption>,
+      modal: freezed == modal
+          ? _value.modal
+          : modal // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
   }
 }
 
@@ -126,20 +108,18 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
 abstract class _$$QuestionImplCopyWith<$Res>
     implements $QuestionCopyWith<$Res> {
   factory _$$QuestionImplCopyWith(
-    _$QuestionImpl value,
-    $Res Function(_$QuestionImpl) then,
-  ) = __$$QuestionImplCopyWithImpl<$Res>;
+          _$QuestionImpl value, $Res Function(_$QuestionImpl) then) =
+      __$$QuestionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    DateTime createdAt,
-    String text,
-    String type,
-    int? order,
-    List<QuestionOption> option,
-    Map<String, dynamic>? modal,
-  });
+  $Res call(
+      {String id,
+      DateTime createdAt,
+      String text,
+      String type,
+      int? order,
+      List<QuestionOption> option,
+      Map<String, dynamic>? modal});
 }
 
 /// @nodoc
@@ -147,12 +127,9 @@ class __$$QuestionImplCopyWithImpl<$Res>
     extends _$QuestionCopyWithImpl<$Res, _$QuestionImpl>
     implements _$$QuestionImplCopyWith<$Res> {
   __$$QuestionImplCopyWithImpl(
-    _$QuestionImpl _value,
-    $Res Function(_$QuestionImpl) _then,
-  ) : super(_value, _then);
+      _$QuestionImpl _value, $Res Function(_$QuestionImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of Question
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -164,61 +141,52 @@ class __$$QuestionImplCopyWithImpl<$Res>
     Object? option = null,
     Object? modal = freezed,
   }) {
-    return _then(
-      _$QuestionImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        text:
-            null == text
-                ? _value.text
-                : text // ignore: cast_nullable_to_non_nullable
-                    as String,
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
-                    as String,
-        order:
-            freezed == order
-                ? _value.order
-                : order // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        option:
-            null == option
-                ? _value._option
-                : option // ignore: cast_nullable_to_non_nullable
-                    as List<QuestionOption>,
-        modal:
-            freezed == modal
-                ? _value._modal
-                : modal // ignore: cast_nullable_to_non_nullable
-                    as Map<String, dynamic>?,
-      ),
-    );
+    return _then(_$QuestionImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int?,
+      option: null == option
+          ? _value._option
+          : option // ignore: cast_nullable_to_non_nullable
+              as List<QuestionOption>,
+      modal: freezed == modal
+          ? _value._modal
+          : modal // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$QuestionImpl implements _Question {
-  const _$QuestionImpl({
-    required this.id,
-    required this.createdAt,
-    required this.text,
-    required this.type,
-    required this.order,
-    required final List<QuestionOption> option,
-    required final Map<String, dynamic>? modal,
-  }) : _option = option,
-       _modal = modal;
+  const _$QuestionImpl(
+      {required this.id,
+      required this.createdAt,
+      required this.text,
+      required this.type,
+      required this.order,
+      required final List<QuestionOption> option,
+      required final Map<String, dynamic>? modal})
+      : _option = option,
+        _modal = modal;
 
   factory _$QuestionImpl.fromJson(Map<String, dynamic> json) =>
       _$$QuestionImplFromJson(json);
@@ -227,17 +195,17 @@ class _$QuestionImpl implements _Question {
   final String id;
   @override
   final DateTime createdAt;
-  // Add this
+// Add this
   @override
   final String text;
   @override
   final String type;
-  // "single" or "open"
+// "single" or "open"
   @override
   final int? order;
-  // Add this
+// Add this
   final List<QuestionOption> _option;
-  // Add this
+// Add this
   @override
   List<QuestionOption> get option {
     if (_option is EqualUnmodifiableListView) return _option;
@@ -245,9 +213,9 @@ class _$QuestionImpl implements _Question {
     return EqualUnmodifiableListView(_option);
   }
 
-  // Changed from 'option' to 'options'
+// Changed from 'option' to 'options'
   final Map<String, dynamic>? _modal;
-  // Changed from 'option' to 'options'
+// Changed from 'option' to 'options'
   @override
   Map<String, dynamic>? get modal {
     final value = _modal;
@@ -277,22 +245,19 @@ class _$QuestionImpl implements _Question {
             const DeepCollectionEquality().equals(other._modal, _modal));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    createdAt,
-    text,
-    type,
-    order,
-    const DeepCollectionEquality().hash(_option),
-    const DeepCollectionEquality().hash(_modal),
-  );
+      runtimeType,
+      id,
+      createdAt,
+      text,
+      type,
+      order,
+      const DeepCollectionEquality().hash(_option),
+      const DeepCollectionEquality().hash(_modal));
 
-  /// Create a copy of Question
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$QuestionImplCopyWith<_$QuestionImpl> get copyWith =>
@@ -300,20 +265,21 @@ class _$QuestionImpl implements _Question {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$QuestionImplToJson(this);
+    return _$$QuestionImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Question implements Question {
-  const factory _Question({
-    required final String id,
-    required final DateTime createdAt,
-    required final String text,
-    required final String type,
-    required final int? order,
-    required final List<QuestionOption> option,
-    required final Map<String, dynamic>? modal,
-  }) = _$QuestionImpl;
+  const factory _Question(
+      {required final String id,
+      required final DateTime createdAt,
+      required final String text,
+      required final String type,
+      required final int? order,
+      required final List<QuestionOption> option,
+      required final Map<String, dynamic>? modal}) = _$QuestionImpl;
 
   factory _Question.fromJson(Map<String, dynamic> json) =
       _$QuestionImpl.fromJson;
@@ -321,22 +287,19 @@ abstract class _Question implements Question {
   @override
   String get id;
   @override
-  DateTime get createdAt; // Add this
-  @override
+  DateTime get createdAt;
+  @override // Add this
   String get text;
   @override
-  String get type; // "single" or "open"
-  @override
-  int? get order; // Add this
-  @override
-  List<QuestionOption> get option; // Changed from 'option' to 'options'
-  @override
+  String get type;
+  @override // "single" or "open"
+  int? get order;
+  @override // Add this
+  List<QuestionOption> get option;
+  @override // Changed from 'option' to 'options'
   Map<String, dynamic>? get modal;
-
-  /// Create a copy of Question
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$QuestionImplCopyWith<_$QuestionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

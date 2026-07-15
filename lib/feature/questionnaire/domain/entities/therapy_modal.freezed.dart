@@ -12,8 +12,7 @@ part of 'therapy_modal.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TherapyModal _$TherapyModalFromJson(Map<String, dynamic> json) {
   return _TherapyModal.fromJson(json);
@@ -26,12 +25,8 @@ mixin _$TherapyModal {
   String get description => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
-  /// Serializes this TherapyModal to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of TherapyModal
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $TherapyModalCopyWith<TherapyModal> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,9 +34,8 @@ mixin _$TherapyModal {
 /// @nodoc
 abstract class $TherapyModalCopyWith<$Res> {
   factory $TherapyModalCopyWith(
-    TherapyModal value,
-    $Res Function(TherapyModal) then,
-  ) = _$TherapyModalCopyWithImpl<$Res, TherapyModal>;
+          TherapyModal value, $Res Function(TherapyModal) then) =
+      _$TherapyModalCopyWithImpl<$Res, TherapyModal>;
   @useResult
   $Res call({String id, String name, String description, DateTime createdAt});
 }
@@ -56,8 +50,6 @@ class _$TherapyModalCopyWithImpl<$Res, $Val extends TherapyModal>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TherapyModal
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,31 +58,24 @@ class _$TherapyModalCopyWithImpl<$Res, $Val extends TherapyModal>
     Object? description = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            description:
-                null == description
-                    ? _value.description
-                    : description // ignore: cast_nullable_to_non_nullable
-                        as String,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
@@ -98,9 +83,8 @@ class _$TherapyModalCopyWithImpl<$Res, $Val extends TherapyModal>
 abstract class _$$TherapyModalImplCopyWith<$Res>
     implements $TherapyModalCopyWith<$Res> {
   factory _$$TherapyModalImplCopyWith(
-    _$TherapyModalImpl value,
-    $Res Function(_$TherapyModalImpl) then,
-  ) = __$$TherapyModalImplCopyWithImpl<$Res>;
+          _$TherapyModalImpl value, $Res Function(_$TherapyModalImpl) then) =
+      __$$TherapyModalImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String description, DateTime createdAt});
@@ -111,12 +95,9 @@ class __$$TherapyModalImplCopyWithImpl<$Res>
     extends _$TherapyModalCopyWithImpl<$Res, _$TherapyModalImpl>
     implements _$$TherapyModalImplCopyWith<$Res> {
   __$$TherapyModalImplCopyWithImpl(
-    _$TherapyModalImpl _value,
-    $Res Function(_$TherapyModalImpl) _then,
-  ) : super(_value, _then);
+      _$TherapyModalImpl _value, $Res Function(_$TherapyModalImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of TherapyModal
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,42 +106,35 @@ class __$$TherapyModalImplCopyWithImpl<$Res>
     Object? description = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _$TherapyModalImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        description:
-            null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                    as String,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$TherapyModalImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$TherapyModalImpl implements _TherapyModal {
-  const _$TherapyModalImpl({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.createdAt,
-  });
+  const _$TherapyModalImpl(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.createdAt});
 
   factory _$TherapyModalImpl.fromJson(Map<String, dynamic> json) =>
       _$$TherapyModalImplFromJson(json);
@@ -192,14 +166,12 @@ class _$TherapyModalImpl implements _TherapyModal {
                 other.createdAt == createdAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, name, description, createdAt);
 
-  /// Create a copy of TherapyModal
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TherapyModalImplCopyWith<_$TherapyModalImpl> get copyWith =>
@@ -207,17 +179,18 @@ class _$TherapyModalImpl implements _TherapyModal {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TherapyModalImplToJson(this);
+    return _$$TherapyModalImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _TherapyModal implements TherapyModal {
-  const factory _TherapyModal({
-    required final String id,
-    required final String name,
-    required final String description,
-    required final DateTime createdAt,
-  }) = _$TherapyModalImpl;
+  const factory _TherapyModal(
+      {required final String id,
+      required final String name,
+      required final String description,
+      required final DateTime createdAt}) = _$TherapyModalImpl;
 
   factory _TherapyModal.fromJson(Map<String, dynamic> json) =
       _$TherapyModalImpl.fromJson;
@@ -230,11 +203,8 @@ abstract class _TherapyModal implements TherapyModal {
   String get description;
   @override
   DateTime get createdAt;
-
-  /// Create a copy of TherapyModal
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$TherapyModalImplCopyWith<_$TherapyModalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
